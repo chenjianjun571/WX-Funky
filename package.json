@@ -1,0 +1,69 @@
+{
+  "name": "wx-funky",
+  "version": "1.0.0",
+  "description": "微官网2.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=development babel-node ./react-server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenjianjun571/WX-Funky.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chenjianjun571/WX-Funky/issues"
+  },
+  "homepage": "https://github.com/chenjianjun571/WX-Funky#readme",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.9.0",
+    "babel-polyfill": "^6.9.0",
+    "babel-register": "^6.9.0",
+    "es6-promise": "^3.2.1",
+    "fetch-detector": "^1.0.0",
+    "fetch-ie8": "^1.4.2",
+    "koa": "^2.0.0",
+    "koa-ejs": "^3.0.0",
+    "koa-favicon": "^2.0.0",
+    "koa-logger": "^2.0.0",
+    "koa-router": "^7.0.1",
+    "koa-static": "^3.0.0",
+    "lodash": "^4.7.0",
+    "node-pre-gyp": "^0.6.28",
+    "path": "^0.12.7",
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "shortid": "^2.2.6",
+    "thinky": "^2.3.2",
+    "thunkify-wrap": "^1.0.4",
+    "fstream-ignore":"^1.0.5",
+    "gauge":"^2.4.0",
+    "npmlog":"^2.0.4"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-react-jsx": "^6.8.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
+    "uglify-js": "^2.6.2",
+    "watchify": "^3.7.0"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ],
+    "plugins": [
+      "transform-react-jsx"
+    ]
+  }
+}

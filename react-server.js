@@ -1,4 +1,5 @@
 import Koa from 'koa'
+import convert from 'koa-convert'
 import ejsEngine from 'koa-ejs'
 import Path from 'path'
 import Favicon from 'koa-favicon'
@@ -8,6 +9,9 @@ import thunkify from 'thunkify-wrap'
 import _ from 'lodash'
 
 import { siteRouter } from './routes'
+
+import netMgr from './src/server/net/net-worker'
+const NetWorker = netMgr.Instance()
 
 const ReactServer = new Koa()
 
@@ -29,15 +33,32 @@ process.env.NODE_ENV === 'development' && ReactServer.use(Logger()) // 只有在
 ReactServer.use(Favicon(__dirname + '/assets/images/favicon.png')) // favico
 ReactServer.use(StaticFile('./assets',{'maxage':3*60*1000})) // 其他静态资源：js images css
 
-ReactServer.use(function*(next){
-  // 如果域名是mt开头就是微信 this.platformClass 将会通过render变量被写到根div的class上
-  if (this.request.header.host.indexOf('mt') === 0) {
-    this.platformClass = 'adaptation-mobile'
-  }else {
-    this.platformClass = 'adaptation-1200'
+let proxyFetcher = thunkify.genify(NetWorker.getData)
+ReactServer.use(convert(function*(next){
+  // 判断是不是api请求,是的话需要代理到后端处理
+  if (this.request.url.startsWith('/api')) {
+    let resData = {
+      success: true,
+      message: "",
+      data: {},
+      code: 200,
+      count: 0
+    }
+    resData = yield* proxyFetcher(this.request.url,this.request.url)
+    this.body = resData
+  } else {
+    // 如果域名是mt开头就是微信 this.platformClass 将会通过render变量被写到根div的class上
+    if (this.request.header.host.indexOf('mt') === 0) {
+      // 移动端
+      this.platformType = 1
+    }else {
+      // PC端
+      this.platformType = 0
+    }
+
+    yield next
   }
-  yield next
-})
+}))
 
 // 静态页面路由
 ReactServer.use(siteRouter.routes())

@@ -1,38 +1,22 @@
 /**
  * Created by chenjianjun on 16/5/21.
  */
-'use strict';
+//import React from 'react'
+//import ReactDOM from 'react-dom'
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+class DomUtils {
 
-/**
- * Get ownerDocument
- * @param {ReactComponent|HTMLElement} componentOrElement
- * @returns {HTMLDocument}
- */
-function ownerDocument(componentOrElement) {
-  var element = ReactDOM.findDOMNode(componentOrElement);
-  return (element && element.ownerDocument) || document;
-}
+  ownerDocument (componentOrElement) {
+    let element = ReactDOM.findDOMNode(componentOrElement);
+    return (element && element.ownerDocument) || document;
+  }
 
-/**
- * Get ownerWindow
- * @param {HTMLElement} element
- * @returns {DocumentView|Window}
- * @refer https://github.com/jquery/jquery/blob/6df669f0fb87cd9975a18bf6bbe3c3548afa4fee/src/event.js#L294-L297
- */
-function ownerWindow(element) {
-  var doc = ownerDocument(element);
-  return doc.defaultView || doc.parentWindow || window;
-}
+  ownerWindow (element) {
+    let doc = ownerDocument(element);
+    return doc.defaultView || doc.parentWindow || window;
+  }
 
-module.exports = {
-  ownerDocument: ownerDocument,
-
-  ownerWindow: ownerWindow,
-
-  scrollTop: function(element, value) {
+  scrollTop (element, value) {
     if (!element) {
       return;
     }
@@ -43,11 +27,10 @@ module.exports = {
       return (hasScrollTop ? element.scrollTop : element.pageYOffset);
     }
 
-    hasScrollTop ?
-      element.scrollTop = value : element.scrollTo(element.scrollX, value);
-  },
+    hasScrollTop ? element.scrollTop = value : element.scrollTo(element.scrollX, value);
+  }
 
-  offset: function(element) {
+  offset (element) {
     if (element) {
       var rect = element.getBoundingClientRect();
       var body = document.body;
@@ -63,12 +46,14 @@ module.exports = {
     }
 
     return null;
-  },
+  }
 
-  position: function(element) {
+  position (element) {
     return {
       left: element.offsetLeft,
       top: element.offsetTop
     };
   }
-};
+}
+
+export { DomUtils }

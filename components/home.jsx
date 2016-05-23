@@ -4,7 +4,8 @@ import _ from 'lodash'
 class Home extends React.Component {
   render () {
     return (
-      <div></div>
+      <div>
+      </div>
     )
   }
 }

@@ -1,7 +1,7 @@
 import Router from 'koa-router'
 import React, { PropTypes } from 'react'
-import _ from 'lodash'
 import { renderToString } from 'react-dom/server'
+import _ from 'lodash'
 
 import { Navigation } from './components/navigation.jsx'
 import { Home } from './components/home.jsx'

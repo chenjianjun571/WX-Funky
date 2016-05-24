@@ -157,23 +157,12 @@ class ImageItem extends React.Component {
 
     let imageUrl = ''
     if (this.props.imageUrl && this.props.imageUrl !== '') {
-      // 图片的实际宽度
-      let src_width = null;
-      // 图片的实际高度
-      let src_height = null;
-      // 获取图片的实际宽高
-      let found = this.props.imageUrl.match(/_(\d{1,4})x(\d{1,4})\.\w+g$/i)
-      if (found && 3 === found.length) {
-        src_width = parseInt(found[1])
-        src_height = parseInt(found[2])
-      }
-
       // 宽度
-      let width = this.props.width || src_width
+      let width = this.props.width
       // 高度
-      let height = this.props.height || src_height
+      let height = this.props.height
       // 图片质量
-      let quality = this.props.quality || '95'
+      let quality = this.props.quality || '70'
 
       // 获取文件后缀名,图片服务只针对jpg类型才有效
       let fileExtend = ''

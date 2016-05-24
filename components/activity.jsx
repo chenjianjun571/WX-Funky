@@ -23,12 +23,12 @@ class Activity extends React.Component {
             if(v.linkUrl && v.linkUrl !== '') {
               content = (
                 <a href={v.linkUrl}>
-                  <ImageItem imageUrl={v.url} quality={95} processType={EmImgProcessType.emGD_W_H} />
+                  <ImageItem imageUrl={v.url} processType={EmImgProcessType.emGD_W_H} width={1260} quality={100} />
                 </a>
               )
             } else {
               content = (
-                <ImageItem imageUrl={v.url} quality={95} processType={EmImgProcessType.emGD_W_H} />
+                <ImageItem imageUrl={v.url}  processType={EmImgProcessType.emGD_W_H} width={1260} quality={100} />
               )
             }
             return(
@@ -45,6 +45,7 @@ class Activity extends React.Component {
   }
 
   componentDidMount() {
+    console.log(window.document.body.offsetWidth)
     // 取到配置的获取婚纱类型数据的请求地址
     let params = this.props.dataParams;
     if (params && params.name) {
@@ -52,7 +53,9 @@ class Activity extends React.Component {
         .then(res => {return res.json()})
         .then(j=>{
           if(j.success && j.data.length > 0) {
-            this.setState({data: j.data[0]})
+            this.setState({
+              data: j.data[0]
+            })
           }
         })
     }

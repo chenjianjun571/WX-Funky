@@ -60,7 +60,7 @@ ReactServer.use(convert(function*(next){
 }))
 
 // 静态页面路由
-ReactServer.use(siteRouter.routes())
+ReactServer.use(convert(siteRouter.routes()))
 
 // 服务器异常处理
 if (process.env.NODE_ENV === 'test') {

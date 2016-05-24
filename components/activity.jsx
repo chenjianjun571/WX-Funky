@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
 import { ActivityConfig } from './config/activity-config'
-import { ImageItem, EmImgProcessType } from './common/media-item.jsx'
+import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 
 class Activity extends React.Component {
   constructor() {
@@ -23,12 +23,12 @@ class Activity extends React.Component {
             if(v.linkUrl && v.linkUrl !== '') {
               content = (
                 <a href={v.linkUrl}>
-                  <ImageItem imageUrl={v.url} processType={EmImgProcessType.emGD_W_H} width={1260} quality={100} />
+                  <MediaItem imageUrl={v.url} processType={EmImgProcessType.emGD_W_H} width={1260} quality={100} />
                 </a>
               )
             } else {
               content = (
-                <ImageItem imageUrl={v.url}  processType={EmImgProcessType.emGD_W_H} width={1260} quality={100} />
+                <MediaItem imageUrl={v.url}  processType={EmImgProcessType.emGD_W_H} width={1260} quality={100} />
               )
             }
             return(

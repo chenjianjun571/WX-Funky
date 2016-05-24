@@ -260,4 +260,18 @@ class ImageItem extends React.Component {
   }
 }
 
-export { VideoItem, ImageItem, EmImgProcessType }
+class MediaItem extends React.Component {
+  render () {
+    if (this.props.videoUrl && this.props.videoUrl.length > 0) {
+      return (
+        <VideoItem {...this.props} />
+      )
+    } else {
+      return (
+        <ImageItem {...this.props} />
+      )
+    }
+  }
+}
+
+export { MediaItem, EmImgProcessType }

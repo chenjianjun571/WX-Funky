@@ -7,6 +7,7 @@
     "start": "NODE_ENV=development babel-node ./react-server.js",
     "deploy": "NODE_ENV=production babel-node ./react-server.js",
     "build-home": "watchify ./src/client/home.js -o 'uglifyjs -cm > ./assets/script/modules/home.min.js'",
+    "build-activity": "watchify ./src/client/activity.js -o 'uglifyjs -cm > ./assets/script/modules/activity.min.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

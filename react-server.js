@@ -47,11 +47,10 @@ ReactServer.use(convert(function*(next){
     resData = yield* proxyFetcher(this.request.url,this.request.url)
     this.body = resData
   } else {
-    // 如果域名是mt开头就是微信 this.platformClass 将会通过render变量被写到根div的class上
     if (this.request.header.host.indexOf('mt') === 0) {
       // 移动端
       this.platformType = 1
-    }else {
+    } else {
       // PC端
       this.platformType = 0
     }

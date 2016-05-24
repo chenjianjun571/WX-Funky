@@ -2,6 +2,12 @@ import React, { PropTypes } from 'react'
 import ShortId from 'shortid'
 import _ from 'lodash'
 
+/*
+ imageUrl:视频封面地址
+ videoUrl:视频地址
+ width:显示宽度
+ height:显示高度
+ * */
 class VideoItem extends React.Component {
 
   constructor() {
@@ -13,22 +19,26 @@ class VideoItem extends React.Component {
   }
 
   render() {
-    if (this.props.videoUrl.includes('taobao.com')) {
-      return (
-        <div id={this.state.genId} style={{'width':this.props.width,'height':this.props.height}}>
-          <h1>Loading TaobaoVideoJS...</h1>
-        </div>
-      )
+    if (this.props.width && this.props.height && this.props.videoUrl) {
+      if (this.props.videoUrl.includes('taobao.com')) {
+        return (
+          <div id={this.state.genId} style={{'width':this.props.width,'height':this.props.height}}>
+            <h1>Loading TaobaoVideoJS...</h1>
+          </div>
+        )
+      } else {
+        return (
+          <video
+            width={this.props.width}
+            height={this.props.height}
+            poster={this.props.imageUrl}
+            id={this.state.genId}
+            src={this.props.videoUrl}
+            type="video/mp4" />
+        )
+      }
     } else {
-      return (
-        <video
-          width={this.props.width}
-          height={this.props.height}
-          poster={this.props.imageUrl}
-          id={this.state.genId}
-          src={this.props.videoUrl}
-          type="video/mp4" />
-      )
+      return null
     }
   }
 
@@ -110,96 +120,155 @@ class VideoItem extends React.Component {
   }
 }
 
+/*
+图片处理方式
+ 0.不做限定,自由显示
+ 1.固定高度，宽度自适应 0o_0l_200h_90q.src
+ 2.固定宽度，高度自适应 0o_0l_200w_90q.src
+ 3.限定宽高，按长边缩放 0e_0o_0l_200h_200w_90q.src
+ 4.限定宽高，按短边缩放 1e_0o_0l_200h_200w_90q.src
+ 5.按长边缩放，缩略填充 4e_0o_0l_200h_200w_90q.src
+ 6.按短边缩放，居中裁剪 1e_1c_0o_0l_200h_200w_90q.src
+* */
+/*
+ 图片处理方式枚举
+ * */
+const EmImgProcessType = {
+  emGD_NONE:0,
+  emGD_H_W:1,
+  emGD_W_H:2,
+  emGD_HW_L:3,
+  emGD_HW_S:4,
+  emGD_L_S:5,
+  emGD_S_S:6
+}
+
+/*
+ imageUrl:图片地址
+ width:显示宽度
+ height:显示高度
+ quality:图片质量
+ processType:图片处理方式
+ water:是否打水印
+* */
 class ImageItem extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
 
   render() {
-    // 显示比例
-    let aspectRatios = this.props.aspectRatio.split(':');
-    // 宽度
-    let width = this.props.width
-    // 高度
-    let height = this.props.height
-    if (this.props.width) {
-      if (aspectRatios[1] === '-1') {
-        height = '100%'
-      } else {
-        height = parseInt(this.props.width*parseFloat(aspectRatios[1])/parseFloat(aspectRatios[0]))
-      }
-    } else if (this.props.height) {
-      if (aspectRatios[0] === '-1') {
-        width='100%'
-      }else {
-        width = parseInt(this.props.height*parseFloat(aspectRatios[0])/parseFloat(aspectRatios[1]))
-      }
-    } else {
-      console.log('宽度或者高度缺失.');
-      return null;
-    }
 
-    console.log('1.计算结果'+'+width:'+width+'|height:'+height)
-
-    // 获取文件后缀名
-    let fileExtend=''
-    if (this.props.imageUrl) {
-      fileExtend = this.props.imageUrl.substring(this.props.imageUrl.lastIndexOf('.')).toLowerCase();
-    }
-    // 图片服务只针对jpg类型才有效
-    let imageOption='';
-    if (fileExtend == '.jpg' || fileExtend == '.jpeg') {
-      imageOption='@';
-      if (width !== '100%') {
-        imageOption = imageOption+width+'w_';
-      }
-      if (height !== '100%') {
-        imageOption = imageOption+height+'h_';
-      }
-      imageOption = imageOption + '95q';
-      imageOption =  this.props.water? (imageOption+'|watermark=1&object=c2h1aXlpbi5wbmc&t=80&p=5&y=10&x=10'):imageOption
-    }
-
-    let found = this.props.imageUrl.match(/_(\d{1,4})x(\d{1,4})\.\w+g$/i)
     let imageUrl = ''
     if (this.props.imageUrl && this.props.imageUrl !== '') {
+      // 图片的实际宽度
+      let src_width = null;
+      // 图片的实际高度
+      let src_height = null;
+      // 获取图片的实际宽高
+      let found = this.props.imageUrl.match(/_(\d{1,4})x(\d{1,4})\.\w+g$/i)
+      if (found && 3 === found.length) {
+        src_width = parseInt(found[1])
+        src_height = parseInt(found[2])
+      }
+
+      // 宽度
+      let width = this.props.width || src_width
+      // 高度
+      let height = this.props.height || src_height
+      // 图片质量
+      let quality = this.props.quality || '95'
+
+      // 获取文件后缀名,图片服务只针对jpg类型才有效
+      let fileExtend = ''
+      if (this.props.imageUrl) {
+        fileExtend = this.props.imageUrl.substring(this.props.imageUrl.lastIndexOf('.')).toLowerCase();
+      }
+
+      // 图片处理参数
+      let imageOption = '';
+      if (fileExtend == '.jpg' || fileExtend == '.jpeg') {
+        switch (this.props.processType) {
+          case EmImgProcessType.emGD_NONE:
+          {
+            // 不做限定,自由显示
+            break;
+          }
+          case EmImgProcessType.emGD_H_W:
+          {
+            // 固定高度，宽度自适应
+            if (height) {
+              imageOption += '@0o_0l_' + height + 'h_' + quality + 'q.src'
+            } else {
+              imageOption += '@' + quality + 'q.src'
+            }
+            break;
+          }
+          case EmImgProcessType.emGD_W_H:
+          {
+            // 固定宽度，高度自适应
+            if (width) {
+              imageOption += '@0o_0l_' + width + 'w_' + quality + 'q.src'
+            } else {
+              imageOption += '@' + quality + 'q.src'
+            }
+            break;
+          }
+          case EmImgProcessType.emGD_HW_L:
+          {
+            // 限定宽高，按长边缩放 0e_0o_0l_200h_200w_90q.src
+            if (height && width) {
+              imageOption += '@0e_0o_0l_' + height + 'h_' + width + 'w_' + quality + 'q.src'
+            } else {
+              imageOption += '@' + quality + 'q.src'
+            }
+            break;
+          }
+          case EmImgProcessType.emGD_HW_S:
+          {
+            // 限定宽高，按短边缩放 1e_0o_0l_200h_200w_90q.src
+            if (height && width) {
+              imageOption += '@1e_0o_0l_' + height + 'h_' + width + 'w_' + quality + 'q.src'
+            } else {
+              imageOption += '@' + quality + 'q.src'
+            }
+            break;
+          }
+          case EmImgProcessType.emGD_L_S:
+          {
+            // 按长边缩放，缩略填充 4e_0o_0l_200h_200w_90q.src
+            if (height && width) {
+              imageOption += '@4e_0o_0l_' + height + 'h_' + width + 'w_' + quality + 'q.src'
+            } else {
+              imageOption += '@' + quality + 'q.src'
+            }
+            break;
+          }
+          case EmImgProcessType.emGD_S_S:
+          {
+            // 按短边缩放，居中裁剪 1e_1c_0o_0l_200h_200w_90q.src
+            if (height && width) {
+              imageOption += '@1e_1c_0o_0l_' + height + 'h_' + width + 'w_' + quality + 'q.src'
+            } else {
+              imageOption += '@' + quality + 'q.src'
+            }
+            break;
+          }
+          default:
+          {
+            imageOption += '@' + quality + 'q.src'
+            break;
+          }
+        }
+
+        if (this.props.water) {
+          imageOption += '|watermark=1&object=c2h1aXlpbi5wbmc&t=80&p=5&y=10&x=10'
+        }
+      }
+
       imageUrl = this.props.imageUrl + imageOption;
     }
 
-    if (found && 3 === found.length) {
-      width = parseInt(found[1])
-      height = parseInt(found[2])
-    }
-
-    console.log('2.计算结果'+'+width:'+width+'|height:'+height)
-
-    if (this.props.outerLink) {
-      return (
-        <a href={this.props.outerLink} className='img-box'>
-          <div style={{'height':'100%'}} data-width={width} data-height={height}>
-            <img src={imageUrl}  />
-          </div>
-        </a>
-      )
-    } else {
-      return (
-        <div style={{'height':height, 'width':width}}>
-          <img src={imageUrl} />
-        </div>
-      )
-    }
+    return (
+      <img src={imageUrl}/>
+    )
   }
 }
 
-class MediaItem extends React.Component {
-  render () {
-    if (this.props.videoUrl) {
-      return <VideoItem {...this.props} />
-    } else {
-      return <ImageItem {...this.props} />
-    }
-  }
-}
-
-export { MediaItem }
+export { VideoItem, ImageItem, EmImgProcessType }

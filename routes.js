@@ -5,35 +5,39 @@ import _ from 'lodash'
 
 import { MenuConfig } from './components/config/menu-config'
 import { ComponentsIndex, ComponentsSeo } from './components/config/components-index'
-
 import { Navigation } from './components/navigation.jsx'
-import { Home } from './components/home.jsx'
 
 const siteRouter = new Router()
-const renderOption = (templateName, menuKey, parentKey, platformType, params) => {
-  let p = params || {}
 
-  // 把平台类型放到参数里面带给客户端
-  _.merge(p,{'platformType':platformType})
-
+const renderOption = (templateName, menuKey, parentKey, platformType, params={}) => {
+  let p = params
+  // 把参数带给客户端
+  _.merge(p,
+    {
+      'platformType':platformType,
+      'menuKey':menuKey,
+      'parentKey':parentKey,
+      'mode': (process.env.NODE_ENV === 'production') ? 'production' : 'development'
+    }
+  )
   return {
+    'mode': (process.env.NODE_ENV === 'production') ? 'production' : 'development',
     'title':ComponentsSeo[templateName].seoTitle,
     'seoKeywords':ComponentsSeo[templateName].seoKeywords,
     'seoDescription':ComponentsSeo[templateName].seoDescription,
     'reactMarkup': renderToString(ComponentsIndex[templateName]),
     'reactNavMarkup': renderToString(<Navigation menuKey={parentKey} currentKey={menuKey} />),
     'main': templateName,
-    'params': JSON.stringify(p),
-    'mode': (process.env.NODE_ENV === 'production') ? 'production' : 'development'
+    'params': JSON.stringify(p)
   }
 }
 
 /*********************************** 首页 *************************************/
 siteRouter.get('/', function* (next) {
-  yield this.render('modules/default', renderOption('home', '/', '/', this.platformType, this.request.query))
+  yield this.render('modules/default', renderOption('home', '/', '/', this.platformType))
 })
 siteRouter.get('/home', function* (next) {
-  yield this.render('modules/default', renderOption('home', '/home', '/home', this.platformType, this.request.query))
+  yield this.render('modules/default', renderOption('home', '/home', '/home', this.platformType))
 })
 /*********************************** 婚纱摄影 *************************************/
 // 婚纱摄影首页

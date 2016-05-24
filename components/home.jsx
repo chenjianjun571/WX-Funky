@@ -82,8 +82,8 @@ class Home extends React.Component {
   }
 
   componentDidMount () {
-    console.log(window.screen.width)
-    console.log(window.screen.availWidth)
+    let params = this.props.dataParams;
+    console.log(JSON.stringify(params))
   }
 }
 

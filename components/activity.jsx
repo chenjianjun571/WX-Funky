@@ -45,9 +45,9 @@ class Activity extends React.Component {
   }
 
   componentDidMount() {
-    console.log(window.document.body.offsetWidth)
     // 取到配置的获取婚纱类型数据的请求地址
     let params = this.props.dataParams;
+    console.log(JSON.stringify(params))
     if (params && params.name) {
       fetch(ActivityConfig.ActiveData.baseUrl + ActivityConfig.ActiveData.dataUrl + params.name)
         .then(res => {return res.json()})

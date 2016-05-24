@@ -9,5 +9,5 @@ let paramsString = document.getElementById('J_Matrix').attributes['data-params']
 let params = JSON.parse(paramsString)
 
 /*渲染本模块的菜单*/
-ReactDOM.render(<Navigation />, document.getElementById('J_Nav'))
-ReactDOM.render(<Home />,document.getElementById('J_Main'))
+ReactDOM.render(<Navigation menuKey={params.parentKey} currentKey={params.menuKey} />, document.getElementById('J_Nav'))
+ReactDOM.render(<Home dataParams={params} />,document.getElementById('J_Main'))

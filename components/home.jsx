@@ -8,7 +8,7 @@ class Home extends React.Component {
   render () {
     return (
       <div>
-        <MediaSlider />
+        <MediaSlider dataUrl="/api/vda/index_top" />
       </div>
     )
   }

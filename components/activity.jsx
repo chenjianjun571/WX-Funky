@@ -19,23 +19,9 @@ class Activity extends React.Component {
       <div className="global-center-box">
         {
           _.map(imageListData, (v,k) => {
-            let content = null;
-            if(v.linkUrl && v.linkUrl !== '') {
-              content = (
-                <a href={v.linkUrl}>
-                  <MediaItem imageUrl={v.url} processType={EmImgProcessType.emGD_W_H} width={1260} quality={100} />
-                </a>
-              )
-            } else {
-              content = (
-                <MediaItem imageUrl={v.url}  processType={EmImgProcessType.emGD_W_H} width={1260} quality={100} />
-              )
-            }
             return(
               <div key={k} className="box-img">
-                {
-                  content
-                }
+                <MediaItem imageUrl={v.url} linkUrl={v.linkUrl} processType={EmImgProcessType.emGD_W_H} width={1260} quality={100} />
               </div>
             );
           })

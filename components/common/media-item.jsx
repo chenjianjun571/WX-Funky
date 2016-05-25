@@ -182,7 +182,7 @@ class ImageItem extends React.Component {
           case EmImgProcessType.emGD_H_W:
           {
             // 固定高度，宽度自适应
-            if (height) {
+            if (height !== '100%') {
               imageOption += '@0o_0l_' + height + 'h_' + quality + 'q.src'
             } else {
               imageOption += '@' + quality + 'q.src'
@@ -192,7 +192,7 @@ class ImageItem extends React.Component {
           case EmImgProcessType.emGD_W_H:
           {
             // 固定宽度，高度自适应
-            if (width) {
+            if (width !== '100%') {
               imageOption += '@0o_0l_' + width + 'w_' + quality + 'q.src'
             } else {
               imageOption += '@' + quality + 'q.src'
@@ -202,7 +202,7 @@ class ImageItem extends React.Component {
           case EmImgProcessType.emGD_HW_L:
           {
             // 限定宽高，按长边缩放 0e_0o_0l_200h_200w_90q.src
-            if (height && width) {
+            if (height !== '100%' && width !== '100%') {
               imageOption += '@0e_0o_0l_' + height + 'h_' + width + 'w_' + quality + 'q.src'
             } else {
               imageOption += '@' + quality + 'q.src'
@@ -212,7 +212,7 @@ class ImageItem extends React.Component {
           case EmImgProcessType.emGD_HW_S:
           {
             // 限定宽高，按短边缩放 1e_0o_0l_200h_200w_90q.src
-            if (height && width) {
+            if (height !== '100%' && width !== '100%') {
               imageOption += '@1e_0o_0l_' + height + 'h_' + width + 'w_' + quality + 'q.src'
             } else {
               imageOption += '@' + quality + 'q.src'
@@ -222,7 +222,7 @@ class ImageItem extends React.Component {
           case EmImgProcessType.emGD_L_S:
           {
             // 按长边缩放，缩略填充 4e_0o_0l_200h_200w_90q.src
-            if (height && width) {
+            if (height !== '100%' && width !== '100%') {
               imageOption += '@4e_0o_0l_' + height + 'h_' + width + 'w_' + quality + 'q.src'
             } else {
               imageOption += '@' + quality + 'q.src'
@@ -232,7 +232,7 @@ class ImageItem extends React.Component {
           case EmImgProcessType.emGD_S_S:
           {
             // 按短边缩放，居中裁剪 1e_1c_0o_0l_200h_200w_90q.src
-            if (height && width) {
+            if (height !== '100%' && width !== '100%') {
               imageOption += '@1e_1c_0o_0l_' + height + 'h_' + width + 'w_' + quality + 'q.src'
             } else {
               imageOption += '@' + quality + 'q.src'
@@ -254,21 +254,51 @@ class ImageItem extends React.Component {
       imageUrl = this.props.imageUrl + imageOption;
     }
 
-    return (
-      <img src={imageUrl}/>
-    )
+    if (this.props.linkUrl && this.props.linkUrl.length > 0) {
+      return (
+        <a href={this.props.linkUrl}>
+          <img src={imageUrl}/>
+        </a>
+      )
+    } else {
+      return (
+        <img src={imageUrl}/>
+      )
+    }
   }
 }
 
 class MediaItem extends React.Component {
+
   render () {
+
+    let factors = this.props.aspectRatio.split(':')
+    let width = this.props.width
+    let height = this.props.height
+    if (width) {
+      if (factors[1] === '-1') {
+        height = '100%'
+      }else {
+        height = parseInt(width*parseFloat(factors[1])/parseFloat(factors[0]))
+      }
+    } else if(height) {
+      if (factors[0] === '-1') {
+        width='100%'
+      }else {
+        width = parseInt(height*parseFloat(factors[0])/parseFloat(factors[1]))
+      }
+    }else {
+      console.log('高度或者宽度必须指定一个啊.');
+      return null;
+    }
+
     if (this.props.videoUrl && this.props.videoUrl.length > 0) {
       return (
-        <VideoItem {...this.props} />
+        <VideoItem {...this.props} height={height} width={width} />
       )
     } else {
       return (
-        <ImageItem {...this.props} />
+        <ImageItem {...this.props} height={height} width={width} />
       )
     }
   }

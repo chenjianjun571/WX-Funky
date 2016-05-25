@@ -1,95 +1,29 @@
+
+const FooterMenuConfig = {
+  '/':{
+    name:'首页',
+    link:'/home',
+  },
+  '/home':{
+    name:'首页',
+    link:'/home',
+  },
+  '/shot':{
+    name:'摄影',
+    link:'/shot',
+  },
+  '/scheme':{
+    name:'婚庆',
+    link:'/scheme',
+  },
+  '/hotel':{
+    name:'婚宴',
+    link:'/hotel',
+  }
+}
+
 const MenuConfig = {
-  '/':[
-    {
-      cn:'婚纱摄影',
-      en:'PHOTO',
-      link:'/shot',
-      target:false,
-      kClass:'item primary',
-      remark:''
-    },
-    {
-      cn:'婚庆定制',
-      en:'WEDDING',
-      link:'/scheme',
-      target:false,
-      kClass:'item primary'
-    },
-    {
-      cn:'金色旅拍',
-      en:'TRIP',
-      link:'http://trip.jsbn.com',
-      target:true,
-      kClass:'item primary',
-      remark:''
-    },
-    {
-      cn:'婚宴预订',
-      en:'BANQUET',
-      link:'/hotel',
-      target:false,
-      kClass:'item secondary index-1',
-      remark:' >'
-    },
-    {
-      cn:'婚戒钻石',
-      en:'DIAMOND',
-      link:'http://www.chinad9.com',
-      target:true,
-      kClass:'item secondary index-2',
-      remark:' >'
-    }
-  ],
-  '/home':[
-    {
-      cn:'婚纱摄影',
-      en:'PHOTO',
-      link:'/shot',
-      target:false,
-      kClass:'item primary',
-      remark:''
-    },
-    {
-      cn:'婚庆定制',
-      en:'WEDDING',
-      link:'/scheme',
-      target:false,
-      kClass:'item primary'
-    },
-    {
-      cn:'金色旅拍',
-      en:'TRIP',
-      link:'http://trip.jsbn.com',
-      target:true,
-      kClass:'item primary',
-      remark:''
-    },
-    {
-      cn:'婚宴预订',
-      en:'BANQUET',
-      link:'/hotel',
-      target:false,
-      kClass:'item secondary index-1',
-      remark:' >'
-    },
-    {
-      cn:'婚戒钻石',
-      en:'DIAMOND',
-      link:'http://www.chinad9.com',
-      target:true,
-      kClass:'item secondary index-2',
-      remark:' >'
-    }
-  ],
   '/shot':[
-    {
-      cn:'全站首页',
-      en:'HOME',
-      link:'/',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
-    },
     {
       cn:'摄影首页',
       en:'PHOTO',
@@ -133,14 +67,6 @@ const MenuConfig = {
   ],
   '/hotel':[
     {
-      cn:'全站首页',
-      en:'HOME',
-      link:'/',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
-    },
-    {
       cn:'婚宴首页',
       en:'BANQUET',
       link:'/hotel',
@@ -166,14 +92,6 @@ const MenuConfig = {
     }
   ],
   '/scheme':[
-    {
-      cn:'全站首页',
-      en:'HOME',
-      link:'/',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
-    },
     {
       cn:'婚庆首页',
       en:'WEDDING',

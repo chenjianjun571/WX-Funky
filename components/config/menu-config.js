@@ -1,9 +1,5 @@
 
 const FooterMenuConfig = {
-  '/':{
-    name:'首页',
-    link:'/home',
-  },
   '/home':{
     name:'首页',
     link:'/home',
@@ -159,4 +155,4 @@ const MenuConfig = {
   ]
 }
 
-export { MenuConfig }
+export { MenuConfig, FooterMenuConfig }

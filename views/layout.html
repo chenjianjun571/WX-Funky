@@ -2,19 +2,26 @@
 <html>
   <head>
     <% include modules/meta.html%>
+
+    <link rel="stylesheet" href="/styles/app.css" />
+
     <link rel="stylesheet" href="/script/mediaelement/mediaelementplayer.css" />
 
-    <script src="/script/mediaelement/jquery-1.9.1.js" charset="utf-8"></script>
+    <script src="/script/jquery-2.2.0.min.js" charset="utf-8"></script>
+    <script src="/script/bootstrap.min.js" charset="utf-8"></script>
     <script src="/script/react-15.1.0.min.js" charset="utf-8"></script>
     <script src="/script/react-dom-15.1.0.min.js" charset="utf-8"></script>
-
     <script src="/script/mediaelement/mediaelement-and-player.min.js" charset="utf-8"></script>
+
     <script src="//api.video.taobao.com//video/getPlayerJS"></script>
   </head>
   <body>
-    <div id='root' style="min-width: 1260px" >
-      <div id='J_Nav'><%- reactNavMarkup %></div>
-      <div id='J_Main'><%- body %></div>
+    <div id="root" class="adaption-auto device-mobile">
+      <div class="app-container">
+        <div id='J_Nav_Second'><%- navSecond %></div>
+        <div id='J_Nav_First'><%- navFirst %></div>
+        <div id='J_Main' style="height: 100%"><%- body %></div>
+      </div>
     </div>
   </body>
 </html>

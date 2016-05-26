@@ -1,5 +1,6 @@
 import { Home } from '../../components/home.jsx'
-import { FooterNavigation } from '../../components/footer-navigation.jsx'
+import { FirstNavigation } from '../../components/first-navigation.jsx'
+import { SecondNavigation } from '../../components/second-navigation.jsx'
 import 'es6-promise'
 import 'fetch-detector'
 import 'fetch-ie8'
@@ -9,5 +10,6 @@ let paramsString = document.getElementById('J_Matrix').attributes['data-params']
 let params = JSON.parse(paramsString)
 
 /*渲染本模块的菜单*/
+ReactDOM.render(<SecondNavigation menuKey={params.parentKey} />, document.getElementById('J_Nav_Second'))
+ReactDOM.render(<FirstNavigation menuKey={params.parentKey} />, document.getElementById('J_Nav_First'))
 ReactDOM.render(<Home dataParams={params} />,document.getElementById('J_Main'))
-ReactDOM.render(<FooterNavigation menuKey={params.parentKey} />, document.getElementById('J_Nav'))

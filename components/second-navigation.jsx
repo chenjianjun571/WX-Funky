@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
-class FooterNavigation extends React.Component {
+class SecondNavigation extends React.Component {
   render () {
     return (
       <div></div>
@@ -9,4 +9,4 @@ class FooterNavigation extends React.Component {
   }
 }
 
-export { FooterNavigation }
+export { SecondNavigation }

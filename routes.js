@@ -5,7 +5,8 @@ import _ from 'lodash'
 
 import { MenuConfig } from './components/config/menu-config'
 import { ComponentsIndex, ComponentsSeo } from './components/config/components-index'
-import { Navigation } from './components/navigation.jsx'
+import { FirstNavigation } from './components/first-navigation.jsx'
+import { SecondNavigation } from './components/second-navigation.jsx'
 
 const siteRouter = new Router()
 
@@ -26,7 +27,8 @@ const renderOption = (templateName, menuKey, parentKey, platformType, params={})
     'seoKeywords':ComponentsSeo[templateName].seoKeywords,
     'seoDescription':ComponentsSeo[templateName].seoDescription,
     'reactMarkup': renderToString(ComponentsIndex[templateName]),
-    'reactNavMarkup': renderToString(<Navigation menuKey={parentKey} currentKey={menuKey} />),
+    'navFirst': renderToString(<FirstNavigation menuKey={parentKey} currentKey={menuKey} />),
+    'navSecond': renderToString(<SecondNavigation menuKey={parentKey} currentKey={menuKey} />),
     'main': templateName,
     'params': JSON.stringify(p)
   }
@@ -34,7 +36,7 @@ const renderOption = (templateName, menuKey, parentKey, platformType, params={})
 
 /*********************************** 首页 *************************************/
 siteRouter.get('/', function* (next) {
-  yield this.render('modules/default', renderOption('home', '/', '/', this.platformType))
+  yield this.render('modules/default', renderOption('home', '/home', '/home', this.platformType))
 })
 siteRouter.get('/home', function* (next) {
   yield this.render('modules/default', renderOption('home', '/home', '/home', this.platformType))

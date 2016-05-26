@@ -21,7 +21,13 @@ class Activity extends React.Component {
           _.map(imageListData, (v,k) => {
             return(
               <div key={k} className="box-img">
-                <MediaItem imageUrl={v.url} linkUrl={v.linkUrl} processType={EmImgProcessType.emGD_W_H} width={1260} quality={100} />
+                <MediaItem
+                  imageUrl={v.url}
+                  linkUrl={v.linkUrl}
+                  processType={EmImgProcessType.emGD_W_H}
+                  aspectRatio="1:-1"
+                  width={1260}
+                  quality={80} />
               </div>
             );
           })

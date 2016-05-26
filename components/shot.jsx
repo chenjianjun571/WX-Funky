@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
-class Navigation extends React.Component {
+import { MediaSlider } from './common/media-slider.jsx'
+
+class Shot extends React.Component {
   render () {
     return (
       <div></div>
@@ -9,4 +11,4 @@ class Navigation extends React.Component {
   }
 }
 
-export { Navigation }
+export { Shot }

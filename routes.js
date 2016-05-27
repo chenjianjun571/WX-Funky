@@ -52,7 +52,7 @@ siteRouter.get('/sample', function* (next) {
 })
 // 作品(样片)详情
 siteRouter.get('/sample/:id', function* (next) {
-  yield this.render('modules/default', renderOption('sample-details', '/sample', '/shot', this.params))
+  yield this.render('modules/default', renderOption('sample-detail', '/sample', '/shot', this.params))
 })
 // 客片
 siteRouter.get('/pringles', function* (next) {
@@ -60,7 +60,7 @@ siteRouter.get('/pringles', function* (next) {
 })
 // 客片详情
 siteRouter.get('/pringles/:id', function* (next) {
-  yield this.render('modules/default', renderOption('pringles-details', '/pringles', '/shot', this.params))
+  yield this.render('modules/default', renderOption('pringles-detail', '/pringles', '/shot', this.params))
 })
 // 套系
 siteRouter.get('/suite', function* (next) {
@@ -68,7 +68,7 @@ siteRouter.get('/suite', function* (next) {
 })
 // 套系详情
 siteRouter.get('/suite/:id', function* (next) {
-  yield this.render('modules/default', renderOption('suite-details', '/suite', '/shot', this.params))
+  yield this.render('modules/default', renderOption('suite-detail', '/suite', '/shot', this.params))
 })
 // 微电影
 siteRouter.get('/movie', function* (next) {
@@ -84,12 +84,12 @@ siteRouter.get('/scheme', function* (next) {
   yield this.render('modules/default', renderOption('scheme', '/scheme', '/scheme'))
 })
 // 实景案例
-siteRouter.get('/cases', function* (next) {
-  yield this.render('modules/default', renderOption('cases', '/cases', '/scheme'))
+siteRouter.get('/case', function* (next) {
+  yield this.render('modules/default', renderOption('case', '/case', '/scheme'))
 })
 // 实景案例详情
-siteRouter.get('/cases/:id', function* (next) {
-  yield this.render('modules/default', renderOption('cases-details', '/cases', '/scheme',this.params))
+siteRouter.get('/case/:id', function* (next) {
+  yield this.render('modules/default', renderOption('case-detail', '/cases', '/scheme',this.params))
 })
 // 婚礼跟拍
 siteRouter.get('/followPhoto', function* (next) {
@@ -97,7 +97,7 @@ siteRouter.get('/followPhoto', function* (next) {
 })
 // 婚礼跟拍详情
 siteRouter.get('/followPhoto/:id', function* (next) {
-  yield this.render('modules/default', renderOption('follow-photo-details', '/followPhoto', '/scheme',this.params))
+  yield this.render('modules/default', renderOption('follow-photo-detail', '/followPhoto', '/scheme',this.params))
 })
 // 婚礼视频
 siteRouter.get('/followVideo', function* (next) {
@@ -105,7 +105,7 @@ siteRouter.get('/followVideo', function* (next) {
 })
 // 婚礼视频详情
 siteRouter.get('/followVideo/:id', function* (next) {
-  yield this.render('modules/default', renderOption('follow-video-details', '/followVideo', '/scheme',this.params))
+  yield this.render('modules/default', renderOption('follow-video-detail', '/followVideo', '/scheme',this.params))
 })
 // 选婚礼人(四大金刚)
 siteRouter.get('/f4', function* (next) {
@@ -116,16 +116,24 @@ siteRouter.get('/dress', function* (next) {
   yield this.render('modules/default', renderOption('dress', '/dress', '/scheme'))
 })
 // 礼服详情
-siteRouter.get('/dress-details', function* (next) {
-  yield this.render('modules/default', renderOption('dress-details', '/dress', '/scheme', this.request.query))
+siteRouter.get('/dress/:id', function* (next) {
+  yield this.render('modules/default', renderOption('dress-detail', '/dress', '/scheme', this.params))
 })
 // 婚礼用品
 siteRouter.get('/supply', function* (next) {
   yield this.render('modules/default', renderOption('supply', '/supply', '/scheme'))
 })
+// 婚礼用品详情
+siteRouter.get('/supply/:id', function* (next) {
+  yield this.render('modules/default', renderOption('supply-detail', '/supply', '/scheme'))
+})
 // 婚车租赁
 siteRouter.get('/car', function* (next) {
   yield this.render('modules/default', renderOption('car', '/car', '/scheme'))
+})
+// 婚车详情
+siteRouter.get('/car/:id', function* (next) {
+  yield this.render('modules/default', renderOption('car-detail', '/car', '/scheme'))
 })
 /****************************************** 婚宴预订 *********************************************/
 // 婚宴预订首页

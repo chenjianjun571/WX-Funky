@@ -10,7 +10,7 @@ import { SecondNavigation } from './components/second-navigation.jsx'
 
 const siteRouter = new Router()
 
-const renderOption = (templateName, menuKey, parentKey, platformType, params={}) => {
+const renderOption = (templateName, menuKey, parentKey, params={}, platformType=0) => {
   let p = params
   // 把参数带给客户端
   _.merge(p,
@@ -27,8 +27,8 @@ const renderOption = (templateName, menuKey, parentKey, platformType, params={})
     'seoKeywords':ComponentsSeo[templateName].seoKeywords,
     'seoDescription':ComponentsSeo[templateName].seoDescription,
     'reactMarkup': renderToString(ComponentsIndex[templateName]),
-    'navFirst': renderToString(<FirstNavigation menuKey={parentKey} currentKey={menuKey} />),
-    'navSecond': renderToString(<SecondNavigation menuKey={parentKey} currentKey={menuKey} />),
+    'navFirst': renderToString(<FirstNavigation menuKey={menuKey} parentKey={parentKey} />),
+    'navSecond': renderToString(<SecondNavigation menuKey={menuKey} parentKey={parentKey} />),
     'main': templateName,
     'params': JSON.stringify(p)
   }
@@ -36,10 +36,10 @@ const renderOption = (templateName, menuKey, parentKey, platformType, params={})
 
 /*********************************** 首页 *************************************/
 siteRouter.get('/', function* (next) {
-  yield this.render('modules/default', renderOption('home', '/home', '/home', this.platformType))
+  yield this.render('modules/default', renderOption('home', '/home', '/home'))
 })
 siteRouter.get('/home', function* (next) {
-  yield this.render('modules/default', renderOption('home', '/home', '/home', this.platformType))
+  yield this.render('modules/default', renderOption('home', '/home', '/home'))
 })
 /*********************************** 婚纱摄影 *************************************/
 // 婚纱摄影首页
@@ -52,7 +52,7 @@ siteRouter.get('/sample', function* (next) {
 })
 // 作品(样片)详情
 siteRouter.get('/sample/:id', function* (next) {
-  yield this.render('modules/default', renderOption('sample-details', '/sample', '/shot',this.params))
+  yield this.render('modules/default', renderOption('sample-details', '/sample', '/shot', this.params))
 })
 // 客片
 siteRouter.get('/pringles', function* (next) {
@@ -60,7 +60,7 @@ siteRouter.get('/pringles', function* (next) {
 })
 // 客片详情
 siteRouter.get('/pringles/:id', function* (next) {
-  yield this.render('modules/default', renderOption('pringles-details', '/pringles', '/shot',this.params))
+  yield this.render('modules/default', renderOption('pringles-details', '/pringles', '/shot', this.params))
 })
 // 套系
 siteRouter.get('/suite', function* (next) {
@@ -68,16 +68,16 @@ siteRouter.get('/suite', function* (next) {
 })
 // 套系详情
 siteRouter.get('/suite/:id', function* (next) {
-  yield this.render('modules/default', renderOption('suite-details', '/suite', '/shot',this.params))
+  yield this.render('modules/default', renderOption('suite-details', '/suite', '/shot', this.params))
 })
 // 微电影
 siteRouter.get('/movie', function* (next) {
   yield this.render('modules/default', renderOption('movie', '/movie', '/shot'))
 })
-// 微电影详情
-siteRouter.get('/movie-details', function* (next) {
-  yield this.render('modules/default', renderOption('movie-details', '/movie', '/shot', this.request.query))
-})
+//// 微电影详情
+//siteRouter.get('/movie-details', function* (next) {
+//  yield this.render('modules/default', renderOption('movie-details', '/movie', '/shot', this.request.query))
+//})
 /************************************** 婚庆定制 ***************************************/
 // 婚庆定制首页
 siteRouter.get('/scheme', function* (next) {
@@ -151,7 +151,7 @@ siteRouter.get('/hotel-require', function* (next) {
 
 /** 活动详情页 **/
 siteRouter.get('/activity/detail/:name', function* (next) {
-  yield this.render('modules/default', renderOption('activity', '/activity', '/', this.platformType, this.params))
+  yield this.render('modules/default', renderOption('activity', '/activity', '/', this.params))
 })
 
 export { siteRouter }

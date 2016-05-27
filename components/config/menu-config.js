@@ -21,136 +21,88 @@ const FooterMenuConfig = {
 const MenuConfig = {
   '/shot':[
     {
-      cn:'摄影首页',
-      en:'PHOTO',
+      name:'摄影首页',
       link:'/shot',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'作品欣赏',
-      en:'WORKS',
+      name:'作品欣赏',
       link:'/sample',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'客片欣赏',
-      en:'PRINGLES',
+      name:'客片欣赏',
       link:'/pringles',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'套系报价',
-      en:'SUITE',
+      name:'套系报价',
       link:'/suite',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'微电影',
-      en:'MOVIE',
+      name:'微电影',
       link:'/movie',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     }
   ],
   '/hotel':[
     {
-      cn:'婚宴首页',
-      en:'BANQUET',
+      name:'婚宴首页',
       link:'/hotel',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'提交需求',
-      en:'REQUIRE',
+      name:'提交需求',
       link:'/hotel-require',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'大礼包',
-      en:'GIFT',
+      name:'大礼包',
       link:'/activity/detail/libao',
-      target:true,
-      kClass:'item second-menu',
-      remark:''
+      target:true
     }
   ],
   '/scheme':[
     {
-      cn:'婚庆首页',
-      en:'WEDDING',
+      name:'婚庆首页',
       link:'/scheme',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'实景案例',
-      en:'CASES',
+      name:'实景案例',
       link:'/cases',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'婚礼跟拍',
-      en:'FOLLOW',
+      name:'婚礼跟拍',
       link:'/followPhoto',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'婚礼视频',
-      en:'VIDEO',
+      name:'婚礼视频',
       link:'/followVideo',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'选婚礼人',
-      en:'F4',
+      name:'选婚礼人',
       link:'/f4',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'婚纱礼服',
-      en:'DRESS',
+      name:'婚纱礼服',
       link:'/dress',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'婚礼用品',
-      en:'SUPPLIES',
+      name:'婚礼用品',
       link:'/supply',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     },
     {
-      cn:'婚车租赁',
-      en:'CAR',
+      name:'婚车租赁',
       link:'/car',
-      target:false,
-      kClass:'item second-menu',
-      remark:''
+      target:false
     }
   ]
 }

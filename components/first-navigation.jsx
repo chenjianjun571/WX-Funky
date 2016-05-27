@@ -5,7 +5,7 @@ import { FooterMenuConfig } from './config/menu-config.js'
 
 class FirstNavigation extends React.Component {
   render () {
-    let menuKey = this.props.menuKey || '/home';
+    let menuKey = this.props.parentKey || '/home';
     return (
       <div className="first-menu">
         {

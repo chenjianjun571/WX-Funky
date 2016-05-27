@@ -262,6 +262,19 @@ body {
   height: 0.875rem;
   background-size: 80%;
 }
+.list-photo-box ul {
+  font-size: 0;
+}
+.list-photo-box ul li {
+  text-align: center;
+}
+.list-photo-box ul li img {
+  width: auto;
+  max-width: 100%;
+}
+.list-photo-box.photo-space ul li {
+  margin-bottom: 10px;
+}
 .adaption-auto {
   width: 100%;
   height: 100%;
@@ -280,7 +293,7 @@ body {
 .adaption-auto .first-menu {
   display: flex;
   position: fixed;
-  z-index: 1000;
+  z-index: 10000;
   bottom: 0;
   width: 100%;
   height: 50px;
@@ -333,6 +346,76 @@ body {
 }
 .adaption-auto .first-menu .item.item-activate .title {
   color: #f94267;
+}
+.adaption-auto .secondly-menu {
+  position: fixed;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: -84px;
+  z-index: 10060;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+.adaption-auto .secondly-menu .menu-box {
+  position: relative;
+  box-sizing: content-box;
+  padding: 3px 3px 3px 0;
+  border-bottom-right-radius: 5px;
+  background-color: #fff;
+}
+.adaption-auto .secondly-menu .menu-box .item {
+  width: 80px;
+  height: 35px;
+  margin-bottom: 3px;
+  text-align: center;
+}
+.adaption-auto .secondly-menu .menu-box .item:last-child {
+  margin-bottom: 0;
+}
+.adaption-auto .secondly-menu .menu-box .item:nth-child( 5n + 1) {
+  background-color: #10437a;
+}
+.adaption-auto .secondly-menu .menu-box .item:nth-child( 5n + 2) {
+  background-color: #ec242e;
+}
+.adaption-auto .secondly-menu .menu-box .item:nth-child( 5n + 3) {
+  background-color: #fd720d;
+}
+.adaption-auto .secondly-menu .menu-box .item:nth-child( 5n + 4) {
+  background-color: #e73b63;
+}
+.adaption-auto .secondly-menu .menu-box .item:nth-child( 5n + 5) {
+  background-color: #0b9a64;
+}
+.adaption-auto .secondly-menu .menu-box .item .title {
+  font-size: 0.875rem;
+  color: #fff;
+  line-height: 35px;
+}
+.adaption-auto .secondly-menu .menu-box .item.item-activate .title {
+  color: #fbd213;
+}
+.adaption-auto .secondly-menu .menu-box .open-button {
+  position: absolute;
+  top: 0;
+  right: -29px;
+  background-image: url("../images/icon-open-button.png");
+  background-size: 59px;
+  background-repeat: no-repeat;
+  background-position-x: -29px;
+  width: 29px;
+  height: 88px;
+}
+.adaption-auto .secondly-menu.fold {
+  left: 0px;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+.adaption-auto .secondly-menu.fold .menu-box .open-button {
+  background-position-x: 0px;
 }
 .adaption-auto .top-logo-box {
   height: 44px;

@@ -14,5 +14,5 @@ let params = JSON.parse(paramsString)
 
 /*渲染本模块的菜单*/
 ReactDOM.render(<SecondNavigation menuKey={params.menuKey} parentKey={params.parentKey} />, document.getElementById('J_Nav_Second'))
-ReactDOM.render(<Activity dataParams={params} />,document.getElementById('J_Main'))
 ReactDOM.render(<FirstNavigation parentKey={params.parentKey} />, document.getElementById('J_Nav_First'))
+ReactDOM.render(<Activity dataParams={params} />,document.getElementById('J_Main'))

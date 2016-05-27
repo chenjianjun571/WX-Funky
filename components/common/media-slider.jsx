@@ -159,6 +159,8 @@ class MediaSlider extends React.Component {
                   this.setState({index:index})
                 }, 3000);
               })
+            } else {
+              this.setState({ data:j.data, index:0 })
             }
           }
         })

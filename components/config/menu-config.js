@@ -22,26 +22,31 @@ const MenuConfig = {
   '/shot':[
     {
       name:'摄影首页',
+      menu:'/shot',
       link:'/shot',
       target:false
     },
     {
       name:'作品欣赏',
+      menu:'/sample',
       link:'/sample',
       target:false
     },
     {
       name:'客片欣赏',
+      menu:'/pringles',
       link:'/pringles',
       target:false
     },
     {
       name:'套系报价',
+      menu:'/suite',
       link:'/suite',
       target:false
     },
     {
       name:'微电影',
+      menu:'/movie',
       link:'/movie',
       target:false
     }
@@ -49,16 +54,19 @@ const MenuConfig = {
   '/hotel':[
     {
       name:'婚宴首页',
+      menu:'/hotel',
       link:'/hotel',
       target:false
     },
     {
       name:'提交需求',
+      menu:'/hotel-require',
       link:'/hotel-require',
       target:false
     },
     {
       name:'大礼包',
+      menu:'/activity/detail/libao',
       link:'/activity/detail/libao',
       target:true
     }
@@ -66,26 +74,31 @@ const MenuConfig = {
   '/scheme':[
     {
       name:'婚庆首页',
+      menu:'/scheme',
       link:'/scheme',
       target:false
     },
     {
       name:'实景案例',
-      link:'/cases',
+      menu:'/case',
+      link:'/case',
       target:false
     },
     {
       name:'婚礼跟拍',
+      menu:'/followPhoto',
       link:'/followPhoto',
       target:false
     },
     {
       name:'婚礼视频',
+      menu:'/followVideo',
       link:'/followVideo',
       target:false
     },
     {
       name:'选婚礼人',
+      menu:'/f4',
       link:'/f4',
       target:false
     },
@@ -96,11 +109,13 @@ const MenuConfig = {
     },
     {
       name:'婚礼用品',
+      menu:'/supply',
       link:'/supply',
       target:false
     },
     {
       name:'婚车租赁',
+      menu:'/car',
       link:'/car',
       target:false
     }

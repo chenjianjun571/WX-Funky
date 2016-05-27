@@ -4,9 +4,21 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 
 class Hotel extends React.Component {
-  render () {
-    return <div>婚宴预订</div>
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      data:[]
+    };
   }
+
+  render () {
+    return (
+      <div></div>
+    )
+  }
+
+  componentDidMount() {}
 }
 
 export { Hotel }

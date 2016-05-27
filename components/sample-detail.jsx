@@ -27,7 +27,6 @@ class SampleDetail extends React.Component {
                     imageUrl={v}
                     quality={90}
                     processType={EmImgProcessType.emGD_S_S}
-                    width={1200}
                   />
                 </li>
               )

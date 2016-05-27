@@ -4,9 +4,21 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 
 class Scheme extends React.Component {
-  render () {
-    return <div>婚庆定制</div>
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      data:[]
+    };
   }
+
+  render () {
+    return (
+      <div></div>
+    )
+  }
+
+  componentDidMount() {}
 }
 
 export { Scheme }

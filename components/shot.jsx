@@ -17,13 +17,15 @@ class NewActivity extends React.Component {
   render() {
     return(
       <div>
-        <div className="title-box-style-1">
-          <div className="banner">
-            <i></i>
-            <span>幸福可以绽放的如此耀眼</span>
+        <a href="/suite">
+          <div className="title-box-style-1">
+            <div className="banner">
+              <i></i>
+              <span>幸福可以绽放的如此耀眼</span>
+            </div>
+            <span className="title">套系报价</span>
           </div>
-          <span className="title">最新活动</span>
-        </div>
+        </a>
 
         <div className="list-box list-suit">
           <ul className="item-list">

@@ -7,7 +7,7 @@ import _ from 'lodash'
 const MovieConfig  = {
   // 顶部广告
   'MediaSlider': _.merge({
-    'dataUrl': 'vda/index_top',
+    'dataUrl': 'vda/movie_top',
     'aspectRatio': '3:2',
     'height': 460
   }, BaseConfig),

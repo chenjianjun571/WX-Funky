@@ -275,21 +275,19 @@ class MediaItem extends React.Component {
     let factors = this.props.aspectRatio.split(':')
     let width = this.props.width
     let height = this.props.height
-    if (width) {
-      if (factors[1] === '-1') {
-        height = '100%'
-      }else {
+
+    if (factors[0] === '-1' || factors[1] === '-1') {
+      width = '100%';
+      height = '100%';
+    } else {
+      if (width) {
         height = parseInt(width*parseFloat(factors[1])/parseFloat(factors[0]))
-      }
-    } else if(height) {
-      if (factors[0] === '-1') {
-        width='100%'
-      }else {
+      } else if(height) {
         width = parseInt(height*parseFloat(factors[0])/parseFloat(factors[1]))
+      } else {
+        console.log('高度或者宽度必须指定一个啊.');
+        return null;
       }
-    }else {
-      console.log('高度或者宽度必须指定一个啊.');
-      return null;
     }
 
     if (this.props.videoUrl && this.props.videoUrl.length > 0) {

@@ -19,6 +19,7 @@ class SuiteDetail extends React.Component {
         <ul className="item-list">
           {
             _.map(this.state.data,(v,k)=>{
+              console.log(v)
               return (
                 <li key={k} className="item">
                   <MediaItem
@@ -26,7 +27,6 @@ class SuiteDetail extends React.Component {
                     imageUrl={v}
                     quality={90}
                     processType={EmImgProcessType.emGD_S_S}
-                    width={1200}
                   />
                 </li>
               )
@@ -44,10 +44,9 @@ class SuiteDetail extends React.Component {
       .then(res => {return res.json()})
       .then(j =>{
         if(j.success && j.data.length > 0) {
-          if (j.data[0].wxDetailImages && j.data[0].wxDetailImages !== '') {
-            this.setState({ data:JSON.parse(j.data[0].wxDetailImages) })
-          } else {
-            this.setState({ data:JSON.parse(j.data[0].pcDetailImages) })
+          if (j.data[0].pcDetailImages && j.data[0].pcDetailImages !== '') {
+            let obj = JSON.parse(j.data[0].pcDetailImages)
+            this.setState({ data:obj.pc_detailImages })
           }
         }
       })

@@ -5,8 +5,8 @@ import { MenuConfig } from './config/menu-config.js'
 
 class SecondNavigation extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       menus:[],
@@ -16,14 +16,13 @@ class SecondNavigation extends React.Component {
 
   render () {
     if (this.state.menus.length > 0) {
-      let menuKey = this.props.menuKey || this.state.menus[0]
       return (
         <div className={"secondly-menu"+this.state.className}>
           <div className="menu-box">
             <ul className="list-item">
               {
                 _.map(this.state.menus,(v,k)=>{
-                  if (v == menuKey) {
+                  if (v.menu == this.props.menuKey) {
                     return (
                       <li key={k} className="item item-activate">
                         <a href={v.link}>
@@ -45,18 +44,26 @@ class SecondNavigation extends React.Component {
                 })
               }
             </ul>
-            <div className="open-button" onClick={this.handle.bind(this)}></div>
+            <div className="open-button" onClick={this.handle.bind(this)}>
+              <div className="info-box">
+                <i className="icon"></i>
+                {
+                  _.map(this.state.menus,(v,k)=>{
+                    if (v.menu == this.props.menuKey) {
+                      return (
+                        <span key={k} className="title">{v.name}</span>
+                      )
+                    }
+                  })
+                }
+                <div className="bg-box"></div>
+              </div>
+            </div>
           </div>
         </div>
       )
     } else {
       return null
-    }
-  }
-
-  getDefaultProps() {
-    return {
-      'parentKey':''
     }
   }
 
@@ -70,10 +77,22 @@ class SecondNavigation extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.parentKey)
+    console.log(this.props.menuKey)
     if (MenuConfig[this.props.parentKey]) {
-      this.setState({menus:MenuConfig[this.props.parentKey]})
+      this.setState({ menus:MenuConfig[this.props.parentKey]})
     }
   }
 }
+
+SecondNavigation.propTypes = {
+  'parentKey':PropTypes.string,
+  'menuKey':PropTypes.string
+};
+
+SecondNavigation.defaultProps = {
+  'parentKey':'',
+  'menuKey':''
+};
 
 export { SecondNavigation }

@@ -53,7 +53,7 @@ const MenuConfig = {
   ],
   '/hotel':[
     {
-      name:'婚宴首页',
+      name:'婚宴酒店',
       menu:'/hotel',
       link:'/hotel',
       target:false

@@ -19,13 +19,11 @@ class SuiteDetail extends React.Component {
         <ul className="item-list">
           {
             _.map(this.state.data,(v,k)=>{
-              console.log(v)
               return (
                 <li key={k} className="item">
                   <MediaItem
                     aspectRatio="1:-1"
                     imageUrl={v}
-                    quality={90}
                     processType={EmImgProcessType.emGD_S_S}
                   />
                 </li>

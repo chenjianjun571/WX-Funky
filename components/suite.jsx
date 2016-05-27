@@ -24,7 +24,7 @@ class SuiteList extends React.Component {
         <div className="more-button" onClick={this.handle.bind(this)}>
           <div className="button-box">
             <span className="icon"></span>
-            <span className="title">更多客片</span>
+            <span className="title">更多套系</span>
           </div>
         </div>
       )
@@ -36,7 +36,7 @@ class SuiteList extends React.Component {
             _.map(this.state.data, (v,k)=>{
               return (
                 <li key={k} className="item">
-                  <a href={"/suite/"+v.id} target="_blank" >
+                  <a href={"/suite/"+v.id} target='_blank' >
                     <div className="photo-box">
                       <MediaItem
                         aspectRatio="3:2"

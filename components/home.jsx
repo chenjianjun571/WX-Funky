@@ -9,12 +9,6 @@ class Home extends React.Component {
   render () {
     return (
       <div className="home-view">
-        <div className="top-logo-box">
-          <div className="logo-box">
-            <i className="icon-home-logo"></i>
-            <i className="icon-home-word"></i>
-          </div>
-        </div>
 
         <div className="adv-header-box">
           <MediaSlider

@@ -427,13 +427,14 @@ body {
   display: block;
   position: absolute;
   width: 30px;
-  height: 30px;
+  height: 24px;
   font-size: 12px;
+  line-height: 12px;
   top: 25%;
   left: 50%;
   color: #fff;
   z-index: 100;
-  margin-top: -12px;
+  margin-top: -10px;
   margin-left: -15px;
 }
 .adaption-auto .secondly-menu .menu-box .open-button .info-box .icon {
@@ -572,7 +573,7 @@ body {
 }
 .adaption-auto .home-view .menu-box {
   width: 100%;
-  height: calc(100% - 66.6666vw - 44px);
+  height: calc(100% - 66.6666vw);
 }
 .adaption-auto .home-view .menu-box .menu-list {
   height: 100%;
@@ -920,20 +921,32 @@ body {
 }
 .adaption-auto .sample-list-view .sift-nav .sift-nav-box {
   width: 100%;
-  height: 2.5rem;
-  padding-left: 3.75rem;
-  padding-right: 3.75rem;
+  height: 42px;
+  padding-left: 60px;
+  padding-right: 60px;
   background-color: #fff;
   border-top: 1px solid #d6d6d6;
   border-bottom: 1px solid #d6d6d6;
   position: relative;
+  text-align: center;
+}
+.adaption-auto .sample-list-view .sift-nav .sift-nav-box span {
+  font-size: 12px;
+  line-height: 20px;
+  display: block;
 }
 .adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-title {
-  float: left;
-  width: 3.75rem;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(231, 59, 99, 0.8);
+  border-radius: 10px;
+  width: 40px;
+  height: 20px;
+  line-height: 20px;
 }
-.adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-title .title {
-  font-size: 0.75rem;
+.adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-title .text {
+  font-size: 12px;
 }
 .adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-list-box {
   width: 100%;
@@ -943,17 +956,31 @@ body {
 }
 .adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-list-box ul {
   width: 1000%;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-list-box ul li {
   float: left;
-  height: 100%;
-  line-height: 100%;
+  height: 20px;
   margin-right: 10px;
-  font-size: 0.75rem;
+  font-size: 12px;
 }
 .adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-button {
-  float: right;
-  width: 3.75rem;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+.adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-button .icon {
+  background-image: url("../images/icon-sift-button.png");
+  width: 15px;
+  height: 15px;
+  background-size: 100%;
+  display: block;
+  background-repeat: no-repeat;
 }
 .adaption-auto .sample-list-view .list-box {
   margin-bottom: 10px;

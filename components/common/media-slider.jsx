@@ -172,6 +172,7 @@ class MediaSlider extends React.Component {
     if (this.intervalId) {
       clearInterval(this.intervalId)
     }
+    super.componentWillUnmount();
   }
 }
 

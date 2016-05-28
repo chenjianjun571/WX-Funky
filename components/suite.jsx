@@ -24,7 +24,7 @@ class SuiteList extends React.Component {
         <div className="more-button" onClick={this.handle.bind(this)}>
           <div className="button-box">
             <span className="icon"></span>
-            <span className="title">更多套系</span>
+            <span className="title">点击加载</span>
           </div>
         </div>
       )

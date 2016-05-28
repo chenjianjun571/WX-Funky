@@ -7,10 +7,25 @@ import _ from 'lodash'
 const SampleConfig  = {
   // 顶部广告
   'MediaSlider': _.merge({
-    'dataUrl': 'vda/index_top',
+    'dataUrl': 'vda/samples_top',
     'aspectRatio': '3:2',
     'height': 460
   }, BaseConfig),
+
+  'SampleList':_.merge({
+    dataUrl:'sample/samples_list?pageIndex=:pageIndex&pageSize=:pageSize'
+  },BaseConfig),
+
+  // 风格条件
+  'StyleFilter':_.merge({
+    dataUrl:'shootStyle/all'
+  },BaseConfig),
+
+  // 外景地条件
+  'ExteriorFilter':_.merge({
+    'dataUrl':'exterior/all'
+  },BaseConfig)
+
 }
 
 export { SampleConfig }

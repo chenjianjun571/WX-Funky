@@ -571,6 +571,9 @@ body {
   width: 100%;
   height: 100%;
 }
+.adaption-auto .home-view .top-logo-box {
+  display: none;
+}
 .adaption-auto .home-view .menu-box {
   width: 100%;
   height: calc(100% - 66.6666vw);
@@ -981,6 +984,69 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+}
+.adaption-auto .sample-list-view .fixed-center-box {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10060;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+.adaption-auto .sample-list-view .sift-content-box {
+  max-width: 80%;
+  width: 60%;
+  border: 1px solid #d6d6d6;
+  background-color: #fff;
+}
+.adaption-auto .sample-list-view .sift-content-box .content-box {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.adaption-auto .sample-list-view .sift-content-box .content-box .title {
+  width: 100%;
+  height: 40px;
+}
+.adaption-auto .sample-list-view .sift-content-box .content-box .title .text {
+  line-height: 40px;
+  font-size: 18px;
+}
+.adaption-auto .sample-list-view .sift-content-box .content-box .item-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.adaption-auto .sample-list-view .sift-content-box .content-box .item-list .item {
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  border: 1px solid #d6d6d6;
+}
+.adaption-auto .sample-list-view .sift-content-box .content-box .item-list .item.item-activate {
+  border-color: #f94267;
+}
+.adaption-auto .sample-list-view .sift-content-box .content-box .item-list .item.item-activate .title {
+  color: #f94267;
+}
+.adaption-auto .sample-list-view .sift-content-box .button-box {
+  display: flex;
+  height: 35px;
+  flex-direction: row;
+  border-top: 1px solid #d6d6d6;
+  text-align: center;
+}
+.adaption-auto .sample-list-view .sift-content-box .button-box .confirm-button,
+.adaption-auto .sample-list-view .sift-content-box .button-box .reset-button {
+  flex: 1;
+  font-size: 14px;
+  line-height: 35px;
+}
+.adaption-auto .sample-list-view .sift-content-box .button-box .confirm-button {
+  background-color: #f94267;
 }
 .adaption-auto .sample-list-view .list-box {
   margin-bottom: 10px;

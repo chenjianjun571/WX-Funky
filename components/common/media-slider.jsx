@@ -114,13 +114,15 @@ class MediaSlider extends React.Component {
           </ul>
           <div className="point-box">
             {
-              _.map(this.state.data, (v,k)=>{
-                if (k === this.state.index) {
-                  return <li key={k} className="point point-activate" onClick={this.selHandle.bind(this,k)} ></li>
-                } else {
-                  return <li key={k} className="point " onClick={this.selHandle.bind(this,k)} ></li>
-                }
-              })
+              this.state.data.length > 1 && (
+                _.map(this.state.data, (v,k)=>{
+                  if (k === this.state.index) {
+                    return <li key={k} className="point point-activate" onClick={this.selHandle.bind(this,k)} ></li>
+                  } else {
+                    return <li key={k} className="point " onClick={this.selHandle.bind(this,k)} ></li>
+                  }
+                })
+              )
             }
           </div>
         </div>

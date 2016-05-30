@@ -13,7 +13,7 @@ const SampleConfig  = {
   }, BaseConfig),
 
   'SampleList':_.merge({
-    dataUrl:'sample/samples_list?pageIndex=:pageIndex&pageSize=:pageSize'
+    dataUrl:'sample/samples_list'
   },BaseConfig),
 
   // 风格条件

@@ -47,12 +47,12 @@ ReactServer.use(convert(function*(next){
     resData = yield* proxyFetcher(this.request.url,this.request.url)
     this.body = resData
   } else {
-    if (this.request.header.host.indexOf('mt') === 0) {
-      // 移动端
-      this.platformType = 1
-    } else {
+    if (this.request.header.host.indexOf('mt') !== 0) {
       // PC端
       this.platformType = 0
+    } else {
+      // 移动端
+      this.platformType = 1
     }
 
     yield next

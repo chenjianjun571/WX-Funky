@@ -16,11 +16,13 @@ class Pringles extends React.Component {
 
   render () {
     return (
-      <div></div>
+      <div>
+      </div>
     )
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
 }
 
 export { Pringles }

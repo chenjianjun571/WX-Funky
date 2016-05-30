@@ -5,6 +5,7 @@ import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { SampleConfig } from './config/sample-config'
 
+// 因为样片的搜索有特殊性,风格和场景的展示与类型挂钩,所以不能使用公共的过滤器组件
 // 筛选组件
 class Filter extends React.Component {
   constructor (props) {
@@ -12,7 +13,7 @@ class Filter extends React.Component {
 
     this.state = {
       sampleType:[{name:'婚纱摄影', sampleType:0},{name:'艺术照', sampleType:1},{name:'全家福', sampleType:2}],
-      sampleIndex:0,
+      sampleIndexType:0,
       shootStyle:[{name:'全部', shootStyleId:-1}],
       shootStyleIndex:0,
       exterior:[{name:'全部', exteriorId:-1}],
@@ -27,10 +28,9 @@ class Filter extends React.Component {
 
   render () {
     return (
-      <div className="fixed-center-box">
-        <div className="sift-content-box">
+      <div className={"fixed-center-box sift-content-box "+this.props.kClass} >
+        <div className="sift-center-box">
           <div className="sift-scrollView-box">
-
             <div className="content-box type">
               <div className="title">
                 <i className="icon"></i>
@@ -41,7 +41,7 @@ class Filter extends React.Component {
                   {
                     _.map(this.state.sampleType, (v,k)=>{
                       let handle = this.handelSel.bind(this, k, "sampleType", v.sampleType, v.name);
-                      if (this.state.sampleIndex == k) {
+                      if (this.state.sampleIndexType == k) {
                         return (
                           <li key={k} className="item item-activate">
                             <span className="title" onClick={handle}>{v.name}</span>
@@ -59,63 +59,72 @@ class Filter extends React.Component {
                 </ul>
               </div>
             </div>
-
-            <div className="content-box style">
-              <div className="title">
-                <i className="icon"></i>
-                <span className="text">风格</span>
-              </div>
-              <div className="item-list-box">
-                <ul className="item-list">
-                  {
-                    _.map(this.state.shootStyle, (v,k)=>{
-                      let handle = this.handelSel.bind(this, k, "shootStyleId", v.shootStyleId, v.name)
-                      if (this.state.shootStyleIndex == k) {
-                        return (
-                          <li key={k} className="item item-activate">
-                            <span className="title" onClick={handle}>{v.name}</span>
-                          </li>
-                        )
-                      } else {
-                        return (
-                          <li key={k} className="item">
-                            <span className="title" onClick={handle}>{v.name}</span>
-                          </li>
-                        )
+            {
+              // 只有婚纱摄影才有风格选项
+              this.state.sampleIndexType === 0 && (
+                <div className="content-box style">
+                  <div className="title">
+                    <i className="icon"></i>
+                    <span className="text">风格</span>
+                  </div>
+                  <div className="item-list-box">
+                    <ul className="item-list">
+                      {
+                        _.map(this.state.shootStyle, (v,k)=>{
+                          let handle = this.handelSel.bind(this, k, "shootStyleId", v.shootStyleId, v.name)
+                          if (this.state.shootStyleIndex == k) {
+                            return (
+                              <li key={k} className="item item-activate">
+                                <span className="title" onClick={handle}>{v.name}</span>
+                              </li>
+                            )
+                          } else {
+                            return (
+                              <li key={k} className="item">
+                                <span className="title" onClick={handle}>{v.name}</span>
+                              </li>
+                            )
+                          }
+                        })
                       }
-                    })
-                  }
-                </ul>
-              </div>
-            </div>
-            <div className="content-box address">
-              <div className="title">
-                <i className="icon"></i>
-                <span className="text">场景</span>
-              </div>
-              <div className="item-list-box">
-                <ul className="item-list">
-                  {
-                    _.map(this.state.exterior, (v,k)=>{
-                      let handle = this.handelSel.bind(this, k, "exteriorId", v.exteriorId, v.name)
-                      if (this.state.exteriorIndex == k) {
-                        return (
-                          <li key={k} className="item item-activate">
-                            <span className="title" onClick={handle}>{v.name}</span>
-                          </li>
-                        )
-                      } else {
-                        return (
-                          <li key={k} className="item">
-                            <span className="title" onClick={handle}>{v.name}</span>
-                          </li>
-                        )
+                    </ul>
+                  </div>
+                </div>
+              )
+            }
+            {
+              // 只有婚纱摄影才有场景选项
+              this.state.sampleIndexType === 0 && (
+                <div className="content-box address">
+                  <div className="title">
+                    <i className="icon"></i>
+                    <span className="text">场景</span>
+                  </div>
+                  <div className="item-list-box">
+                    <ul className="item-list">
+                      {
+                        _.map(this.state.exterior, (v,k)=>{
+                          let handle = this.handelSel.bind(this, k, "exteriorId", v.exteriorId, v.name)
+                          if (this.state.exteriorIndex == k) {
+                            return (
+                              <li key={k} className="item item-activate">
+                                <span className="title" onClick={handle}>{v.name}</span>
+                              </li>
+                            )
+                          } else {
+                            return (
+                              <li key={k} className="item">
+                                <span className="title" onClick={handle}>{v.name}</span>
+                              </li>
+                            )
+                          }
+                        })
                       }
-                    })
-                  }
-                </ul>
-              </div>
-            </div>
+                    </ul>
+                  </div>
+                </div>
+              )
+            }
           </div>
           <div className="button-box">
             <div className="confirm-button" onClick={this.handleSubmit.bind(this)}>确定</div>
@@ -128,21 +137,24 @@ class Filter extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // 提交
+    // 点击确定的时候吧用户选中的条件反馈给父组件
     if (this.props.filterChangeHandle) {
+
       let filters = {}
       let filterContents = {}
 
       // 摄影类型
       filters.sampleType = this.state.params.sampleType.id;
       filterContents.sampleTypeName = this.state.params.sampleType.name;
+
       // 摄影风格
-      if (this.state.params.shootStyleId.id != -1) {
+      if (this.state.params.shootStyleId.id != -1 && filters.sampleType == 0) {
         filters.shootStyleId = this.state.params.shootStyleId.id;
         filterContents.shootStyleName = this.state.params.shootStyleId.name;
       }
+
       // 外景地
-      if (this.state.params.exteriorId.id != -1) {
+      if (this.state.params.exteriorId.id != -1 && filters.sampleType == 0) {
         filters.exteriorId = this.state.params.exteriorId.id;
         filterContents.exteriorName = this.state.params.exteriorId.name;
       }
@@ -159,18 +171,20 @@ class Filter extends React.Component {
       shootStyleId:{id:-1,name:'全部'},
       exteriorId:{id:-1,name:'全部'}
     }
-    this.setState({sampleIndex:0, shootStyleIndex:0, exteriorIndex:0, params:p})
+
+    this.setState({sampleIndexType:0, shootStyleIndex:0, exteriorIndex:0, params:p})
   }
 
   handelSel(index, filterName, id, name, e) {
     e.preventDefault();
+    // 获取选中的条件值
     let p = this.state.params;
     switch(filterName) {
       case "sampleType":
       {
         // 摄影类型
         p.sampleType = {id:id, name:name}
-        this.setState({sampleIndex:index, params:p})
+        this.setState({sampleIndexType:index, params:p})
         break;
       }
       case "shootStyleId":
@@ -233,59 +247,61 @@ class Filter extends React.Component {
 class FilterContent extends React.Component {
   constructor (props) {
     super(props);
-
     this.state = {
-      data:[]
-    };
+      kClass:"",
+      content:{
+        sampleTypeName:'婚纱摄影'
+      }
+    }
   }
 
   render () {
     return (
-      <div id="fixedNav" className="sift-nav">
-        <div className="sift-nav-box">
-          <div className="sift-title">
-            {
-              //this.props.sampleTypeName && (<span className="text">{this.props.sampleTypeName}</span>)
-            }
-            {
-              //this.props.shootStyleName && (<span className="text">{this.props.shootStyleName}</span>)
-            }
-            {
-              //this.props.exteriorName && (<span className="text">{this.props.exteriorName}</span>)
-            }
-          </div>
-
-          <div className="item-list-box">
-            <ul className="item-list">
-              {
-                this.props.sampleTypeName || (<li className="item "><span className="text">{this.props.sampleTypeName}</span></li>)
-              }
-              {
-                this.props.shootStyleName || (<li className="item "><span className="text">{this.props.shootStyleName}</span></li>)
-              }
-              {
-                this.props.exteriorName || (<li className="item "><span className="text">{this.props.exteriorName}</span></li>)
-              }
-            </ul>
-          </div>
-
-
-          <div className="sift-button">
-            <span className="icon"></span>
-            <span className="text">筛选</span>
+      <div className="nav-placeholder">
+        <div id="fixedNav" className="sift-nav">
+          <div className="sift-nav-box">
+            <div className="sift-list-box">
+              <ul className="sift-list">
+                {
+                  _.map(this.state.content, (v,k)=>{
+                    return (
+                      <li key={k} className="item "><span className="text">{v}</span></li>
+                    )
+                  })
+                }
+              </ul>
+            </div>
+            <div className="sift-button" onClick={this.handle.bind(this)}>
+              <span className="icon"></span>
+              <span className="text">筛选</span>
+            </div>
+            <Filter kClass={this.state.kClass} filterChangeHandle={this.filterChangeHandle.bind(this)} />
           </div>
         </div>
       </div>
     )
   }
 
+  handle(e) {
+    e.preventDefault();
+    this.setState({kClass:" show-sift"})
+  }
+
+  filterChangeHandle(filters, filterContents) {
+    if (this.props.filterChangeHandle) {
+      this.props.filterChangeHandle(filters)
+    }
+    this.setState({kClass:"", content:filterContents})
+  }
+
   componentWillReceiveProps(nextProps) {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.sampleTypeName == nextProps.sampleTypeName
-      && this.props.shootStyleName == nextProps.shootStyleName
-      && this.props.exteriorName == nextProps.exteriorName
+    if (this.state.content.sampleTypeName == nextState.content.sampleTypeName
+      && this.state.content.shootStyleName == nextState.content.shootStyleName
+      && this.state.content.exteriorName == nextState.content.exteriorName
+      && this.state.kClass == nextState.kClass
     ) {
       return false;
     } else {
@@ -301,12 +317,10 @@ class SampleList extends React.Component {
     this.state = {
       data:[],
       showMoreFlg:true,
+      pageSize:4,
+      pageIndex:0,
       params:{
-        pageSize:4,
-        pageIndex:0,
-        sampleType:0,
-        shootStyleId:-1,
-        exteriorId:-1
+        sampleType:0
       }
     };
   }
@@ -315,7 +329,7 @@ class SampleList extends React.Component {
     let moreButton = null;
     if (this.state.showMoreFlg) {
       moreButton = (
-        <div className="more-button" onClick={this.handle.bind(this)}>
+        <div className="more-button" onClick={this.handleMore.bind(this)}>
           <div className="button-box">
             <span className="icon"></span>
             <span className="title">点击加载</span>
@@ -323,25 +337,36 @@ class SampleList extends React.Component {
         </div>
       )
     }
+    let listContent = null;
+    if (this.state.data.length > 0) {
+      listContent = (
+        _.map(this.state.data, (v,k)=>{
+          return (
+            <li key={k} className="item">
+              <a href={'/sample/'+v.id} target='_blank' >
+                <MediaItem
+                  aspectRatio="2:3"
+                  imageUrl={v.coverUrlWx || v.coverUrlWeb}
+                  processType={EmImgProcessType.emGD_S_S}
+                  height={300}
+                  quality={95}
+                />
+              </a>
+            </li>
+          )
+        })
+      )
+    } else {
+      return (
+        <p>无搜索结果</p>
+      )
+    }
     return (
       <div className="list-box">
         <ul className="item-list">
-          <li className="item">
-            {
-              _.map(this.state.data, (v,k)=>{
-                return (
-                  <a key={k} href={'/sample/'+v.id} target='_blank' >
-                    <MediaItem
-                      aspectRatio="2:3"
-                      imageUrl={v.coverUrlWx || v.coverUrlWeb}
-                      processType={EmImgProcessType.emGD_S_S}
-                      height={300}
-                    />
-                  </a>
-                )
-              })
-            }
-          </li>
+          {
+            listContent
+          }
         </ul>
         {
           moreButton
@@ -350,40 +375,100 @@ class SampleList extends React.Component {
     )
   }
 
-  handle(e) {
-    e.preventDefault();
-    let cfg = SampleConfig['SampleList']
-    let fetchUrl = cfg.buildUrl(this.props.params,cfg.dataUrl)
-  }
-
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params)
-    this.setState({
-      params:_.merge(this.props.params, nextProps.params)
-    })
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    // 条件改变会导致重新渲染组件
-    if (nextState.params.pageIndex !== this.state.params.pageIndex) {
-      return true;
+    // 比较接收到的参数是否有变化
+    if ((nextProps.params.sampleType != this.props.params.sampleType)
+      || (nextProps.params.shootStyleId != this.props.params.shootStyleId)
+      || (nextProps.params.exteriorId != this.props.params.exteriorId)
+    ) {
+      this.queryData(0,this.state.pageSize,nextProps.params,false);
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    // 判断是否需要重新渲染组件
+    if (nextState.params.length !== this.state.params.length) {
+      console.log('params.length需要渲染')
+      return true;
+    }
+
+    if ((nextState.params.sampleType !== this.state.params.sampleType)
+      || (nextState.params.shootStyleId !== this.state.params.shootStyleId)
+      || (nextState.params.exteriorId !== this.state.params.exteriorId)
+    ) {
+      console.log('params需要渲染')
+      return true;
+    }
+
+    if (nextState.pageIndex !== this.state.pageIndex) {
+      console.log('pageIndex需要渲染')
+      return true;
+    }
+
+    if (nextState.showMoreFlg !== this.state.showMoreFlg) {
+      console.log('showMoreFlg需要渲染')
+      return true;
+    }
+
+    console.log('不需要渲染')
+    return false;
+  }
+
+  queryData(pageIndex, pageSize, params, isChunk) {
+    let cfg = SampleConfig['SampleList']
+    let pI = pageIndex + 1;
+    let p = _.merge({pageIndex:pI, pageSize:pageSize}, params)
+    let fetchUrl = cfg.buildQueryUrl(p,cfg.dataUrl)
+    console.log(fetchUrl)
+    fetch(fetchUrl)
+      .then(res => {return res.json()})
+      .then(j =>{
+        if(j.success) {
+          let tmpData;
+          if (isChunk) {
+            tmpData = this.state.data;
+            tmpData = tmpData.concat(j.data);
+          } else {
+            tmpData = j.data;
+          }
+          if (j.count > tmpData.length) {
+            this.setState({data:tmpData, params:params, pageIndex:pI, showMoreFlg:true})
+          } else {
+            this.setState({data:tmpData, params:params, pageIndex:pI, showMoreFlg:false})
+          }
+        }
+      })
+  }
+
+  handleMore(e) {
+    e.preventDefault();
+    this.queryData(this.state.pageIndex,this.state.pageSize,this.state.params,true);
+  }
+
   componentDidMount() {
-    //let cfg = SampleConfig['SampleList']
-    //let fetchUrl = cfg.buildUrl(cfg.params,cfg.dataUrl)
-    //fetch(fetchUrl)
-    //  .then(res => {return res.json()})
-    //  .then(j =>{
-    //    if(j.success && j.data.length > 0) {
-    //      if (j.count > j.data.length) {
-    //        this.setState({ data:j.data, pageIndex:1, pageSize:4, showMoreFlg:true})
-    //      } else {
-    //        this.setState({ data:j.data, pageIndex:1, pageSize:4, showMoreFlg:false})
-    //      }
-    //    }
-    //  })
+    this.queryData(this.state.pageIndex,this.state.pageSize,this.state.params,false);
+  }
+}
+
+class SampleContent extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      filters:{}
+    }
+  }
+
+  render () {
+    return (
+      <div>
+        <FilterContent filterChangeHandle={this.filterChangeHandle.bind(this)} />
+        <SampleList params={this.state.filters} />
+      </div>
+    )
+  }
+
+  filterChangeHandle(filters) {
+    this.setState({filters:filters})
   }
 }
 
@@ -409,25 +494,18 @@ class Sample extends React.Component {
             height={SampleConfig['MediaSlider'].height}
           />
         </div>
-
-        <FilterContent sampleTypeName="婚纱摄影" shootStyleName="九龙滨江" />
-        <Filter filterChangeHandle={this.filterChangeHandle.bind(this)} />
-        <SampleList />
+        <SampleContent />
       </div>
     )
   }
 
-  filterChangeHandle(filters, filterContents) {
-    console.log(filters)
-    console.log(filterContents)
-  }
-
   componentDidMount() {
     $(document).ready(function(){
+      var topMain= $("#fixedNav").offset().top
       $(".scrollView").scroll(function(){
-        if ($(".scrollView").scrollTop() > $("#fixedNav").offset().top) {
+        if ($(".scrollView").scrollTop()>topMain){
           $("#fixedNav").addClass("fixed_top_nav");
-        } else {
+        }else{
           $("#fixedNav").removeClass("fixed_top_nav");
         }
       });

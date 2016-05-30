@@ -12,6 +12,12 @@ const SampleConfig  = {
     'height': 460
   }, BaseConfig),
 
+  'Banner':[
+    {
+      imageUrl: '//img2.jsbn.com/static/m_sample_banner_01.jpg'
+    }
+  ],
+
   'SampleList':_.merge({
     dataUrl:'sample/samples_list'
   },BaseConfig),

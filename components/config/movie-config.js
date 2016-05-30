@@ -11,6 +11,12 @@ const MovieConfig  = {
     'aspectRatio': '3:2',
     'height': 460
   }, BaseConfig),
+
+  'Banner':[
+    {
+      imageUrl: '//img2.jsbn.com/static/m_wdy_banner_01.jpg'
+    }
+  ],
 }
 
 export { MovieConfig }

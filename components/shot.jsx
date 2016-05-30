@@ -112,8 +112,10 @@ class BestPringles extends React.Component {
           </ul>
           <a href="/pringles">
             <div className="more-button">
-              <span className="icon"></span>
-              <span className="title">更多客片</span>
+              <div className="button-box">
+                <span className="icon"></span>
+                <span className="title">更多客片</span>
+              </div>
             </div>
           </a>
         </div>
@@ -177,8 +179,10 @@ class BestSample extends React.Component {
           </ul>
           <a href="/sample">
             <div className="more-button">
-              <span className="icon"></span>
-              <span className="title">更多样片</span>
+              <div className="button-box">
+                <span className="icon"></span>
+                <span className="title">更多样片</span>
+              </div>
             </div>
           </a>
         </div>

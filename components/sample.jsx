@@ -472,6 +472,15 @@ class SampleContent extends React.Component {
   }
 }
 
+/*
+ <div className="adv-header-box">
+ <MediaSlider
+ dataUrl={SampleConfig['MediaSlider'].baseUrl+SampleConfig['MediaSlider'].dataUrl}
+ aspectRatio={SampleConfig['MediaSlider'].aspectRatio}
+ height={SampleConfig['MediaSlider'].height}
+ />
+ </div>
+* */
 class Sample extends React.Component {
   constructor (props) {
     super(props);
@@ -487,13 +496,12 @@ class Sample extends React.Component {
           </div>
         </div>
 
-        <div className="adv-header-box">
-          <MediaSlider
-            dataUrl={SampleConfig['MediaSlider'].baseUrl+SampleConfig['MediaSlider'].dataUrl}
-            aspectRatio={SampleConfig['MediaSlider'].aspectRatio}
-            height={SampleConfig['MediaSlider'].height}
-          />
-        </div>
+        <MediaItem
+          aspectRatio="1:-1"
+          imageUrl={SampleConfig['Banner'][0].imageUrl}
+          processType={EmImgProcessType.emGD_S_S}
+        />
+
         <SampleContent />
       </div>
     )

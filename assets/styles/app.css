@@ -297,124 +297,6 @@ body {
   display: flex;
   align-items: center;
 }
-.sift-content-box {
-  left: 100%;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  -webkit-transition-duration: 1s;
-  transition-duration: 1s;
-}
-.sift-content-box.show-sift {
-  left: 0;
-}
-.sift-content-box .sift-center-box {
-  max-width: 80%;
-  min-width: 40%;
-  border: 1px solid #d6d6d6;
-  background-color: #fff;
-}
-.sift-content-box .sift-center-box .sift-scrollView-box {
-  overflow: auto;
-  max-height: calc(100vh - 150px);
-  padding-bottom: 5px;
-}
-.sift-content-box .sift-center-box .content-box {
-  width: 100%;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.sift-content-box .sift-center-box .content-box .title {
-  width: 100%;
-  height: 40px;
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row;
-  align-items: center;
-}
-.sift-content-box .sift-center-box .content-box .title .text {
-  line-height: 40px;
-  font-size: 14px;
-  display: block;
-  margin-left: 5px;
-}
-.sift-content-box .sift-center-box .content-box .item-list {
-  width: calc(100% + 10px);
-  margin-right: -10px;
-  text-align: center;
-}
-.sift-content-box .sift-center-box .content-box .item-list:before,
-.sift-content-box .sift-center-box .content-box .item-list:after {
-  content: " ";
-  display: table;
-}
-.sift-content-box .sift-center-box .content-box .item-list:after {
-  clear: both;
-}
-.sift-content-box .sift-center-box .content-box .item-list .item {
-  float: left;
-  border-radius: 5px;
-  height: 30px;
-  min-width: 60px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-bottom: 10px;
-  margin-right: 10px;
-  border: 1px solid #d6d6d6;
-}
-.sift-content-box .sift-center-box .content-box .item-list .item .title {
-  font-size: 12px;
-  line-height: 30px;
-  display: block;
-}
-.sift-content-box .sift-center-box .content-box .item-list .item.item-activate {
-  border-color: #f94267;
-}
-.sift-content-box .sift-center-box .content-box .item-list .item.item-activate .title {
-  color: #f94267;
-}
-.sift-content-box .sift-center-box .content-box.type .title .icon {
-  background-image: url("../images/icon-pringles-sift.png");
-  width: 18px;
-  height: 18px;
-  background-size: 100%;
-  display: block;
-  background-repeat: no-repeat;
-  background-position-y: 0px;
-}
-.sift-content-box .sift-center-box .content-box.style .title .icon {
-  background-image: url("../images/icon-pringles-sift.png");
-  width: 18px;
-  height: 18px;
-  background-size: 100%;
-  display: block;
-  background-repeat: no-repeat;
-  background-position-y: -18px;
-}
-.sift-content-box .sift-center-box .content-box.address .title .icon {
-  background-image: url("../images/icon-pringles-sift.png");
-  width: 18px;
-  height: 18px;
-  background-size: 100%;
-  display: block;
-  background-repeat: no-repeat;
-  background-position-y: -36px;
-}
-.sift-content-box .sift-center-box .button-box {
-  display: flex;
-  height: 35px;
-  flex-direction: row;
-  border-top: 1px solid #d6d6d6;
-  text-align: center;
-}
-.sift-content-box .sift-center-box .button-box .confirm-button,
-.sift-content-box .sift-center-box .button-box .reset-button {
-  flex: 1;
-  font-size: 14px;
-  line-height: 35px;
-}
-.sift-content-box .sift-center-box .button-box .confirm-button {
-  background-color: #f94267;
-}
 .adaption-auto {
   width: 100%;
   height: 100%;
@@ -429,6 +311,191 @@ body {
   width: 100%;
   height: 100%;
   overflow: scroll;
+}
+.adaption-auto .sift-content-box {
+  left: 100%;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  -webkit-transition-duration: 1s;
+  transition-duration: 1s;
+}
+.adaption-auto .sift-content-box.show-sift {
+  left: 0;
+}
+.adaption-auto .sift-content-box .sift-center-box {
+  max-width: 80%;
+  min-width: 40%;
+  border: 1px solid #d6d6d6;
+  background-color: #fff;
+}
+.adaption-auto .sift-content-box .sift-center-box .sift-scrollView-box {
+  overflow: auto;
+  max-height: calc(100vh - 150px);
+  padding-bottom: 5px;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box .title {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box .title .text {
+  line-height: 40px;
+  font-size: 14px;
+  display: block;
+  margin-left: 5px;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box .item-list {
+  width: calc(100% + 10px);
+  margin-right: -10px;
+  text-align: center;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box .item-list:before,
+.adaption-auto .sift-content-box .sift-center-box .content-box .item-list:after {
+  content: " ";
+  display: table;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box .item-list:after {
+  clear: both;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box .item-list .item {
+  float: left;
+  border-radius: 5px;
+  height: 30px;
+  min-width: 60px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  border: 1px solid #d6d6d6;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box .item-list .item .title {
+  font-size: 12px;
+  line-height: 30px;
+  display: block;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box .item-list .item.item-activate {
+  border-color: #f94267;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box .item-list .item.item-activate .title {
+  color: #f94267;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box.type .title .icon {
+  background-image: url("../images/icon-pringles-sift.png");
+  width: 18px;
+  height: 18px;
+  background-size: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-position-y: 0px;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box.style .title .icon {
+  background-image: url("../images/icon-pringles-sift.png");
+  width: 18px;
+  height: 18px;
+  background-size: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-position-y: -18px;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box.address .title .icon {
+  background-image: url("../images/icon-pringles-sift.png");
+  width: 18px;
+  height: 18px;
+  background-size: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-position-y: -36px;
+}
+.adaption-auto .sift-content-box .sift-center-box .button-box {
+  display: flex;
+  height: 35px;
+  flex-direction: row;
+  border-top: 1px solid #d6d6d6;
+  text-align: center;
+}
+.adaption-auto .sift-content-box .sift-center-box .button-box .confirm-button,
+.adaption-auto .sift-content-box .sift-center-box .button-box .reset-button {
+  flex: 1;
+  font-size: 14px;
+  line-height: 35px;
+}
+.adaption-auto .sift-content-box .sift-center-box .button-box .confirm-button {
+  background-color: #f94267;
+}
+.adaption-auto .nav-placeholder {
+  height: 42px;
+}
+.adaption-auto .nav-placeholder .sift-nav .sift-nav-box {
+  width: 100%;
+  height: 42px;
+  padding-left: 10px;
+  padding-right: 60px;
+  background-color: #fff;
+  border-top: 1px solid #d6d6d6;
+  border-bottom: 1px solid #d6d6d6;
+  position: relative;
+  text-align: center;
+}
+.adaption-auto .nav-placeholder .sift-nav .sift-nav-box span {
+  font-size: 12px;
+  line-height: 20px;
+  display: block;
+}
+.adaption-auto .nav-placeholder .sift-nav .sift-nav-box .sift-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(231, 59, 99, 0.8);
+  border-radius: 10px;
+  width: 40px;
+  height: 20px;
+  line-height: 20px;
+  display: none;
+}
+.adaption-auto .nav-placeholder .sift-nav .sift-nav-box .sift-title .text {
+  font-size: 12px;
+}
+.adaption-auto .nav-placeholder .sift-nav .sift-nav-box .sift-list-box {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: auto;
+}
+.adaption-auto .nav-placeholder .sift-nav .sift-nav-box .sift-list-box ul {
+  width: 1000%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.adaption-auto .nav-placeholder .sift-nav .sift-nav-box .sift-list-box ul li {
+  float: left;
+  height: 20px;
+  margin-right: 10px;
+  font-size: 12px;
+}
+.adaption-auto .nav-placeholder .sift-nav .sift-nav-box .sift-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 50px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+.adaption-auto .nav-placeholder .sift-nav .sift-nav-box .sift-button .icon {
+  background-image: url("../images/icon-sift-button.png");
+  width: 15px;
+  height: 15px;
+  background-size: 100%;
+  display: block;
+  background-repeat: no-repeat;
 }
 .adaption-auto .first-menu {
   display: flex;
@@ -846,7 +913,7 @@ body {
 }
 .adaption-auto .hssy-home-view .list-sample ul li {
   width: calc((100vw - 10px * (2 + 1))/2);
-  height: calc((100vw - 10px * (2 + 1))/2 * 1.5 + 0);
+  height: calc((100vw - 10px * (2 + 1))/2 * 0.6666 + 0px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -860,11 +927,11 @@ body {
 }
 .adaption-auto .hssy-home-view .list-sample ul li .info-box {
   width: 100%;
-  height: 0;
+  height: 0px;
 }
 .adaption-auto .hssy-home-view .list-sample ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0);
+  height: calc(100% - 0px);
   overflow: hidden;
 }
 .adaption-auto .hssy-home-view .list-pringles {
@@ -880,7 +947,7 @@ body {
 }
 .adaption-auto .hssy-home-view .list-pringles ul li {
   width: calc((100vw - 10px * (2 + 1))/2);
-  height: calc((100vw - 10px * (2 + 1))/2 * 1.5 + 0);
+  height: calc((100vw - 10px * (2 + 1))/2 * 0.6666 + 0px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -894,11 +961,11 @@ body {
 }
 .adaption-auto .hssy-home-view .list-pringles ul li .info-box {
   width: 100%;
-  height: 0;
+  height: 0px;
 }
 .adaption-auto .hssy-home-view .list-pringles ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0);
+  height: calc(100% - 0px);
   overflow: hidden;
 }
 .adaption-auto .hssy-home-view .list-suit {
@@ -914,7 +981,7 @@ body {
 }
 .adaption-auto .hssy-home-view .list-suit ul li {
   width: calc((100vw - 10px * (1 + 1))/1);
-  height: calc((100vw - 10px * (1 + 1))/1 * 0.25 + 0);
+  height: calc((100vw - 10px * (1 + 1))/1 * 0.25 + 0px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -928,11 +995,11 @@ body {
 }
 .adaption-auto .hssy-home-view .list-suit ul li .info-box {
   width: 100%;
-  height: 0;
+  height: 0px;
 }
 .adaption-auto .hssy-home-view .list-suit ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0);
+  height: calc(100% - 0px);
   overflow: hidden;
 }
 .adaption-auto .hssy-home-view .list-suit .suit-box {
@@ -1007,7 +1074,7 @@ body {
 }
 .adaption-auto .hssy-suit-list-view .list-box ul li {
   width: calc((100vw - 10px * (1 + 1))/1);
-  height: calc((100vw - 10px * (1 + 1))/1 * 0.66666667 + 1.875rem);
+  height: calc((100vw - 10px * (1 + 1))/1 * 0.66666667 + 1.875px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1021,11 +1088,11 @@ body {
 }
 .adaption-auto .hssy-suit-list-view .list-box ul li .info-box {
   width: 100%;
-  height: 1.875rem;
+  height: 1.875px;
 }
 .adaption-auto .hssy-suit-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 1.875rem);
+  height: calc(100% - 1.875px);
   overflow: hidden;
 }
 .adaption-auto .hssy-suit-list-view .list-box .info-box span {
@@ -1050,73 +1117,6 @@ body {
   position: relative;
   top: -0.1875rem;
 }
-.adaption-auto .sample-list-view .nav-placeholder {
-  height: 42px;
-}
-.adaption-auto .sample-list-view .sift-nav .sift-nav-box {
-  width: 100%;
-  height: 42px;
-  padding-left: 10px;
-  padding-right: 60px;
-  background-color: #fff;
-  border-top: 1px solid #d6d6d6;
-  border-bottom: 1px solid #d6d6d6;
-  position: relative;
-  text-align: center;
-}
-.adaption-auto .sample-list-view .sift-nav .sift-nav-box span {
-  font-size: 12px;
-  line-height: 20px;
-  display: block;
-}
-.adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-title {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background-color: rgba(231, 59, 99, 0.8);
-  border-radius: 10px;
-  width: 40px;
-  height: 20px;
-  line-height: 20px;
-  display: none;
-}
-.adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-title .text {
-  font-size: 12px;
-}
-.adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-list-box {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  margin: auto;
-}
-.adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-list-box ul {
-  width: 1000%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-.adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-list-box ul li {
-  float: left;
-  height: 20px;
-  margin-right: 10px;
-  font-size: 12px;
-}
-.adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 50px;
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: center;
-}
-.adaption-auto .sample-list-view .sift-nav .sift-nav-box .sift-button .icon {
-  background-image: url("../images/icon-sift-button.png");
-  width: 15px;
-  height: 15px;
-  background-size: 100%;
-  display: block;
-  background-repeat: no-repeat;
-}
 .adaption-auto .sample-list-view .list-box {
   margin-bottom: 10px;
 }
@@ -1130,7 +1130,7 @@ body {
 }
 .adaption-auto .sample-list-view .list-box ul li {
   width: calc((100vw - 10px * (2 + 1))/2);
-  height: calc((100vw - 10px * (2 + 1))/2 * 1.5 + 0);
+  height: calc((100vw - 10px * (2 + 1))/2 * 0.6666 + 0px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1144,17 +1144,29 @@ body {
 }
 .adaption-auto .sample-list-view .list-box ul li .info-box {
   width: 100%;
-  height: 0;
+  height: 0px;
 }
 .adaption-auto .sample-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0);
+  height: calc(100% - 0px);
   overflow: hidden;
 }
-.adaption-auto .pringles-list-view .list-box {
-  margin-bottom: 10px;
+.adaption-auto .pringles-list-view .season-box {
+  overflow: hidden;
 }
-.adaption-auto .pringles-list-view .list-box ul {
+.adaption-auto .pringles-list-view .list-season {
+  margin-bottom: 10px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  max-width: 100vw;
+  padding-bottom: 60px;
+  padding-top: 15px;
+  margin-bottom: -15px;
+  text-align: center;
+  /* 核心样式 */
+  /* 阴影的呼吸灯效果 */
+}
+.adaption-auto .pringles-list-view .list-season ul {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -1162,27 +1174,117 @@ body {
   padding: 10px 10px 0;
   margin-bottom: -10px;
 }
-.adaption-auto .pringles-list-view .list-box ul li {
-  width: calc((100vw - 10px * (2 + 1))/2);
-  height: calc((100vw - 10px * (2 + 1))/2 * 1.5 + 0);
+.adaption-auto .pringles-list-view .list-season ul li {
+  width: calc((100vw - 10px * (3 + 1))/3);
+  height: calc((100vw - 10px * (3 + 1))/3 * 0.6666 + 30px);
   overflow: hidden;
   margin-bottom: 10px;
 }
-.adaption-auto .pringles-list-view .list-box ul li > a {
+.adaption-auto .pringles-list-view .list-season ul li > a {
   display: block;
   width: 100%;
   height: 100%;
 }
-.adaption-auto .pringles-list-view .list-box ul li img {
+.adaption-auto .pringles-list-view .list-season ul li img {
   width: 100%;
 }
-.adaption-auto .pringles-list-view .list-box ul li .info-box {
+.adaption-auto .pringles-list-view .list-season ul li .info-box {
   width: 100%;
-  height: 0;
+  height: 30px;
 }
-.adaption-auto .pringles-list-view .list-box ul li .photo-box {
+.adaption-auto .pringles-list-view .list-season ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0);
+  height: calc(100% - 30px);
+  overflow: hidden;
+}
+.adaption-auto .pringles-list-view .list-season .text-title {
+  font-size: 12px;
+  line-height: 30px;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.adaption-auto .pringles-list-view .list-season .item-list {
+  padding-left: calc((100vw - 10px * (3 + 1))/3 + 10px);
+  padding-right: calc((100vw - 10px * (3 + 1))/3 + 10px);
+}
+.adaption-auto .pringles-list-view .list-season .item.activate {
+  zoom: 1.3;
+}
+.adaption-auto .pringles-list-view .list-season .item.activate .text-title {
+  color: #f94267;
+  background-color: #fff;
+}
+.adaption-auto .pringles-list-view .list-season .item {
+  /* 定义过渡属性，就是平滑的变大，看起来不会那么生硬  */
+  /* webkit写法,现在的chrome版本已经支持transition这种方式了 */
+}
+.adaption-auto .pringles-list-view .list-season .item.activate {
+  /* 依次定义变换、阴影、阴影的动画  */
+  transform: scale(1.2);
+  outline: none;
+}
+@keyframes glow {
+  0% {
+    border-color: #000;
+    box-shadow: 0 0 5px 5px transparent;
+  }
+  100% {
+    border-color: #000;
+    box-shadow: 0 0 10px 5px #000;
+  }
+}
+@-webkit-keyframes glow {
+  0% {
+    border-color: #000;
+    box-shadow: 0 0 5px 5px transparent;
+    -webkit-box-shadow: 0 0 5px 5px transparent;
+  }
+  100% {
+    border-color: #000;
+    box-shadow: 0 0 10px 5px #000;
+    -webkit-box-shadow: 0 0 10px 5px #000;
+  }
+}
+.adaption-auto .pringles-list-view .list-pringles,
+.adaption-auto .pringles-list-view .list-new-pringles {
+  margin-bottom: 10px;
+}
+.adaption-auto .pringles-list-view .list-pringles ul,
+.adaption-auto .pringles-list-view .list-new-pringles ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px 10px 0;
+  margin-bottom: -10px;
+}
+.adaption-auto .pringles-list-view .list-pringles ul li,
+.adaption-auto .pringles-list-view .list-new-pringles ul li {
+  width: calc((100vw - 10px * (2 + 1))/2);
+  height: calc((100vw - 10px * (2 + 1))/2 * 0.6666 + 0px);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.adaption-auto .pringles-list-view .list-pringles ul li > a,
+.adaption-auto .pringles-list-view .list-new-pringles ul li > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.adaption-auto .pringles-list-view .list-pringles ul li img,
+.adaption-auto .pringles-list-view .list-new-pringles ul li img {
+  width: 100%;
+}
+.adaption-auto .pringles-list-view .list-pringles ul li .info-box,
+.adaption-auto .pringles-list-view .list-new-pringles ul li .info-box {
+  width: 100%;
+  height: 0px;
+}
+.adaption-auto .pringles-list-view .list-pringles ul li .photo-box,
+.adaption-auto .pringles-list-view .list-new-pringles ul li .photo-box {
+  width: 100%;
+  height: calc(100% - 0px);
   overflow: hidden;
 }
 .adaption-auto .full-view-show {

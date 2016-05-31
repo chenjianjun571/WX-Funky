@@ -18,8 +18,16 @@ const PringlesConfig  = {
     }
   ],
 
+  'Best':_.merge({
+    'dataUrl':'pringles/weddingshot_index_best_pringles?pageIndex=1&pageSize=4',
+  },BaseConfig),
+
   'Season':_.merge({
     dataUrl:'pringlesSeason/all'
+  },BaseConfig),
+
+  'PringlesSeasonList':_.merge({
+    dataUrl:'pringles/pringles_season'
   },BaseConfig),
 }
 

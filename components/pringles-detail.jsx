@@ -27,6 +27,7 @@ class PringlesDetail extends React.Component {
                     imageUrl={v}
                     quality={90}
                     processType={EmImgProcessType.emGD_S_S}
+                    water={true}
                   />
                 </li>
               )

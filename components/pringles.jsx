@@ -10,32 +10,34 @@ class Season extends React.Component {
 
   constructor (props) {
     super(props);
+    this.cache = new Map()
     this.state = {
       season:[],
       index:0,
-      data:[],
-      startX:"",
-      startY:"",
-      endX:"",
-      endY:""
+      data:[]
     };
   }
 
   render () {
+    let seasonActivateName="";
     return (
       <div>
         <div className="season-box">
-          <div className="list-box list-season" onTouchStart={ev=>{this.touchStart(ev)}} onTouchEnd={ev=>{this.touchEnd(ev, this.state.index)}} >
+          <div className="list-box list-season" >
             <ul className="item-list" style={{width: "calc(( (100vw - 10px * (3 + 1))/3 + 10px) * (" + this.state.season.length +" + 2) - 10px)"}}>
               {
                 _.map(this.state.season, (v,k)=>{
-                  let kClass = this.state.index==k ? "item activate" : "item"
+                  let kClass = "item";
+                  if (this.state.index==k) {
+                    kClass = "item activate";
+                    seasonActivateName = v.name;
+                  }
                   return (
-                    <li key={k} className={kClass}>
+                    <li key={k} className={kClass} onClick={this.handleClick.bind(this,k,v.seasonId)}>
                       <div className="photo-box">
                         <MediaItem
                           aspectRatio="3:2"
-                          imageUrl={v.coverUrlWx || v.coverUrlWeb}
+                          imageUrl={v.coverUrlWeb}
                           processType={EmImgProcessType.emGD_S_S}
                           height={140}
                           quality={95}
@@ -50,23 +52,31 @@ class Season extends React.Component {
               }
             </ul>
           </div>
+          <div className="activate-info">
+            <span className="text-title">{seasonActivateName}</span>
+          </div>
           <i className="icon"></i>
         </div>
 
         <div className="list-box list-pringles">
           <ul className="item-list">
-            <li className="item">
-              <a href="javascrip:void(0)"><img src="https://c.stocksy.com/a/iuC400/z1/1002956.jpg"/></a>
-            </li>
-            <li className="item">
-              <a href="javascrip:void(0)"><img src="https://c.stocksy.com/a/iuC400/z1/1002956.jpg"/></a>
-            </li>
-            <li className="item">
-              <a href="javascrip:void(0)"><img src="https://c.stocksy.com/a/iuC400/z1/1002956.jpg"/></a>
-            </li>
-            <li className="item">
-              <a href="javascrip:void(0)"><img src="https://c.stocksy.com/a/iuC400/z1/1002956.jpg"/></a>
-            </li>
+            {
+              _.map(this.state.data, (v,k)=>{
+                return (
+                  <li key={k} className="item">
+                    <a href={'/pringles/'+v.id} target='_blank' >
+                      <MediaItem
+                        aspectRatio="2:3"
+                        imageUrl={v.coverUrlWeb}
+                        processType={EmImgProcessType.emGD_S_S}
+                        height={600}
+                        quality={95}
+                      />
+                    </a>
+                  </li>
+                )
+              })
+            }
           </ul>
         </div>
       </div>
@@ -80,81 +90,110 @@ class Season extends React.Component {
       .then(res => {return res.json()})
       .then(j =>{
         if(j.success && j.data.length > 0) {
-          this.setState({season:j.data, index:0})
+          this.queryData(0, j.data[0].seasonId, j.data)
         }
       })
   }
 
-  touchStart(ev){
-    this.setState({
-      startX:ev.touches[0].pageX,
-      startY:ev.touches[0].pageY
-    })
+  handleClick(i,seasonId,e) {
+    e.preventDefault();
+    this.queryData(i, seasonId);
   }
 
-  touchEnd(ev, i){
-    this.setState({
-      startX:"",
-      startY:""
-    })
-    let index = -1;
-    let direction = this.GetSlideDirection(this.state.startX, this.state.startY, ev.changedTouches[0].pageX, ev.changedTouches[0].pageY);
-    switch(direction) {
-      case 0:// "没滑动"
-        break;
-      case 1:// 向上
-        break;
-      case 2:// "向下"
-        break;
-      case 3:// "向左"
-        index = i + 1;
-        if (index >= this.state.season.length) {
-          index = this.state.season.length-1;
-        }
-        break;
-      case 4:// "向右"
-        index = i - 1;
-        if (index < 0) {
-          index = 0;
-        }
-        break;
-      default:
-    }
-    console.log(index)
-    if(index != -1) {
-      this.setState({ index:index });
-    }
-  }
+  queryData(i, seasonId, season=null) {
 
-  GetSlideAngle(dx, dy) {
-    return Math.atan2(dy, dx) * 180 / Math.PI;
-  }
-
-  GetSlideDirection(startX, startY, endX, endY) {
-    var dy = startY - endY;
-    var dx = endX - startX;
-    var result = 0;
-    //如果滑动距离太短
-    if(Math.abs(dx) < 5 && Math.abs(dy) < 5) {
-      return result;
+    let ready = ()=>{
+      var toOffsetLeft = $(".list-season .item-list .item.activate").attr("data-left") ;
+      var time = (Math.abs($(".list-season").scrollLeft() - toOffsetLeft)/300)*500;
+      $(".list-season").animate({scrollLeft:toOffsetLeft},time)
     }
 
-    var angle = this.GetSlideAngle(dx, dy);
-    if(angle >= -45 && angle < 45) {
-      result = 4;
-    }else if (angle >= 45 && angle < 135) {
-      result = 1;
-    }else if (angle >= -135 && angle < -45) {
-      result = 2;
+    let cfg = PringlesConfig['PringlesSeasonList']
+    let fetchUrl = cfg.buildQueryUrl({seasonId:seasonId},cfg.dataUrl)
+    // 先从本地缓存里面查找,早不到才去网络请求
+    if (this.cache[fetchUrl]) {
+      this.setState({data:this.cache[fetchUrl], index:i},ready)
+    } else {
+      fetch(fetchUrl)
+        .then(res => {return res.json()})
+        .then(j =>{
+          if(j.success) {
+            this.cache[fetchUrl]=j.data;
+            if (season) {
+              // 第一次设置的时候需要通过脚本把每个item的位置确定
+              this.setState({data:j.data, season:season, index:i},()=>{
+                var $allItem=$(".list-season .item-list .item");
+                var $season=$(".list-season");
+                var $firstItem=$(".list-season .item-list .item:first");
+                if ($($allItem).length > 0){
+                  var space=$($firstItem).offset().left;
+                  var maxLength =  $($allItem).length;
+                  var offset=0;
+                  if (maxLength >= 2){
+                    space = $($allItem[maxLength - 1]).offset().left - $($allItem[maxLength - 2]).offset().left ;
+                  }
+                  $allItem.map(function(){
+                    $(this).attr("data-left", offset);
+                    offset = offset + space;
+                  });
+                }
+              })
+            } else {
+              this.setState({data:j.data,index:i},ready)
+            }
+          }
+        })
     }
-    else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
-      result = 3;
-    }
-    return result;
   }
 }
 
-Season.mixins=TouchMixin;
+class BestPringles extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      data:[]
+    };
+  }
+
+  render () {
+    return (
+      <div className="list-box list-new-pringles">
+        <ul className="item-list">
+          {
+            _.map(this.state.data, (v,k)=>{
+              return (
+                <li key={k} className="item">
+                  <a href={'/pringles/'+v.id} target='_blank' >
+                    <MediaItem
+                      aspectRatio="2:3"
+                      imageUrl={v.coverUrlWeb}
+                      processType={EmImgProcessType.emGD_S_S}
+                      height={600}
+                      quality={95}
+                    />
+                  </a>
+                </li>
+              )
+            })
+          }
+        </ul>
+      </div>
+    )
+  }
+
+  componentDidMount() {
+    let cfg = PringlesConfig['Best']
+    let fetchUrl = cfg.buildUrl(null,cfg.dataUrl)
+    fetch(fetchUrl)
+      .then(res => {return res.json()})
+      .then(j =>{
+        if(j.success && j.data.length > 0) {
+          this.setState({data:j.data})
+        }
+      })
+  }
+}
 
 class Pringles extends React.Component {
   constructor (props) {
@@ -175,20 +214,20 @@ class Pringles extends React.Component {
           </div>
         </div>
 
-        <div className="adv-header-box">
-          <MediaSlider
-            dataUrl={PringlesConfig['MediaSlider'].baseUrl+PringlesConfig['MediaSlider'].dataUrl}
-            aspectRatio={PringlesConfig['MediaSlider'].aspectRatio}
-            height={PringlesConfig['MediaSlider'].height}
-          />
-        </div>
+        <MediaItem
+          aspectRatio="1:-1"
+          imageUrl={PringlesConfig['Banner'][0].imageUrl}
+          processType={EmImgProcessType.emGD_S_S}
+        />
+
+        <BestPringles />
 
         <div className="title-box-style-1">
           <div className="banner">
             <i></i>
             <span>幸福可以绽放的如此耀眼</span>
           </div>
-          <span className="title">最新客片欣赏</span>
+          <span className="title">客片分季欣赏</span>
         </div>
 
         <Season />

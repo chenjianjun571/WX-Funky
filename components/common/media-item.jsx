@@ -23,7 +23,7 @@ class VideoItem extends React.Component {
       if (this.props.videoUrl.includes('taobao.com')) {
         return (
           <div id={this.state.genId} style={{'width':this.props.width,'height':this.props.height}}>
-            <h1>Loading TaobaoVideoJS...</h1>
+            <h1></h1>
           </div>
         )
       } else {
@@ -269,24 +269,28 @@ class ImageItem extends React.Component {
 }
 
 class MediaItem extends React.Component {
-
   render () {
-
-    let factors = this.props.aspectRatio.split(':')
-    let width = this.props.width
-    let height = this.props.height
-
-    if (factors[0] === '-1' || factors[1] === '-1') {
-      width = '100%';
-      height = '100%';
+    let width;
+    let height;
+    if (this.props.videoUrl && this.props.videoUrl.length > 0) {
+      width = this.props.width || '100%'
+      height = this.props.height || '100%'
     } else {
-      if (width) {
-        height = parseInt(width*parseFloat(factors[1])/parseFloat(factors[0]))
-      } else if(height) {
-        width = parseInt(height*parseFloat(factors[0])/parseFloat(factors[1]))
+      let factors = this.props.aspectRatio.split(':')
+      width = this.props.width;
+      height = this.props.height;
+      if (factors[0] === '-1' || factors[1] === '-1') {
+        width = '100%';
+        height = '100%';
       } else {
-        console.log('高度或者宽度必须指定一个啊.');
-        return null;
+        if (width) {
+          height = parseInt(width*parseFloat(factors[1])/parseFloat(factors[0]))
+        } else if(height) {
+          width = parseInt(height*parseFloat(factors[0])/parseFloat(factors[1]))
+        } else {
+          console.log('高度或者宽度必须指定一个啊.');
+          return null;
+        }
       }
     }
 

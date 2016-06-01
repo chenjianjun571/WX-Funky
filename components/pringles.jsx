@@ -7,10 +7,10 @@ import { PringlesConfig } from './config/pringles-config'
 import { TouchMixin } from './common/TouchMixin'
 
 class Season extends React.Component {
-
   constructor (props) {
     super(props);
-    this.cache = new Map()
+    this.cache = new Map();
+    this.first = true;
     this.state = {
       season:[],
       index:0,
@@ -95,24 +95,62 @@ class Season extends React.Component {
       })
   }
 
+  componentWillReceiveProps(nextProps) {}
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if(nextState.index !== this.state.index) {
+      return true;
+    }
+
+    if(nextState.data.toString() !== this.state.data.toString()) {
+      return true;
+    }
+
+    if(nextState.season.toString() !== this.state.season.toString()) {
+      return true;
+    }
+
+    return false;
+  }
+
+  componentDidUpdate() {
+    // 渲染完成以后做的一些dom操作
+    if (this.first) {
+      // 第一次渲染,需要做一些操作
+      let $allItem=$(".list-season .item-list .item");
+      let $season=$(".list-season");
+      let $firstItem=$(".list-season .item-list .item:first");
+      if ($($allItem).length > 0){
+        let space=$($firstItem).offset().left;
+        let maxLength =  $($allItem).length;
+        let offset=0;
+        if (maxLength >= 2){
+          space = $($allItem[maxLength - 1]).offset().left - $($allItem[maxLength - 2]).offset().left ;
+        }
+        $allItem.map(function(){
+          $(this).attr("data-left", offset);
+          offset = offset + space;
+        });
+      }
+      this.first = false;
+    } else {
+      var toOffsetLeft = $(".list-season .item-list .item.activate").attr("data-left") ;
+      var time = (Math.abs($(".list-season").scrollLeft() - toOffsetLeft)/300)*500;
+      $(".list-season").animate({scrollLeft:toOffsetLeft},time)
+    }
+  }
+
   handleClick(i,seasonId,e) {
     e.preventDefault();
     this.queryData(i, seasonId);
   }
 
   queryData(i, seasonId, season=null) {
-
-    let ready = ()=>{
-      var toOffsetLeft = $(".list-season .item-list .item.activate").attr("data-left") ;
-      var time = (Math.abs($(".list-season").scrollLeft() - toOffsetLeft)/300)*500;
-      $(".list-season").animate({scrollLeft:toOffsetLeft},time)
-    }
-
     let cfg = PringlesConfig['PringlesSeasonList']
     let fetchUrl = cfg.buildQueryUrl({seasonId:seasonId},cfg.dataUrl)
     // 先从本地缓存里面查找,早不到才去网络请求
     if (this.cache[fetchUrl]) {
-      this.setState({data:this.cache[fetchUrl], index:i},ready)
+      this.setState({data:this.cache[fetchUrl], index:i})
     } else {
       fetch(fetchUrl)
         .then(res => {return res.json()})
@@ -121,25 +159,10 @@ class Season extends React.Component {
             this.cache[fetchUrl]=j.data;
             if (season) {
               // 第一次设置的时候需要通过脚本把每个item的位置确定
-              this.setState({data:j.data, season:season, index:i},()=>{
-                var $allItem=$(".list-season .item-list .item");
-                var $season=$(".list-season");
-                var $firstItem=$(".list-season .item-list .item:first");
-                if ($($allItem).length > 0){
-                  var space=$($firstItem).offset().left;
-                  var maxLength =  $($allItem).length;
-                  var offset=0;
-                  if (maxLength >= 2){
-                    space = $($allItem[maxLength - 1]).offset().left - $($allItem[maxLength - 2]).offset().left ;
-                  }
-                  $allItem.map(function(){
-                    $(this).attr("data-left", offset);
-                    offset = offset + space;
-                  });
-                }
-              })
+              this.setState({data:j.data, season:season, index:i})
             } else {
-              this.setState({data:j.data,index:i},ready)
+              // 每次渲染完成以后需要调整分季展示的位置
+              this.setState({data:j.data,index:i})
             }
           }
         })
@@ -198,10 +221,6 @@ class BestPringles extends React.Component {
 class Pringles extends React.Component {
   constructor (props) {
     super(props);
-
-    this.state = {
-      data:[]
-    };
   }
 
   render () {
@@ -233,9 +252,6 @@ class Pringles extends React.Component {
         <Season />
       </div>
     )
-  }
-
-  componentDidMount() {
   }
 }
 

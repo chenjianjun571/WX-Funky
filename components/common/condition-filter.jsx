@@ -5,7 +5,7 @@ import _ from 'lodash'
 class ConditionFilter extends React.Component {
   constructor (props) {
     super(props);
-
+    this.firstRender = true;
     this.state = {
       selContent:[],
       filters: []
@@ -89,6 +89,7 @@ class ConditionFilter extends React.Component {
   selHandle(k, kk, e) {
     e.preventDefault();
     let t = this.state.filters;
+    // 标注选择的是哪一类条件的哪一个选项
     t[k].kIndex=kk;
     this.setState({filters:t})
   }
@@ -96,6 +97,7 @@ class ConditionFilter extends React.Component {
   handleReset(e) {
     e.preventDefault();
     let t = this.state.filters;
+    // 重置条件
     _.each(t,(v,k)=>{
       v.kIndex=0;
     })
@@ -127,18 +129,7 @@ class ConditionFilter extends React.Component {
         n[k]=v.conditions[0].name
       }
     })
-    this.setState({selContent:n, filters:f}, ()=>{
-      $(document).ready(function(){
-        var topMain= $("#fixedNav").offset().top
-        $(".scrollView").scroll(function(){
-          if ($(".scrollView").scrollTop()>topMain){
-            $("#fixedNav").addClass("fixed_top_nav");
-          }else{
-            $("#fixedNav").removeClass("fixed_top_nav");
-          }
-        });
-      });
-    })
+    this.setState({selContent:n, filters:f})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -160,6 +151,21 @@ class ConditionFilter extends React.Component {
       return false;
     }
     return true;
+  }
+
+  componentDidUpdate() {
+    // 客户端第一次渲染的时候才做处理
+    if (this.firstRender) {
+      let topMain= $("#fixedNav").offset().top
+      $(".scrollView").scroll(function(){
+        if ($(".scrollView").scrollTop()>topMain){
+          $("#fixedNav").addClass("fixed_top_nav");
+        }else{
+          $("#fixedNav").removeClass("fixed_top_nav");
+        }
+      });
+      this.firstRender = false;
+    }
   }
 }
 

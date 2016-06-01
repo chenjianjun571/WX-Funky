@@ -17,6 +17,12 @@ const MovieConfig  = {
       imageUrl: '//img2.jsbn.com/static/m_wdy_banner_01.jpg'
     }
   ],
+
+  // 微电影 videoType 1:爱情MV 2:爱情微电影 3:婚纱纪实MV
+  'Movie':_.merge({
+    'dataUrl':'video/movie_list'
+  },BaseConfig),
+
 }
 
 export { MovieConfig }

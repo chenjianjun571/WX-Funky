@@ -313,7 +313,6 @@ class FilterContent extends React.Component {
 class SampleList extends React.Component {
   constructor (props) {
     super(props);
-
     this.state = {
       data:[],
       showMoreFlg:true,
@@ -388,7 +387,6 @@ class SampleList extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     // 判断是否需要重新渲染组件
     if (nextState.params.length !== this.state.params.length) {
-      console.log('params.length需要渲染')
       return true;
     }
 
@@ -396,21 +394,17 @@ class SampleList extends React.Component {
       || (nextState.params.shootStyleId !== this.state.params.shootStyleId)
       || (nextState.params.exteriorId !== this.state.params.exteriorId)
     ) {
-      console.log('params需要渲染')
       return true;
     }
 
     if (nextState.pageIndex !== this.state.pageIndex) {
-      console.log('pageIndex需要渲染')
       return true;
     }
 
     if (nextState.showMoreFlg !== this.state.showMoreFlg) {
-      console.log('showMoreFlg需要渲染')
       return true;
     }
 
-    console.log('不需要渲染')
     return false;
   }
 
@@ -419,7 +413,6 @@ class SampleList extends React.Component {
     let pI = pageIndex + 1;
     let p = _.merge({pageIndex:pI, pageSize:pageSize}, params)
     let fetchUrl = cfg.buildQueryUrl(p,cfg.dataUrl)
-    console.log(fetchUrl)
     fetch(fetchUrl)
       .then(res => {return res.json()})
       .then(j =>{
@@ -431,6 +424,7 @@ class SampleList extends React.Component {
           } else {
             tmpData = j.data;
           }
+
           if (j.count > tmpData.length) {
             this.setState({data:tmpData, params:params, pageIndex:pI, showMoreFlg:true})
           } else {

@@ -16,6 +16,7 @@
     "build-suite-detail": "watchify ./src/client/suite-detail.js -o 'uglifyjs -cm > ./assets/script/modules/suite-detail.min.js'",
     "build-movie": "watchify ./src/client/movie.js -o 'uglifyjs -cm > ./assets/script/modules/movie.min.js'",
     "build-scheme": "watchify ./src/client/scheme.js -o 'uglifyjs -cm > ./assets/script/modules/scheme.min.js'",
+    "build-case": "watchify ./src/client/case.js -o 'uglifyjs -cm > ./assets/script/modules/case.min.js'",
     "build-hotel": "watchify ./src/client/hotel.js -o 'uglifyjs -cm > ./assets/script/modules/hotel.min.js'",
     "build-activity": "watchify ./src/client/activity.js -o 'uglifyjs -cm > ./assets/script/modules/activity.min.js'",
     "test": "echo \"Error: no test specified\" && exit 1"

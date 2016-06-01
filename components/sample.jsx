@@ -313,13 +313,14 @@ class FilterContent extends React.Component {
 class SampleList extends React.Component {
   constructor (props) {
     super(props);
+    this.renderFlg=true;
     this.state = {
       data:[],
       showMoreFlg:true,
-      pageSize:4,
-      pageIndex:0,
       params:{
-        sampleType:0
+        sampleType:0,
+        pageSize:4,
+        pageIndex:0
       }
     };
   }
@@ -340,9 +341,10 @@ class SampleList extends React.Component {
     if (this.state.data.length > 0) {
       listContent = (
         _.map(this.state.data, (v,k)=>{
+          // 通过v.coverUrlWeb来做组件的key,这样才能避免条件切换的时候不刷新的问题
           return (
-            <li key={k} className="item">
-              <a href={'/sample/'+v.id} target='_blank' >
+            <li key={v.id} className="item">
+              <a href={k} target='_blank' >
                 <MediaItem
                   aspectRatio="2:3"
                   imageUrl={v.coverUrlWx || v.coverUrlWeb}
@@ -375,29 +377,22 @@ class SampleList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    let p = _.merge(nextProps.params, {pageSize:this.state.params.pageSize, pageIndex:this.state.params.pageIndex})
     // 比较接收到的参数是否有变化
-    if ((nextProps.params.sampleType != this.props.params.sampleType)
-      || (nextProps.params.shootStyleId != this.props.params.shootStyleId)
-      || (nextProps.params.exteriorId != this.props.params.exteriorId)
-    ) {
-      this.queryData(0,this.state.pageSize,nextProps.params,false);
+    if (JSON.stringify(p) !== JSON.stringify(this.state.params)) {
+      // 重新赋值页码
+      p.pageIndex = 0;
+      this.queryData(p,false);
+      this.renderFlg=true;
+    } else {
+      this.renderFlg=false;
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     // 判断是否需要重新渲染组件
-    if (nextState.params.length !== this.state.params.length) {
-      return true;
-    }
-
-    if ((nextState.params.sampleType !== this.state.params.sampleType)
-      || (nextState.params.shootStyleId !== this.state.params.shootStyleId)
-      || (nextState.params.exteriorId !== this.state.params.exteriorId)
-    ) {
-      return true;
-    }
-
-    if (nextState.pageIndex !== this.state.pageIndex) {
+    if (nextState.params.length !== this.state.params.length
+      || nextState.data.length !== this.state.data.length) {
       return true;
     }
 
@@ -405,14 +400,18 @@ class SampleList extends React.Component {
       return true;
     }
 
+    if (this.renderFlg) {
+      return true;
+    }
+
     return false;
   }
 
-  queryData(pageIndex, pageSize, params, isChunk) {
+  queryData(params, isChunk) {
     let cfg = SampleConfig['SampleList']
-    let pI = pageIndex + 1;
-    let p = _.merge({pageIndex:pI, pageSize:pageSize}, params)
-    let fetchUrl = cfg.buildQueryUrl(p,cfg.dataUrl)
+    params.pageIndex += 1;
+    let fetchUrl = cfg.buildQueryUrl(params,cfg.dataUrl)
+    console.log(fetchUrl)
     fetch(fetchUrl)
       .then(res => {return res.json()})
       .then(j =>{
@@ -426,9 +425,9 @@ class SampleList extends React.Component {
           }
 
           if (j.count > tmpData.length) {
-            this.setState({data:tmpData, params:params, pageIndex:pI, showMoreFlg:true})
+            this.setState({data:tmpData, params:params, showMoreFlg:true})
           } else {
-            this.setState({data:tmpData, params:params, pageIndex:pI, showMoreFlg:false})
+            this.setState({data:tmpData, params:params, showMoreFlg:false})
           }
         }
       })
@@ -436,11 +435,11 @@ class SampleList extends React.Component {
 
   handleMore(e) {
     e.preventDefault();
-    this.queryData(this.state.pageIndex,this.state.pageSize,this.state.params,true);
+    this.queryData(this.state.params,true);
   }
 
   componentDidMount() {
-    this.queryData(this.state.pageIndex,this.state.pageSize,this.state.params,false);
+    this.queryData(this.state.params,false);
   }
 }
 

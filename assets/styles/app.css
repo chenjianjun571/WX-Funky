@@ -2,6 +2,7 @@
   outline: none;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 body,
 div,
@@ -157,6 +158,7 @@ body {
   background-size: 15px;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
   background-position-y: -15px;
 }
 .more-button .button-box .title {
@@ -170,11 +172,17 @@ body {
   z-index: 10070;
   width: 100%;
 }
-.banner-box {
+.layout-banner-box {
+  width: 100%;
   text-align: center;
+  font-size: 0;
 }
-.banner-box img {
+.layout-banner-box img {
   max-width: 100%;
+}
+.layout-space-box {
+  padding-right: 10px;
+  padding-left: 10px;
 }
 /***
 @f_s                字体尺寸
@@ -401,6 +409,7 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
   background-position-y: 0px;
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box.style .title .icon {
@@ -410,6 +419,7 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
   background-position-y: -18px;
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box.address .title .icon {
@@ -419,7 +429,18 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
   background-position-y: -36px;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box.price .title .icon {
+  background-image: url("../images/icon-pringles-sift.png");
+  width: 18px;
+  height: 18px;
+  background-size: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-position-y: 0px;
 }
 .adaption-auto .sift-content-box .sift-center-box .button-box {
   display: flex;
@@ -503,6 +524,7 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
 }
 .adaption-auto .nav-placeholder .option-group-box {
   height: 42px;
@@ -556,6 +578,7 @@ body {
   background-size: 100px;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
 }
 .adaption-auto .first-menu .item .title {
   font-size: 12px;
@@ -678,6 +701,7 @@ body {
   background-size: 200%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
   background-position-x: 0px;
 }
 .adaption-auto .secondly-menu .menu-box .open-button .info-box .bg-box {
@@ -734,6 +758,7 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
   margin-top: 12px;
 }
 .adaption-auto .top-logo-box .icon-home-word {
@@ -745,6 +770,7 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
 }
 .adaption-auto .adv-header-box {
   position: relative;
@@ -879,6 +905,7 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
 }
 .adaption-auto .home-view .menu-box .menu-list .menu-item:nth-child(2) .title {
   color: #f94267;
@@ -890,6 +917,7 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
 }
 .adaption-auto .home-view .menu-box .menu-list .menu-item:nth-child(3) .menu-icon {
   background-image: url("../images/icon-home-menu-3.png");
@@ -898,6 +926,7 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
   background-position-y: 0px;
 }
 .adaption-auto .home-view .menu-box .menu-list .menu-item:nth-child(4) .menu-icon {
@@ -907,6 +936,7 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
   background-position-y: -29px;
 }
 .adaption-auto .home-view .menu-box .menu-list .menu-item:nth-child(5) {
@@ -919,6 +949,7 @@ body {
   background-size: 100%;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
   background-position-y: -58px;
 }
 .adaption-auto .home-view .menu-box .menu-list:before,
@@ -1085,9 +1116,154 @@ body {
   font-weight: normal;
   color: #949191;
 }
-.adaption-auto .hqdz-home-view {
+.adaption-auto .hqdz-home-view .list-case {
+  margin-bottom: 5px;
+}
+.adaption-auto .hqdz-home-view .list-case ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 5px 5px 0;
+  margin-bottom: -5px;
+}
+.adaption-auto .hqdz-home-view .list-case ul li {
+  width: calc((100vw - 5px * (2 + 1))/2);
+  height: calc((100vw - 5px * (2 + 1))/2 * 0.6666 + 0px);
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.adaption-auto .hqdz-home-view .list-case ul li > a {
+  display: block;
   width: 100%;
   height: 100%;
+}
+.adaption-auto .hqdz-home-view .list-case ul li img {
+  width: 100%;
+}
+.adaption-auto .hqdz-home-view .list-case ul li .info-box {
+  width: 100%;
+  height: 0px;
+}
+.adaption-auto .hqdz-home-view .list-case ul li .photo-box {
+  width: 100%;
+  height: calc(100% - 0px);
+  overflow: hidden;
+}
+.adaption-auto .hqdz-home-view .list-f4 {
+  margin-bottom: 20px;
+}
+.adaption-auto .hqdz-home-view .list-f4 ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px 20px 0;
+  margin-bottom: -20px;
+}
+.adaption-auto .hqdz-home-view .list-f4 ul li {
+  width: calc((100vw - 20px * (2 + 1))/2);
+  height: calc((100vw - 20px * (2 + 1))/2 * 1.175 + 2.1875rem);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.adaption-auto .hqdz-home-view .list-f4 ul li > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.adaption-auto .hqdz-home-view .list-f4 ul li img {
+  width: 100%;
+}
+.adaption-auto .hqdz-home-view .list-f4 ul li .info-box {
+  width: 100%;
+  height: 2.1875rem;
+}
+.adaption-auto .hqdz-home-view .list-f4 ul li .photo-box {
+  width: 100%;
+  height: calc(100% - 2.1875rem);
+  overflow: hidden;
+}
+.adaption-auto .hqdz-home-view .list-f4 .item-list .item .info-box {
+  text-align: center;
+  padding-top: 0.3125rem;
+}
+.adaption-auto .hqdz-home-view .list-f4 .item-list .item .info-box .text-title {
+  font-size: 0.875rem;
+  display: block;
+  line-height: 0.875rem;
+}
+.adaption-auto .hqdz-home-view .list-f4 .item-list .item .info-box .text-subtitle {
+  font-size: 0.75rem;
+  display: block;
+  line-height: 0.75rem;
+}
+.adaption-auto .hqdz-home-view .list-f4 .item-list .item .photo-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.adaption-auto .hqdz-home-view .list-f4 .item-list .item .photo-box .icon {
+  background-image: url("../images/icon-nav-img-f4.jpg");
+  width: calc((100vw - 20px * (2 + 1))/2);
+  height: calc((100vw - 20px * (2 + 1))/2 * 1.175);
+  background-size: calc((100vw - 20px * (2 + 1))/2*4);
+  display: block;
+  background-repeat: no-repeat;
+}
+.adaption-auto .hqdz-home-view .list-f4 .item-list .item:nth-child(1) .photo-box .icon {
+  background-position-x: 0;
+}
+.adaption-auto .hqdz-home-view .list-f4 .item-list .item:nth-child(2) .photo-box .icon {
+  background-position-x: calc(((100vw - 20px * (2 + 1))/2) * -1);
+}
+.adaption-auto .hqdz-home-view .list-f4 .item-list .item:nth-child(3) .photo-box .icon {
+  background-position-x: calc(((100vw - 20px * (2 + 1))/2) * -2);
+}
+.adaption-auto .hqdz-home-view .list-f4 .item-list .item:nth-child(4) .photo-box .icon {
+  background-position-x: calc(((100vw - 20px * (2 + 1))/2) * -3);
+}
+.adaption-auto .hqdz-home-view .list-supplies,
+.adaption-auto .hqdz-home-view .list-car {
+  margin-bottom: 10px;
+}
+.adaption-auto .hqdz-home-view .list-supplies ul,
+.adaption-auto .hqdz-home-view .list-car ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 10px 10px 0;
+  margin-bottom: -10px;
+}
+.adaption-auto .hqdz-home-view .list-supplies ul li,
+.adaption-auto .hqdz-home-view .list-car ul li {
+  width: calc((100vw - 10px * (2 + 1))/2);
+  height: calc((100vw - 10px * (2 + 1))/2 * 1.5 + 0px);
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.adaption-auto .hqdz-home-view .list-supplies ul li > a,
+.adaption-auto .hqdz-home-view .list-car ul li > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.adaption-auto .hqdz-home-view .list-supplies ul li img,
+.adaption-auto .hqdz-home-view .list-car ul li img {
+  width: 100%;
+}
+.adaption-auto .hqdz-home-view .list-supplies ul li .info-box,
+.adaption-auto .hqdz-home-view .list-car ul li .info-box {
+  width: 100%;
+  height: 0px;
+}
+.adaption-auto .hqdz-home-view .list-supplies ul li .photo-box,
+.adaption-auto .hqdz-home-view .list-car ul li .photo-box {
+  width: 100%;
+  height: calc(100% - 0px);
+  overflow: hidden;
 }
 .adaption-auto .hyyd-home-view {
   width: 100%;
@@ -1390,7 +1566,42 @@ body {
   background-size: 15px;
   display: block;
   background-repeat: no-repeat;
+  background-position: center center;
   background-position-y: 0;
+}
+.adaption-auto .case-list-view .list-box {
+  margin-bottom: 5px;
+}
+.adaption-auto .case-list-view .list-box ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 5px 5px 0;
+  margin-bottom: -5px;
+}
+.adaption-auto .case-list-view .list-box ul li {
+  width: calc((100vw - 5px * (2 + 1))/2);
+  height: calc((100vw - 5px * (2 + 1))/2 * 0.6666 + 0px);
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+.adaption-auto .case-list-view .list-box ul li > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.adaption-auto .case-list-view .list-box ul li img {
+  width: 100%;
+}
+.adaption-auto .case-list-view .list-box ul li .info-box {
+  width: 100%;
+  height: 0px;
+}
+.adaption-auto .case-list-view .list-box ul li .photo-box {
+  width: 100%;
+  height: calc(100% - 0px);
+  overflow: hidden;
 }
 .adaption-auto .full-view-show {
   height: 100%;

@@ -52,8 +52,8 @@ class CarList extends React.Component {
                 <div className="info-box">
                   <i className="img-title"></i>
                   <span className="text-title">{v.title}</span>
-                  <span className="price-discount">{'$'+v.rentalPrice}</span>
-                  <span className="price-original">{'$'+v.marketPrice}</span>
+                  <span className="price-discount">{'￥'+v.rentalPrice}</span>
+                  <span className="price-original">{'￥'+v.marketPrice}</span>
                 </div>
               </a>
             </li>
@@ -290,7 +290,7 @@ class CarContent extends React.Component {
     }
     // 组装类别
     let p2 = {
-      kClass:"content-box type",
+      kClass:"content-box category",
       kName:"类别",
       conditions:[
         {

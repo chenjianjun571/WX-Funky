@@ -422,7 +422,6 @@ body {
   line-height: 40px;
   font-size: 14px;
   display: block;
-  margin-left: 5px;
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box .item-list {
   width: calc(100% + 10px);
@@ -459,65 +458,31 @@ body {
 .adaption-auto .sift-content-box .sift-center-box .content-box .item-list .item.item-activate .title {
   color: #f94267;
 }
-.adaption-auto .sift-content-box .sift-center-box .content-box.type .title .icon {
-  background-image: url("../images/icon-pringles-sift.png");
-  width: 18px;
-  height: 18px;
-  background-size: 100%;
+.adaption-auto .sift-content-box .sift-center-box .content-box .title .icon {
+  background-image: url("../images/icon-sift-title.png");
+  width: calc(30px);
+  height: calc(30px);
+  background-size: calc(30px * 1);
   display: block;
   background-repeat: no-repeat;
-  background-position: center center;
-  background-position-y: 0px;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box.type .title .icon {
+  background-position-y: calc((30px) * (0 - (3 - 1)));
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box.style .title .icon {
-  background-image: url("../images/icon-pringles-sift.png");
-  width: 18px;
-  height: 18px;
-  background-size: 100%;
-  display: block;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-position-y: -18px;
+  background-position-y: calc((30px) * (0 - (4 - 1)));
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box.address .title .icon {
-  background-image: url("../images/icon-pringles-sift.png");
-  width: 18px;
-  height: 18px;
-  background-size: 100%;
-  display: block;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-position-y: -36px;
+  background-position-y: calc((30px) * (0 - (5 - 1)));
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box.price .title .icon {
-  background-image: url("../images/icon-pringles-sift.png");
-  width: 18px;
-  height: 18px;
-  background-size: 100%;
-  display: block;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-position-y: 0px;
+  background-position-y: calc((30px) * (0 - (1 - 1)));
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box.brand .title .icon {
-  background-image: url("../images/icon-pringles-sift.png");
-  width: 18px;
-  height: 18px;
-  background-size: 100%;
-  display: block;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-position-y: -54px;
+  background-position-y: calc((30px) * (0 - (2 - 1)));
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box.category .title .icon {
-  background-image: url("../images/icon-pringles-sift.png");
-  width: 18px;
-  height: 18px;
-  background-size: 100%;
-  display: block;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-position-y: -54px;
+  background-position-y: calc((30px) * (0 - (6 - 1)));
 }
 .adaption-auto .sift-content-box .sift-center-box .button-box {
   display: flex;
@@ -1269,21 +1234,21 @@ body {
   background-image: url("../images/icon-nav-img-f4.jpg");
   width: calc((100vw - 20px * (2 + 1))/2);
   height: calc((100vw - 20px * (2 + 1))/2 * 1.175);
-  background-size: calc((100vw - 20px * (2 + 1))/2*4);
+  background-size: calc((100vw - 20px * (2 + 1))/2 * 4);
   display: block;
   background-repeat: no-repeat;
 }
 .adaption-auto .hqdz-home-view .list-f4 .item-list .item:nth-child(1) .photo-box .icon {
-  background-position-x: 0;
+  background-position-x: calc(((100vw - 20px * (2 + 1))/2) * (0 - (1 - 1)));
 }
 .adaption-auto .hqdz-home-view .list-f4 .item-list .item:nth-child(2) .photo-box .icon {
-  background-position-x: calc(((100vw - 20px * (2 + 1))/2) * -1);
+  background-position-x: calc(((100vw - 20px * (2 + 1))/2) * (0 - (2 - 1)));
 }
 .adaption-auto .hqdz-home-view .list-f4 .item-list .item:nth-child(3) .photo-box .icon {
-  background-position-x: calc(((100vw - 20px * (2 + 1))/2) * -2);
+  background-position-x: calc(((100vw - 20px * (2 + 1))/2) * (0 - (3 - 1)));
 }
 .adaption-auto .hqdz-home-view .list-f4 .item-list .item:nth-child(4) .photo-box .icon {
-  background-position-x: calc(((100vw - 20px * (2 + 1))/2) * -3);
+  background-position-x: calc(((100vw - 20px * (2 + 1))/2) * (0 - (4 - 1)));
 }
 .adaption-auto .hqdz-home-view .list-supplies,
 .adaption-auto .hqdz-home-view .list-car {
@@ -1902,6 +1867,7 @@ body {
 }
 .adaption-auto .dress-list-view .list-box {
   margin-bottom: 10px;
+  margin-bottom: 0;
 }
 .adaption-auto .dress-list-view .list-box ul {
   display: flex;
@@ -1913,7 +1879,7 @@ body {
 }
 .adaption-auto .dress-list-view .list-box ul li {
   width: calc((100vw - (10px * (1 + 1)))/1);
-  height: calc((100vw - (10px * (1 + 1)))/1 * 0.6666 + 25px);
+  height: calc((100vw - (10px * (1 + 1)))/1 * 0.6666 + 1.875rem);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1927,11 +1893,11 @@ body {
 }
 .adaption-auto .dress-list-view .list-box ul li .info-box {
   width: 100%;
-  height: 25px;
+  height: 1.875rem;
 }
 .adaption-auto .dress-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 25px);
+  height: calc(100% - 1.875rem);
   overflow: hidden;
   position: relative;
 }
@@ -1951,11 +1917,26 @@ body {
   border-radius: 3px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
-.adaption-auto .dress-list-view .list-box .info-box {
-  text-align: center;
+.adaption-auto .dress-list-view .list-box .item-list {
+  background-color: #d8d8d8;
 }
-.adaption-auto .dress-list-view .list-box .info-box .text-title {
-  font-size: 12px;
+.adaption-auto .dress-list-view .list-box .item {
+  position: relative;
+  background-color: #fff;
+}
+.adaption-auto .dress-list-view .list-box .item .info-box {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.adaption-auto .dress-list-view .list-box .item .info-box .text-title {
+  font-size: 0.875rem;
+  line-height: 1.875rem;
+  display: block;
+}
+.adaption-auto .dress-list-view .list-box .item .photo-box {
+  margin-top: 1.875rem;
 }
 .adaption-auto .supply-list-view .list-box {
   margin-bottom: 10px;
@@ -2035,6 +2016,7 @@ body {
   line-height: 0.875rem;
   font-size: 1.125rem;
   color: #f94267;
+  margin-right: 5px;
 }
 .adaption-auto .supply-list-view .list-box .item .info-box .price-original {
   line-height: 0.75rem;
@@ -2120,6 +2102,7 @@ body {
   line-height: 0.875rem;
   font-size: 1.125rem;
   color: #f94267;
+  margin-right: 5px;
 }
 .adaption-auto .car-list-view .list-box .item .info-box .price-original {
   line-height: 0.75rem;

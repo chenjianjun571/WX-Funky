@@ -15,6 +15,7 @@
     "build-scheme": "watchify ./src/client/scheme.js -o 'uglifyjs -cm > ./assets/script/modules/scheme.min.js'",
     "build-case": "watchify ./src/client/case.js -o 'uglifyjs -cm > ./assets/script/modules/case.min.js'",
     "build-car": "watchify ./src/client/car.js -o 'uglifyjs -cm > ./assets/script/modules/car.min.js'",
+    "build-dress": "watchify ./src/client/dress.js -o 'uglifyjs -cm > ./assets/script/modules/dress.min.js'",
     "build-supply": "watchify ./src/client/supply.js -o 'uglifyjs -cm > ./assets/script/modules/supply.min.js'",
     "build-follow-photo": "watchify ./src/client/follow-photo.js -o 'uglifyjs -cm > ./assets/script/modules/cfollow-photoar.min.js'",
     "build-follow-video": "watchify ./src/client/follow-video.js -o 'uglifyjs -cm > ./assets/script/modules/follow-video.min.js'",

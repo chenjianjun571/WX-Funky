@@ -104,6 +104,7 @@ const MenuConfig = {
     },
     {
       name:'婚纱礼服',
+      menu:'/dress',
       link:'/dress',
       target:false
     },

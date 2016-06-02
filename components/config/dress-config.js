@@ -13,12 +13,18 @@ const DressConfig  = {
     'height':460
   },BaseConfig),
 
-  'DressType':_.merge({
-    'dataUrl':'dressType/all'
+  Banner:[
+    {
+      imageUrl: '//img2.jsbn.com/static/m_sample_banner_01.jpg'
+    }
+  ],
+
+  DressType:_.merge({
+    dataUrl:'dressType/all'
   },BaseConfig),
 
-  'DressBrand':_.merge({
-    'dataUrl':'dressBrand/all?typeId='
+  DressBrand:_.merge({
+    dataUrl:'dressBrand/all'
   },BaseConfig)
 }
 

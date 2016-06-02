@@ -52,8 +52,8 @@ class SupplyList extends React.Component {
                 <div className="info-box">
                   <i className="img-title"></i>
                   <span className="text-title">{v.title}</span>
-                  <span className="price-discount">{'$'+v.sellingPrice}</span>
-                  <span className="price-original">{'$'+v.marketPrice}</span>
+                  <span className="price-discount">{'￥'+v.sellingPrice}</span>
+                  <span className="price-original">{'￥'+v.marketPrice}</span>
                 </div>
               </a>
             </li>

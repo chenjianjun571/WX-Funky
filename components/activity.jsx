@@ -16,22 +16,24 @@ class Activity extends React.Component {
     let imageListData = []
     imageListData = JSON.parse(this.state.data.detailImages || '[]')
     return(
-      <div className="global-center-box">
-        {
-          _.map(imageListData, (v,k) => {
-            return(
-              <div key={k} className="box-img">
-                <MediaItem
-                  imageUrl={v.url}
-                  linkUrl={v.linkUrl}
-                  processType={EmImgProcessType.emGD_W_H}
-                  aspectRatio="1:-1"
-                  width={1260}
-                  quality={80} />
-              </div>
-            );
-          })
-        }
+      <div className="list-photo-box">
+        <ul className="item-list">
+          {
+            _.map(imageListData, (v,k) => {
+              return (
+                <li key={k} className="item">
+                  <MediaItem
+                    aspectRatio="1:-1"
+                    imageUrl={v.url}
+                    linkUrl={v.linkUrl}
+                    quality={90}
+                    processType={EmImgProcessType.emGD_S_S}
+                  />
+                </li>
+              )
+            })
+          }
+        </ul>
       </div>
     )
   }

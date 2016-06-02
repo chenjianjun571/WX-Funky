@@ -6,6 +6,7 @@ const DetailType = {
   Sample:1,
   Pringles:2,
   Suite:3,
+  Movie:10,
   Case:4,
   FollowPhoto:5,
   FollowVideo:6,

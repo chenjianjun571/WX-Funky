@@ -206,7 +206,6 @@ class CarContent extends React.Component {
     switch (type) {
       case 1:// 车型
       {
-        let f = [];
         let p = {
           kClass:"content-box type",
           kName:"车型",
@@ -226,13 +225,12 @@ class CarContent extends React.Component {
             }
           }
         })
-        f[0]=p;
-        this.conditions = this.conditions.concat(f);
+
+        this.conditions.push(p);
 
         break;
       }
       case 2:{
-        let f = [];
         let p = {
           kClass:"content-box brand",
           kName:"品牌",
@@ -252,8 +250,8 @@ class CarContent extends React.Component {
             }
           }
         })
-        f[0]=p;
-        this.conditions = this.conditions.concat(f);
+
+        this.conditions.push(p);
 
         break;
       }
@@ -263,7 +261,6 @@ class CarContent extends React.Component {
       return;
     }
 
-    let f1 = [];
     // 组装价格条件
     let p1 = {
       kClass:"content-box price",
@@ -291,7 +288,6 @@ class CarContent extends React.Component {
         }
       ]
     }
-    f1[0]=p1;
     // 组装类别
     let p2 = {
       kClass:"content-box type",
@@ -311,9 +307,9 @@ class CarContent extends React.Component {
         }
       ]
     }
-    f1[1]=p2;
+    this.conditions.push(p1);
+    this.conditions.push(p2);
 
-    this.conditions = this.conditions.concat(f1);
     this.setState({filters:this.conditions,renderFlg:true})
   }
 }

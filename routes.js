@@ -63,10 +63,6 @@ siteRouter.get('/suite', function* (next) {
 siteRouter.get('/movie', function* (next) {
   yield this.render('modules/default', renderOption('movie', '/movie', '/shot'))
 })
-//// 微电影详情
-//siteRouter.get('/movie-details', function* (next) {
-//  yield this.render('modules/default', renderOption('movie-details', '/movie', '/shot', this.request.query))
-//})
 /************************************** 婚庆定制 ***************************************/
 // 婚庆定制首页
 siteRouter.get('/scheme', function* (next) {
@@ -141,6 +137,12 @@ siteRouter.get('/detail/:type/:id', function* (next) {
     {
       // 套系详情
       yield this.render('modules/default', renderOption('detail', '/suite', '/shot', this.params))
+      break;
+    }
+    case DetailType.Movie:
+    {
+      // 微电影详情
+      yield this.render('modules/default', renderOption('detail', '/movie', '/shot', this.params))
       break;
     }
     case DetailType.Case:

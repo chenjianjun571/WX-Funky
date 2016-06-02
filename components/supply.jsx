@@ -206,7 +206,6 @@ class SupplyContent extends React.Component {
     switch (type) {
       case 1:// 车型
       {
-        let f = [];
         let p = {
           kClass:"content-box type",
           kName:"类型",
@@ -226,12 +225,12 @@ class SupplyContent extends React.Component {
             }
           }
         })
-        f[0]=p;
-        this.conditions = this.conditions.concat(f);
+
+        this.conditions.push(p);
+
         break;
       }
       case 2:{
-        let f = [];
         let p = {
           kClass:"content-box brand",
           kName:"品牌",
@@ -251,8 +250,9 @@ class SupplyContent extends React.Component {
             }
           }
         })
-        f[0]=p;
-        this.conditions = this.conditions.concat(f);
+
+        this.conditions.push(p);
+
         break;
       }
     }

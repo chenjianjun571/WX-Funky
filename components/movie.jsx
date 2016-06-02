@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { MovieConfig } from './config/movie-config'
+import { DetailType } from '../src/utils/detail-type'
 
 class MoveFilter extends React.Component {
   constructor (props) {

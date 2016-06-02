@@ -195,7 +195,6 @@ class CaseContent extends React.Component {
         }
       }
     })
-    f[0]=p1;
     // 组装价格条件
     let p2 = {
       kClass:"content-box price",
@@ -235,7 +234,8 @@ class CaseContent extends React.Component {
         }
       ]
     }
-    f[1]=p2;
+    f.push(p1);
+    f.push(p2);
     this.setState({filters:f,renderFlg:true})
   }
 }

@@ -40,12 +40,15 @@ class FollowVideoList extends React.Component {
           return (
             <li key={k} className="item">
               <a href={'/detail/'+DetailType.FollowVideo+'/'+v.id} target='_blank' >
-                <MediaItem
-                  aspectRatio="3:2"
-                  imageUrl={v.coverUrlWeb}
-                  processType={EmImgProcessType.emGD_S_S}
-                  width={300}
-                />
+                <div className="photo-box">
+                  <MediaItem
+                    aspectRatio="3:2"
+                    imageUrl={v.coverUrlWeb}
+                    processType={EmImgProcessType.emGD_S_S}
+                    width={300}
+                  />
+                  <i className="icon-video-play"></i>
+                </div>
               </a>
             </li>
           )

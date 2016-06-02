@@ -149,7 +149,7 @@ body {
 .adaption-auto #J_Main {
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 .adaption-auto .fixed-center-box {
   position: fixed;
@@ -507,14 +507,28 @@ body {
   display: block;
   background-repeat: no-repeat;
   background-position: center center;
-  background-position-y: 0px;
+  background-position-y: -54px;
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box.category .title .icon {
+  background-image: url("../images/icon-pringles-sift.png");
+  width: 18px;
+  height: 18px;
+  background-size: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-position-y: -54px;
 }
 .adaption-auto .sift-content-box .sift-center-box .button-box {
   display: flex;
   height: 35px;
+  width: calc(100% + 1px);
   flex-direction: row;
   border-top: 1px solid #d6d6d6;
   text-align: center;
+  position: relative;
+  top: 1px;
+  right: 1px;
 }
 .adaption-auto .sift-content-box .sift-center-box .button-box .confirm-button,
 .adaption-auto .sift-content-box .sift-center-box .button-box .reset-button {
@@ -958,6 +972,19 @@ body {
   width: 100%;
   height: calc(100% - 0px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .hssy-home-view .list-sample ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .hssy-home-view .list-sample ul li .circular-shadow-box {
   border-radius: 3px;
@@ -996,6 +1023,19 @@ body {
   width: 100%;
   height: calc(100% - 0px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .hssy-home-view .list-pringles ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .hssy-home-view .list-pringles ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1034,6 +1074,19 @@ body {
   width: 100%;
   height: calc(100% - 0px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .hssy-home-view .list-suit ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .hssy-home-view .list-suit ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1123,6 +1176,19 @@ body {
   width: 100%;
   height: calc(100% - 0px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .hqdz-home-view .list-case ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .hqdz-home-view .list-case ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1161,6 +1227,19 @@ body {
   width: 100%;
   height: calc(100% - 2.1875rem);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .hqdz-home-view .list-f4 ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .hqdz-home-view .list-f4 ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1246,6 +1325,20 @@ body {
   width: 100%;
   height: calc(100% - 0px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .hqdz-home-view .list-supplies ul li .photo-box .icon-video-play,
+.adaption-auto .hqdz-home-view .list-car ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .hqdz-home-view .list-supplies ul li .circular-shadow-box,
 .adaption-auto .hqdz-home-view .list-car ul li .circular-shadow-box {
@@ -1289,6 +1382,19 @@ body {
   width: 100%;
   height: calc(100% - 1.875rem);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .hssy-suit-list-view .list-box ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .hssy-suit-list-view .list-box ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1349,6 +1455,19 @@ body {
   width: 100%;
   height: calc(100% - 0px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .sample-list-view .list-box ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .sample-list-view .list-box ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1418,6 +1537,19 @@ body {
   width: 100%;
   height: calc(100% - 25px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .pringles-list-view .list-season ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .pringles-list-view .list-season ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1528,6 +1660,20 @@ body {
   width: 100%;
   height: calc(100% - 0px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .pringles-list-view .list-pringles ul li .photo-box .icon-video-play,
+.adaption-auto .pringles-list-view .list-new-pringles ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .pringles-list-view .list-pringles ul li .circular-shadow-box,
 .adaption-auto .pringles-list-view .list-new-pringles ul li .circular-shadow-box {
@@ -1567,6 +1713,19 @@ body {
   width: 100%;
   height: calc(100% - 25px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .micro-movie-list-view .list-box ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .micro-movie-list-view .list-box ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1621,6 +1780,19 @@ body {
   width: 100%;
   height: calc(100% - 0px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .case-list-view .list-box ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .case-list-view .list-box ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1659,6 +1831,19 @@ body {
   width: 100%;
   height: calc(100% - 0px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .followPhoto-list-view .list-box ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .followPhoto-list-view .list-box ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1697,6 +1882,19 @@ body {
   width: 100%;
   height: calc(100% - 0px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .followVideo-list-view .list-box ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .followVideo-list-view .list-box ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1735,6 +1933,19 @@ body {
   width: 100%;
   height: calc(100% - 25px);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .dress-list-view .list-box ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .dress-list-view .list-box ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1780,6 +1991,19 @@ body {
   width: 100%;
   height: calc(100% - 3.125rem);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .supply-list-view .list-box ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .supply-list-view .list-box ul li .circular-shadow-box {
   border-radius: 3px;
@@ -1852,6 +2076,19 @@ body {
   width: 100%;
   height: calc(100% - 3.125rem);
   overflow: hidden;
+  position: relative;
+}
+.adaption-auto .car-list-view .list-box ul li .photo-box .icon-video-play {
+  position: absolute;
+  display: block;
+  width: 1.875rem;
+  height: 1.875rem;
+  top: 50%;
+  left: 50%;
+  margin-top: -0.9375rem;
+  margin-left: -0.9375rem;
+  background-image: url("../images/icon-more-button.png");
+  background-size: 100%;
 }
 .adaption-auto .car-list-view .list-box ul li .circular-shadow-box {
   border-radius: 3px;

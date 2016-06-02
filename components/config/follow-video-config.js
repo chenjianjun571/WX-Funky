@@ -6,7 +6,17 @@ const FollowVideoConfig = {
     'dataUrl':'vda/weddingvideo_top',
     'aspectRatio':'3:2',
     'height':460
-  },BaseConfig)
+  },BaseConfig),
+
+  Banner:[
+    {
+      imageUrl: '//img2.jsbn.com/static/m_sample_banner_01.jpg'
+    }
+  ],
+
+  FollowVideoList:_.merge({
+    dataUrl:'followVideo/weddingvideo_list'
+  },BaseConfig),
 }
 
 export { FollowVideoConfig }

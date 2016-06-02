@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { ShotConfig } from './config/shot-config'
+import { DetailType } from '../src/utils/detail-type'
 
 class NewActivity extends React.Component {
   constructor() {
@@ -95,7 +96,7 @@ class BestPringles extends React.Component {
           <ul className="item-list">
             {
               _.map(this.state.data,(v,k)=>{
-                let link = '/pringles/'+v.id
+                let link = '/detail/'+DetailType.Pringles+'/'+v.id
                 return (
                   <li key={k} className="item">
                     <MediaItem
@@ -162,7 +163,7 @@ class BestSample extends React.Component {
           <ul className="item-list">
             {
               _.map(this.state.data,(v,k)=>{
-                let link = '/sample/'+v.id
+                let link = '/detail/'+DetailType.Sample+'/'+v.id
                 return (
                   <li key={k} className="item">
                     <MediaItem

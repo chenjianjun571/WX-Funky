@@ -2,55 +2,36 @@ import { BaseConfig } from './base'
 import _ from 'lodash'
 
 const CarConfig = {
-  'MediaSlider': _.merge({
-    'dataUrl': 'vda/car_top',
-    'height': 460,
-    'aspectRatio': '3:2'
+  MediaSlider: _.merge({
+    dataUrl: 'vda/car_top',
+    height: 460,
+    aspectRatio: '3:2'
   }, BaseConfig),
 
-  'CarItemList':_.merge({
-    'dataUrl':'car/car_list',
-    'width':380,
-    'aspectRatio':'3:2',
-    'params':{
-      'pageIndex':1,
-      'pageSize':9
+  Banner:[
+    {
+      imageUrl: '//img2.jsbn.com/static/m_sample_banner_01.jpg'
     }
+  ],
+
+  CarList:_.merge({
+    dataUrl:'car/car_list'
   },BaseConfig),
 
-  'CarItemDetail': _.merge({
-    'dataUrl':'car/detail/:id'
-  },BaseConfig),
-  'ModelCategory': _.merge({
-    'dataUrl': 'carModels/all'
+  // 婚车车型
+  ModelCategory: _.merge({
+    dataUrl: 'carModels/all'
   }, BaseConfig),
-  'LevelCategory': _.merge({
-    'dataUrl': 'carLevel/all'
-  }, BaseConfig),
-  'BrandCategory': _.merge({
+
+  // 婚车品牌
+  BrandCategory: _.merge({
     'dataUrl': 'carBrand/all'
   }, BaseConfig),
-  'PriceCategory':{
-    'conditions':[
-      {
-        'minPrice': '0',
-        'maxPrice': '999',
-        'name': '1000元以下'
-      }, {
-        'minPrice': '1000',
-        'maxPrice': '2000',
-        'name': '1000-2000元'
-      }, {
-        'minPrice': '2000',
-        'maxPrice': '3000',
-        'name': '2000-3000元'
-      }, {
-        'minPrice': '3000',
-        'maxPrice': '99999',
-        'name': '3000元以上'
-      }
-    ]
-  }
+
+  // 档次
+  LevelCategory: _.merge({
+    dataUrl: 'carLevel/all'
+  }, BaseConfig)
 }
 
 export { CarConfig }

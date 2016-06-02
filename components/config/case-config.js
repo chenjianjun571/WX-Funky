@@ -21,7 +21,7 @@ const CaseConfig = {
     dataUrl:'caseStyle/all'
   },BaseConfig),
 
-  'CaseList':_.merge({
+  CaseList:_.merge({
     dataUrl:'cases/scheme_list'
   },BaseConfig),
 }

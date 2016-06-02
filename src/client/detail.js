@@ -1,7 +1,7 @@
 /**
- * Created by chenjianjun on 16/5/27.
+ * Created by chenjianjun on 16/6/2.
  */
-import { DressDetail } from '../../components/dress-detail.jsx'
+import { Detail } from '../../components/detail.jsx'
 import { FirstNavigation } from '../../components/first-navigation.jsx'
 import { SecondNavigation } from '../../components/second-navigation.jsx'
 import 'es6-promise'
@@ -15,4 +15,5 @@ let params = JSON.parse(paramsString)
 /*渲染本模块的菜单*/
 ReactDOM.render(<SecondNavigation menuKey={params.menuKey} parentKey={params.parentKey} />, document.getElementById('J_Nav_Second'))
 ReactDOM.render(<FirstNavigation parentKey={params.parentKey} />, document.getElementById('J_Nav_First'))
-ReactDOM.render(<DressDetail dataParams={params} />,document.getElementById('J_Main'))
+ReactDOM.render(<Detail dataParams={params} />,document.getElementById('J_Main'))
+

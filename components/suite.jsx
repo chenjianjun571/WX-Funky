@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { SuiteConfig } from './config/suite-config'
+import { DetailType } from '../src/utils/detail-type'
 
 class SuiteList extends React.Component {
   constructor (props) {
@@ -36,7 +37,7 @@ class SuiteList extends React.Component {
             _.map(this.state.data, (v,k)=>{
               return (
                 <li key={k} className="item">
-                  <a href={"/suite/"+v.id} target='_blank' >
+                  <a href={'/detail/'+DetailType.Suite+'/'+v.id} target='_blank' >
                     <div className="photo-box">
                       <MediaItem
                         aspectRatio="3:2"

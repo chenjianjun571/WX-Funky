@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { SampleConfig } from './config/sample-config'
+import { DetailType } from '../src/utils/detail-type'
 
 // 因为样片的搜索有特殊性,风格和场景的展示与类型挂钩,所以不能使用公共的过滤器组件
 // 筛选组件
@@ -343,8 +344,8 @@ class SampleList extends React.Component {
         _.map(this.state.data, (v,k)=>{
           // 通过v.coverUrlWeb来做组件的key,这样才能避免条件切换的时候不刷新的问题
           return (
-            <li key={v.id} className="item">
-              <a href={k} target='_blank' >
+            <li key={k} className="item">
+              <a href={'/detail/'+DetailType.Sample+'/'+v.id} target='_blank' >
                 <MediaItem
                   aspectRatio="2:3"
                   imageUrl={v.coverUrlWx || v.coverUrlWeb}
@@ -377,34 +378,20 @@ class SampleList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // 设置不渲染,最后由数据请求回来以后修改是否渲染
+    this.renderFlg=false;
+    // 组装参数,比较参数变化
     let p = _.merge(nextProps.params, {pageSize:this.state.params.pageSize, pageIndex:this.state.params.pageIndex})
     // 比较接收到的参数是否有变化
     if (JSON.stringify(p) !== JSON.stringify(this.state.params)) {
       // 重新赋值页码
       p.pageIndex = 0;
       this.queryData(p,false);
-      this.renderFlg=true;
-    } else {
-      this.renderFlg=false;
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // 判断是否需要重新渲染组件
-    if (nextState.params.length !== this.state.params.length
-      || nextState.data.length !== this.state.data.length) {
-      return true;
-    }
-
-    if (nextState.showMoreFlg !== this.state.showMoreFlg) {
-      return true;
-    }
-
-    if (this.renderFlg) {
-      return true;
-    }
-
-    return false;
+    return this.renderFlg;
   }
 
   queryData(params, isChunk) {
@@ -423,7 +410,8 @@ class SampleList extends React.Component {
           } else {
             tmpData = j.data;
           }
-
+          // 设置渲染标志
+          this.renderFlg=true;
           if (j.count > tmpData.length) {
             this.setState({data:tmpData, params:params, showMoreFlg:true})
           } else {

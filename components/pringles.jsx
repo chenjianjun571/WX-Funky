@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { PringlesConfig } from './config/pringles-config'
-import { TouchMixin } from './common/TouchMixin'
+import { DetailType } from '../src/utils/detail-type'
 
 class Season extends React.Component {
   constructor (props) {
@@ -64,7 +64,7 @@ class Season extends React.Component {
               _.map(this.state.data, (v,k)=>{
                 return (
                   <li key={k} className="item">
-                    <a href={'/pringles/'+v.id} target='_blank' >
+                    <a href={'/detail/'+DetailType.Pringles+'/'+v.id} target='_blank' >
                       <MediaItem
                         aspectRatio="2:3"
                         imageUrl={v.coverUrlWeb}
@@ -118,14 +118,31 @@ class Season extends React.Component {
     if (this.first) {
       // 第一次渲染,需要做一些操作
       let $allItem=$(".list-season .item-list .item");
-      let $season=$(".list-season");
-      let $firstItem=$(".list-season .item-list .item:first");
+      //let $season=$(".list-season");
+      //let $firstItem=$(".list-season .item-list .item:first");
+      //if ($($allItem).length > 0){
+      //  let space=$($firstItem).offset().left;
+      //  let maxLength =  $($allItem).length;
+      //  let offset=0;
+      //  if (maxLength >= 2){
+      //    space = $($allItem[maxLength - 1]).offset().left - $($allItem[maxLength - 2]).offset().left ;
+      //  }
+      //  $allItem.map(function(){
+      //    $(this).attr("data-left", offset);
+      //    offset = offset + space;
+      //  });
+      //}
+      var $lastItem=$(".list-season .item-list .item:last-child");
+      var $itemList=$(".list-season .item-list");
+
       if ($($allItem).length > 0){
-        let space=$($firstItem).offset().left;
-        let maxLength =  $($allItem).length;
-        let offset=0;
+        var maxLength =  $($allItem).length;
+        var itemWidth=($(window).width() - (10 * (3 + 1)))/3;
+        var $itemListWidth=((itemWidth+10) * maxLength) - 10;
+        var space=itemWidth+10;
+        var offset=0;
         if (maxLength >= 2){
-          space = $($allItem[maxLength - 1]).offset().left - $($allItem[maxLength - 2]).offset().left ;
+          space = ($itemListWidth - itemWidth * maxLength)/(maxLength + 2) +  itemWidth;
         }
         $allItem.map(function(){
           $(this).attr("data-left", offset);
@@ -187,7 +204,7 @@ class BestPringles extends React.Component {
             _.map(this.state.data, (v,k)=>{
               return (
                 <li key={k} className="item">
-                  <a href={'/pringles/'+v.id} target='_blank' >
+                  <a href={'/detail/'+DetailType.Pringles+'/'+v.id} target='_blank' >
                     <MediaItem
                       aspectRatio="2:3"
                       imageUrl={v.coverUrlWeb}

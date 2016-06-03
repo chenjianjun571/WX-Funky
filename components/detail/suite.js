@@ -5,10 +5,6 @@ import _ from 'lodash'
 import { MediaItem, EmImgProcessType } from '../common/media-item.jsx'
 
 const suite = (data)=>{
-  if (data.length == 0) {
-    return null;
-  }
-
   let su = JSON.parse(data[0].pcDetailImages);
   return (
     <div className="list-photo-box">

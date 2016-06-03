@@ -7,7 +7,6 @@ class SecondNavigation extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       menus:[],
       className:''
@@ -77,8 +76,6 @@ class SecondNavigation extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.parentKey)
-    console.log(this.props.menuKey)
     if (MenuConfig[this.props.parentKey]) {
       this.setState({ menus:MenuConfig[this.props.parentKey]})
     }

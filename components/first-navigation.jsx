@@ -40,6 +40,10 @@ class FirstNavigation extends React.Component {
       </div>
     )
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
+  }
 }
 
 export { FirstNavigation }

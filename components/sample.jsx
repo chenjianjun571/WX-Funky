@@ -5,6 +5,8 @@ import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { SampleConfig } from './config/sample-config'
 import { DetailType } from '../src/utils/detail-type'
+import { noResult } from './common/no_result'
+import { loading } from './common/loading'
 
 // 因为样片的搜索有特殊性,风格和场景的展示与类型挂钩,所以不能使用公共的过滤器组件
 // 筛选组件
@@ -213,12 +215,9 @@ class Filter extends React.Component {
       fetch(fetchUrl)
         .then(res => {return res.json()})
         .then(j =>{
-          if(j.success && j.data.length > 0) {
+          if(j.success) {
             let tmpData = this.state.shootStyle;
-            let style = _.map(j.data || [], (v,k)=>{
-              return _.pick(v,['name','shootStyleId'])
-            });
-            tmpData = tmpData.concat(style);
+            tmpData = tmpData.concat(j.data||[]);
             this.setState({shootStyle:tmpData})
           }
         })
@@ -231,12 +230,9 @@ class Filter extends React.Component {
       fetch(fetchUrl)
         .then(res => {return res.json()})
         .then(j =>{
-          if(j.success && j.data.length > 0) {
+          if(j.success) {
             let tmpData = this.state.exterior;
-            let exterior = _.map(j.data || [], (v,k)=>{
-              return _.pick(v,['name','exteriorId'])
-            });
-            tmpData = tmpData.concat(exterior);
+            tmpData = tmpData.concat(j.data||[]);
             this.setState({exterior:tmpData})
           }
         })
@@ -314,7 +310,7 @@ class FilterContent extends React.Component {
 class SampleList extends React.Component {
   constructor (props) {
     super(props);
-    this.renderFlg=true;
+    this.renderFlg=false;
     this.state = {
       data:[],
       showMoreFlg:true,
@@ -358,10 +354,12 @@ class SampleList extends React.Component {
           )
         })
       )
+    } else if (this.renderFlg) {
+      // 没有搜索结果的时候显示
+      listContent = noResult()
     } else {
-      return (
-        <p>无搜索结果</p>
-      )
+      // 初始化的时候显示加载图标
+      listContent = loading()
     }
     return (
       <div className="list-box">

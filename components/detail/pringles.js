@@ -5,10 +5,6 @@ import _ from 'lodash'
 import { MediaItem, EmImgProcessType } from '../common/media-item.jsx'
 
 const pringles = (data)=>{
-  if (data.length == 0) {
-    return null;
-  }
-
   let list = [];
   let kClass = ' photo-space';
   if (data[0].wxDetailImages && data[0].wxDetailImages !== '') {

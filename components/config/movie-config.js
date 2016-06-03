@@ -19,7 +19,7 @@ const MovieConfig  = {
   ],
 
   // 微电影 videoType 1:爱情MV 2:爱情微电影 3:婚纱纪实MV
-  'Movie':_.merge({
+  MovieList:_.merge({
     'dataUrl':'video/movie_list'
   },BaseConfig),
 

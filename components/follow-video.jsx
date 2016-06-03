@@ -4,11 +4,13 @@ import _ from 'lodash'
 import { FollowVideoConfig } from './config/follow-video-config'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { DetailType } from '../src/utils/detail-type'
+import { noResult } from './common/no_result'
+import { loading } from './common/loading'
 
 class FollowVideoList extends React.Component {
   constructor (props) {
     super(props);
-    this.renderFlg=true;
+    this.renderFlg=false;
     this.cache=new Map();
     this.state = {
       data:[],
@@ -20,21 +22,10 @@ class FollowVideoList extends React.Component {
     };
   }
 
-  render () {
-    let moreButton = null;
-    if (this.state.showMoreFlg) {
-      moreButton = (
-        <div className="more-button" onClick={this.handleMore.bind(this)}>
-          <div className="button-box">
-            <span className="icon"></span>
-            <span className="title">点击加载</span>
-          </div>
-        </div>
-      )
-    }
-    let listContent = null;
+  getListContent () {
+    let content;
     if (this.state.data.length > 0) {
-      listContent = (
+      content = (
         _.map(this.state.data, (v,k)=>{
           // 通过v.coverUrlWeb来做组件的key,这样才能避免条件切换的时候不刷新的问题
           return (
@@ -54,11 +45,28 @@ class FollowVideoList extends React.Component {
           )
         })
       )
+    } else if (this.renderFlg) {
+      content = noResult();
     } else {
-      return (
-        <p>无搜索结果</p>
+      content = loading();
+    }
+
+    return content;
+  }
+
+  render () {
+    let moreButton = null;
+    if (this.state.showMoreFlg) {
+      moreButton = (
+        <div className="more-button" onClick={this.handleMore.bind(this)}>
+          <div className="button-box">
+            <span className="icon"></span>
+            <span className="title">点击加载</span>
+          </div>
+        </div>
       )
     }
+    let listContent = this.getListContent();
     return (
       <div className="list-box">
         <ul className="item-list">
@@ -71,6 +79,13 @@ class FollowVideoList extends React.Component {
         }
       </div>
     )
+  }
+
+  componentWillReceiveProps(nextProps) {
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.renderFlg;
   }
 
   queryData(params, isChunk) {
@@ -89,7 +104,8 @@ class FollowVideoList extends React.Component {
           } else {
             tmpData = j.data;
           }
-
+          // 设置渲染标志
+          this.renderFlg = true;
           if (j.count > tmpData.length) {
             this.setState({data:tmpData, params:params, showMoreFlg:true})
           } else {

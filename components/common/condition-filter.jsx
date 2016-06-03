@@ -110,7 +110,9 @@ class ConditionFilter extends React.Component {
     let pN = []
     _.each(this.state.filters,(v,k)=>{
       pP=_.merge(pP, v.conditions[v.kIndex].external)
-      pN[k]=v.conditions[v.kIndex].name
+      if (v.conditions[v.kIndex].name !== '全部') {
+        pN.push(v.conditions[v.kIndex].name)
+      }
     })
     this.setState({showFlg:false, selContent:pN})
     if (this.props.filterChangeHandle) {
@@ -126,7 +128,9 @@ class ConditionFilter extends React.Component {
     _.each(f, (v,k)=>{
       if (v.conditions && v.conditions.length>0) {
         v.kIndex=0;
-        n[k]=v.conditions[0].name
+        if (v.conditions[0].name !== '全部') {
+          n.push(v.conditions[0].name)
+        }
       }
     })
     this.setState({selContent:n, filters:f})

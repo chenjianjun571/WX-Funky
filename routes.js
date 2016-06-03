@@ -177,8 +177,10 @@ siteRouter.get('/detail/:type/:id', function* (next) {
     }
     case DetailType.Dress:
     {
+      let p = this.params;
+      _.merge(p, this.request.query)
       // 礼服详情
-      yield this.render('modules/default', renderOption('detail', '/dress', '/scheme', this.params))
+      yield this.render('modules/default', renderOption('detail', '/dress', '/scheme', p))
       break;
     }
   }

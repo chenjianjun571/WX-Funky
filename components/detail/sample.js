@@ -5,10 +5,6 @@ import _ from 'lodash'
 import { MediaItem, EmImgProcessType } from '../common/media-item.jsx'
 
 const sample = (data)=>{
-  if (data.length == 0) {
-    return null;
-  }
-
   let list =  JSON.parse(data[0].pcDetailImages);
   let kClass = '';
   //let kClass = ' photo-space';

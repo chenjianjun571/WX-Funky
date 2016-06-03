@@ -5,11 +5,13 @@ import { SupplyConfig } from './config/supply-config'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { ConditionFilter } from './common/condition-filter.jsx'
 import { DetailType } from '../src/utils/detail-type'
+import { noResult } from './common/no_result'
+import { loading } from './common/loading'
 
 class SupplyList extends React.Component {
   constructor (props) {
     super(props);
-    this.renderFlg=true;
+    this.renderFlg=false;
     this.cache=new Map();
     this.state = {
       data:[],
@@ -60,10 +62,12 @@ class SupplyList extends React.Component {
           )
         })
       )
+    } else if (this.renderFlg) {
+      // 没有搜索结果的时候显示
+      listContent = noResult()
     } else {
-      return (
-        <p>无搜索结果</p>
-      )
+      // 初始化的时候显示加载图标
+      listContent = loading()
     }
     return (
       <div className="list-box">
@@ -174,10 +178,7 @@ class SupplyContent extends React.Component {
         .then(res => {return res.json()})
         .then(j =>{
           if(j.success) {
-            let type = _.map(j.data || [], (v,k)=>{
-              return _.pick(v,['name','typeId'])
-            });
-            let tmpData = [{name:'全部', weddingSuppliesTypeId:-1}].concat(type);
+            let tmpData = [{name:'全部', weddingSuppliesTypeId:-1}].concat(j.data || []);
             this.initFilter(tmpData, 1)
           }
         })
@@ -191,10 +192,7 @@ class SupplyContent extends React.Component {
         .then(res => {return res.json()})
         .then(j =>{
           if(j.success) {
-            let brand = _.map(j.data || [], (v,k)=>{
-              return _.pick(v,['name','brandId'])
-            });
-            let tmpData = [{name:'全部', brandId:-1}].concat(brand);
+            let tmpData = [{name:'全部', brandId:-1}].concat(j.data || []);
             this.initFilter(tmpData, 2)
           }
         })

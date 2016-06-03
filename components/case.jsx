@@ -5,17 +5,19 @@ import { CaseConfig } from './config/case-config'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { ConditionFilter } from './common/condition-filter.jsx'
 import { DetailType } from '../src/utils/detail-type'
+import { noResult } from './common/no_result'
+import { loading } from './common/loading'
 
 class CaseList extends React.Component {
   constructor (props) {
     super(props);
-    this.renderFlg=true;
+    this.renderFlg=false;
     this.cache=new Map();
     this.state = {
       data:[],
       showMoreFlg:true,
       params:{
-        pageSize:8,
+        pageSize:6,
         pageIndex:0
       }
     };
@@ -52,10 +54,12 @@ class CaseList extends React.Component {
           )
         })
       )
+    } else if (this.renderFlg) {
+      // 没有搜索结果的时候显示
+      listContent = noResult()
     } else {
-      return (
-        <p>无搜索结果</p>
-      )
+      // 初始化的时候显示加载图标
+      listContent = loading()
     }
     return (
       <div className="list-box">
@@ -165,10 +169,7 @@ class CaseContent extends React.Component {
       .then(res => {return res.json()})
       .then(j =>{
         if(j.success) {
-          let caseStyle = _.map(j.data || [], (v,k)=>{
-            return _.pick(v,['name','caseStyleId'])
-          });
-          let tmpData = [{name:'全部', caseStyleId:-1}].concat(caseStyle);
+          let tmpData = [{name:'全部', caseStyleId:-1}].concat(j.data || []);
           this.initFilter(tmpData)
         }
       })

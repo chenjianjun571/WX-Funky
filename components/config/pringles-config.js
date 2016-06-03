@@ -12,21 +12,21 @@ const PringlesConfig  = {
     height: 460
   }, BaseConfig),
 
-  'Banner':[
+  Banner:[
     {
       imageUrl: '//img2.jsbn.com/static/m_pringles_banner_01.jpg'
     }
   ],
 
-  'Best':_.merge({
+  BestPringles:_.merge({
     'dataUrl':'pringles/weddingshot_index_best_pringles?pageIndex=1&pageSize=4',
   },BaseConfig),
 
-  'Season':_.merge({
+  SeasonList:_.merge({
     dataUrl:'pringlesSeason/all'
   },BaseConfig),
 
-  'PringlesSeasonList':_.merge({
+  PringlesList:_.merge({
     dataUrl:'pringles/pringles_season'
   },BaseConfig),
 }

@@ -5,22 +5,84 @@ import { SupplyConfig } from './config/supply-config'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { ConditionFilter } from './common/condition-filter.jsx'
 import { DetailType } from '../src/utils/detail-type'
-import { noResult } from './common/no_result'
-import { loading } from './common/loading'
+import { GetHintContent, HintType } from './common/hint'
+import { ReqCode } from './common/code'
 
 class SupplyList extends React.Component {
   constructor (props) {
     super(props);
+    // 渲染标志,控制组件是否渲染
     this.renderFlg=false;
+    // 缓存对象
     this.cache=new Map();
+    // 组件状态
     this.state = {
+      // 数据请求状态
+      reqState:ReqCode.Loading,
+      // 数据请求错误标志
+      dataErrorFlg:false,
+      // 数据
       data:[],
-      showMoreFlg:true,
+      // 是否显示加载更多
+      showMoreFlg:false,
+      // 搜索条件
       params:{
-        pageSize:6,
+        pageSize:2,
         pageIndex:0
       }
     };
+  }
+
+  getListContent () {
+    let content;
+
+    switch (this.state.reqState) {
+      case ReqCode.Loading: {
+        // 加载中状态
+        content = GetHintContent(HintType.Loading);
+        break;
+      }
+      case ReqCode.Error: {
+        // 加载错误状态
+        content = GetHintContent(HintType.Error);
+        break;
+      }
+      case ReqCode.Ready: {
+        // 数据准备ok状态
+        if (this.state.data.length > 0) {
+          content = (
+            _.map(this.state.data, (v,k)=>{
+              // 通过v.coverUrlWeb来做组件的key,这样才能避免条件切换的时候不刷新的问题
+              return (
+                <li key={k} className="item">
+                  <a href={'/detail/'+DetailType.Supply+'/'+v.id} target='_blank' >
+                    <div className="photo-box">
+                      <MediaItem
+                        aspectRatio="1:1"
+                        imageUrl={v.coverUrlWeb}
+                        processType={EmImgProcessType.emGD_S_S}
+                        width={300}
+                      />
+                    </div>
+                    <div className="info-box">
+                      <i className="img-title"></i>
+                      <span className="text-title">{v.title}</span>
+                      <span className="price-discount">{'￥'+v.sellingPrice}</span>
+                      <span className="price-original">{'￥'+v.marketPrice}</span>
+                    </div>
+                  </a>
+                </li>
+              )
+            })
+          )
+        } else {
+          content = GetHintContent(HintType.NoResult);
+        }
+        break;
+      }
+    }
+
+    return content;
   }
 
   render () {
@@ -35,40 +97,7 @@ class SupplyList extends React.Component {
         </div>
       )
     }
-    let listContent = null;
-    if (this.state.data.length > 0) {
-      listContent = (
-        _.map(this.state.data, (v,k)=>{
-          // 通过v.coverUrlWeb来做组件的key,这样才能避免条件切换的时候不刷新的问题
-          return (
-            <li key={k} className="item">
-              <a href={'/detail/'+DetailType.Supply+'/'+v.id} target='_blank' >
-                <div className="photo-box">
-                  <MediaItem
-                    aspectRatio="1:1"
-                    imageUrl={v.coverUrlWeb}
-                    processType={EmImgProcessType.emGD_S_S}
-                    width={300}
-                  />
-                </div>
-                <div className="info-box">
-                  <i className="img-title"></i>
-                  <span className="text-title">{v.title}</span>
-                  <span className="price-discount">{'￥'+v.sellingPrice}</span>
-                  <span className="price-original">{'￥'+v.marketPrice}</span>
-                </div>
-              </a>
-            </li>
-          )
-        })
-      )
-    } else if (this.renderFlg) {
-      // 没有搜索结果的时候显示
-      listContent = noResult()
-    } else {
-      // 初始化的时候显示加载图标
-      listContent = loading()
-    }
+    let listContent = this.getListContent();
     return (
       <div className="list-box">
         <ul className="item-list">
@@ -84,15 +113,33 @@ class SupplyList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // 设置不渲染,最后由数据请求回来以后修改是否渲染
-    this.renderFlg=false;
-    // 组装参数,比较参数变化
-    let p = _.merge(nextProps.params, {pageSize:this.state.params.pageSize, pageIndex:this.state.params.pageIndex})
-    // 比较接收到的参数是否有变化
-    if (JSON.stringify(p) !== JSON.stringify(this.state.params)) {
-      // 重新赋值页码
+    let key = JSON.stringify(nextProps.params)
+    // 设置渲染标志
+    this.renderFlg = true;
+    // 组装key
+    if (this.cache[key]) {
+      // 从缓存里面直接取数据
+      this.setState({
+        reqState       : ReqCode.Ready,
+        data           : this.cache[key].data,
+        showMoreFlg    : this.cache[key].showMoreFlg,
+        params         : this.cache[key].params,
+        dataErrorFlg   : false
+      })
+    } else {
+      let p = {}
+      p.pageSize = this.state.params.pageSize;
       p.pageIndex = 0;
-      this.queryData(p,false);
+      p = _.merge(p, nextProps.params)
+      // 设置加载中状态
+      this.setState({
+        reqState       : ReqCode.Loading,
+        data           : [],
+        showMoreFlg    : false,
+        dataErrorFlg   : false
+      })
+      // 请求数据
+      this.queryData(key, p, false)
     }
   }
 
@@ -100,40 +147,107 @@ class SupplyList extends React.Component {
     return this.renderFlg;
   }
 
-  queryData(params, isChunk) {
-    let cfg = SupplyConfig.SupplyList;
-    params.pageIndex += 1;
-    let fetchUrl = cfg.buildQueryUrl(params,cfg.dataUrl)
-    console.log(fetchUrl)
-    fetch(fetchUrl)
-      .then(res => {return res.json()})
-      .then(j =>{
-        if(j.success) {
-          let tmpData;
-          if (isChunk) {
-            tmpData = this.state.data;
-            tmpData = tmpData.concat(j.data);
-          } else {
-            tmpData = j.data;
-          }
-          // 设置渲染标志
-          this.renderFlg=true;
-          if (j.count > tmpData.length) {
-            this.setState({data:tmpData, params:params, showMoreFlg:true})
-          } else {
-            this.setState({data:tmpData, params:params, showMoreFlg:false})
-          }
-        }
-      })
-  }
-
   handleMore(e) {
     e.preventDefault();
-    this.queryData(this.state.params,true);
+    let p = {};
+    p = _.merge(p, this.state.params)
+    let key = JSON.stringify(_.omit(p, ['pageSize','pageIndex']));
+    this.queryData(key, p, true);
   }
 
   componentDidMount() {
-    this.queryData(this.state.params,false);
+    // 参数的初始状态
+    let p = {};
+    p = _.merge(p, this.state.params)
+    // 组装缓存key
+    let key = JSON.stringify(_.omit(p, ['pageSize','pageIndex']));
+    this.queryData(key, p, false);
+  }
+
+  queryData(key, params, isChunk=false) {
+    // 先从本地缓存里面查找数据
+    if (this.cache[key] && !isChunk) {
+      // 设置渲染标志
+      this.renderFlg = true;
+      // 从缓存里面直接取数据
+      this.setState({
+        reqState       : ReqCode.Ready,
+        data           : this.cache[key].data,
+        showMoreFlg    : this.cache[key].showMoreFlg,
+        params         : this.cache[key].params,
+        dataErrorFlg   : false,
+      })
+    } else {
+      // 从网络请求数据
+      let cfg = SupplyConfig.SupplyList
+      // 加页请求
+      params.pageIndex += 1;
+      // 组装url
+      let fetchUrl = cfg.buildQueryUrl(params,cfg.dataUrl)
+      fetch(fetchUrl)
+        .then(res => {return res.json()})
+        .then(j => {
+          // 设置渲染标志
+          this.renderFlg=true;
+          // 判断服务器应答结果
+          if(j.success) {
+            let t;
+            // 是否需要合并老数据,适用于分页加载的情况
+            if (isChunk) {
+              t = this.state.data;
+              t = t.concat(j.data);
+            } else {
+              t = j.data;
+            }
+            // 判断服务器数据是否加载完毕
+            let m = (j.count > t.length) ? true : false;
+
+            // 缓存数据
+            let p = {}
+            p.data = t;
+            p.showMoreFlg = m;
+            p.params = params;
+            this.cache[key]=p;
+
+            // 设置组件状态
+            this.setState({
+              reqState       : ReqCode.Ready,
+              data           : t,
+              showMoreFlg    : m,
+              params         : params,
+              dataErrorFlg   : false,
+            })
+          } else {
+            // 数据请求错误
+            if (isChunk) {
+              // 分页请求数据失败的情况下不做处理
+            } else {
+              // 设置组件状态
+              this.setState({
+                reqState       : ReqCode.Error,
+                data           : [],
+                dataErrorFlg   : true,
+              })
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          // 设置渲染标志
+          this.renderFlg=true;
+          // 数据请求错误
+          if (isChunk) {
+            // 分页请求数据失败的情况下不做处理
+          } else {
+            // 设置组件状态
+            this.setState({
+              reqState       : ReqCode.Error,
+              data           : [],
+              dataErrorFlg   : true,
+            })
+          }
+        });
+    }
   }
 }
 

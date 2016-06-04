@@ -4,17 +4,27 @@ import _ from 'lodash'
 import { FollowVideoConfig } from './config/follow-video-config'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { DetailType } from '../src/utils/detail-type'
-import { noResult } from './common/no_result'
-import { loading } from './common/loading'
+import { GetHintContent, HintType } from './common/hint'
+import { ReqCode } from './common/code'
 
 class FollowVideoList extends React.Component {
   constructor (props) {
     super(props);
+    // 渲染标志,控制组件是否渲染
     this.renderFlg=false;
+    // 缓存对象
     this.cache=new Map();
+    // 组件状态
     this.state = {
+      // 数据请求状态
+      reqState:ReqCode.Loading,
+      // 数据请求错误标志
+      dataErrorFlg:false,
+      // 数据
       data:[],
-      showMoreFlg:true,
+      // 是否显示加载更多
+      showMoreFlg:false,
+      // 搜索条件
       params:{
         pageSize:6,
         pageIndex:0
@@ -24,31 +34,46 @@ class FollowVideoList extends React.Component {
 
   getListContent () {
     let content;
-    if (this.state.data.length > 0) {
-      content = (
-        _.map(this.state.data, (v,k)=>{
-          // 通过v.coverUrlWeb来做组件的key,这样才能避免条件切换的时候不刷新的问题
-          return (
-            <li key={k} className="item">
-              <a href={'/detail/'+DetailType.FollowVideo+'/'+v.id} target='_blank' >
-                <div className="photo-box">
-                  <MediaItem
-                    aspectRatio="3:2"
-                    imageUrl={v.coverUrlWeb}
-                    processType={EmImgProcessType.emGD_S_S}
-                    width={300}
-                  />
-                  <i className="icon-video-play"></i>
-                </div>
-              </a>
-            </li>
+
+    switch (this.state.reqState) {
+      case ReqCode.Loading: {
+        // 加载中状态
+        content = GetHintContent(HintType.Loading);
+        break;
+      }
+      case ReqCode.Error: {
+        // 加载错误状态
+        content = GetHintContent(HintType.Error);
+        break;
+      }
+      case ReqCode.Ready: {
+        // 数据准备ok状态
+        if (this.state.data.length > 0) {
+          content = (
+            _.map(this.state.data, (v,k)=>{
+              // 通过v.coverUrlWeb来做组件的key,这样才能避免条件切换的时候不刷新的问题
+              return (
+                <li key={k} className="item">
+                  <a href={'/detail/'+DetailType.FollowVideo+'/'+v.id} target='_blank' >
+                    <div className="photo-box">
+                      <MediaItem
+                        aspectRatio="3:2"
+                        imageUrl={v.coverUrlWeb}
+                        processType={EmImgProcessType.emGD_S_S}
+                        width={300}
+                      />
+                      <i className="icon-video-play"></i>
+                    </div>
+                  </a>
+                </li>
+              )
+            })
           )
-        })
-      )
-    } else if (this.renderFlg) {
-      content = noResult();
-    } else {
-      content = loading();
+        } else {
+          content = GetHintContent(HintType.NoResult);
+        }
+        break;
+      }
     }
 
     return content;
@@ -88,40 +113,107 @@ class FollowVideoList extends React.Component {
     return this.renderFlg;
   }
 
-  queryData(params, isChunk) {
-    let cfg = FollowVideoConfig.FollowVideoList
-    params.pageIndex += 1;
-    let fetchUrl = cfg.buildQueryUrl(params,cfg.dataUrl)
-    console.log(fetchUrl)
-    fetch(fetchUrl)
-      .then(res => {return res.json()})
-      .then(j =>{
-        if(j.success) {
-          let tmpData;
-          if (isChunk) {
-            tmpData = this.state.data;
-            tmpData = tmpData.concat(j.data);
-          } else {
-            tmpData = j.data;
-          }
-          // 设置渲染标志
-          this.renderFlg = true;
-          if (j.count > tmpData.length) {
-            this.setState({data:tmpData, params:params, showMoreFlg:true})
-          } else {
-            this.setState({data:tmpData, params:params, showMoreFlg:false})
-          }
-        }
-      })
-  }
-
   handleMore(e) {
     e.preventDefault();
-    this.queryData(this.state.params,true);
+    let p = {};
+    p = _.merge(p, this.state.params)
+    let key = JSON.stringify(_.omit(p, ['pageSize','pageIndex']));
+    this.queryData(key, p, true);
   }
 
   componentDidMount() {
-    this.queryData(this.state.params,false);
+    // 参数的初始状态
+    let p = {};
+    p = _.merge(p, this.state.params)
+    // 组装缓存key
+    let key = JSON.stringify(_.omit(p, ['pageSize','pageIndex']));
+    this.queryData(key, p, false);
+  }
+
+  queryData(key, params, isChunk=false) {
+    // 先从本地缓存里面查找数据
+    if (this.cache[key] && !isChunk) {
+      // 设置渲染标志
+      this.renderFlg = true;
+      // 从缓存里面直接取数据
+      this.setState({
+        reqState       : ReqCode.Ready,
+        data           : this.cache[key].data,
+        showMoreFlg    : this.cache[key].showMoreFlg,
+        params         : this.cache[key].params,
+        dataErrorFlg   : false,
+      })
+    } else {
+      // 从网络请求数据
+      let cfg = FollowVideoConfig.FollowVideoList
+      // 加页请求
+      params.pageIndex += 1;
+      // 组装url
+      let fetchUrl = cfg.buildQueryUrl(params,cfg.dataUrl)
+      fetch(fetchUrl)
+        .then(res => {return res.json()})
+        .then(j => {
+          // 设置渲染标志
+          this.renderFlg=true;
+          // 判断服务器应答结果
+          if(j.success) {
+            let t;
+            // 是否需要合并老数据,适用于分页加载的情况
+            if (isChunk) {
+              t = this.state.data;
+              t = t.concat(j.data);
+            } else {
+              t = j.data;
+            }
+            // 判断服务器数据是否加载完毕
+            let m = (j.count > t.length) ? true : false;
+
+            // 缓存数据
+            let p = {}
+            p.data = t;
+            p.showMoreFlg = m;
+            p.params = params;
+            this.cache[key]=p;
+
+            // 设置组件状态
+            this.setState({
+              reqState       : ReqCode.Ready,
+              data           : t,
+              showMoreFlg    : m,
+              params         : params,
+              dataErrorFlg   : false,
+            })
+          } else {
+            // 数据请求错误
+            if (isChunk) {
+              // 分页请求数据失败的情况下不做处理
+            } else {
+              // 设置组件状态
+              this.setState({
+                reqState       : ReqCode.Error,
+                data           : [],
+                dataErrorFlg   : true,
+              })
+            }
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          // 设置渲染标志
+          this.renderFlg=true;
+          // 数据请求错误
+          if (isChunk) {
+            // 分页请求数据失败的情况下不做处理
+          } else {
+            // 设置组件状态
+            this.setState({
+              reqState       : ReqCode.Error,
+              data           : [],
+              dataErrorFlg   : true,
+            })
+          }
+        });
+    }
   }
 }
 

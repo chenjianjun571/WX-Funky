@@ -47,7 +47,7 @@ class Detail extends React.Component {
     let params = this.props.dataParams;
     console.log(JSON.stringify(params))
     if (params && params.type && params.id) {
-      let fetchUrl = BaseConfig['buildUrl'](params,DetailConfig[params.type].dataUrl)
+      let fetchUrl = BaseConfig.buildUrl(params,DetailConfig[params.type].dataUrl)
       fetch(fetchUrl)
         .then(res => {return res.json()})
         .then(j =>{

@@ -25,9 +25,13 @@ class ConditionFilter extends React.Component {
               <ul className="sift-list">
                 {
                   _.map(this.state.selContent, (v,k)=>{
-                    return (
-                      <li key={k} className="item "><span className="text">{v}</span></li>
-                    )
+                    if ( v != '全部' ) {
+                      return (
+                        <li key={k} className="item "><span className="text">{v}</span></li>
+                      )
+                    } else {
+                      return null
+                    }
                   })
                 }
               </ul>
@@ -110,9 +114,7 @@ class ConditionFilter extends React.Component {
     let pN = []
     _.each(this.state.filters,(v,k)=>{
       pP=_.merge(pP, v.conditions[v.kIndex].external)
-      if (v.conditions[v.kIndex].name !== '全部') {
-        pN.push(v.conditions[v.kIndex].name)
-      }
+      pN.push(v.conditions[v.kIndex].name)
     })
     this.setState({showFlg:false, selContent:pN})
     if (this.props.filterChangeHandle) {
@@ -128,9 +130,7 @@ class ConditionFilter extends React.Component {
     _.each(f, (v,k)=>{
       if (v.conditions && v.conditions.length>0) {
         v.kIndex=0;
-        if (v.conditions[0].name !== '全部') {
-          n.push(v.conditions[0].name)
-        }
+        n.push(v.conditions[0].name)
       }
     })
     this.setState({selContent:n, filters:f})

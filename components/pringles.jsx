@@ -218,7 +218,7 @@ class PringlesContent extends React.Component {
       showMoreFlg:false,
       // 搜索条件
       params:{
-        pageSize:2,
+        pageSize:4,
         pageIndex:0
       }
     };
@@ -306,6 +306,13 @@ class PringlesContent extends React.Component {
         </div>
       </div>
     )
+  }
+
+  componentWillReceiveProps(nextProps) {
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.renderFlg;
   }
 
   changeHandle(seasonId) {

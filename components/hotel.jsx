@@ -8,17 +8,46 @@ class Hotel extends React.Component {
     super(props);
 
     this.state = {
-      data:[]
+      data:[
+        'http://img2.jsbn.com/venus/sample/20160317/1458207659557376520150919195756477089_1200x800.jpg@1e_1c_0o_0l_600h_400w_70q.src',
+        'http://img2.jsbn.com/venus/sample/20160317/1458209563327072420151015174048870251_1200x800.jpg@1e_1c_0o_0l_600h_400w_70q.src',
+        'http://img2.jsbn.com/venus/sample/20160317/1458210736001263120160127190814487233_1200x800.JPG@1e_1c_0o_0l_600h_400w_70q.src'
+      ]
     };
   }
 
   render () {
     return (
-      <div></div>
+      <div>
+        <div className="window">
+          <p>我是弹出层</p>
+          <br />
+          <p>sfskdfjsdjflsdjf;ksfjsdklfjasj</p>
+        </div>
+        <div className="mbody" onClick={this.handle.bind(this)}>
+          <p className="btn" >点击我show出弹出层</p>
+        </div>
+      </div>
     )
   }
 
-  componentDidMount() {}
+  handle() {
+    console.log('~~')
+    location.hash = "win";
+  }
+
+  componentDidMount() {
+  }
+
+  componentDidUpdate() {
+    window.onpopstate = function() {
+      if(location.hash.indexOf("#win")>-1){
+        $(".window").show();
+      }else{
+        $(".window").hide();
+      }
+    };
+  }
 }
 
 export { Hotel }

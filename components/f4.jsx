@@ -7,7 +7,7 @@ import { ConditionFilter } from './common/condition-filter.jsx'
 import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
-import { BaseShowDetail } from './common/detail.jsx'
+import { BaseShowDetail } from './detail.jsx'
 
 class F4List extends BaseShowDetail {
   constructor (props) {
@@ -470,7 +470,6 @@ class F4 extends React.Component {
   render () {
     return (
       <div className="f4-list-view">
-        <div id='J_Detail'></div>
         <div className="top-logo-box">
           <div className="logo-box">
             <i className="icon-home-logo"></i>

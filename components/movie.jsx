@@ -3,11 +3,12 @@ import _ from 'lodash'
 
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { MovieConfig } from './config/movie-config'
-import { DetailType } from '../src/utils/detail-type'
+import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
+import { BaseShowDetail } from './detail.jsx'
 
-class MovieContent extends React.Component {
+class MovieContent extends BaseShowDetail {
   constructor (props) {
     super(props);
     // 渲染标志,控制组件是否渲染
@@ -57,19 +58,19 @@ class MovieContent extends React.Component {
             _.map(this.state.data, (v,k)=>{
               // 为了防止不同tab切换的时候key冲突
               let key=''+this.state.movieTypeIndex+'-'+k
+              let dataUrl=MovieConfig.Base.baseUrl+'video/detail/'+v.id;
+              let onShowDetail=super.showDetail.bind(this, DetailType.Movie, ShowType.video, null, dataUrl)
               return (
-                <li key={key} className="item">
-                  <a href={'/detail/'+DetailType.Movie+'/'+v.id} target='_blank' >
-                    <div className="photo-box">
-                      <MediaItem
-                        aspectRatio="3:2"
-                        imageUrl={v.coverUrlWeb}
-                        processType={EmImgProcessType.emGD_S_S}
-                        width={300}
-                      />
-                      <i className="icon-video-play"></i>
-                    </div>
-                  </a>
+                <li key={key} className="item" onClick={onShowDetail}>
+                  <div className="photo-box">
+                    <MediaItem
+                      aspectRatio="3:2"
+                      imageUrl={v.coverUrlWeb}
+                      processType={EmImgProcessType.emGD_S_S}
+                      width={300}
+                    />
+                    <i className="icon-video-play"></i>
+                  </div>
                 </li>
               )
             })
@@ -191,6 +192,7 @@ class MovieContent extends React.Component {
   }
 
   componentDidMount() {
+    super.componentDidMount();
     let p = {}
     p.pageSize = this.state.params.pageSize;
     p.pageIndex = this.state.params.pageIndex;

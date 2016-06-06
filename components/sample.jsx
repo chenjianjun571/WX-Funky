@@ -7,7 +7,7 @@ import { SampleConfig } from './config/sample-config'
 import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
-import { BaseShowDetail } from './common/detail.jsx'
+import { BaseShowDetail } from './detail.jsx'
 
 // 因为样片的搜索有特殊性,风格和场景的展示与类型挂钩,所以不能使用公共的过滤器组件
 // 筛选组件
@@ -297,6 +297,10 @@ class FilterContent extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    if (this.first) {
+      return true;
+    }
+
     if (this.state.content.sampleTypeName == nextState.content.sampleTypeName
       && this.state.content.shootStyleName == nextState.content.shootStyleName
       && this.state.content.exteriorName == nextState.content.exteriorName
@@ -375,7 +379,7 @@ class SampleContent extends BaseShowDetail {
               let dataUrl=SampleConfig.Base.baseUrl+'sample/detail/'+v.id;
               let onShowDetail=super.showDetail.bind(this, DetailType.Sample, ShowType.image, null, dataUrl)
               return (
-                <li key={k} className="item" onClick={onShowDetail}>
+                <li key={k+''+v.id} className="item" onClick={onShowDetail}>
                   <MediaItem
                     aspectRatio="2:3"
                     imageUrl={v.coverUrlWx || v.coverUrlWeb}
@@ -621,7 +625,6 @@ class Sample extends React.Component {
   render () {
     return (
       <div className="sample-list-view">
-        <div id='J_Detail'></div>
         <div className="top-logo-box">
           <div className="logo-box">
             <i className="icon-home-logo"></i>

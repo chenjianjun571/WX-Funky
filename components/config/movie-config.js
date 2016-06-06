@@ -5,6 +5,8 @@ import { BaseConfig } from './base'
 import _ from 'lodash'
 
 const MovieConfig  = {
+  Base:BaseConfig,
+
   // 顶部广告
   'MediaSlider': _.merge({
     'dataUrl': 'vda/movie_top',

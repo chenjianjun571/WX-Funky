@@ -69,8 +69,6 @@ class Hotel extends React.Component {
   render () {
     return (
       <div>
-        <div id='J_Detail'></div>
-
         <div className="mbody" onClick={this.handle.bind(this)}>
           <p className="btn" >点击我show出弹出层</p>
         </div>

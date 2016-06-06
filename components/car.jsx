@@ -4,11 +4,12 @@ import _ from 'lodash'
 import { CarConfig } from './config/car-config'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { ConditionFilter } from './common/condition-filter.jsx'
-import { DetailType } from '../src/utils/detail-type'
+import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
+import { BaseShowDetail } from './detail.jsx'
 
-class CarList extends React.Component {
+class CarList extends BaseShowDetail {
   constructor (props) {
     super(props);
     // 渲染标志,控制组件是否渲染
@@ -52,25 +53,24 @@ class CarList extends React.Component {
         if (this.state.data.length > 0) {
           content = (
             _.map(this.state.data, (v,k)=>{
-              // 通过v.coverUrlWeb来做组件的key,这样才能避免条件切换的时候不刷新的问题
+              let dataUrl=CarConfig.Base.baseUrl+'car/detail/'+v.id;
+              let onShowDetail=super.showDetail.bind(this, DetailType.Car, ShowType.image, null, dataUrl)
               return (
-                <li key={k} className="item">
-                  <a href={'/detail/'+DetailType.Car+'/'+v.id} target='_blank' >
-                    <div className="photo-box">
-                      <MediaItem
-                        aspectRatio="3:2"
-                        imageUrl={v.coverUrlWeb}
-                        processType={EmImgProcessType.emGD_S_S}
-                        width={300}
-                      />
-                    </div>
-                    <div className="info-box">
-                      <i className="img-title"></i>
-                      <span className="text-title">{v.title}</span>
-                      <span className="price-discount">{'￥'+v.rentalPrice}</span>
-                      <span className="price-original">{'￥'+v.marketPrice}</span>
-                    </div>
-                  </a>
+                <li key={k+''+v.id} className="item" onClick={onShowDetail}>
+                  <div className="photo-box">
+                    <MediaItem
+                      aspectRatio="3:2"
+                      imageUrl={v.coverUrlWeb}
+                      processType={EmImgProcessType.emGD_S_S}
+                      width={300}
+                    />
+                  </div>
+                  <div className="info-box">
+                    <i className="img-title"></i>
+                    <span className="text-title">{v.title}</span>
+                    <span className="price-discount">{'￥'+v.rentalPrice}</span>
+                    <span className="price-original">{'￥'+v.marketPrice}</span>
+                  </div>
                 </li>
               )
             })
@@ -156,6 +156,7 @@ class CarList extends React.Component {
   }
 
   componentDidMount() {
+    super.componentDidMount();
     // 参数的初始状态
     let p = {};
     p = _.merge(p, this.state.params)

@@ -1,9 +1,9 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
-import { MediaItem, EmImgProcessType } from './media-item.jsx'
-import { DetailType } from '../../src/utils/detail-type'
-import { GetHintContent, HintType } from './hint'
-import { ReqCode } from './code'
+import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
+import { DetailType, ShowType } from '../src/utils/detail-type'
+import { GetHintContent, HintType } from './common/hint'
+import { ReqCode } from './common/code'
 
 class Detail extends React.Component {
   constructor (props) {
@@ -25,10 +25,28 @@ class Detail extends React.Component {
 
   getContent() {
     switch (this.props.type) {
+      case DetailType.Movie:
+      {
+        return (
+          <MediaItem
+            imageUrl={this.state.data[0].coverUrlWeb}
+            videoUrl={this.state.data[0].videoUrl}
+          />
+        )
+      }
+      case DetailType.FollowVideo:
+      {
+        return (
+          <MediaItem
+            imageUrl={this.state.data[0].coverUrlWeb}
+            videoUrl={this.state.data[0].videoUrl}
+          />
+        )
+      }
       case DetailType.F4:
       {
         // 四大金刚的数据是通过props传递进来的
-        if (this.props.showType == 1) {
+        if (this.props.showType == ShowType.video) {
           // 四大金刚作品的视频显示
           return (
             <MediaItem
@@ -146,6 +164,185 @@ class Detail extends React.Component {
               }
             </ul>
           </div>
+        )
+      }
+      case DetailType.FollowPhoto: {
+        let list =  JSON.parse(this.state.data[0].pcDetailImages);
+        let kClass = ' photo-space';
+        return (
+          <div className={"list-photo-box" + kClass}>
+            <ul className="item-list">
+              {
+                _.map(list,(v,k)=>{
+                  return (
+                    <li key={k} className="item">
+                      <MediaItem
+                        aspectRatio="1:-1"
+                        imageUrl={v}
+                        quality={90}
+                        processType={EmImgProcessType.emGD_S_S}
+                        water={true}
+                      />
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
+        )
+      }
+      case DetailType.Dress: {
+        let list =  this.state.data;
+        let kClass = ' photo-space';
+        return (
+          <div className={"list-photo-box" + kClass}>
+            <ul className="item-list">
+              {
+                _.map(list,(v,k)=>{
+                  return (
+                    <li key={k} className="item">
+                      <MediaItem
+                        aspectRatio="1:-1"
+                        imageUrl={v.imageUrl}
+                        quality={90}
+                        processType={EmImgProcessType.emGD_S_S}
+                        water={true}
+                      />
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
+        )
+      }
+      case DetailType.Case: {
+        if (this.state.data.length == 0) {
+          return null;
+        }
+        let content = this.state.data[0];
+
+        let f4Map = {
+          '': '',
+          1: '主持人',
+          2: '化妆师',
+          3: '摄影师',
+          4: '摄像师',
+          5: '双机摄影',
+          6: '双机摄像',
+        }
+        let f4String = ''
+        let standardWeddingString = content.personDescription || '';
+        _.each(standardWeddingString.split(','), function(v,k) {
+          f4String += (' ' + v);
+        })
+
+        let imgList = JSON.parse(content.pcDetailImages);
+
+        return (
+          <div className="case-detail-view">
+            <div className="top-logo-box">
+              <div className="logo-box">
+                <i className="icon-home-logo"></i>
+                <i className="icon-home-word"></i>
+              </div>
+            </div>
+            <div className="text-info-box">
+              <div className="header-box">
+                <div className="cover-box">
+                  <MediaItem
+                    aspectRatio="3:2"
+                    imageUrl={content.coverUrlWeb}
+                    quality={95}
+                    processType={EmImgProcessType.emGD_S_S}
+                    height={300}
+                  />
+                </div>
+                <h1 className="text-title">{content.name}</h1>
+                <h3 className="text-content">{content.description}</h3>
+              </div>
+              <div className="theme-box">
+                <div className="hint-box">
+                  <span className="hint-title">主题属性</span>
+                  <i className="hint-icon"></i>
+                </div>
+                <div className="theme-item theme-name">
+                  <span className="text-hint">主题</span> <span className="text-content">{content.theme}</span>
+                </div>
+                <div className="theme-item theme-style">
+                  <span className="text-hint">风格</span>
+                  {
+                    _.map(content.caseStyleName&&content.caseStyleName.split(',')||[],(v,k)=>{
+                      return <span key={k} className="text-content">{v + ' '}</span>
+                    })
+                  }
+                </div>
+                <div className="theme-item theme-color">
+                  <span className="text-hint">色系</span> <span className="text-content">{content.color}</span>
+                </div>
+              </div>
+              <div className="price-box">
+                <div className="hint-box">
+                  <span className="hint-title">价格</span>
+                  <i className="hint-icon"></i>
+                </div>
+                <div className="total-price">
+                  <i className="icon-discount"></i>
+                  <span className="price-discount">{'￥'+parseFloat(content.totalCost).toFixed(2)}</span>
+                  <i className="icon-original"></i>
+                  <span className="price-original">{'￥'+parseFloat(content.originalPrice).toFixed(2)}</span>
+                </div>
+                <h2><span className="text-hint">场景布置费用</span> <span class="text-content">{'￥'+parseFloat(content.senceCost).toFixed(2)}</span></h2>
+                <h2>
+                  <span className="text-hint">{($.trim(f4String) === '')?'婚礼人费用：':'婚礼人(' + f4String +') 费用：'}</span>
+                  <span class="text-content">{'￥'+parseFloat(content.hdpcCost).toFixed(2)}</span>
+                </h2>
+              </div>
+            </div>
+            <div className="image-detail-box">
+              <div className="hint-box">
+                <span className="hint-title">现场实景</span>
+                <i className="hint-icon"></i>
+              </div>
+              <div className="detail-list-box">
+                <ul className="item-list">
+                  {
+                    _.map(imgList, (v,k)=>{
+                      return (
+                        <li key={k} className="item">
+                          <MediaItem
+                            aspectRatio="1:-1"
+                            imageUrl={v}
+                            quality={90}
+                            processType={EmImgProcessType.emGD_S_S}
+                            water={true}
+                          />
+                        </li>
+                      )
+                    })
+                  }
+                </ul>
+
+              </div>
+            </div>
+          </div>
+        )
+      }
+      case DetailType.Car:
+      {
+        // http://cq.jsbn.com/api/car/detail/1107
+        let content = this.state.data[0];
+        return (
+          <p>租车...</p>
+        )
+      }
+      case DetailType.Supply:
+      {
+        //http://cq.jsbn.com/api/weddingsupplies/detail/1111
+        let content = this.state.data[0];
+        //<div className='J_DetailText' dangerouslySetInnerHTML={{__html:this.props.data}} ></div>
+        return (
+          <p>用品...</p>
         )
       }
       default:

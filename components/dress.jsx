@@ -3,11 +3,12 @@ import _ from 'lodash'
 
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { DressConfig } from './config/dress-config'
-import { DetailType } from '../src/utils/detail-type'
+import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
+import { BaseShowDetail } from './detail.jsx'
 
-class DressContent extends React.Component {
+class DressContent extends BaseShowDetail {
   constructor (props) {
     super(props);
     // 渲染标志,控制组件是否渲染
@@ -59,21 +60,21 @@ class DressContent extends React.Component {
               // 为了防止不同tab切换的时候key冲突
               let key=''+this.state.dressTypeIndex+'-'+k
               // 因为路由的详情是/detail/:type/:id 所以没有ID需要补全一个id(用brandId补全)
+              let dataUrl=DressConfig.Base.baseUrl+'dress/dress_list?brandId='+v.brandId+'&typeId='+dressType;
+              let onShowDetail=super.showDetail.bind(this, DetailType.Dress, ShowType.image, null, dataUrl)
               return (
-                <li key={k} className="item">
-                  <a href={'/detail/'+DetailType.Dress+'/'+v.brandId+'?brandId='+v.brandId+'&typeId='+dressType} target='_blank' >
-                    <div className="photo-box">
-                      <MediaItem
-                        aspectRatio="3:2"
-                        imageUrl={v.coverUrlWeb}
-                        processType={EmImgProcessType.emGD_S_S}
-                        width={600}
-                      />
-                    </div>
-                    <div className="info-box">
-                      <span className="text-title">{v.name}</span>
-                    </div>
-                  </a>
+                <li key={k} className="item" onClick={onShowDetail}>
+                  <div className="photo-box">
+                    <MediaItem
+                      aspectRatio="3:2"
+                      imageUrl={v.coverUrlWeb}
+                      processType={EmImgProcessType.emGD_S_S}
+                      width={600}
+                    />
+                  </div>
+                  <div className="info-box">
+                    <span className="text-title">{v.name}</span>
+                  </div>
                 </li>
               )
             })
@@ -195,6 +196,7 @@ class DressContent extends React.Component {
   }
 
   componentDidMount() {
+    super.componentDidMount();
     // 获取婚纱礼服类型列表
     let cfg = DressConfig.DressType
     let fetchUrl = cfg.buildUrl(null,cfg.dataUrl)

@@ -6,6 +6,7 @@ import { BaseConfig } from './base'
 import _ from 'lodash'
 
 const DressConfig  = {
+  Base:BaseConfig,
 
   'MediaSlider':_.merge({
     'dataUrl':'vda/dress_top',

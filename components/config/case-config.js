@@ -5,6 +5,8 @@ import { BaseConfig } from './base'
 import _ from 'lodash'
 
 const CaseConfig = {
+  Base:BaseConfig,
+
   MediaSlider:_.merge({
     'dataUrl':'cases/scheme_recommend?pageIndex=1&pageSize=6',
     'aspectRatio':'3:2',

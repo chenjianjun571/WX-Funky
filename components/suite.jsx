@@ -7,7 +7,7 @@ import { SuiteConfig } from './config/suite-config'
 import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
-import { BaseShowDetail } from './common/detail.jsx'
+import { BaseShowDetail } from './detail.jsx'
 
 class SuiteList extends BaseShowDetail {
   constructor (props) {
@@ -204,7 +204,6 @@ class Suite extends React.Component {
   render () {
     return (
       <div className="hssy-suit-list-view">
-        <div id='J_Detail'></div>
         <div className="top-logo-box">
           <div className="logo-box">
             <i className="icon-home-logo"></i>

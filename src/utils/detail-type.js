@@ -6,14 +6,14 @@ const DetailType = {
   Sample:1,
   Pringles:2,
   Suite:3,
-  Movie:10,
-  Case:4,
-  FollowPhoto:5,
-  FollowVideo:6,
-  Car:7,
-  Supply:8,
+  Movie:4,
+  Case:5,
+  FollowPhoto:6,
+  FollowVideo:7,
+  F4:8,
   Dress:9,
-  F4:10
+  Car:10,
+  Supply:11,
 }
 
 const ShowType = {

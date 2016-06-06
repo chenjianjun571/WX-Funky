@@ -4,11 +4,12 @@ import _ from 'lodash'
 import { CaseConfig } from './config/case-config'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { ConditionFilter } from './common/condition-filter.jsx'
-import { DetailType } from '../src/utils/detail-type'
+import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
+import { BaseShowDetail } from './detail.jsx'
 
-class CaseList extends React.Component {
+class CaseList extends BaseShowDetail {
   constructor (props) {
     super(props);
     // 渲染标志,控制组件是否渲染
@@ -27,7 +28,7 @@ class CaseList extends React.Component {
       showMoreFlg:false,
       // 搜索条件
       params:{
-        pageSize:6,
+        pageSize:12,
         pageIndex:0
       }
     };
@@ -52,17 +53,16 @@ class CaseList extends React.Component {
         if (this.state.data.length > 0) {
           content = (
             _.map(this.state.data, (v,k)=>{
-              // 通过v.coverUrlWeb来做组件的key,这样才能避免条件切换的时候不刷新的问题
+              let dataUrl=CaseConfig.Base.baseUrl+'cases/detail/'+v.id;
+              let onShowDetail=super.showDetail.bind(this, DetailType.Case, ShowType.image, null, dataUrl)
               return (
-                <li key={k} className="item">
-                  <a href={'/detail/'+DetailType.Case+'/'+v.id} target='_blank' >
-                    <MediaItem
-                      aspectRatio="3:2"
-                      imageUrl={v.coverUrlWeb}
-                      processType={EmImgProcessType.emGD_S_S}
-                      width={300}
-                    />
-                  </a>
+                <li key={k+''+v.id} className="item" onClick={onShowDetail}>
+                  <MediaItem
+                    aspectRatio="3:2"
+                    imageUrl={v.coverUrlWeb}
+                    processType={EmImgProcessType.emGD_S_S}
+                    width={300}
+                  />
                 </li>
               )
             })
@@ -148,6 +148,7 @@ class CaseList extends React.Component {
   }
 
   componentDidMount() {
+    super.componentDidMount();
     // 参数的初始状态
     let p = {};
     p = _.merge(p, this.state.params)

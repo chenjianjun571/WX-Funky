@@ -2,6 +2,8 @@ import { BaseConfig } from './base'
 import _ from 'lodash'
 
 const FollowPhotoConfig = {
+  Base:BaseConfig,
+
   'MediaSlider':_.merge({
     'dataUrl':'vda/weddingpat_top',
     'aspectRatio':'3:2',

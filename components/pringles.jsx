@@ -7,7 +7,7 @@ import { PringlesConfig } from './config/pringles-config'
 import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
-import { BaseShowDetail } from './common/detail.jsx'
+import { BaseShowDetail } from './detail.jsx'
 
 class BestPringles extends BaseShowDetail {
   constructor (props) {
@@ -45,6 +45,7 @@ class BestPringles extends BaseShowDetail {
   }
 
   componentDidMount() {
+    super.componentDidMount();
     let cfg = PringlesConfig.BestPringles
     let fetchUrl = cfg.buildUrl(null,cfg.dataUrl)
     fetch(fetchUrl)
@@ -247,7 +248,7 @@ class PringlesContent extends BaseShowDetail {
               let dataUrl=PringlesConfig.Base.baseUrl+'pringles/detail/'+v.id;
               let onShowDetail=super.showDetail.bind(this, DetailType.Pringles, ShowType.image, null, dataUrl)
               return (
-                <li key={k} className="item" onClick={onShowDetail}>
+                <li key={k+''+v.id} className="item" onClick={onShowDetail}>
                   <MediaItem
                     aspectRatio="2:3"
                     imageUrl={v.coverUrlWeb}
@@ -307,6 +308,10 @@ class PringlesContent extends BaseShowDetail {
         </div>
       </div>
     )
+  }
+
+  componentDidMount() {
+    super.componentDidMount();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -450,7 +455,6 @@ class Pringles extends React.Component {
   render () {
     return (
       <div className="pringles-list-view">
-        <div id='J_Detail'></div>
         <div className="top-logo-box">
           <div className="logo-box">
             <i className="icon-home-logo"></i>

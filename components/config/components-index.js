@@ -20,8 +20,6 @@ import { Supply } from '../supply.jsx'
 import { Hotel } from '../hotel.jsx'
 import { Activity} from '../activity.jsx'
 
-import { Detail } from '../detail.jsx'
-
 const ComponentsIndex = {
   'home': <Home />,
 
@@ -41,8 +39,7 @@ const ComponentsIndex = {
   'car': <Car />,
 
   'hotel': <Hotel />,
-  'activity': <Activity />,
-  'detail':<Detail />
+  'activity': <Activity />
 }
 const ComponentsSeo= {
   'home': {
@@ -125,12 +122,7 @@ const ComponentsSeo= {
     'seoTitle':'活动详情',
     'seoKeywords':'',
     'seoDescription':''
-  },
-  'detail': {
-    'seoTitle':'详情',
-    'seoKeywords':'',
-    'seoDescription':''
-  },
+  }
 }
 
 export {

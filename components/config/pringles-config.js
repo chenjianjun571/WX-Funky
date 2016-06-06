@@ -5,6 +5,8 @@ import { BaseConfig } from './base'
 import _ from 'lodash'
 
 const PringlesConfig  = {
+  Base:BaseConfig,
+
   // 顶部广告
   'MediaSlider': _.merge({
     dataUrl: 'vda/index_top',

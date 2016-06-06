@@ -186,9 +186,4 @@ siteRouter.get('/detail/:type/:id', function* (next) {
   }
 })
 
-/** 活动详情页 **/
-siteRouter.get('/activity/detail/:name', function* (next) {
-  yield this.render('modules/default', renderOption('activity', '/activity', '/', this.params))
-})
-
 export { siteRouter }

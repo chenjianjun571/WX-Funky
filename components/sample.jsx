@@ -4,9 +4,10 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { SampleConfig } from './config/sample-config'
-import { DetailType } from '../src/utils/detail-type'
+import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
+import { BaseShowDetail } from './common/detail.jsx'
 
 // 因为样片的搜索有特殊性,风格和场景的展示与类型挂钩,所以不能使用公共的过滤器组件
 // 筛选组件
@@ -327,7 +328,7 @@ class FilterContent extends React.Component {
   }
 }
 
-class SampleContent extends React.Component {
+class SampleContent extends BaseShowDetail {
   constructor (props) {
     super(props);
     // 渲染标志,控制组件是否渲染
@@ -371,17 +372,17 @@ class SampleContent extends React.Component {
         if (this.state.data.length > 0) {
           content = (
             _.map(this.state.data, (v,k)=>{
+              let dataUrl=SampleConfig.Base.baseUrl+'sample/detail/'+v.id;
+              let onShowDetail=super.showDetail.bind(this, DetailType.Sample, ShowType.image, null, dataUrl)
               return (
-                <li key={k} className="item">
-                  <a href={'/detail/'+DetailType.Sample+'/'+v.id} target='_blank' >
-                    <MediaItem
-                      aspectRatio="2:3"
-                      imageUrl={v.coverUrlWx || v.coverUrlWeb}
-                      processType={EmImgProcessType.emGD_S_S}
-                      height={300}
-                      quality={95}
-                    />
-                  </a>
+                <li key={k} className="item" onClick={onShowDetail}>
+                  <MediaItem
+                    aspectRatio="2:3"
+                    imageUrl={v.coverUrlWx || v.coverUrlWeb}
+                    processType={EmImgProcessType.emGD_S_S}
+                    height={300}
+                    quality={95}
+                  />
                 </li>
               )
             })
@@ -452,11 +453,9 @@ class SampleContent extends React.Component {
       k = _.merge(k, {exteriorId:params.exteriorId})
     }
     let key = JSON.stringify(k)
-    console.log('change:'+key)
     // 设置渲染标志
     this.renderFlg = true;
     if (this.cache[key]) {
-      console.log(this.cache[key].data.length)
       // 从缓存里面直接取数据
       this.setState({
         reqState       : ReqCode.Ready,
@@ -512,11 +511,11 @@ class SampleContent extends React.Component {
       k = _.merge(k, {exteriorId:p.exteriorId})
     }
     let key = JSON.stringify(k)
-    console.log('more:'+key)
     this.queryData(key, p, true);
   }
 
   componentDidMount() {
+    super.componentDidMount();
     // 参数的初始状态
     let p = {};
     p.pageSize = this.state.params.pageSize;
@@ -524,7 +523,6 @@ class SampleContent extends React.Component {
     p.sampleType = 0;
     // 组装缓存key
     let key = JSON.stringify({sampleType:0})
-    console.log('init:'+key)
     this.queryData(key, p, false);
   }
 
@@ -623,6 +621,7 @@ class Sample extends React.Component {
   render () {
     return (
       <div className="sample-list-view">
+        <div id='J_Detail'></div>
         <div className="top-logo-box">
           <div className="logo-box">
             <i className="icon-home-logo"></i>

@@ -4,11 +4,12 @@ import _ from 'lodash'
 import { F4Config } from './config/f4-config'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { ConditionFilter } from './common/condition-filter.jsx'
-import { DetailType } from '../src/utils/detail-type'
+import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
+import { BaseShowDetail } from './common/detail.jsx'
 
-class F4List extends React.Component {
+class F4List extends BaseShowDetail {
   constructor (props) {
     super(props);
     // 渲染标志,控制组件是否渲染
@@ -52,7 +53,7 @@ class F4List extends React.Component {
         if (this.state.data.length > 0) {
           // 四大金刚展示需要把结果打乱
           content = (
-            _.map(_.shuffle(this.state.data), (v,k)=>{
+            _.map(this.state.data, (v,k)=>{
               // 价格描述
               let priceRemark=null;
               if (v.priceRemark && v.priceRemark !== '') {
@@ -110,31 +111,30 @@ class F4List extends React.Component {
                   <div className="photo-box">
                     {
                       _.map(v.workList && v.workList.slice(0,2), (v, k) => {
+                        // 显示详情处理句柄
                         if (this.props.workType=='video') {
+                          let onShowDetail=super.showDetail.bind(this, DetailType.F4, ShowType.video, v)
                           return (
-                            <div key={k} className="img-box">
-                              <a>
-                                <MediaItem
-                                  aspectRatio="3:2"
-                                  imageUrl={v.coverUrlWeb}
-                                  processType={EmImgProcessType.emGD_S_S}
-                                  width={300}
-                                />
-                                <i className="icon-video-play"></i>
-                              </a>
+                            <div key={k} className="img-box" onClick={onShowDetail}>
+                              <MediaItem
+                                aspectRatio="3:2"
+                                imageUrl={v.coverUrlWeb}
+                                processType={EmImgProcessType.emGD_S_S}
+                                width={300}
+                              />
+                              <i className="icon-video-play"></i>
                             </div>
                           )
                         } else {
+                          let onShowDetail=super.showDetail.bind(this, DetailType.F4, ShowType.image, v)
                           return (
-                            <div key={k} className="img-box">
-                              <a>
-                                <MediaItem
-                                  aspectRatio="2:3"
-                                  imageUrl={v.coverUrlWeb}
-                                  processType={EmImgProcessType.emGD_S_S}
-                                  width={200}
-                                />
-                              </a>
+                            <div key={k} className="img-box" onClick={onShowDetail}>
+                              <MediaItem
+                                aspectRatio="2:3"
+                                imageUrl={v.coverUrlWeb}
+                                processType={EmImgProcessType.emGD_S_S}
+                                width={200}
+                              />
                             </div>
                           )
                         }
@@ -188,10 +188,10 @@ class F4List extends React.Component {
     this.renderFlg = true;
     // 组装key
     if (this.cache[key]) {
-      // 从缓存里面直接取数据
+      // 从缓存里面直接取数据 _.shuffle 把数据打乱
       this.setState({
         reqState       : ReqCode.Ready,
-        data           : this.cache[key].data,
+        data           : _.shuffle(this.cache[key].data),
         showMoreFlg    : this.cache[key].showMoreFlg,
         params         : this.cache[key].params,
         dataErrorFlg   : false
@@ -226,6 +226,8 @@ class F4List extends React.Component {
   }
 
   componentDidMount() {
+    // 调用父类的componentDidMount
+    super.componentDidMount();
     // 参数的初始状态
     let p = {};
     _.merge(p, this.state.params)
@@ -233,6 +235,10 @@ class F4List extends React.Component {
     // 组装缓存key
     let key = JSON.stringify(_.omit(p, ['pageSize','pageIndex']));
     this.queryData(key, p, this.props.dataUrl, false);
+  }
+
+  componentWillUnmount() {
+    super.componentWillUnmount();
   }
 
   queryData(key, params, url,isChunk=false) {
@@ -269,6 +275,7 @@ class F4List extends React.Component {
               t = t.concat(j.data);
             } else {
               t = j.data;
+              t = _.shuffle(t);
             }
             // 判断服务器数据是否加载完毕
             let m = (j.count > t.length) ? true : false;
@@ -463,6 +470,7 @@ class F4 extends React.Component {
   render () {
     return (
       <div className="f4-list-view">
+        <div id='J_Detail'></div>
         <div className="top-logo-box">
           <div className="logo-box">
             <i className="icon-home-logo"></i>

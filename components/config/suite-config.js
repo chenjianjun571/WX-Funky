@@ -5,6 +5,8 @@ import { BaseConfig } from './base'
 import _ from 'lodash'
 
 const SuiteConfig  = {
+  Base:BaseConfig,
+
   // 顶部广告
   MediaSlider: _.merge({
     dataUrl: 'vda/suite_top',

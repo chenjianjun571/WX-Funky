@@ -4,11 +4,12 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { PringlesConfig } from './config/pringles-config'
-import { DetailType } from '../src/utils/detail-type'
+import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
+import { BaseShowDetail } from './common/detail.jsx'
 
-class BestPringles extends React.Component {
+class BestPringles extends BaseShowDetail {
   constructor (props) {
     super(props);
 
@@ -23,17 +24,17 @@ class BestPringles extends React.Component {
         <ul className="item-list">
           {
             _.map(this.state.data, (v,k)=>{
+              let dataUrl=PringlesConfig.Base.baseUrl+'pringles/detail/'+v.id;
+              let onShowDetail=super.showDetail.bind(this, DetailType.Pringles, ShowType.image, null, dataUrl)
               return (
-                <li key={k} className="item">
-                  <a href={'/detail/'+DetailType.Pringles+'/'+v.id} target='_blank' >
-                    <MediaItem
-                      aspectRatio="2:3"
-                      imageUrl={v.coverUrlWeb}
-                      processType={EmImgProcessType.emGD_S_S}
-                      height={600}
-                      quality={95}
-                    />
-                  </a>
+                <li key={k} className="item" onClick={onShowDetail}>
+                  <MediaItem
+                    aspectRatio="2:3"
+                    imageUrl={v.coverUrlWeb}
+                    processType={EmImgProcessType.emGD_S_S}
+                    height={600}
+                    quality={95}
+                  />
                 </li>
               )
             })
@@ -199,7 +200,7 @@ class SeasonList extends React.Component {
 }
 
 
-class PringlesContent extends React.Component {
+class PringlesContent extends BaseShowDetail {
   constructor (props) {
     super(props);
     // 渲染标志,控制组件是否渲染
@@ -243,17 +244,17 @@ class PringlesContent extends React.Component {
         if (this.state.data.length > 0) {
           content = (
             _.map(this.state.data, (v,k)=>{
+              let dataUrl=PringlesConfig.Base.baseUrl+'pringles/detail/'+v.id;
+              let onShowDetail=super.showDetail.bind(this, DetailType.Pringles, ShowType.image, null, dataUrl)
               return (
-                <li key={k} className="item">
-                  <a href={'/detail/'+DetailType.Pringles+'/'+v.id} target='_blank' >
-                    <MediaItem
-                      aspectRatio="2:3"
-                      imageUrl={v.coverUrlWeb}
-                      processType={EmImgProcessType.emGD_S_S}
-                      height={600}
-                      quality={95}
-                    />
-                  </a>
+                <li key={k} className="item" onClick={onShowDetail}>
+                  <MediaItem
+                    aspectRatio="2:3"
+                    imageUrl={v.coverUrlWeb}
+                    processType={EmImgProcessType.emGD_S_S}
+                    height={600}
+                    quality={95}
+                  />
                 </li>
               )
             })
@@ -449,6 +450,7 @@ class Pringles extends React.Component {
   render () {
     return (
       <div className="pringles-list-view">
+        <div id='J_Detail'></div>
         <div className="top-logo-box">
           <div className="logo-box">
             <i className="icon-home-logo"></i>

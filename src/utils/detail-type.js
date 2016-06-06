@@ -12,7 +12,13 @@ const DetailType = {
   FollowVideo:6,
   Car:7,
   Supply:8,
-  Dress:9
+  Dress:9,
+  F4:10
 }
 
-export { DetailType }
+const ShowType = {
+  video:1,
+  image:2
+}
+
+export { DetailType, ShowType }

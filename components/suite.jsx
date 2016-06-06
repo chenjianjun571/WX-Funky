@@ -4,11 +4,12 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { SuiteConfig } from './config/suite-config'
-import { DetailType } from '../src/utils/detail-type'
+import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
+import { BaseShowDetail } from './common/detail.jsx'
 
-class SuiteList extends React.Component {
+class SuiteList extends BaseShowDetail {
   constructor (props) {
     super(props);
     // 渲染标志,控制组件是否渲染
@@ -24,7 +25,7 @@ class SuiteList extends React.Component {
       showMoreFlg:false,
       // 搜索条件
       params:{
-        pageSize:2,
+        pageSize:4,
         pageIndex:0
       }
     }
@@ -49,23 +50,23 @@ class SuiteList extends React.Component {
         if (this.state.data.length > 0) {
           content = (
             _.map(this.state.data, (v,k)=>{
+              let dataUrl=SuiteConfig.Base.baseUrl+'suite/detail/'+v.id;
+              let onShowDetail=super.showDetail.bind(this, DetailType.Suite, ShowType.image, null, dataUrl)
               return (
-                <li key={k} className="item">
-                  <a href={'/detail/'+DetailType.Suite+'/'+v.id} target='_blank' >
-                    <div className="photo-box">
-                      <MediaItem
-                        aspectRatio="3:2"
-                        imageUrl={v.coverUrlWx || v.coverUrlWeb}
-                        processType={EmImgProcessType.emGD_S_S}
-                        height={400}
-                      />
-                    </div>
-                    <div className="info-box">
-                      <span className="title">{v.name}</span>
-                      <span className="unit">RMB</span>
-                      <span className="price">{v.salePrice}</span>
-                    </div>
-                  </a>
+                <li key={k} className="item" onClick={onShowDetail}>
+                  <div className="photo-box">
+                    <MediaItem
+                      aspectRatio="3:2"
+                      imageUrl={v.coverUrlWx || v.coverUrlWeb}
+                      processType={EmImgProcessType.emGD_S_S}
+                      height={400}
+                    />
+                  </div>
+                  <div className="info-box">
+                    <span className="title">{v.name}</span>
+                    <span className="unit">RMB</span>
+                    <span className="price">{v.salePrice}</span>
+                  </div>
                 </li>
               )
             })
@@ -123,6 +124,7 @@ class SuiteList extends React.Component {
   }
 
   componentDidMount() {
+    super.componentDidMount();
     let p = {}
     p.pageSize = this.state.params.pageSize;
     p.pageIndex = this.state.params.pageIndex;
@@ -202,6 +204,7 @@ class Suite extends React.Component {
   render () {
     return (
       <div className="hssy-suit-list-view">
+        <div id='J_Detail'></div>
         <div className="top-logo-box">
           <div className="logo-box">
             <i className="icon-home-logo"></i>

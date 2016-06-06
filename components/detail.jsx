@@ -45,7 +45,6 @@ class Detail extends React.Component {
   componentDidMount() {
     // 取到配置的获取婚纱类型数据的请求地址
     let params = this.props.dataParams;
-    console.log(JSON.stringify(params))
     if (params && params.type && params.id) {
       let fetchUrl = BaseConfig.buildUrl(params,DetailConfig[params.type].dataUrl)
       fetch(fetchUrl)

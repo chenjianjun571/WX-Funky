@@ -36,7 +36,7 @@ class Filter extends React.Component {
       <div className={"fixed-center-box sift-content-box "+this.props.kClass} >
         <div className="sift-center-box">
           <div className="sift-scrollView-box">
-            <div className="content-box type">
+            <div className="content-box wedding-class">
               <div className="title">
                 <i className="icon"></i>
                 <span className="text">分类</span>
@@ -67,7 +67,7 @@ class Filter extends React.Component {
             {
               // 只有婚纱摄影才有风格选项
               this.state.sampleIndexType === 0 && (
-                <div className="content-box style">
+                <div className="content-box wedding-style">
                   <div className="title">
                     <i className="icon"></i>
                     <span className="text">风格</span>
@@ -100,7 +100,7 @@ class Filter extends React.Component {
             {
               // 只有婚纱摄影才有场景选项
               this.state.sampleIndexType === 0 && (
-                <div className="content-box address">
+                <div className="content-box wedding-address">
                   <div className="title">
                     <i className="icon"></i>
                     <span className="text">场景</span>

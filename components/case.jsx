@@ -60,7 +60,7 @@ class CaseContent extends React.Component {
     // 组装风格条件
     let f = [];
     let p1 = {
-      kClass:"content-box style",
+      kClass:"content-box case-style",
       kName:"风格",
       conditions:[]
     }

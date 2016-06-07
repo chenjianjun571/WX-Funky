@@ -14,6 +14,7 @@ import { BaseShowDetail } from '../detail.jsx'
  * dataUrl:数据请求的url
  * customData:定制数据,一些特殊组件传递的参数,{}
  * showMore:是否显示加载更多 默认是true
+ * isShuffle:是否打乱顺序显示数据,默认是不打乱
  */
 class ListContent extends BaseShowDetail {
   constructor (props) {
@@ -356,6 +357,104 @@ class ListContent extends BaseShowDetail {
 
         break;
       }
+      case DetailType.F4:
+      {
+        content.listData = (
+          _.map(this.state.data||[], (v,k)=>{
+            // 价格描述
+            let priceRemark=null;
+            if (v.priceRemark && v.priceRemark !== '') {
+              let ls = v.priceRemark.split && v.priceRemark.split('|') || []
+              priceRemark = (
+                <div className="price-intro-box">
+                  <span className="text-hint">浮动价格</span>
+                  {
+                    _.map(ls, (v,k) => {
+                      return (
+                        <span key={k}>{v}</span>
+                      );
+                    })
+                  }
+                </div>
+              )
+            }
+
+            // 个人描述
+            let description=null;
+            if (v.description && v.description !== "") {
+              description = (
+                <div className="intro-box">
+                  <span className="text-hint">个人简介</span>
+                  <span className="text-content">{v.description}</span>
+                </div>
+              )
+            }
+
+            return (
+              <li key={k+''+v.id} className="item f4-item">
+                <div className="head-image-box">
+                  <MediaItem
+                    aspectRatio="1:1"
+                    imageUrl={v.photoUrl}
+                    processType={EmImgProcessType.emGD_S_S}
+                    width={200}
+                  />
+                </div>
+                <div className="info-box">
+                  <div className="name-box">
+                    <span className="text-hint">{this.props.customData.typeName}</span>
+                    <span className="text-content">{v.nickName}</span>
+                  </div>
+                  <div className="price-box">
+                    <span className="text-content">{'￥'+v.salePrice}</span>
+                  </div>
+                  {
+                    priceRemark
+                  }
+                  {
+                    description
+                  }
+                </div>
+                <div className="photo-box">
+                  {
+                    _.map(v.workList && v.workList.slice(0,2), (v, k) => {
+                      // 显示详情处理句柄
+                      if (this.props.customData.workType=='video') {
+                        let onShowDetail=super.showDetail.bind(this, DetailType.F4, ShowType.video, v)
+                        return (
+                          <div key={k} className="img-box" onClick={onShowDetail}>
+                            <MediaItem
+                              aspectRatio="3:2"
+                              imageUrl={v.coverUrlWeb}
+                              processType={EmImgProcessType.emGD_S_S}
+                              width={300}
+                            />
+                            <i className="icon-video-play"></i>
+                          </div>
+                        )
+                      } else {
+                        let onShowDetail=super.showDetail.bind(this, DetailType.F4, ShowType.image, v)
+                        return (
+                          <div key={k} className="img-box" onClick={onShowDetail}>
+                            <MediaItem
+                              aspectRatio="2:3"
+                              imageUrl={v.coverUrlWeb}
+                              processType={EmImgProcessType.emGD_S_S}
+                              width={200}
+                            />
+                          </div>
+                        )
+                      }
+                    })
+                  }
+                </div>
+              </li>
+            )
+          })
+        )
+
+        break;
+      }
     }
 
     return content;
@@ -386,7 +485,7 @@ class ListContent extends BaseShowDetail {
     p = _.merge(p, this.props.params)
     // 组装缓存key
     let key = JSON.stringify(_.omit(p, ['pageSize','pageIndex']));
-    this.queryData(key, p, false);
+    this.queryData(key, p, this.props.dataUrl, false, this.props.isShuffle);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -397,16 +496,26 @@ class ListContent extends BaseShowDetail {
     // 组装key
     if (this.cache[key]) {
       // 从缓存里面直接取数据
-      this.setState({
-        reqState       : ReqCode.Ready,
-        data           : this.cache[key].data,
-        showMoreFlg    : this.cache[key].showMoreFlg,
-        params         : this.cache[key].params,
-        dataErrorFlg   : false
-      })
+      if (nextProps.isShuffle) {
+        this.setState({
+          reqState       : ReqCode.Ready,
+          data           : _.shuffle(this.cache[key].data),
+          showMoreFlg    : this.cache[key].showMoreFlg,
+          params         : this.cache[key].params,
+          dataErrorFlg   : false
+        })
+      } else {
+        this.setState({
+          reqState       : ReqCode.Ready,
+          data           : this.cache[key].data,
+          showMoreFlg    : this.cache[key].showMoreFlg,
+          params         : this.cache[key].params,
+          dataErrorFlg   : false
+        })
+      }
     } else {
       let p = {}
-      p.pageSize = this.props.params.pageSize||6;
+      p.pageSize = this.props.params.pageSize||this.state.params.pageSize||6;
       p.pageIndex = 0;
       p = _.merge(p, params)
       // 设置加载中状态
@@ -417,7 +526,7 @@ class ListContent extends BaseShowDetail {
         dataErrorFlg   : false
       })
       // 请求数据
-      this.queryData(key, p, false)
+      this.queryData(key, p, nextProps.dataUrl, false, nextProps.isShuffle)
     }
   }
 
@@ -440,31 +549,41 @@ class ListContent extends BaseShowDetail {
     let p = {};
     p = _.merge(p, this.state.params)
     let key = JSON.stringify(_.omit(p, ['pageSize','pageIndex']));
-    this.queryData(key, p, true);
+    this.queryData(key, p, this.props.dataUrl, true, this.props.isShuffle);
   }
 
   componentWillUnmount() {
     super.componentWillUnmount();
   }
 
-  queryData(key, params, isChunk=false) {
+  queryData(key, params, dataUrl, isChunk=false, isShuffle=false) {
     // 先从本地缓存里面查找数据
     if (this.cache[key] && !isChunk) {
       // 设置渲染标志
       this.renderFlg = true;
       // 从缓存里面直接取数据
-      this.setState({
-        reqState       : ReqCode.Ready,
-        data           : this.cache[key].data,
-        showMoreFlg    : this.cache[key].showMoreFlg,
-        params         : this.cache[key].params,
-        dataErrorFlg   : false,
-      })
+      if (isShuffle) {
+        this.setState({
+          reqState       : ReqCode.Ready,
+          data           : _.shuffle(this.cache[key].data),
+          showMoreFlg    : this.cache[key].showMoreFlg,
+          params         : this.cache[key].params,
+          dataErrorFlg   : false,
+        })
+      } else {
+        this.setState({
+          reqState       : ReqCode.Ready,
+          data           : this.cache[key].data,
+          showMoreFlg    : this.cache[key].showMoreFlg,
+          params         : this.cache[key].params,
+          dataErrorFlg   : false,
+        })
+      }
     } else {
       // 加页请求
       params.pageIndex += 1;
       // 组装url
-      let fetchUrl = BaseConfig.buildQueryUrl(params, this.props.dataUrl)
+      let fetchUrl = BaseConfig.buildQueryUrl(params, dataUrl)
       fetch(fetchUrl)
         .then(res => {return res.json()})
         .then(j => {
@@ -479,6 +598,9 @@ class ListContent extends BaseShowDetail {
               t = t.concat(j.data);
             } else {
               t = j.data;
+              if (isShuffle) {
+                t = _.shuffle(t);
+              }
             }
             // 判断服务器数据是否加载完毕
             let m = (j.count > t.length) ? true : false;
@@ -549,6 +671,7 @@ ListContent.defaultProps = {
   dataUrl:'',
   customData:{},
   showMore:true,
+  isShuffle:false,
   params:{
     pageSize:0
   }

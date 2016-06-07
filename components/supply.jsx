@@ -78,7 +78,7 @@ class SupplyContent extends React.Component {
       case 1:// 车型
       {
         let p = {
-          kClass:"content-box type",
+          kClass:"content-box supply-type",
           kName:"类型",
           conditions:[]
         }

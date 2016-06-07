@@ -81,7 +81,7 @@ class CarContent extends React.Component {
       case 1:// 车型
       {
         let p = {
-          kClass:"content-box type",
+          kClass:"content-box car-type",
           kName:"车型",
           conditions:[]
         }
@@ -164,7 +164,7 @@ class CarContent extends React.Component {
     }
     // 组装类别
     let p2 = {
-      kClass:"content-box category",
+      kClass:"content-box car-category",
       kName:"类别",
       conditions:[
         {

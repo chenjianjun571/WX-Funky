@@ -9,6 +9,9 @@ import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
 import { BaseShowDetail } from './detail.jsx'
 
+/*
+F4的list没有提到list_content是因为这个数据结果在展示的时候需要打乱展示,所以没有做提取
+* */
 class F4List extends BaseShowDetail {
   constructor (props) {
     super(props);
@@ -390,8 +393,44 @@ class F4Content extends React.Component {
 
   componentDidMount() {
     let f= this.initFilter()
-    // 设置状态
-    this.setState({params:{type:1}, filters:f, renderFlg:true, typeName:'主持人', workType:'video', dataUrl:'f4/host'})
+    switch(this.props.dataParams.tab) {
+      case "host":
+      {
+        // 设置状态
+        this.setState({params:{type:1}, filters:f, renderFlg:true, typeName:'主持人', workType:'video', dataUrl:'f4/host'})
+        break;
+      }
+      case "dresser":
+      {
+        // 设置默认条件是第几个选中,不设置是第0个选中
+        f[0].active=1;
+        // 设置状态
+        this.setState({params:{type:2}, filters:f, renderFlg:true, typeName:'化妆师', workType:'image', dataUrl:'f4/dresser'})
+        break;
+      }
+      case "photographer":
+      {
+        // 设置默认条件是第几个选中,不设置是第0个选中
+        f[0].active=2;
+        // 设置状态
+        this.setState({params:{type:3}, filters:f, renderFlg:true, typeName:'摄影师', workType:'image', dataUrl:'f4/photographer'})
+        break;
+      }
+      case "camera":
+      {
+        // 设置默认条件是第几个选中,不设置是第0个选中
+        f[0].active=3;
+        // 设置状态
+        this.setState({params:{type:4}, filters:f, renderFlg:true, typeName:'摄像师', workType:'video', dataUrl:'f4/camera'})
+        break;
+      }
+      default:
+      {
+        // 设置状态
+        this.setState({params:{type:1}, filters:f, renderFlg:true, typeName:'主持人', workType:'video', dataUrl:'f4/host'})
+        break;
+      }
+    }
   }
 
   initFilter () {
@@ -483,7 +522,7 @@ class F4 extends React.Component {
           processType={EmImgProcessType.emGD_S_S}
         />
 
-        <F4Content />
+        <F4Content {...this.props} />
       </div>
     )
   }

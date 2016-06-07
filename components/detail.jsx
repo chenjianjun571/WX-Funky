@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
+
+import { DetailSlider } from './common/detail-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
@@ -330,19 +332,108 @@ class Detail extends React.Component {
       }
       case DetailType.Car:
       {
-        // http://cq.jsbn.com/api/car/detail/1107
         let content = this.state.data[0];
+        let params = content.parameter.split('|') || [];
+        let detailImages = JSON.parse(content.pcDetailImages)
         return (
-          <p>租车...</p>
+          <div className="car-detail-view">
+            <div className="adv-header-box">
+              <DetailSlider
+                data={detailImages}
+                aspectRatio="1:1"
+                height={475}
+              />
+            </div>
+
+            <div className="text-info-box ">
+              <div className="name-box">
+                <h1 className="title">{content.title}</h1>
+                <h3 className="describe">{content.description}</h3>
+              </div>
+              <div className="price-box">
+                <span className="price-discount">{'￥'+content.rentalPrice}</span>
+                <span className="price-original">{'￥'+content.marketPrice}</span>
+              </div>
+              <div className="parameter-box">
+                <div className="hint-box">
+                  <span className="hint-title">产品参数</span>
+                  <i className="hint-icon"></i>
+                </div>
+                <div className="parameter-info-box">
+                  {
+                    _.map(params, (v,k)=>{
+                      let str=v.replace(/\r\n/ig,"");
+                      return (
+                        <span key={k}>{str}</span>
+                      )
+                    })
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div className="detail-info-box">
+              <div className="hint-box">
+                <span className="hint-title">产品信息</span>
+                <i className="hint-icon"></i>
+              </div>
+              <div className='img-content-box' dangerouslySetInnerHTML={{__html:content.content}} ></div>
+            </div>
+          </div>
         )
+
+        break;
       }
       case DetailType.Supply:
       {
-        //http://cq.jsbn.com/api/weddingsupplies/detail/1111
         let content = this.state.data[0];
-        //<div className='J_DetailText' dangerouslySetInnerHTML={{__html:this.props.data}} ></div>
+        let params = content.parameter.split('|') || [];
+        let detailImages = JSON.parse(content.pcDetailImages)
         return (
-          <p>用品...</p>
+          <div className="supply-detail-view">
+            <div className="adv-header-box">
+              <DetailSlider
+                data={detailImages}
+                aspectRatio="1:1"
+                height={475}
+              />
+            </div>
+
+            <div className="text-info-box ">
+              <div className="name-box">
+                <h1 className="title">{content.title}</h1>
+                <h3 className="describe">{content.description}</h3>
+              </div>
+              <div className="price-box">
+                <span className="price-discount">{'￥'+content.sellingPrice}</span>
+                <span className="price-original">{'￥'+content.marketPrice}</span>
+              </div>
+              <div className="parameter-box">
+                <div className="hint-box">
+                  <span className="hint-title">产品参数</span>
+                  <i className="hint-icon"></i>
+                </div>
+                <div className="parameter-info-box">
+                  {
+                    _.map(params, (v,k)=>{
+                      let str=v.replace(/\r\n/ig,"");
+                      return (
+                        <span key={k}>{str}</span>
+                      )
+                    })
+                  }
+                </div>
+              </div>
+            </div>
+
+            <div className="detail-info-box">
+              <div className="hint-box">
+                <span className="hint-title">产品信息</span>
+                <i className="hint-icon"></i>
+              </div>
+              <div className='img-content-box' dangerouslySetInnerHTML={{__html:content.content}} ></div>
+            </div>
+          </div>
         )
       }
       default:
@@ -456,12 +547,14 @@ class Detail extends React.Component {
             console.log('detail:'+err)
             // 数据请求错误
             this.setState({
+              reqState:ReqCode.Error,
               dataErrorFlg:true,
               data:[],
             })
           });
       }
     } else {
+      // 只设置reqState,数据从props里面取
       this.setState({
         reqState:ReqCode.Ready
       })

@@ -5,8 +5,6 @@ import { BaseConfig } from './base'
 import _ from 'lodash'
 
 const CaseConfig = {
-  Base:BaseConfig,
-
   MediaSlider:_.merge({
     'dataUrl':'cases/scheme_recommend?pageIndex=1&pageSize=6',
     'aspectRatio':'3:2',
@@ -15,7 +13,7 @@ const CaseConfig = {
 
   Banner:[
     {
-      imageUrl: '//img2.jsbn.com/static/m_sample_banner_01.jpg'
+      imageUrl: '//img2.jsbn.com/static/m_case_banner_01.jpg'
     }
   ],
 

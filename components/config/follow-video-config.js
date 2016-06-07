@@ -2,8 +2,6 @@ import { BaseConfig } from './base'
 import _ from 'lodash'
 
 const FollowVideoConfig = {
-  Base:BaseConfig,
-
   'MediaSlider':_.merge({
     'dataUrl':'vda/weddingvideo_top',
     'aspectRatio':'3:2',
@@ -12,7 +10,7 @@ const FollowVideoConfig = {
 
   Banner:[
     {
-      imageUrl: '//img2.jsbn.com/static/m_sample_banner_01.jpg'
+      imageUrl: '//img2.jsbn.com/static/m_follow_video_banner_01.jpg'
     }
   ],
 

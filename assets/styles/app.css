@@ -669,9 +669,22 @@ body {
   width: 100%;
   height: 2.1875rem;
   margin-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+  position: relative;
+}
+.adaption-auto .more-button .hint-box {
+  height: 100%;
+  display: inline-block;
+}
+.adaption-auto .more-button .hint-box .hint-title {
+  font-size: 12px;
+  line-height: 2.1875rem;
+  color: #f94267;
+  display: inline-block;
 }
 .adaption-auto .more-button .button-box {
-  padding-right: 10px;
   padding-left: 0.625rem;
   height: 100%;
   display: flex;
@@ -679,7 +692,9 @@ body {
   flex-wrap: nowrap;
   justify-content: flex-end;
   align-items: center;
-  float: right;
+  position: absolute;
+  right: 10px;
+  top: 0;
 }
 .adaption-auto .more-button .button-box .icon {
   background-image: url("../images/icon-more-button.png");
@@ -1829,11 +1844,11 @@ body {
   line-height: 1.125rem;
 }
 .adaption-auto .case-detail-view .hint-box .hint-icon {
-  margin-top: 3px;
+  margin-top: 6px;
   margin-bottom: 3px;
   display: block;
   width: 5rem;
-  height: 0.25rem;
+  height: 2px;
   overflow: hidden;
 }
 .adaption-auto .case-detail-view .hint-box .hint-icon:before {
@@ -1892,6 +1907,9 @@ body {
   text-align: left;
   font-size: 0;
   border-bottom: 10px solid #d6d6d6;
+}
+.adaption-auto .case-detail-view .text-info-box .theme-box .hint-box {
+  margin-bottom: 10px;
 }
 .adaption-auto .case-detail-view .text-info-box .theme-box .hint-box .hint-title {
   color: #f94267;
@@ -1967,8 +1985,8 @@ body {
 }
 .adaption-auto .case-detail-view .text-info-box .price-box .total-price .icon-original:before {
   content: "原";
-  color: #a3a3a3;
-  border-color: #a3a3a3;
+  color: #999999;
+  border-color: #999999;
   transform: scale(0.8);
   top: 1px;
   left: 3px;
@@ -1986,7 +2004,7 @@ body {
 }
 .adaption-auto .case-detail-view .text-info-box .price-box .total-price .price-original {
   text-decoration: line-through;
-  color: #a3a3a3;
+  color: #999999;
   font-size: 14px;
   display: inline-block;
   line-height: 30px;
@@ -2004,7 +2022,7 @@ body {
   display: inline-block;
 }
 .adaption-auto .case-detail-view .text-info-box .price-box h2 .text-content {
-  color: #a3a3a3;
+  color: #999999;
   font-weight: 200;
   font-size: 14px;
   display: inline-block;
@@ -2536,6 +2554,202 @@ body {
   text-decoration: line-through;
   color: #d6d6d6;
   display: inline-block;
+}
+.adaption-auto .car-detail-view .adv-header-box {
+  height: 100vw;
+}
+.adaption-auto .car-detail-view .hint-box {
+  position: relative;
+}
+.adaption-auto .car-detail-view .hint-box .hint-title {
+  font-size: 1.125rem;
+  line-height: 1.125rem;
+}
+.adaption-auto .car-detail-view .hint-box .hint-icon {
+  margin-top: 6px;
+  margin-bottom: 3px;
+  display: block;
+  width: 5rem;
+  height: 2px;
+  overflow: hidden;
+}
+.adaption-auto .car-detail-view .hint-box .hint-icon:before {
+  content: "";
+  display: inline-block;
+  border-style: solid;
+  border-color: transparent #ff4b00 transparent #ffe600;
+  border-width: 0 1.25rem 9997px 1.25rem;
+}
+.adaption-auto .car-detail-view .hint-box .hint-icon:after {
+  content: "";
+  display: inline-block;
+  border-style: solid;
+  border-color: transparent #969dff transparent #66d6cd;
+  border-width: 0 1.25rem 9997px 1.25rem;
+}
+.adaption-auto .car-detail-view .text-info-box {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #d6d6d6;
+}
+.adaption-auto .car-detail-view .text-info-box .name-box .title {
+  font-size: 18px;
+}
+.adaption-auto .car-detail-view .text-info-box .name-box .describe {
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #999999;
+}
+.adaption-auto .car-detail-view .text-info-box .price-box {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.adaption-auto .car-detail-view .text-info-box .price-box .price-discount {
+  font-size: 24px;
+  color: #f94267;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.adaption-auto .car-detail-view .text-info-box .price-box .price-original {
+  font-size: 12px;
+  color: #999999;
+  text-decoration: line-through;
+}
+.adaption-auto .car-detail-view .text-info-box .price-box .price-original,
+.adaption-auto .car-detail-view .text-info-box .price-box .price-discount {
+  line-height: 30px;
+  font-weight: 200;
+  display: inline-block;
+}
+.adaption-auto .car-detail-view .text-info-box .price-box .price-original:first-letter,
+.adaption-auto .car-detail-view .text-info-box .price-box .price-discount:first-letter {
+  font-size: 60%;
+}
+.adaption-auto .car-detail-view .text-info-box .parameter-box {
+  margin-bottom: 10px;
+}
+.adaption-auto .car-detail-view .text-info-box .parameter-box .parameter-info-box {
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.adaption-auto .car-detail-view .text-info-box .parameter-box .parameter-info-box span {
+  display: block;
+  width: 50%;
+  line-height: 14px;
+  overflow: hidden;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.adaption-auto .car-detail-view .detail-info-box {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+}
+.adaption-auto .car-detail-view .detail-info-box .img-content-box {
+  margin-top: 10px;
+}
+.adaption-auto .supply-detail-view .adv-header-box {
+  height: 100vw;
+}
+.adaption-auto .supply-detail-view .hint-box {
+  position: relative;
+}
+.adaption-auto .supply-detail-view .hint-box .hint-title {
+  font-size: 1.125rem;
+  line-height: 1.125rem;
+}
+.adaption-auto .supply-detail-view .hint-box .hint-icon {
+  margin-top: 6px;
+  margin-bottom: 3px;
+  display: block;
+  width: 5rem;
+  height: 2px;
+  overflow: hidden;
+}
+.adaption-auto .supply-detail-view .hint-box .hint-icon:before {
+  content: "";
+  display: inline-block;
+  border-style: solid;
+  border-color: transparent #ff4b00 transparent #ffe600;
+  border-width: 0 1.25rem 9997px 1.25rem;
+}
+.adaption-auto .supply-detail-view .hint-box .hint-icon:after {
+  content: "";
+  display: inline-block;
+  border-style: solid;
+  border-color: transparent #969dff transparent #66d6cd;
+  border-width: 0 1.25rem 9997px 1.25rem;
+}
+.adaption-auto .supply-detail-view .text-info-box {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #d6d6d6;
+}
+.adaption-auto .supply-detail-view .text-info-box .name-box .title {
+  font-size: 18px;
+}
+.adaption-auto .supply-detail-view .text-info-box .name-box .describe {
+  margin-top: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #999999;
+}
+.adaption-auto .supply-detail-view .text-info-box .price-box {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.adaption-auto .supply-detail-view .text-info-box .price-box .price-discount {
+  font-size: 24px;
+  color: #f94267;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.adaption-auto .supply-detail-view .text-info-box .price-box .price-original {
+  font-size: 12px;
+  color: #999999;
+  text-decoration: line-through;
+}
+.adaption-auto .supply-detail-view .text-info-box .price-box .price-original,
+.adaption-auto .supply-detail-view .text-info-box .price-box .price-discount {
+  line-height: 30px;
+  font-weight: 200;
+  display: inline-block;
+}
+.adaption-auto .supply-detail-view .text-info-box .price-box .price-original:first-letter,
+.adaption-auto .supply-detail-view .text-info-box .price-box .price-discount:first-letter {
+  font-size: 60%;
+}
+.adaption-auto .supply-detail-view .text-info-box .parameter-box {
+  margin-bottom: 10px;
+}
+.adaption-auto .supply-detail-view .text-info-box .parameter-box .parameter-info-box {
+  margin-top: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.adaption-auto .supply-detail-view .text-info-box .parameter-box .parameter-info-box span {
+  display: block;
+  width: 50%;
+  line-height: 14px;
+  overflow: hidden;
+  font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.adaption-auto .supply-detail-view .detail-info-box {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 10px;
+}
+.adaption-auto .supply-detail-view .detail-info-box .img-content-box {
+  margin-top: 10px;
 }
 .adaption-auto .full-view-show {
   height: 100%;

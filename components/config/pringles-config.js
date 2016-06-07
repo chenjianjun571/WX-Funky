@@ -6,7 +6,6 @@ import _ from 'lodash'
 
 const PringlesConfig  = {
   Base:BaseConfig,
-
   // 顶部广告
   'MediaSlider': _.merge({
     dataUrl: 'vda/index_top',
@@ -21,7 +20,7 @@ const PringlesConfig  = {
   ],
 
   BestPringles:_.merge({
-    'dataUrl':'pringles/weddingshot_index_best_pringles?pageIndex=1&pageSize=4',
+    dataUrl:'pringles/weddingshot_index_best_pringles?pageIndex=1&pageSize=4',
   },BaseConfig),
 
   SeasonList:_.merge({

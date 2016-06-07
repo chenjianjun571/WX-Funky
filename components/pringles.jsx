@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
-import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { PringlesConfig } from './config/pringles-config'
 import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
 import { BaseShowDetail } from './detail.jsx'
+import { ListContent } from './common/list-content.jsx'
 
 class BestPringles extends BaseShowDetail {
   constructor (props) {
@@ -200,90 +200,19 @@ class SeasonList extends React.Component {
   }
 }
 
-
-class PringlesContent extends BaseShowDetail {
+class PringlesContent extends React.Component {
   constructor (props) {
     super(props);
-    // 渲染标志,控制组件是否渲染
-    this.renderFlg=false;
-    // 缓存对象
-    this.cache=new Map();
-    // 组件状态
     this.state = {
-      // 数据请求状态
-      reqState:ReqCode.Loading,
-      // 数据请求错误标志
-      dataErrorFlg:false,
-      // 列表数据
-      data:[],
-      // 是否显示加载更多
-      showMoreFlg:false,
-      // 搜索条件
       params:{
         pageSize:4,
-        pageIndex:0
+        pageIndex:0,
+        seasonId:null
       }
     };
   }
 
-  getListContent () {
-    let content;
-
-    switch (this.state.reqState) {
-      case ReqCode.Loading: {
-        // 加载中状态
-        content = GetHintContent(HintType.Loading);
-        break;
-      }
-      case ReqCode.Error: {
-        // 加载错误状态
-        content = GetHintContent(HintType.Error);
-        break;
-      }
-      case ReqCode.Ready: {
-        // 数据准备ok状态
-        if (this.state.data.length > 0) {
-          content = (
-            _.map(this.state.data, (v,k)=>{
-              let dataUrl=PringlesConfig.Base.baseUrl+'pringles/detail/'+v.id;
-              let onShowDetail=super.showDetail.bind(this, DetailType.Pringles, ShowType.image, null, dataUrl)
-              return (
-                <li key={k+''+v.id} className="item" onClick={onShowDetail}>
-                  <MediaItem
-                    aspectRatio="2:3"
-                    imageUrl={v.coverUrlWeb}
-                    processType={EmImgProcessType.emGD_S_S}
-                    height={600}
-                    quality={95}
-                  />
-                </li>
-              )
-            })
-          )
-        } else {
-          content = GetHintContent(HintType.NoResult);
-        }
-        break;
-      }
-    }
-
-    return content;
-  }
-
   render () {
-    let moreButton = null;
-    if (this.state.showMoreFlg) {
-      moreButton = (
-        <div className="more-button" onClick={this.handleMore.bind(this)}>
-          <div className="button-box">
-            <span className="icon"></span>
-            <span className="title">点击加载</span>
-          </div>
-        </div>
-      )
-    }
-
-    let listContent = this.getListContent();
     return (
       <div>
         <div className="title-box-style-1">
@@ -293,157 +222,23 @@ class PringlesContent extends BaseShowDetail {
           </div>
           <span className="title">客片分季欣赏</span>
         </div>
-
         <SeasonList changeHandle={this.changeHandle.bind(this)} />
-
-        <div className="list-box list-pringles">
-          <ul className="item-list">
-            {
-              listContent
-            }
-          </ul>
-          {
-            moreButton
-          }
-        </div>
+        {
+          this.state.params.seasonId !== null
+            ? <ListContent params={this.state.params} customData={{listClass:" list-pringles"}}
+                           type={DetailType.Pringles} dataUrl={PringlesConfig.PringlesList.dataUrl} />
+            : null
+        }
       </div>
     )
   }
 
-  componentDidMount() {
-    super.componentDidMount();
-  }
-
-  componentWillReceiveProps(nextProps) {
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.renderFlg;
-  }
-
   changeHandle(seasonId) {
-    // 设置渲染标志
-    this.renderFlg = true;
-    if (this.cache[seasonId]) {
-      // 从缓存里面直接取数据
-      this.setState({
-        reqState       : ReqCode.Ready,
-        data           : this.cache[seasonId].data,
-        showMoreFlg    : this.cache[seasonId].showMoreFlg,
-        params         : this.cache[seasonId].params,
-        dataErrorFlg   : false,
-      })
-    } else {
-      let p = {}
-      p.pageSize = this.state.params.pageSize;
-      p.pageIndex = 0;
-      // 赋值礼服类型
-      p.seasonId = seasonId;
-      // 设置加载中状态
-      this.setState({
-        reqState       : ReqCode.Loading,
-        data           : [],
-        showMoreFlg    : false,
-        dataErrorFlg   : false,
-      })
-      // 请求数据
-      this.queryData(seasonId, p, false)
-    }
-  }
-
-  handleMore(e) {
-    e.preventDefault();
     let p = {};
     p.pageSize = this.state.params.pageSize;
     p.pageIndex = this.state.params.pageIndex;
-    p.seasonId = this.state.params.seasonId;
-    this.queryData(this.state.params.seasonId, p, true);
-  }
-
-  queryData(key, params, isChunk=false) {
-    // 先从本地缓存里面查找数据
-    if (this.cache[key] && !isChunk) {
-      // 设置渲染标志
-      this.renderFlg = true;
-      // 从缓存里面直接取数据
-      this.setState({
-        reqState       : ReqCode.Ready,
-        data           : this.cache[key].data,
-        showMoreFlg    : this.cache[key].showMoreFlg,
-        params         : this.cache[key].params,
-        dataErrorFlg   : false,
-      })
-    } else {
-      // 从网络请求数据
-      let cfg = PringlesConfig.PringlesList
-      // 加页请求
-      params.pageIndex += 1;
-      // 组装url
-      let fetchUrl = cfg.buildQueryUrl(params,cfg.dataUrl)
-      fetch(fetchUrl)
-        .then(res => {return res.json()})
-        .then(j => {
-          // 设置渲染标志
-          this.renderFlg=true;
-          // 判断服务器应答结果
-          if(j.success) {
-            let t;
-            // 是否需要合并老数据,适用于分页加载的情况
-            if (isChunk) {
-              t = this.state.data;
-              t = t.concat(j.data);
-            } else {
-              t = j.data;
-            }
-            // 判断服务器数据是否加载完毕
-            let m = (j.count > t.length) ? true : false;
-
-            // 缓存数据
-            let p = {}
-            p.data = t;
-            p.showMoreFlg = m;
-            p.params = params;
-            this.cache[key]=p;
-
-            // 设置组件状态
-            this.setState({
-              reqState       : ReqCode.Ready,
-              data           : t,
-              showMoreFlg    : m,
-              params         : params,
-              dataErrorFlg   : false,
-            })
-          } else {
-            // 数据请求错误
-            if (isChunk) {
-              // 分页请求数据失败的情况下不做处理
-            } else {
-              // 设置组件状态
-              this.setState({
-                reqState       : ReqCode.Error,
-                data           : [],
-                dataErrorFlg   : true,
-              })
-            }
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          // 设置渲染标志
-          this.renderFlg=true;
-          // 数据请求错误
-          if (isChunk) {
-            // 分页请求数据失败的情况下不做处理
-          } else {
-            // 设置组件状态
-            this.setState({
-              reqState       : ReqCode.Error,
-              data           : [],
-              dataErrorFlg   : true,
-            })
-          }
-        });
-    }
+    p.seasonId = seasonId;
+    this.setState({params:p});
   }
 }
 

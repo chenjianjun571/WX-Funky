@@ -4,7 +4,8 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { ShotConfig } from './config/shot-config'
-import { DetailType } from '../src/utils/detail-type'
+import { DetailType, ShowType } from '../src/utils/detail-type'
+import { ListContent } from './common/list-content.jsx'
 
 class NewActivity extends React.Component {
   constructor() {
@@ -92,48 +93,22 @@ class BestPringles extends React.Component {
             <span className="title">最佳客片欣赏</span>
           </div>
         </a>
-        <div className="list-box list-pringles">
-          <ul className="item-list">
-            {
-              _.map(this.state.data,(v,k)=>{
-                let link = '/detail/'+DetailType.Pringles+'/'+v.id
-                return (
-                  <li key={k} className="item">
-                    <MediaItem
-                      aspectRatio="2:3"
-                      imageUrl={v.coverUrlWx || v.coverUrlWeb}
-                      linkUrl={link}
-                      processType={EmImgProcessType.emGD_S_S}
-                      width={400}
-                    />
-                  </li>
-                )
-              })
-            }
-          </ul>
-          <a href="/pringles">
-            <div className="more-button">
-              <div className="button-box">
-                <span className="icon"></span>
-                <span className="title">更多客片</span>
-              </div>
+        <ListContent params={{pageIndex:1,pageSize:4}}
+                     customData={{listClass:" list-pringles"}}
+                     type={DetailType.Pringles}
+                     showMore={false}
+                     dataUrl={ShotConfig.BestPringlesHot.dataUrl} />
+        <a href="/pringles">
+          <div className="more-button">
+            <div className="button-box">
+              <span className="icon"></span>
+              <span className="title">更多客片</span>
             </div>
-          </a>
-        </div>
+          </div>
+        </a>
 
       </div>
     )
-  }
-
-  componentDidMount() {
-    let url = ShotConfig['BestPringlesHot'].baseUrl+ShotConfig['BestPringlesHot'].dataUrl;
-    fetch(url)
-      .then(res => {return res.json()})
-      .then(j =>{
-        if(j.success && j.data.length > 0) {
-          this.setState({ data:j.data })
-        }
-      })
   }
 }
 
@@ -159,48 +134,23 @@ class BestSample extends React.Component {
             <span className="title">最佳样片欣赏</span>
           </div>
         </a>
-        <div className="list-box list-sample">
-          <ul className="item-list">
-            {
-              _.map(this.state.data,(v,k)=>{
-                let link = '/detail/'+DetailType.Sample+'/'+v.id
-                return (
-                  <li key={k} className="item">
-                    <MediaItem
-                      aspectRatio="2:3"
-                      imageUrl={v.coverUrlWx || v.coverUrlWeb}
-                      linkUrl={link}
-                      processType={EmImgProcessType.emGD_S_S}
-                      width={400}
-                    />
-                  </li>
-                )
-              })
-            }
-          </ul>
-          <a href="/sample">
-            <div className="more-button">
-              <div className="button-box">
-                <span className="icon"></span>
-                <span className="title">更多样片</span>
-              </div>
+        <ListContent params={{pageIndex:1,pageSize:4}}
+                     customData={{listClass:" list-sample"}}
+                     type={DetailType.Sample}
+                     showMore={false}
+                     dataUrl={ShotConfig.BestSampleHot.dataUrl} />
+
+        <a href="/sample">
+          <div className="more-button">
+            <div className="button-box">
+              <span className="icon"></span>
+              <span className="title">更多样片</span>
             </div>
-          </a>
-        </div>
+          </div>
+        </a>
 
       </div>
     )
-  }
-
-  componentDidMount() {
-    let url = ShotConfig['BestSampleHot'].baseUrl+ShotConfig['BestSampleHot'].dataUrl;
-    fetch(url)
-      .then(res => {return res.json()})
-      .then(j =>{
-        if(j.success && j.data.length > 0) {
-          this.setState({ data:j.data })
-        }
-      })
   }
 }
 

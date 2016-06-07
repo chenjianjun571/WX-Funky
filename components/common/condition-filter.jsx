@@ -129,8 +129,13 @@ class ConditionFilter extends React.Component {
     let f = this.props.filters;
     _.each(f, (v,k)=>{
       if (v.conditions && v.conditions.length>0) {
-        v.kIndex=0;
-        n.push(v.conditions[0].name)
+        if (v.active && (v.active>0 && v.active<v.conditions.length)) {
+          v.kIndex=v.active;
+          n.push(v.conditions[v.active].name)
+        } else {
+          v.kIndex=0;
+          n.push(v.conditions[0].name)
+        }
       }
     })
     this.setState({selContent:n, filters:f})
@@ -142,8 +147,13 @@ class ConditionFilter extends React.Component {
       let f = nextProps.filters
       _.each(f, (v,k)=>{
         if (v.conditions && v.conditions.length>0) {
-          v.kIndex=0;
-          n[k]=v.conditions[0].name
+          if (v.active && (v.active>0 && v.active<v.conditions.length)) {
+            v.kIndex=v.active;
+            n.push(v.conditions[v.active].name)
+          } else {
+            v.kIndex=0;
+            n.push(v.conditions[0].name)
+          }
         }
       })
       this.setState({selContent:n, filters:f})

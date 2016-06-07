@@ -2,8 +2,6 @@ import { BaseConfig } from './base'
 import _ from 'lodash'
 
 const SupplyConfig = {
-  Base:BaseConfig,
-
   'MediaSlider': _.merge({
     'dataUrl': 'vda/supplies_top',
     'height': 460,
@@ -12,7 +10,7 @@ const SupplyConfig = {
 
   Banner:[
     {
-      imageUrl: '//img2.jsbn.com/static/m_sample_banner_01.jpg'
+      imageUrl: '//img2.jsbn.com/static/m_supply_banner_01.jpg'
     }
   ],
 

@@ -8,6 +8,7 @@ import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
 import { BaseShowDetail } from './detail.jsx'
+import { ListContent } from './common/list-content.jsx'
 
 // 因为样片的搜索有特殊性,风格和场景的展示与类型挂钩,所以不能使用公共的过滤器组件
 // 筛选组件
@@ -332,89 +333,19 @@ class FilterContent extends React.Component {
   }
 }
 
-class SampleContent extends BaseShowDetail {
+class SampleContent extends React.Component {
   constructor (props) {
     super(props);
-    // 渲染标志,控制组件是否渲染
-    this.renderFlg=false;
-    // 缓存对象
-    this.cache=new Map();
-    // 组件状态
     this.state = {
-      // 数据请求状态
-      reqState:ReqCode.Loading,
-      // 数据请求错误标志
-      dataErrorFlg:false,
-      // 列表数据
-      data:[],
-      // 是否显示加载更多
-      showMoreFlg:false,
-      // 搜索条件
       params:{
         pageSize:4,
-        pageIndex:0
+        pageIndex:0,
+        sampleType:0
       }
     };
   }
 
-  getListContent () {
-    let content;
-
-    switch (this.state.reqState) {
-      case ReqCode.Loading: {
-        // 加载中状态
-        content = GetHintContent(HintType.Loading);
-        break;
-      }
-      case ReqCode.Error: {
-        // 加载错误状态
-        content = GetHintContent(HintType.Error);
-        break;
-      }
-      case ReqCode.Ready: {
-        // 数据准备ok状态
-        if (this.state.data.length > 0) {
-          content = (
-            _.map(this.state.data, (v,k)=>{
-              let dataUrl=SampleConfig.Base.baseUrl+'sample/detail/'+v.id;
-              let onShowDetail=super.showDetail.bind(this, DetailType.Sample, ShowType.image, null, dataUrl)
-              return (
-                <li key={k+''+v.id} className="item" onClick={onShowDetail}>
-                  <MediaItem
-                    aspectRatio="2:3"
-                    imageUrl={v.coverUrlWx || v.coverUrlWeb}
-                    processType={EmImgProcessType.emGD_S_S}
-                    height={300}
-                    quality={95}
-                  />
-                </li>
-              )
-            })
-          )
-        } else {
-          content = GetHintContent(HintType.NoResult);
-        }
-        break;
-      }
-    }
-
-    return content;
-  }
-
   render () {
-    let moreButton = null;
-    if (this.state.showMoreFlg) {
-      moreButton = (
-        <div className="more-button" onClick={this.handleMore.bind(this)}>
-          <div className="button-box">
-            <span className="icon"></span>
-            <span className="title">点击加载</span>
-          </div>
-        </div>
-      )
-    }
-
-    let listContent = this.getListContent();
     return (
       <div>
         <div className="title-box-style-1">
@@ -425,195 +356,29 @@ class SampleContent extends BaseShowDetail {
           <span className="title">样片欣赏</span>
         </div>
         <FilterContent filterChangeHandle={this.changeHandle.bind(this)} />
-        <div className="list-box">
-          <ul className="item-list">
-            {
-              listContent
-            }
-          </ul>
-          {
-            moreButton
-          }
-        </div>
+        <ListContent params={this.state.params} type={DetailType.Sample} dataUrl={SampleConfig.SampleList.dataUrl} />
       </div>
     )
   }
 
-  componentWillReceiveProps(nextProps) {
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.renderFlg;
+  componentDidMount() {
   }
 
   changeHandle(params) {
-    // 组装缓存key
-    let k = {}
-    k = _.merge(k, {sampleType:params.sampleType})
-    if (params.shootStyleId) {
-      k = _.merge(k, {shootStyleId:params.shootStyleId})
-    }
-    if (params.exteriorId) {
-      k = _.merge(k, {exteriorId:params.exteriorId})
-    }
-    let key = JSON.stringify(k)
-    // 设置渲染标志
-    this.renderFlg = true;
-    if (this.cache[key]) {
-      // 从缓存里面直接取数据
-      this.setState({
-        reqState       : ReqCode.Ready,
-        data           : this.cache[key].data,
-        showMoreFlg    : this.cache[key].showMoreFlg,
-        params         : this.cache[key].params,
-        dataErrorFlg   : false,
-      })
+    // 组装参数
+    let p = {}
+    if (params.sampleType == 0) {
+      // 婚纱摄影
+      _.merge(p, {sampleType:params.sampleType})
+      _.merge(p, {shootStyleId:params.shootStyleId})
+      _.merge(p, {exteriorId:params.exteriorId})
     } else {
-      let p = {}
-      p.pageSize = this.state.params.pageSize;
-      p.pageIndex = 0;
-      // 判断搜索条件
-      p.sampleType = params.sampleType;
-      if (params.shootStyleId) {
-        p.shootStyleId = params.shootStyleId;
-      }
-      if (params.exteriorId) {
-        p.exteriorId = params.exteriorId;
-      }
-      // 设置加载中状态
-      this.setState({
-        reqState       : ReqCode.Loading,
-        data           : [],
-        showMoreFlg    : false,
-        dataErrorFlg   : false,
-      })
-      // 请求数据
-      this.queryData(key, p, false)
+      // 艺术照和全家福
+      _.merge(p, {sampleType:params.sampleType})
     }
-  }
-
-  handleMore(e) {
-    e.preventDefault();
-    let p = {};
     p.pageSize = this.state.params.pageSize;
     p.pageIndex = this.state.params.pageIndex;
-    // 判断搜索条件
-    p.sampleType = this.state.params.sampleType;
-    if (this.state.params.shootStyleId) {
-      p.shootStyleId = this.state.params.shootStyleId;
-    }
-    if (this.state.params.exteriorId) {
-      p.exteriorId = this.state.params.exteriorId;
-    }
-    // 组装缓存key
-    let k = {}
-    k = _.merge(k, {sampleType:p.sampleType})
-    if (p.shootStyleId) {
-      k = _.merge(k, {shootStyleId:p.shootStyleId})
-    }
-    if (p.exteriorId) {
-      k = _.merge(k, {exteriorId:p.exteriorId})
-    }
-    let key = JSON.stringify(k)
-    this.queryData(key, p, true);
-  }
-
-  componentDidMount() {
-    super.componentDidMount();
-    // 参数的初始状态
-    let p = {};
-    p.pageSize = this.state.params.pageSize;
-    p.pageIndex = this.state.params.pageIndex;
-    p.sampleType = 0;
-    // 组装缓存key
-    let key = JSON.stringify({sampleType:0})
-    this.queryData(key, p, false);
-  }
-
-  queryData(key, params, isChunk=false) {
-    // 先从本地缓存里面查找数据
-    if (this.cache[key] && !isChunk) {
-      // 设置渲染标志
-      this.renderFlg = true;
-      // 从缓存里面直接取数据
-      this.setState({
-        reqState       : ReqCode.Ready,
-        data           : this.cache[key].data,
-        showMoreFlg    : this.cache[key].showMoreFlg,
-        params         : this.cache[key].params,
-        dataErrorFlg   : false,
-      })
-    } else {
-      // 从网络请求数据
-      let cfg = SampleConfig.SampleList
-      // 加页请求
-      params.pageIndex += 1;
-      // 组装url
-      let fetchUrl = cfg.buildQueryUrl(params,cfg.dataUrl)
-      fetch(fetchUrl)
-        .then(res => {return res.json()})
-        .then(j => {
-          // 设置渲染标志
-          this.renderFlg=true;
-          // 判断服务器应答结果
-          if(j.success) {
-            let t;
-            // 是否需要合并老数据,适用于分页加载的情况
-            if (isChunk) {
-              t = this.state.data;
-              t = t.concat(j.data);
-            } else {
-              t = j.data;
-            }
-            // 判断服务器数据是否加载完毕
-            let m = (j.count > t.length) ? true : false;
-
-            // 缓存数据
-            let p = {}
-            p.data = t;
-            p.showMoreFlg = m;
-            p.params = params;
-            this.cache[key]=p;
-
-            // 设置组件状态
-            this.setState({
-              reqState       : ReqCode.Ready,
-              data           : t,
-              showMoreFlg    : m,
-              params         : params,
-              dataErrorFlg   : false,
-            })
-          } else {
-            // 数据请求错误
-            if (isChunk) {
-              // 分页请求数据失败的情况下不做处理
-            } else {
-              // 设置组件状态
-              this.setState({
-                reqState       : ReqCode.Error,
-                data           : [],
-                dataErrorFlg   : true,
-              })
-            }
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          // 设置渲染标志
-          this.renderFlg=true;
-          // 数据请求错误
-          if (isChunk) {
-            // 分页请求数据失败的情况下不做处理
-          } else {
-            // 设置组件状态
-            this.setState({
-              reqState       : ReqCode.Error,
-              data           : [],
-              dataErrorFlg   : true,
-            })
-          }
-        });
-    }
+    this.setState({params:p});
   }
 }
 

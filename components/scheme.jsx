@@ -4,6 +4,8 @@ import _ from 'lodash'
 import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { SchemeConfig } from './config/scheme-config'
+import { DetailType, ShowType } from '../src/utils/detail-type'
+import { ListContent } from './common/list-content.jsx'
 
 class BestCases extends React.Component {
   constructor (props) {
@@ -26,35 +28,19 @@ class BestCases extends React.Component {
             <span className="title">最佳案例</span>
           </div>
         </a>
-
-        <div className="list-box list-case">
-          <ul className="item-list">
-            {
-              _.map(this.state.data,(v,k)=>{
-                let link = '/case/'+v.id
-                return (
-                  <li key={k} className="item">
-                    <MediaItem
-                      aspectRatio="3:2"
-                      imageUrl={v.coverUrlWx || v.coverUrlWeb}
-                      linkUrl={link}
-                      processType={EmImgProcessType.emGD_S_S}
-                      width={600}
-                    />
-                  </li>
-                )
-              })
-            }
-          </ul>
-          <a href="/case">
-            <div className="more-button">
-              <div className="button-box">
-                <span className="icon"></span>
-                <span className="title">更多案例</span>
-              </div>
+        <ListContent params={{pageIndex:1,pageSize:6}}
+                     customData={{listClass:" list-case"}}
+                     type={DetailType.Case}
+                     showMore={false}
+                     dataUrl={SchemeConfig.BestCasesHot.dataUrl} />
+        <a href="/case">
+          <div className="more-button">
+            <div className="button-box">
+              <span className="icon"></span>
+              <span className="title">更多案例</span>
             </div>
-          </a>
-        </div>
+          </div>
+        </a>
 
       </div>
     )

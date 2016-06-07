@@ -6,8 +6,6 @@ import { BaseConfig } from './base'
 import _ from 'lodash'
 
 const DressConfig  = {
-  Base:BaseConfig,
-
   'MediaSlider':_.merge({
     'dataUrl':'vda/dress_top',
     'aspectRatio':'3:2',
@@ -16,7 +14,7 @@ const DressConfig  = {
 
   Banner:[
     {
-      imageUrl: '//img2.jsbn.com/static/m_sample_banner_01.jpg'
+      imageUrl: '//img2.jsbn.com/static/m_dress_banner_01.jpg'
     }
   ],
 

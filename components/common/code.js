@@ -8,4 +8,10 @@ const ReqCode = {
   Ready:3,// 准备ok
 }
 
-export { ReqCode }
+const LoadingCode = {
+  Loading:1,// 加载中
+  Error:2,// 加载错误
+  OK:3,// 加载ok
+}
+
+export { ReqCode, LoadingCode }

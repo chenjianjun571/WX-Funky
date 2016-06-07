@@ -7,7 +7,7 @@ import _ from 'lodash'
 const F4Config  = {
   Banner:[
     {
-      imageUrl: '//img2.jsbn.com/static/m_sample_banner_01.jpg'
+      imageUrl: '//img2.jsbn.com/static/m_f4_banner_01.jpg'
     }
   ],
 

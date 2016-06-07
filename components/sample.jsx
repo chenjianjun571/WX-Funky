@@ -330,6 +330,11 @@ class FilterContent extends React.Component {
   }
 
   componentDidMount() {
+    this.setState({
+      kClass:"",
+      content:{
+        sampleTypeName:'婚纱摄影'
+      }})
   }
 }
 

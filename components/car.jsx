@@ -83,6 +83,8 @@ class CarContent extends React.Component {
         let p = {
           kClass:"content-box car-type",
           kName:"车型",
+          selType:0, // 单选
+          defaultIndex:0,// 默认选中第一个
           conditions:[]
         }
 
@@ -108,6 +110,8 @@ class CarContent extends React.Component {
         let p = {
           kClass:"content-box brand",
           kName:"品牌",
+          selType:0, // 单选
+          defaultIndex:0,// 默认选中第一个
           conditions:[]
         }
 
@@ -139,6 +143,8 @@ class CarContent extends React.Component {
     let p1 = {
       kClass:"content-box price",
       kName:"价位",
+      selType:0, // 单选
+      defaultIndex:0,// 默认选中第一个
       conditions:[
         {
           name:"全部",
@@ -166,6 +172,8 @@ class CarContent extends React.Component {
     let p2 = {
       kClass:"content-box car-category",
       kName:"类别",
+      selType:0, // 单选
+      defaultIndex:0,// 默认选中第一个
       conditions:[
         {
           name:"全部",

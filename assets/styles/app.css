@@ -149,12 +149,14 @@ body {
 .adaption-auto #J_Main {
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .adaption-auto .detail-scrollView {
   width: 100%;
   height: 100%;
-  overflow: scroll;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .adaption-auto .animation-transition {
   -webkit-transition: 0.3s;
@@ -584,6 +586,18 @@ body {
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box.supply-type .title .icon {
   background-position-y: calc((20px) * (0 - (8 - 1)));
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box.hotel-address .title .icon {
+  background-position-y: calc((20px) * (0 - (3 - 1)));
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box.hotel-class .title .icon {
+  background-position-y: calc((20px) * (0 - (1 - 1)));
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box.hotel-table .title .icon {
+  background-position-y: calc((20px) * (0 - (5 - 1)));
+}
+.adaption-auto .sift-content-box .sift-center-box .content-box.hotel-discount .title .icon {
+  background-position-y: calc((20px) * (0 - (5 - 1)));
 }
 .adaption-auto .sift-content-box .sift-center-box .button-box {
   display: flex;
@@ -1452,7 +1466,7 @@ body {
 }
 .adaption-auto .hyyd-home-view .list-box ul li {
   width: calc((100vw - (0px * (1 + 1)))/1);
-  height: calc((100vw - (0px * (1 + 1)))/1 * 0.3333 + 20px);
+  height: calc((100vw - (0px * (1 + 1)))/1 * 0.3333 + 10px);
   overflow: hidden;
   margin-bottom: 0px;
 }
@@ -1466,11 +1480,11 @@ body {
 }
 .adaption-auto .hyyd-home-view .list-box ul li .info-box {
   width: 100%;
-  height: 20px;
+  height: 10px;
 }
 .adaption-auto .hyyd-home-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 20px);
+  height: calc(100% - 10px);
   overflow: hidden;
   position: relative;
 }
@@ -1491,7 +1505,7 @@ body {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 .adaption-auto .hyyd-home-view .list-box .item {
-  padding: 10px;
+  padding: 5px 10px;
   border-bottom: 1px solid #d6d6d6;
   overflow: hidden;
   display: flex;
@@ -1517,15 +1531,55 @@ body {
 .adaption-auto .hyyd-home-view .list-box .item .info-box span {
   font-size: 12px;
 }
+.adaption-auto .hyyd-home-view .list-box .item .info-box .title-box {
+  position: relative;
+  height: 20px;
+  padding-right: 36px;
+  display: inline-block;
+}
 .adaption-auto .hyyd-home-view .list-box .item .info-box .title-box .text-title {
   font-size: 14px;
-  line-height: 18px;
+  line-height: 20px;
+  display: inline-block;
+  height: 20px;
+  overflow: hidden;
+}
+.adaption-auto .hyyd-home-view .list-box .item .info-box .title-box .icon-box {
+  display: inline-block;
+  font-size: 0;
+  position: absolute;
+  left: calc(100% - 35px);
+  top: 0;
+  height: 20px;
+}
+.adaption-auto .hyyd-home-view .list-box .item .info-box .title-box .icon-box i {
+  font-size: 0;
+}
+.adaption-auto .hyyd-home-view .list-box .item .info-box .title-box .icon-box .icon-discount:before {
+  content: "惠";
+  font-size: 12px;
+  line-height: 16px;
+  background-color: #51a5f4;
+  color: #fff;
+  border: 1px dotted #d6d6d6;
+  padding: 1px;
+  margin-left: 1px;
+}
+.adaption-auto .hyyd-home-view .list-box .item .info-box .title-box .icon-box .icon-gift:before {
+  content: "礼";
+  font-size: 12px;
+  line-height: 16px;
+  background-color: #f94267;
+  color: #fff;
+  border: 1px dotted #d6d6d6;
+  padding: 1px;
+  margin-left: 1px;
 }
 .adaption-auto .hyyd-home-view .list-box .item .info-box .type-box,
 .adaption-auto .hyyd-home-view .list-box .item .info-box .table-box,
 .adaption-auto .hyyd-home-view .list-box .item .info-box .addr-box {
   font-size: 0;
-  height: 20px;
+  height: 18px;
   overflow: hidden;
 }
 .adaption-auto .hyyd-home-view .list-box .item .info-box .type-box span,
@@ -1534,7 +1588,7 @@ body {
 .adaption-auto .hyyd-home-view .list-box .item .info-box .type-box strong,
 .adaption-auto .hyyd-home-view .list-box .item .info-box .table-box strong,
 .adaption-auto .hyyd-home-view .list-box .item .info-box .addr-box strong {
-  line-height: 20px;
+  line-height: 18px;
   font-size: 12px;
 }
 .adaption-auto .hyyd-home-view .list-box .item .info-box .type-box .text-title,
@@ -1552,6 +1606,10 @@ body {
 }
 .adaption-auto .hyyd-home-view .list-box .item .info-box .type-box .text {
   color: #999999;
+}
+.adaption-auto .hyyd-home-view .list-box .item .info-box .addr-box {
+  height: 36px;
+  max-height: calc(100% - 85px);
 }
 .adaption-auto .hyyd-home-view .list-box .item .info-box .price-box {
   position: absolute;
@@ -1721,8 +1779,6 @@ body {
   padding-top: 0.3125rem;
   margin-bottom: -15px;
   text-align: center;
-  /* 核心样式 */
-  /* 阴影的呼吸灯效果 */
 }
 .adaption-auto .pringles-list-view .list-season ul {
   display: flex;
@@ -1807,36 +1863,6 @@ body {
 }
 .adaption-auto .pringles-list-view .list-season .item + .activate {
   text-align: left;
-}
-.adaption-auto .pringles-list-view .list-season .item {
-  /* 定义过渡属性，就是平滑的变大，看起来不会那么生硬  */
-  /* webkit写法,现在的chrome版本已经支持transition这种方式了 */
-}
-.adaption-auto .pringles-list-view .list-season .item.activate {
-  /* 依次定义变换、阴影、阴影的动画  */
-  outline: none;
-}
-@keyframes glow {
-  0% {
-    border-color: #000;
-    box-shadow: 0 0 5px 5px transparent;
-  }
-  100% {
-    border-color: #000;
-    box-shadow: 0 0 10px 5px #000;
-  }
-}
-@-webkit-keyframes glow {
-  0% {
-    border-color: #000;
-    box-shadow: 0 0 5px 5px transparent;
-    -webkit-box-shadow: 0 0 5px 5px transparent;
-  }
-  100% {
-    border-color: #000;
-    box-shadow: 0 0 10px 5px #000;
-    -webkit-box-shadow: 0 0 10px 5px #000;
-  }
 }
 .adaption-auto .pringles-list-view .list-pringles,
 .adaption-auto .pringles-list-view .list-new-pringles {

@@ -14,11 +14,13 @@ const DetailType = {
   Dress:9,
   Car:10,
   Supply:11,
+  Hotel:12,
 }
 
 const ShowType = {
-  video:1,
-  image:2
+  video:1,// 视频
+  image:2,// 图片
+  content:3,// 内容详情
 }
 
 export { DetailType, ShowType }

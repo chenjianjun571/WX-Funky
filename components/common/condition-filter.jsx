@@ -1,25 +1,46 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
-// 筛选组件
+/*
+ let f =[
+ {
+   kClass          : "content-box price",
+   kName           : "价位",
+   selType         : 选择器类型0:单选 1:多选 默认是0
+   defaultIndex    : 默认选中第几个(单选有效)
+   conditions:[
+     {
+       name:"全部",
+       isActive:true, //标识是否选中,仅selType为多选有效
+       external:{}
+     },
+     {
+       name:"5000-10,000",
+       external:{minPrice:5000,maxPrice:10000}
+     },
+   ]
+ }
+ ]
+*/
+// 酒店搜索组件有单选和多选功能,单独处理
 class ConditionFilter extends React.Component {
   constructor (props) {
     super(props);
-    this.firstRender = true;
+
+    // 第一次渲染标志
+    this.isFirstRender=false;
     this.state = {
+      selShowClass:'',
       selContent:[],
-      filters: []
-    }
+      filters:[]
+    };
   }
 
   render () {
-    let kClass="fixed-center-box sift-content-box ";
-    if (this.state.showFlg) {
-      kClass="fixed-center-box sift-content-box show-sift";
-    }
     return (
       <div className="nav-placeholder">
         <div id="fixedNav" className="sift-nav">
+
           <div className="sift-nav-box">
             <div className="sift-list-box">
               <ul className="sift-list">
@@ -27,7 +48,9 @@ class ConditionFilter extends React.Component {
                   _.map(this.state.selContent, (v,k)=>{
                     if ( v != '全部' ) {
                       return (
-                        <li key={k} className="item "><span className="text">{v}</span></li>
+                        <li key={k} className="item ">
+                          <span className="text">{v}</span>
+                        </li>
                       )
                     } else {
                       return null
@@ -40,46 +63,56 @@ class ConditionFilter extends React.Component {
               <span className="icon"></span>
               <span className="text">筛选</span>
             </div>
-
-            <div className={kClass} >
-              <div className="sift-center-box">
-                <div className="sift-scrollView-box">
-                  {
-                    _.map(this.state.filters, (v,k)=>{
-                      return (
-                        <div key={k} className={v.kClass}>
-                          <div className="title">
-                            <i className="icon"></i>
-                            <span className="text">{v.kName}</span>
-                          </div>
-                          <div className="item-list-box">
-                            <ul className="item-list">
-                              {
-                                _.map(v.conditions, (vv,kk)=>{
-                                  let selHandle = this.selHandle.bind(this, k, kk);
-                                  let kl = (kk==v.kIndex)?"item item-activate":"item"
-                                  return (
-                                    <li key={kk} className={kl}>
-                                      <span className="title" onClick={selHandle}>{vv.name}</span>
-                                    </li>
-                                  )
-                                })
-                              }
-                            </ul>
-                          </div>
-                        </div>
-                      )
-                    })
-                  }
-                </div>
-                <div className="button-box">
-                  <div className="confirm-button" onClick={this.handleSubmit.bind(this)}>确定</div>
-                  <div className="reset-button" onClick={this.handleReset.bind(this)}>清除条件</div>
-                </div>
-              </div>
-            </div>
-
           </div>
+
+          <div className={"fixed-center-box sift-content-box"+this.state.selShowClass}>
+            <div className="sift-center-box">
+
+              <div className="sift-scrollView-box">
+                {
+                  _.map(this.state.filters, (v,k)=>{
+                    return (
+                      <div key={k} className={v.kClass}>
+                        <div className="title">
+                          <i className="icon"></i>
+                          <span className="text">{v.kName}</span>
+                        </div>
+                        <div className="item-list-box">
+                          <ul className="item-list">
+                            {
+                              _.map(v.conditions, (vv,kk)=>{
+                                let selHandle = this.selHandle.bind(this, k, kk);
+                                let kl = "item";
+                                if (v.selType && v.selType == 1) {
+                                  // 多选
+                                  kl=(vv.isActive&&vv.isActive==true)?"item item-activate":"item"
+                                } else {
+                                  // 单选
+                                  kl=(kk==v.kIndex)?"item item-activate":"item"
+                                }
+                                return (
+                                  <li key={kk} className={kl}>
+                                    <span className="title" onClick={selHandle}>{vv.name}</span>
+                                  </li>
+                                )
+                              })
+                            }
+                          </ul>
+                        </div>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+
+              <div className="button-box">
+                <div className="confirm-button" onClick={this.handleSubmit.bind(this)}>确定</div>
+                <div className="reset-button" onClick={this.handleReset.bind(this)}>重置</div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
     )
@@ -87,23 +120,26 @@ class ConditionFilter extends React.Component {
 
   showHandle(e) {
     e.preventDefault();
-    this.setState({showFlg:true});
-  }
-
-  selHandle(k, kk, e) {
-    e.preventDefault();
-    let t = this.state.filters;
-    // 标注选择的是哪一类条件的哪一个选项
-    t[k].kIndex=kk;
-    this.setState({filters:t})
+    this.setState({selShowClass:' show-sift'});
   }
 
   handleReset(e) {
     e.preventDefault();
-    let t = this.state.filters;
+    // 对象直接赋值只是引用赋值,还是指向的是同一块内存,所以这里的赋值采用深拷贝
+    let t = this.deepCopy(this.props.filters)
     // 重置条件
     _.each(t,(v,k)=>{
-      v.kIndex=0;
+      if (v.selType && v.selType== 1) {
+        // 多选,多选模式下只有根据conditions里面的v.isActive控制选中还是不选中
+      } else {
+        // 单选
+        // 检查父组件有没有设置默认值
+        if (v.defaultIndex) {
+          v.kIndex=v.defaultIndex;
+        } else {
+          v.kIndex=0;
+        }
+      }
     })
     this.setState({filters:t})
   }
@@ -113,49 +149,103 @@ class ConditionFilter extends React.Component {
     let pP = {}
     let pN = []
     _.each(this.state.filters,(v,k)=>{
-      pP=_.merge(pP, v.conditions[v.kIndex].external)
-      pN.push(v.conditions[v.kIndex].name)
+      if (v.selType && v.selType== 1) {
+        // 多选
+        _.each(v.conditions,(vv,kk)=>{
+          if (vv.isActive && vv.isActive==true) {
+            pP=_.merge(pP, vv.external)
+            pN.push(vv.name)
+          }
+        })
+      } else {
+        // 单选
+        pP=_.merge(pP, v.conditions[v.kIndex].external)
+        pN.push(v.conditions[v.kIndex].name)
+      }
     })
-    this.setState({showFlg:false, selContent:pN})
+
+    this.setState({selShowClass:'', selContent:pN})
+
     if (this.props.filterChangeHandle) {
       this.props.filterChangeHandle(pP)
     }
   }
 
-  /*
-  * */
+  selHandle(k, kk, e) {
+    e.preventDefault();
+
+    let t = this.state.filters;
+    if (t[k].selType && t[k].selType== 1) {
+      // 多选
+      _.each(t[k].conditions,(v,j)=>{
+        if (j==kk) {
+          v.isActive=!v.isActive;
+        }
+      })
+    } else {
+      // 单选
+      // 标注选择的是哪一类条件的哪一个选项
+      t[k].kIndex=kk;
+    }
+
+    this.setState({filters:t})
+  }
+
   componentDidMount() {
     let n = []
-    let f = this.props.filters;
+    // 对象直接赋值只是引用赋值,还是指向的是同一块内存,所以这里的赋值采用深拷贝
+    let f = this.deepCopy(this.props.filters)
     _.each(f, (v,k)=>{
-      if (v.conditions && v.conditions.length>0) {
-        if (v.active && (v.active>0 && v.active<v.conditions.length)) {
-          v.kIndex=v.active;
-          n.push(v.conditions[v.active].name)
+      if (v.selType && v.selType== 1) {
+        // 多选
+        _.each(v.conditions,(vv,jj)=>{
+          if (vv.isActive && vv.isActive==true) {
+            n.push(vv.name)
+          }
+        })
+      } else {
+        // 单选,检查默认值
+        if (v.defaultIndex && v.defaultIndex > 0) {
+          // 检查默认值
+          v.kIndex=v.defaultIndex;
+          n.push(v.conditions[v.defaultIndex].name)
         } else {
-          v.kIndex=0;
+          v.kIndex = 0;
           n.push(v.conditions[0].name)
         }
       }
     })
+
+    this.isFirstRender=true;
     this.setState({selContent:n, filters:f})
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.renderFlg) {
       let n = []
-      let f = nextProps.filters
+      // 对象直接赋值只是引用赋值,还是指向的是同一块内存,所以这里的赋值采用深拷贝
+      let f = this.deepCopy(nextProps.filters)
       _.each(f, (v,k)=>{
-        if (v.conditions && v.conditions.length>0) {
-          if (v.active && (v.active>0 && v.active<v.conditions.length)) {
-            v.kIndex=v.active;
-            n.push(v.conditions[v.active].name)
+        if (v.selType && v.selType== 1) {
+          // 多选
+          _.each(v.conditions,(vv,jj)=>{
+            if (vv.isActive && vv.isActive==true) {
+              n.push(vv.name)
+            }
+          })
+        } else {
+          // 单选,检查默认值
+          if (v.defaultIndex && v.defaultIndex > 0) {
+            // 检查默认值
+            v.kIndex=v.defaultIndex;
+            n.push(v.conditions[v.defaultIndex].name)
           } else {
             v.kIndex=0;
             n.push(v.conditions[0].name)
           }
         }
       })
+
       this.setState({selContent:n, filters:f})
     }
   }
@@ -169,7 +259,7 @@ class ConditionFilter extends React.Component {
 
   componentDidUpdate() {
     // 客户端第一次渲染的时候才做处理
-    if (this.firstRender) {
+    if (this.isFirstRender) {
       let topMain= $("#fixedNav").offset().top
       $(".scrollView").scroll(function(){
         if ($(".scrollView").scrollTop()>topMain){
@@ -178,8 +268,16 @@ class ConditionFilter extends React.Component {
           $("#fixedNav").removeClass("fixed_top_nav");
         }
       });
-      this.firstRender = false;
+      this.isFirstRender = false;
     }
+  }
+
+  deepCopy(source) {
+    let result={};
+    for (var key in source) {
+      result[key] = typeof source[key]==='object'? this.deepCopy(source[key]): source[key];
+    }
+    return result;
   }
 }
 

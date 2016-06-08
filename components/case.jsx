@@ -62,6 +62,8 @@ class CaseContent extends React.Component {
     let p1 = {
       kClass:"content-box case-style",
       kName:"风格",
+      selType:0, // 单选
+      defaultIndex:0,// 默认选中第一个
       conditions:[]
     }
     p1.conditions=_.map(tmpData, (v,k)=>{
@@ -81,6 +83,8 @@ class CaseContent extends React.Component {
     let p2 = {
       kClass:"content-box price",
       kName:"价位",
+      selType:0, // 单选
+      defaultIndex:0,// 默认选中第一个
       conditions:[
         {
           name:"全部",

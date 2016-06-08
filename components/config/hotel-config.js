@@ -6,10 +6,22 @@ import _ from 'lodash'
 
 const HotelConfig  = {
   'MediaSlider': _.merge({
-    'dataUrl': 'vda/index_top',
+    'dataUrl': 'vda/hotel_top',
     'aspectRatio': '3:2',
     'height': 460
-  }, BaseConfig), // 广告轮播
+  }, BaseConfig),
+
+  HotelType:_.merge({
+    dataUrl:'hotelType/all'
+  },BaseConfig),
+
+  HotelDistrict:_.merge({
+    dataUrl:'hotelDistrict/all'
+  },BaseConfig),
+
+  HotelList:_.merge({
+    dataUrl:'hotel/hotel_list'
+  },BaseConfig),
 }
 
 export { HotelConfig }

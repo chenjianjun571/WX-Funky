@@ -80,6 +80,8 @@ class SupplyContent extends React.Component {
         let p = {
           kClass:"content-box supply-type",
           kName:"类型",
+          selType:0, // 单选
+          defaultIndex:0,// 默认选中第一个
           conditions:[]
         }
 
@@ -105,6 +107,8 @@ class SupplyContent extends React.Component {
         let p = {
           kClass:"content-box brand",
           kName:"品牌",
+          selType:0, // 单选
+          defaultIndex:0,// 默认选中第一个
           conditions:[]
         }
 

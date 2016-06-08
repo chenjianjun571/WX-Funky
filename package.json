@@ -7,6 +7,7 @@
     "start": "NODE_ENV=development babel-node ./react-server.js",
     "deploy": "NODE_ENV=production babel-node ./react-server.js",
     "build-home": "watchify ./src/client/home.js -o 'uglifyjs -cm > ./assets/script/modules/home.min.js'",
+    "build-hotel": "watchify ./src/client/hotel.js -o 'uglifyjs -cm > ./assets/script/modules/hotel.min.js'",
     "build-shot": "watchify ./src/client/shot.js -o 'uglifyjs -cm > ./assets/script/modules/shot.min.js'",
     "build-sample": "watchify ./src/client/sample.js -o 'uglifyjs -cm > ./assets/script/modules/sample.min.js'",
     "build-pringles": "watchify ./src/client/pringles.js -o 'uglifyjs -cm > ./assets/script/modules/pringles.min.js'",

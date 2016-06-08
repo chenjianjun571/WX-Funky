@@ -17,6 +17,18 @@ class MediaSlider extends React.Component {
   }
 
   touchStart(ev){
+    // 如果只有一个数据,则不响应
+    if (this.state.data.length < 2) {
+      return;
+    }
+
+    /*
+     开始滑动的时候先关闭定时器
+     * */
+    if (this.intervalId) {
+      clearInterval(this.intervalId)
+    }
+
     this.setState({
       startX:ev.touches[0].pageX,
       startY:ev.touches[0].pageY
@@ -24,10 +36,17 @@ class MediaSlider extends React.Component {
   }
 
   touchEnd(ev, i){
+
+    // 如果只有一个数据,则不响应
+    if (this.state.data.length < 2) {
+      return;
+    }
+
     this.setState({
       startX:"",
       startY:""
     })
+
     let index = -1;
     let direction = this.GetSlideDirection(this.state.startX, this.state.startY, ev.changedTouches[0].pageX, ev.changedTouches[0].pageY);
     switch(direction) {
@@ -53,18 +72,23 @@ class MediaSlider extends React.Component {
     }
 
     if (index !== -1) {
-      if (this.intervalId) {
-        clearInterval(this.intervalId)
-        this.setState({ index:index }, ()=>{
-          this.intervalId = setInterval(()=>{
-            let index = this.state.index + 1;
-            if (index > this.state.data.length - 1) {
-              index = 0;
-            }
-            this.setState({index:index})
-          }, 3000);
-        });
-      }
+      this.setState({ index:index }, ()=>{
+        this.intervalId = setInterval(()=>{
+          let index = this.state.index + 1;
+          if (index > this.state.data.length - 1) {
+            index = 0;
+          }
+          this.setState({index:index})
+        }, 3000);
+      });
+    } else {
+      this.intervalId = setInterval(()=>{
+        let index = this.state.index + 1;
+        if (index > this.state.data.length - 1) {
+          index = 0;
+        }
+        this.setState({index:index})
+      }, 3000);
     }
   }
 
@@ -174,7 +198,6 @@ class MediaSlider extends React.Component {
     if (this.intervalId) {
       clearInterval(this.intervalId)
     }
-    super.componentWillUnmount();
   }
 }
 

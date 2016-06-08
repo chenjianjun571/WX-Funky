@@ -34,7 +34,7 @@ class F4Content extends React.Component {
           </div>
           <span className="title">婚礼人</span>
         </div>
-
+        <span className="text-hint-showy">*温馨提示：遇节假日或黄道吉日，预订价格或有波动，请以实际合同为准</span>
         <ConditionFilter filters={this.state.filters} renderFlg={this.state.renderFlg} filterChangeHandle={this.filterChangeHandle.bind(this)} />
         {
           this.state.dataUrl.length >0

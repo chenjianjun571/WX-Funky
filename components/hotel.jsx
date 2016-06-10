@@ -39,8 +39,9 @@ class HotelContent extends React.Component {
   }
 
   filterChangeHandle(params) {
-    console.log(JSON.stringify(params))
-    this.setState({params:params, renderFlg:false})
+    if (JSON.stringify(params) != JSON.stringify(this.state.params)) {
+      this.setState({params:params, renderFlg:false})
+    }
   }
 
   componentDidMount() {

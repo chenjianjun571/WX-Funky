@@ -39,7 +39,9 @@ class SupplyContent extends React.Component {
   }
 
   filterChangeHandle(params) {
-    this.setState({params:params, renderFlg:false})
+    if (JSON.stringify(params) != JSON.stringify(this.state.params)) {
+      this.setState({params:params, renderFlg:false})
+    }
   }
 
   componentDidMount() {

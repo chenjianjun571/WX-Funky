@@ -50,26 +50,28 @@ class F4Content extends React.Component {
   }
 
   filterChangeHandle(params) {
-    switch(params.type) {
-      case 1:// 主持人
-      {
-        this.setState({params:params, renderFlg:false, typeName:'主持人', workType:'video', dataUrl:'f4/host'})
-        break;
-      }
-      case 2:// 化妆师
-      {
-        this.setState({params:params, renderFlg:false, typeName:'化妆师', workType:'image', dataUrl:'f4/dresser'})
-        break;
-      }
-      case 3:// 摄影师
-      {
-        this.setState({params:params, renderFlg:false, typeName:'摄影师', workType:'image', dataUrl:'f4/photographer'})
-        break;
-      }
-      case 4:// 摄像师
-      {
-        this.setState({params:params, renderFlg:false, typeName:'摄像师', workType:'video', dataUrl:'f4/camera'})
-        break;
+    if (JSON.stringify(params) != JSON.stringify(this.state.params)) {
+      switch(params.type) {
+        case 1:// 主持人
+        {
+          this.setState({params:params, renderFlg:false, typeName:'主持人', workType:'video', dataUrl:'f4/host'})
+          break;
+        }
+        case 2:// 化妆师
+        {
+          this.setState({params:params, renderFlg:false, typeName:'化妆师', workType:'image', dataUrl:'f4/dresser'})
+          break;
+        }
+        case 3:// 摄影师
+        {
+          this.setState({params:params, renderFlg:false, typeName:'摄影师', workType:'image', dataUrl:'f4/photographer'})
+          break;
+        }
+        case 4:// 摄像师
+        {
+          this.setState({params:params, renderFlg:false, typeName:'摄像师', workType:'video', dataUrl:'f4/camera'})
+          break;
+        }
       }
     }
   }

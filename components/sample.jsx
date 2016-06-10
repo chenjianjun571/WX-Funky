@@ -381,9 +381,10 @@ class SampleContent extends React.Component {
       // 艺术照和全家福
       _.merge(p, {sampleType:params.sampleType})
     }
-    p.pageSize = this.state.params.pageSize;
-    p.pageIndex = this.state.params.pageIndex;
-    this.setState({params:p});
+
+    if (JSON.stringify(p) != JSON.stringify(this.state.params)) {
+      this.setState({params:p})
+    }
   }
 }
 

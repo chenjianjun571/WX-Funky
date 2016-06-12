@@ -22,11 +22,9 @@ import _ from 'lodash'
  }
  ]
 */
-// 酒店搜索组件有单选和多选功能,单独处理
 class ConditionFilter extends React.Component {
   constructor (props) {
     super(props);
-
     // 第一次渲染标志
     this.isFirstRender=false;
     this.state = {
@@ -125,8 +123,9 @@ class ConditionFilter extends React.Component {
 
   handleReset(e) {
     e.preventDefault();
-    // 对象直接赋值只是引用赋值,还是指向的是同一块内存,所以这里的赋值采用深拷贝
-    let t = this.deepCopy(this.props.filters)
+    // 对象直接赋值只是引用赋值,还是指向的是同一块内存,所以这里使用merge可以返回一个拷贝对象
+    let t = [];
+    t = _.merge(t, this.props.filters);
     // 重置条件
     _.each(t,(v,k)=>{
       if (v.selType && v.selType== 1) {
@@ -193,8 +192,9 @@ class ConditionFilter extends React.Component {
 
   componentDidMount() {
     let n = []
-    // 对象直接赋值只是引用赋值,还是指向的是同一块内存,所以这里的赋值采用深拷贝
-    let f = this.deepCopy(this.props.filters)
+    // 对象直接赋值只是引用赋值,还是指向的是同一块内存,所以这里使用merge可以返回一个拷贝对象
+    let f = [];
+    f = _.merge(f, this.props.filters);
     _.each(f, (v,k)=>{
       if (v.selType && v.selType== 1) {
         // 多选
@@ -223,8 +223,9 @@ class ConditionFilter extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.renderFlg) {
       let n = []
-      // 对象直接赋值只是引用赋值,还是指向的是同一块内存,所以这里的赋值采用深拷贝
-      let f = this.deepCopy(nextProps.filters)
+      // 对象直接赋值只是引用赋值,还是指向的是同一块内存,所以这里使用merge可以返回一个拷贝对象
+      let f = [];
+      f = _.merge(f, nextProps.filters);
       _.each(f, (v,k)=>{
         if (v.selType && v.selType== 1) {
           // 多选
@@ -270,14 +271,6 @@ class ConditionFilter extends React.Component {
       });
       this.isFirstRender = false;
     }
-  }
-
-  deepCopy(source) {
-    let result={};
-    for (var key in source) {
-      result[key] = typeof source[key]==='object'? this.deepCopy(source[key]): source[key];
-    }
-    return result;
   }
 }
 

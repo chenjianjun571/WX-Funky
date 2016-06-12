@@ -15,6 +15,8 @@ const DetailType = {
   Car:10,
   Supply:11,
   Hotel:12,
+  Map:13,// 地图
+  Hall:14,// 宴会厅
 }
 
 const ShowType = {

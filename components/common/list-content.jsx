@@ -15,6 +15,7 @@ import { BaseShowDetail } from '../detail.jsx'
  * customData:定制数据,一些特殊组件传递的参数,{}
  * showMore:是否显示加载更多 默认是true
  * isShuffle:是否打乱顺序显示数据,默认是不打乱
+ * params:url请求参数
  */
 class ListContent extends BaseShowDetail {
   constructor (props) {
@@ -721,11 +722,17 @@ class ListContent extends BaseShowDetail {
 }
 
 ListContent.defaultProps = {
+  // 列表类型,参考DetailType定义
   type:-1,
+  // 数据请求的url地址
   dataUrl:'',
+  // 用户自定义的一些特殊数据
   customData:{},
+  // 是否显示加载更多
   showMore:true,
+  // 显示数据的时候是否打乱显示
   isShuffle:false,
+  // url请求参数
   params:{
     pageSize:0
   }

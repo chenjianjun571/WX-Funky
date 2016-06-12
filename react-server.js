@@ -49,10 +49,10 @@ ReactServer.use(convert(function*(next){
   } else {
     if (this.request.header.host.indexOf('mt') !== 0) {
       // PC端
-      this.platformType = 0
+      this.platformType = 1
     } else {
       // 移动端
-      this.platformType = 1
+      this.platformType = 0
     }
 
     yield next

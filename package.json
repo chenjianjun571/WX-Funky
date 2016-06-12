@@ -20,7 +20,6 @@
     "build-supply": "watchify ./src/client/supply.js -o 'uglifyjs -cm > ./assets/script/modules/supply.min.js'",
     "build-follow-photo": "watchify ./src/client/follow-photo.js -o 'uglifyjs -cm > ./assets/script/modules/cfollow-photoar.min.js'",
     "build-follow-video": "watchify ./src/client/follow-video.js -o 'uglifyjs -cm > ./assets/script/modules/follow-video.min.js'",
-    "build-hotel": "watchify ./src/client/hotel.js -o 'uglifyjs -cm > ./assets/script/modules/hotel.min.js'",
     "build-activity": "watchify ./src/client/activity.js -o 'uglifyjs -cm > ./assets/script/modules/activity.min.js'",
     "build-detail": "watchify ./src/client/detail.js -o 'uglifyjs -cm > ./assets/script/modules/detail.min.js'",
     "test": "echo \"Error: no test specified\" && exit 1"

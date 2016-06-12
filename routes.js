@@ -101,10 +101,10 @@ siteRouter.get('/car', function* (next) {
 siteRouter.get('/hotel', function* (next) {
   yield this.render('modules/default', renderOption('hotel', '/hotel', '/hotel'))
 })
-///** 婚宴酒店详情页 **/
-//siteRouter.get('/hotel/:id', function* (next) {
-//  yield this.render('modules/default', renderOption('hotel-details', '/hotel', '/hotel',this.params))
-//})
+/** 婚宴酒店详情页 **/
+siteRouter.get('/hotel/:id', function* (next) {
+  yield this.render('modules/default', renderOption('hotel-details', '/hotel', '/hotel', this.params))
+})
 ///** 宴会厅详情 **/
 //siteRouter.get('/hall/:id', function* (next) {
 //  yield this.render('modules/default', renderOption('hall-details', '/hotel', '/hotel',this.params))
@@ -118,76 +118,17 @@ siteRouter.get('/hotel', function* (next) {
 //  yield this.render('modules/default', renderOption('hotel-require', '/hotel-require', '/hotel'))
 //})
 
-///** 详情页面 **/
-//siteRouter.get('/detail/:type/:id', function* (next) {
-//  switch (parseInt(this.params.type)) {
-//    case DetailType.Sample:
-//    {
-//      // 样片详情
-//      yield this.render('modules/default', renderOption('detail', '/sample', '/shot', this.params))
-//      break;
-//    }
-//    case DetailType.Pringles:
-//    {
-//      // 客片详情
-//      yield this.render('modules/default', renderOption('detail', '/pringles', '/shot', this.params))
-//      break;
-//    }
-//    case DetailType.Suite:
-//    {
-//      // 套系详情
-//      yield this.render('modules/default', renderOption('detail', '/suite', '/shot', this.params))
-//      break;
-//    }
-//    case DetailType.Movie:
-//    {
-//      // 微电影详情
-//      yield this.render('modules/default', renderOption('detail', '/movie', '/shot', this.params))
-//      break;
-//    }
-//    case DetailType.Case:
-//    {
-//      // 实景案例详情
-//      yield this.render('modules/default', renderOption('detail', '/cases', '/scheme',this.params))
-//      break;
-//    }
-//    case DetailType.FollowPhoto:
-//    {
-//      // 婚礼跟拍详情
-//      yield this.render('modules/default', renderOption('detail', '/followPhoto', '/scheme',this.params))
-//      break;
-//    }
-//    case DetailType.FollowVideo:
-//    {
-//      // 婚礼视频详情
-//      yield this.render('modules/default', renderOption('detail', '/followVideo', '/scheme',this.params))
-//      break;
-//    }
-//    case DetailType.Car:
-//    {
-//      // 婚车详情
-//      yield this.render('modules/default', renderOption('detail', '/car', '/scheme', this.params))
-//      break;
-//    }
-//    case DetailType.Supply:
-//    {
-//      // 用品详情
-//      yield this.render('modules/default', renderOption('detail', '/supply', '/scheme', this.params))
-//      break;
-//    }
-//    case DetailType.Dress:
-//    {
-//      let p = this.params;
-//      _.merge(p, this.request.query)
-//      // 礼服详情
-//      yield this.render('modules/default', renderOption('detail', '/dress', '/scheme', p))
-//      break;
-//    }
-//  }
-//})
 /** 活动详情页 **/
 siteRouter.get('/activity/detail/:name', function* index(next) {
-  yield this.render('modules/default', renderOption('activity', '/', '/', this.params))
+  let menuKey = '/'
+  if (this.request.query.menuKey) {
+    menuKey = '/'+this.request.query.menuKey;
+  }
+  let parentKey = '/'
+  if (this.request.query.parentKey) {
+    parentKey = '/'+this.request.query.parentKey
+  }
+  yield this.render('modules/default', renderOption('activity', menuKey, parentKey, this.params))
 })
 
 export { siteRouter }

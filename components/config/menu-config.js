@@ -66,8 +66,8 @@ const MenuConfig = {
     //},
     {
       name:'大礼包',
-      menu:'/activity/detail/libao',
-      link:'/activity/detail/libao',
+      menu:'/libao',
+      link:'/activity/detail/libao?parentKey=hotel&menuKey=libao',
       target:true
     }
   ],

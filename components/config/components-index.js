@@ -18,6 +18,8 @@ import { F4 } from '../f4.jsx'
 import { Supply } from '../supply.jsx'
 
 import { Hotel } from '../hotel.jsx'
+import { HotelDetails } from '../hotel-details.jsx'
+
 import { Activity} from '../activity.jsx'
 
 const ComponentsIndex = {
@@ -39,6 +41,7 @@ const ComponentsIndex = {
   'car': <Car />,
 
   'hotel': <Hotel />,
+  'hotel-details': <HotelDetails />,
   'activity': <Activity />
 }
 const ComponentsSeo= {
@@ -118,6 +121,12 @@ const ComponentsSeo= {
     'seoKeywords':'',
     'seoDescription':''
   },
+  'hotel-details': {
+    'seoTitle':'酒店详情',
+    'seoKeywords':'',
+    'seoDescription':''
+  },
+
   'activity': {
     'seoTitle':'活动详情',
     'seoKeywords':'',

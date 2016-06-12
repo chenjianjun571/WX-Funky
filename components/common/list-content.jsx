@@ -463,47 +463,50 @@ class ListContent extends BaseShowDetail {
             //let dataUrl=BaseConfig.baseUrl+'dress/dress_list?brandId='+v.brandId+'&typeId='+dressType;
             //let onShowDetail=super.showDetail.bind(this, DetailType.Hotel, ShowType.image, null, dataUrl)
             //<li key={k+'v.id'} className="item " onClick={onShowDetail}>
+            let detailUrl = "/hotel/"+v.id;
             return (
-              <li key={k+'v.id'} className="item ">
-                <div className="photo-box">
-                  <MediaItem
-                    aspectRatio="3:2"
-                    imageUrl={v.coverUrlWeb}
-                    processType={EmImgProcessType.emGD_S_S}
-                    width={200}
-                  />
-                </div>
-                <div className="info-box">
-                  <div className="title-box">
-                    <span className="text-title">{v.name}</span>
-                  <span className="icon-box">
-                    {
-                      (v.isGift&&v.isGift==1) ? <i className="icon-gift"></i> : null
-                    }
-                    {
-                      (v.isDiscount&&v.isDiscount==1) ? <i className="icon-discount"></i> : null
-                    }
-                  </span>
+              <a key={k+''+v.id} href={detailUrl} target="_blank" >
+                <li className="item ">
+                  <div className="photo-box">
+                    <MediaItem
+                      aspectRatio="3:2"
+                      imageUrl={v.coverUrlWeb}
+                      processType={EmImgProcessType.emGD_S_S}
+                      width={200}
+                    />
                   </div>
-                  <div className="type-box">
-                    <span className="text">{v.typeName}</span>
+                  <div className="info-box">
+                    <div className="title-box">
+                      <span className="text-title">{v.name}</span>
+                    <span className="icon-box">
+                      {
+                        (v.isGift&&v.isGift==1) ? <i className="icon-gift"></i> : null
+                      }
+                      {
+                        (v.isDiscount&&v.isDiscount==1) ? <i className="icon-discount"></i> : null
+                      }
+                    </span>
+                    </div>
+                    <div className="type-box">
+                      <span className="text">{v.typeName}</span>
+                    </div>
+                    <div className="table-box" >
+                      <strong className="text-hint">桌数：</strong>
+                      <b className="text-title">{v.banquetHalNum}</b>
+                      <span className="text-content">个宴会厅，容纳</span>
+                      <b className="text-title">{v.maxTableNum}</b>
+                      <span className="text-content">桌</span>
+                    </div>
+                    <div className="addr-box" >
+                      <strong className="text-hint">位置：</strong>
+                      <span className="text-content" >{v.address}</span>
+                    </div>
+                    <div className="price-box">
+                      <span className="text">{'￥'+v.lowestConsumption+'-'+v.highestConsumption}</span>
+                    </div>
                   </div>
-                  <div className="table-box" >
-                    <strong className="text-hint">桌数：</strong>
-                    <b className="text-title">{v.banquetHalNum}</b>
-                    <span className="text-content">个宴会厅，容纳</span>
-                    <b className="text-title">{v.maxTableNum}</b>
-                    <span className="text-content">桌</span>
-                  </div>
-                  <div className="addr-box" >
-                    <strong className="text-hint">位置：</strong>
-                    <span className="text-content" >{v.address}</span>
-                  </div>
-                  <div className="price-box">
-                    <span className="text">{'￥'+v.lowestConsumption+'-'+v.highestConsumption}</span>
-                  </div>
-                </div>
-              </li>
+                </li>
+              </a>
             )
           })
         )

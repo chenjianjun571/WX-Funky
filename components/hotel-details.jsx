@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
+import { BaseConfig } from './config/base'
 
 /*
  http://cq.jsbn.com/api/hotel/detail/2864
@@ -19,12 +20,13 @@ class HotelDetails extends React.Component {
   }
 
   componentDidMount() {
+    console.log('~~'+JSON.stringify(this.props.dataParams))
     // 获取酒店ID
-    let id = this.dataParams.id;
+    let id = this.props.dataParams.id;
     if (id && parseInt(id)>0) {
-      let url = "/hotel/detail/"+id;
+      let url = BaseConfig.baseUrl+"hotel/detail/"+id;
       // 请求数据
-      fetch(fetchUrl)
+      fetch(url)
         .then(res => {return res.json()})
         .then(j =>{
           if(j.success && j.data.length > 0) {

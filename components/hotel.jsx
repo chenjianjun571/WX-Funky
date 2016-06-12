@@ -177,7 +177,7 @@ class HotelContent extends React.Component {
     // 组装价格
     let p2 = {
       kClass:"content-box price",
-      kName:"桌数",
+      kName:"价位",
       selType:0, // 单选
       defaultIndex:0,// 默认选中第一个
       conditions:[
@@ -187,19 +187,19 @@ class HotelContent extends React.Component {
         },
         {
           name:"2000元以下",
-          external:{minPrice:0,minPrice:2000}
+          external:{minPrice:0,maxPrice:2000}
         },
         {
           name:"2000-3000元",
-          external:{minPrice:2000,minPrice:3000}
+          external:{minPrice:2000,maxPrice:3000}
         },
         {
           name:"3000-4000元",
-          external:{minPrice:3000,minPrice:4000}
+          external:{minPrice:3000,maxPrice:4000}
         },
         {
           name:"4000元以上",
-          external:{minPrice:4000,minPrice:99999}
+          external:{minPrice:4000,maxPrice:99999}
         }
       ]
     }

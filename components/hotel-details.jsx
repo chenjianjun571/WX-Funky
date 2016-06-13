@@ -16,26 +16,26 @@ class DiscountInfo extends BaseShowDetail {
   }
 
   render () {
-    let giftUrl=BaseConfig.baseUrl+'activity/detail/zuhe';
+    let giftUrl=BaseConfig.baseUrl+'activity/detail/libao';
     let onShowGiftDetail=super.showDetail.bind(this, DetailType.Activity, ShowType.image, null, giftUrl)
 
-    let discountUrl=BaseConfig.baseUrl+'activity/detail/libao';
+    let discountUrl=BaseConfig.baseUrl+'activity/detail/zuhe';
     let onShowDiscountDetail=super.showDetail.bind(this, DetailType.Activity, ShowType.image, null, discountUrl)
     return (
-      <section className="items info-items">
+      <section className="items gift-items">
         <ul className="list-box info-list">
           <li className="item" onClick={onShowGiftDetail}>
             <div className="title-box">
-              <i className="left-icon"></i>
-              <span className="title">大礼包</span>
-              <i className="right-icon"></i>
+              <i className="left-icon icon-text">[预订有礼]</i>
+              <span className="title">下单立享万元大礼包</span>
+              <i className="right-icon icon-arrow"></i>
             </div>
           </li>
           <li className="item" onClick={onShowDiscountDetail}>
             <div className="title-box">
-              <i className="left-icon"></i>
-              <span className="title">组合优惠</span>
-              <i className="right-icon "></i>
+              <i className="left-icon icon-text">[组合优惠]</i>
+              <span className="title">下单立享组合优惠</span>
+              <i className="right-icon icon-arrow"></i>
             </div>
           </li>
         </ul>
@@ -132,14 +132,14 @@ class MenuInfo extends React.Component {
         </ol>
       )
     } else {
-      menuContent = (<span className="text-hint">该酒店未提供菜肴，请以店谈为准</span>)
+      menuContent = (<span className="text-hint">*该酒店未提供菜肴，请以店谈为准</span>)
     }
     // 菜单明显
     let setMealDetail = JSON.parse(this.state.setMealDetail)
     return (
       <div>
         <section className="items menu-suit-items">
-          <div className="section-title">菜单套系</div>
+          <div className="section-title">婚宴菜单</div>
           <ul className="list-box menu-suit-list">
             {
               _.map(setMealDetail, (v,k)=>{
@@ -148,7 +148,7 @@ class MenuInfo extends React.Component {
                   <li key={k} className="item menu-suit" onClick={onShowMenu}>
                     <div className="title-box">
                       <span className="title">{v.name}</span>
-                      <span className="subtitle">{'('+v.price+'元/桌)'}</span>
+                      <span className="subtitle">{'￥'+v.price+'元/桌'}</span>
                       <i className="right-icon icon-arrow"></i>
                     </div>
                   </li>
@@ -163,7 +163,7 @@ class MenuInfo extends React.Component {
             <span className="title">菜单套系</span>
           </div>
           <div className="close-box" onClick={this.onHide.bind(this)}>
-            <span className="icon">x</span>
+            <span className="icon"></span>
           </div>
           <div className="popup-content-box">
             <div className="menu-suit-box">
@@ -260,11 +260,12 @@ class HotelInfo extends React.Component {
                 <i className="right-icon icon-arrow"></i>
               </div>
             </li>
-            <li className="item">
+            <li className="item phone-item">
               <a href="tel:400-015-9999">
                 <div className="title-box">
-                  <i className="left-icon icon-photo"></i>
+                  <i className="left-icon icon-phone"></i>
                   <span className="title">{this.state.tell}</span>
+                  <span className="subtitle">联系商家</span>
                   <i className="right-icon icon-arrow"></i>
                 </div>
               </a>
@@ -277,7 +278,7 @@ class HotelInfo extends React.Component {
             <span className="title">{this.state.boxTitle}</span>
           </div>
           <div className="close-box" onClick={this.onHide.bind(this)}>
-            <span className="icon">x</span>
+            <span className="icon"></span>
           </div>
           <div className="popup-content-box">
             {
@@ -341,17 +342,17 @@ class HotelDetails extends React.Component {
 
         <div className="head-info-box ">
           <div className="name-box">
-            <span className="text">酒店名字</span>
+            <span className="text">{this.state.data.name}</span>
           </div>
           <div className="price-box">
-            <span className="text">￥999-8888</span>
+            <span className="text">{'￥'+this.state.data.lowestConsumption+'-'+this.state.data.highestConsumption+'/桌'}</span>
           </div>
         </div>
 
         <DiscountInfo />
         <HotelInfo {...this.state.data} />
-        <MenuInfo {...this.state.data} />
         <HallInfo {...this.state.data} />
+        <MenuInfo {...this.state.data} />
 
       </div>
     )
@@ -374,20 +375,6 @@ class HotelDetails extends React.Component {
   }
 
   componentDidUpdate() {
-    //let unslider = $('.banner').unslider({
-    //  autoplay: false,
-    //  complete: function() {},  //  A function that gets called after every slide animation
-    //  keys: true,               //  Enable keyboard (left, right) arrow shortcuts
-    //  dots: true,               //  Display dot navigation
-    //  fluid: false              //  Support responsive design. May break non-responsive designs
-    //});
-    //
-    //var slides = jQuery('.banner'), i = 0;
-    //slides.on('swipeleft', function(e) {
-    //  unslider.prev();
-    //}).on('swiperight', function(e) {
-    //  unslider.next();
-    //});
   }
 }
 

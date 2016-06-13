@@ -56,7 +56,6 @@ class FirstNavigation extends React.Component {
   }
 
   clickHandle(e) {
-    e.preventDefault();
     if(this.state.className.length > 0) {
       this.setState({className:''})
     } else {

@@ -139,6 +139,9 @@ body {
 .adaption-auto {
   width: 100%;
   height: 100%;
+  /* slider 效果CSS开始 */
+  /*用于获取更加体验*/
+  /* 效果CSS结束 */
 }
 .adaption-auto .app-container {
   width: 100%;
@@ -160,6 +163,20 @@ body {
 }
 .adaption-auto .hide {
   display: none;
+}
+.adaption-auto .slider {
+  display: none;
+}
+.adaption-auto .focus span {
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: #666;
+  font-size: 0;
+}
+.adaption-auto .focus span.current {
+  background: #ffffff;
 }
 .adaption-auto .animation-transition {
   -webkit-transition: 0.3s;
@@ -486,6 +503,7 @@ body {
   z-index: 10070;
   width: 100% !important;
   height: 50% !important;
+  -webkit-overflow-scrolling: auto;
   -webkit-animation-name: moveBegin;
   /*动画属性名，也就是我们前面keyframes定义的动画名*/
   -webkit-animation-duration: 0.2s;
@@ -500,61 +518,71 @@ body {
   }
 }
 .adaption-auto .fixed-popup-show-box .title-box {
-  text-align: center;
-  height: 30px;
-  margin-top: 9px;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 40px;
   border-bottom: 1px solid #d6d6d6;
 }
 .adaption-auto .fixed-popup-show-box .title-box span {
   font-size: 18px;
-  line-height: 30px;
+  line-height: 40px;
 }
 .adaption-auto .fixed-popup-show-box .close-box {
   position: absolute;
   top: 0;
   right: 0;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  padding-top: 10px;
   text-align: center;
 }
 .adaption-auto .fixed-popup-show-box .close-box .icon {
-  font-size: 18px;
-  line-height: 30px;
+  background-image: url("../images/icon-hotel-info.png");
+  width: calc(20px);
+  height: calc(20px);
+  background-size: calc(20px * 1);
+  display: block;
+  background-repeat: no-repeat;
+  background-position-y: calc((20px) * (0 - (1 - 1)));
 }
 .adaption-auto .fixed-popup-show-box .popup-content-box {
   width: 100%;
   height: calc(100% - 40px);
-  overflow-y: auto;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .adaption-auto .fixed-popup-show-box .popup-content-box .menu-suit-box {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding: 10px;
   font-size: 0;
 }
 .adaption-auto .fixed-popup-show-box .popup-content-box .menu-suit-box .menu-list li {
   width: 50%;
   font-size: 12px;
   line-height: 18px;
+  color: #999999;
   display: inline-block;
 }
 .adaption-auto .fixed-popup-show-box .popup-content-box .menu-suit-box .text-hint {
   font-size: 14px;
   line-height: 18px;
+  color: #f94267;
 }
-.adaption-auto .fixed-popup-show-box .item-list .item {
+.adaption-auto .fixed-popup-show-box .popup-content-box .item-list .item {
   padding: 10px;
   border-bottom: 1px solid #d6d6d6;
 }
-.adaption-auto .fixed-popup-show-box .item-list .item .info-box .text-title {
+.adaption-auto .fixed-popup-show-box .popup-content-box .item-list .item .info-box .text-title {
   display: block;
   line-height: 18px;
   font-size: 14px;
 }
-.adaption-auto .fixed-popup-show-box .item-list .item .info-box .text-content {
+.adaption-auto .fixed-popup-show-box .popup-content-box .item-list .item .info-box .text-content {
   line-height: 14px;
   font-size: 12px;
+  color: #999999;
 }
-.adaption-auto .fixed-popup-show-box .item-list .item:last-child {
+.adaption-auto .fixed-popup-show-box .popup-content-box .item-list .item:last-child {
   border-bottom-style: none;
 }
 .adaption-auto .sift-content-box {
@@ -576,7 +604,7 @@ body {
 }
 .adaption-auto .sift-content-box .sift-center-box .sift-scrollView-box {
   overflow: auto;
-  max-height: calc(100% - 35px);
+  height: calc(100% - 35px);
   padding-bottom: 5px;
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box {
@@ -675,13 +703,13 @@ body {
   background-position-y: calc((20px) * (0 - (3 - 1)));
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box.hotel-class .title .icon {
-  background-position-y: calc((20px) * (0 - (1 - 1)));
+  background-position-y: calc((20px) * (0 - (10 - 1)));
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box.hotel-table .title .icon {
-  background-position-y: calc((20px) * (0 - (5 - 1)));
+  background-position-y: calc((20px) * (0 - (11 - 1)));
 }
 .adaption-auto .sift-content-box .sift-center-box .content-box.hotel-discount .title .icon {
-  background-position-y: calc((20px) * (0 - (5 - 1)));
+  background-position-y: calc((20px) * (0 - (12 - 1)));
 }
 .adaption-auto .sift-content-box .sift-center-box .button-box {
   display: flex;
@@ -1142,7 +1170,6 @@ body {
 }
 .adaption-auto .hssy-home-view .list-sample ul li {
   width: calc((100vw - (10px * (2 + 1)))/2);
-  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5 + 0px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1156,11 +1183,10 @@ body {
 }
 .adaption-auto .hssy-home-view .list-sample ul li .info-box {
   width: 100%;
-  height: 0px;
 }
 .adaption-auto .hssy-home-view .list-sample ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0px);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5);
   overflow: hidden;
   position: relative;
 }
@@ -1193,7 +1219,6 @@ body {
 }
 .adaption-auto .hssy-home-view .list-pringles ul li {
   width: calc((100vw - (10px * (2 + 1)))/2);
-  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5 + 0px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1207,11 +1232,10 @@ body {
 }
 .adaption-auto .hssy-home-view .list-pringles ul li .info-box {
   width: 100%;
-  height: 0px;
 }
 .adaption-auto .hssy-home-view .list-pringles ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0px);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5);
   overflow: hidden;
   position: relative;
 }
@@ -1244,7 +1268,6 @@ body {
 }
 .adaption-auto .hssy-home-view .list-suit ul li {
   width: calc((100vw - (10px * (1 + 1)))/1);
-  height: calc((100vw - (10px * (1 + 1)))/1 * 0.25 + 0px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1258,11 +1281,10 @@ body {
 }
 .adaption-auto .hssy-home-view .list-suit ul li .info-box {
   width: 100%;
-  height: 0px;
 }
 .adaption-auto .hssy-home-view .list-suit ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0px);
+  height: calc((100vw - (10px * (1 + 1)))/1 * 0.25);
   overflow: hidden;
   position: relative;
 }
@@ -1348,7 +1370,6 @@ body {
 }
 .adaption-auto .hqdz-home-view .list-case ul li {
   width: calc((100vw - (5px * (2 + 1)))/2);
-  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666 + 0px);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -1362,11 +1383,10 @@ body {
 }
 .adaption-auto .hqdz-home-view .list-case ul li .info-box {
   width: 100%;
-  height: 0px;
 }
 .adaption-auto .hqdz-home-view .list-case ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0px);
+  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -1399,7 +1419,6 @@ body {
 }
 .adaption-auto .hqdz-home-view .list-f4 ul li {
   width: calc((100vw - (20px * (2 + 1)))/2);
-  height: calc((100vw - (20px * (2 + 1)))/2 * 1.175 + 2.1875rem);
   overflow: hidden;
   margin-bottom: 20px;
 }
@@ -1417,7 +1436,7 @@ body {
 }
 .adaption-auto .hqdz-home-view .list-f4 ul li .photo-box {
   width: 100%;
-  height: calc(100% - 2.1875rem);
+  height: calc((100vw - (20px * (2 + 1)))/2 * 1.175);
   overflow: hidden;
   position: relative;
 }
@@ -1493,7 +1512,6 @@ body {
 .adaption-auto .hqdz-home-view .list-supplies ul li,
 .adaption-auto .hqdz-home-view .list-car ul li {
   width: calc((100vw - (10px * (2 + 1)))/2);
-  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5 + 0px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1510,12 +1528,11 @@ body {
 .adaption-auto .hqdz-home-view .list-supplies ul li .info-box,
 .adaption-auto .hqdz-home-view .list-car ul li .info-box {
   width: 100%;
-  height: 0px;
 }
 .adaption-auto .hqdz-home-view .list-supplies ul li .photo-box,
 .adaption-auto .hqdz-home-view .list-car ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0px);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5);
   overflow: hidden;
   position: relative;
 }
@@ -1537,58 +1554,9 @@ body {
   border-radius: 3px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
-.adaption-auto .hyyd-home-view .list-box {
-  margin-bottom: 0px;
-}
-.adaption-auto .hyyd-home-view .list-box ul {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0px 0px 0;
-  margin-bottom: 0px;
-}
-.adaption-auto .hyyd-home-view .list-box ul li {
-  width: calc((100vw - (0px * (1 + 1)))/1);
-  height: calc((100vw - (0px * (1 + 1)))/1 * 0.3333 + 10px);
-  overflow: hidden;
-  margin-bottom: 0px;
-}
-.adaption-auto .hyyd-home-view .list-box ul li > a {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.adaption-auto .hyyd-home-view .list-box ul li img {
-  width: 100%;
-}
-.adaption-auto .hyyd-home-view .list-box ul li .info-box {
-  width: 100%;
-  height: 10px;
-}
-.adaption-auto .hyyd-home-view .list-box ul li .photo-box {
-  width: 100%;
-  height: calc(100% - 10px);
-  overflow: hidden;
-  position: relative;
-}
-.adaption-auto .hyyd-home-view .list-box ul li .photo-box .icon-video-play {
-  position: absolute;
-  display: block;
-  width: 1.875rem;
-  height: 1.875rem;
-  top: 50%;
-  left: 50%;
-  margin-top: -0.9375rem;
-  margin-left: -0.9375rem;
-  background-image: url("../images/icon-more-button.png");
-  background-size: 100%;
-}
-.adaption-auto .hyyd-home-view .list-box ul li .circular-shadow-box {
-  border-radius: 3px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-}
 .adaption-auto .hyyd-home-view .list-box .item {
+  width: 100%;
+  height: calc(100vw * 0.3333 + 10px);
   padding: 5px 10px;
   border-bottom: 1px solid #d6d6d6;
   overflow: hidden;
@@ -1721,7 +1689,6 @@ body {
 }
 .adaption-auto .hssy-suit-list-view .list-box ul li {
   width: calc((100vw - (10px * (1 + 1)))/1);
-  height: calc((100vw - (10px * (1 + 1)))/1 * 0.66666667 + 1.875rem);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1739,7 +1706,7 @@ body {
 }
 .adaption-auto .hssy-suit-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 1.875rem);
+  height: calc((100vw - (10px * (1 + 1)))/1 * 0.66666667);
   overflow: hidden;
   position: relative;
 }
@@ -1794,7 +1761,6 @@ body {
 }
 .adaption-auto .sample-list-view .list-box ul li {
   width: calc((100vw - (10px * (2 + 1)))/2);
-  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5 + 0px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1808,11 +1774,10 @@ body {
 }
 .adaption-auto .sample-list-view .list-box ul li .info-box {
   width: 100%;
-  height: 0px;
 }
 .adaption-auto .sample-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0px);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5);
   overflow: hidden;
   position: relative;
 }
@@ -1874,7 +1839,6 @@ body {
 }
 .adaption-auto .pringles-list-view .list-season ul li {
   width: calc((100vw - (10px * (3 + 1)))/3);
-  height: calc((100vw - (10px * (3 + 1)))/3 * 0.6666 + 25px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1892,7 +1856,7 @@ body {
 }
 .adaption-auto .pringles-list-view .list-season ul li .photo-box {
   width: 100%;
-  height: calc(100% - 25px);
+  height: calc((100vw - (10px * (3 + 1)))/3 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -1964,7 +1928,6 @@ body {
 .adaption-auto .pringles-list-view .list-pringles ul li,
 .adaption-auto .pringles-list-view .list-new-pringles ul li {
   width: calc((100vw - (10px * (2 + 1)))/2);
-  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5 + 0px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1981,12 +1944,11 @@ body {
 .adaption-auto .pringles-list-view .list-pringles ul li .info-box,
 .adaption-auto .pringles-list-view .list-new-pringles ul li .info-box {
   width: 100%;
-  height: 0px;
 }
 .adaption-auto .pringles-list-view .list-pringles ul li .photo-box,
 .adaption-auto .pringles-list-view .list-new-pringles ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0px);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5);
   overflow: hidden;
   position: relative;
 }
@@ -2021,7 +1983,6 @@ body {
 }
 .adaption-auto .micro-movie-list-view .list-box ul li {
   width: calc((100vw - (5px * (2 + 1)))/2);
-  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666 + 25px);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2039,7 +2000,7 @@ body {
 }
 .adaption-auto .micro-movie-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 25px);
+  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -2078,7 +2039,6 @@ body {
 }
 .adaption-auto .case-list-view .list-box ul li {
   width: calc((100vw - (5px * (2 + 1)))/2);
-  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666 + 0px);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2092,11 +2052,10 @@ body {
 }
 .adaption-auto .case-list-view .list-box ul li .info-box {
   width: 100%;
-  height: 0px;
 }
 .adaption-auto .case-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0px);
+  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -2344,11 +2303,9 @@ body {
 }
 .adaption-auto .case-detail-view .image-detail-box .detail-list-box ul li .info-box {
   width: 100%;
-  height: 0px;
 }
 .adaption-auto .case-detail-view .image-detail-box .detail-list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0px);
   overflow: hidden;
   position: relative;
 }
@@ -2381,7 +2338,6 @@ body {
 }
 .adaption-auto .followPhoto-list-view .list-box ul li {
   width: calc((100vw - (5px * (2 + 1)))/2);
-  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666 + 0px);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2395,11 +2351,10 @@ body {
 }
 .adaption-auto .followPhoto-list-view .list-box ul li .info-box {
   width: 100%;
-  height: 0px;
 }
 .adaption-auto .followPhoto-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0px);
+  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -2432,7 +2387,6 @@ body {
 }
 .adaption-auto .followVideo-list-view .list-box ul li {
   width: calc((100vw - (5px * (2 + 1)))/2);
-  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666 + 0px);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2446,11 +2400,10 @@ body {
 }
 .adaption-auto .followVideo-list-view .list-box ul li .info-box {
   width: 100%;
-  height: 0px;
 }
 .adaption-auto .followVideo-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 0px);
+  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -2592,7 +2545,6 @@ body {
 }
 .adaption-auto .dress-list-view .list-box ul li {
   width: calc((100vw - (10px * (1 + 1)))/1);
-  height: calc((100vw - (10px * (1 + 1)))/1 * 0.6666 + 1.875rem);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -2610,7 +2562,7 @@ body {
 }
 .adaption-auto .dress-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 1.875rem);
+  height: calc((100vw - (10px * (1 + 1)))/1 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -2665,7 +2617,6 @@ body {
 }
 .adaption-auto .supply-list-view .list-box ul li {
   width: calc((100vw - (10px * (2 + 1)))/2);
-  height: calc((100vw - (10px * (2 + 1)))/2 * 1 + 3.125rem);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -2683,7 +2634,7 @@ body {
 }
 .adaption-auto .supply-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 3.125rem);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1);
   overflow: hidden;
   position: relative;
 }
@@ -2757,7 +2708,6 @@ body {
 }
 .adaption-auto .car-list-view .list-box ul li {
   width: calc((100vw - (10px * (2 + 1)))/2);
-  height: calc((100vw - (10px * (2 + 1)))/2 * 0.6666 + 3.125rem);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -2775,7 +2725,7 @@ body {
 }
 .adaption-auto .car-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc(100% - 3.125rem);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -3034,6 +2984,63 @@ body {
 .adaption-auto .hotel-detail-view {
   background-color: #f0f0f0;
 }
+.adaption-auto .hotel-detail-view .icon-text {
+  font-size: 14px;
+  color: #f94267;
+  margin-right: 5px;
+}
+.adaption-auto .hotel-detail-view .icon-discount:before {
+  content: "惠";
+  font-size: 14px;
+  line-height: 35px;
+  background-color: #51a5f4;
+  color: #fff;
+  padding: 2px;
+}
+.adaption-auto .hotel-detail-view .icon-gift:before {
+  content: "礼";
+  font-size: 14px;
+  line-height: 35px;
+  background-color: #f94267;
+  color: #fff;
+  padding: 2px;
+}
+.adaption-auto .hotel-detail-view .icon-arrow {
+  background-image: url("../images/icon-hotel-info.png");
+  width: calc(20px);
+  height: calc(20px);
+  background-size: calc(20px * 1);
+  display: block;
+  background-repeat: no-repeat;
+  background-position-y: calc((20px) * (0 - (2 - 1)));
+}
+.adaption-auto .hotel-detail-view .icon-address {
+  background-image: url("../images/icon-hotel-info.png");
+  width: calc(20px);
+  height: calc(20px);
+  background-size: calc(20px * 1);
+  display: block;
+  background-repeat: no-repeat;
+  background-position-y: calc((20px) * (0 - (5 - 1)));
+}
+.adaption-auto .hotel-detail-view .icon-detail {
+  background-image: url("../images/icon-hotel-info.png");
+  width: calc(20px);
+  height: calc(20px);
+  background-size: calc(20px * 1);
+  display: block;
+  background-repeat: no-repeat;
+  background-position-y: calc((20px) * (0 - (4 - 1)));
+}
+.adaption-auto .hotel-detail-view .icon-phone {
+  background-image: url("../images/icon-hotel-info.png");
+  width: calc(20px);
+  height: calc(20px);
+  background-size: calc(20px * 1);
+  display: block;
+  background-repeat: no-repeat;
+  background-position-y: calc((20px) * (0 - (3 - 1)));
+}
 .adaption-auto .hotel-detail-view .head-info-box {
   background-color: #fff;
   padding: 10px;
@@ -3068,118 +3075,146 @@ body {
 .adaption-auto .hotel-detail-view section .section-title {
   height: 40px;
   line-height: 40px;
+  font-size: 16px;
   padding-left: 10px;
   padding-right: 10px;
   border-bottom: 1px solid #d6d6d6;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .list-box .item,
-.adaption-auto .hotel-detail-view section.info-items .list-box .item {
+.adaption-auto .hotel-detail-view section.menu-suit-items .item,
+.adaption-auto .hotel-detail-view section.info-items .item,
+.adaption-auto .hotel-detail-view section.gift-items .item {
   padding-left: 10px;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .list-box .item .title-box,
-.adaption-auto .hotel-detail-view section.info-items .list-box .item .title-box {
+.adaption-auto .hotel-detail-view section.menu-suit-items .item:last-child .title-box,
+.adaption-auto .hotel-detail-view section.info-items .item:last-child .title-box,
+.adaption-auto .hotel-detail-view section.gift-items .item:last-child .title-box {
+  border-bottom-style: none;
+}
+.adaption-auto .hotel-detail-view section.menu-suit-items .item .title-box {
   padding-right: 5px;
   position: relative;
-  height: 35px;
+  height: 45px;
   border-bottom: 1px solid #d6d6d6;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .list-box .item .title-box:before,
-.adaption-auto .hotel-detail-view section.info-items .list-box .item .title-box:before {
+.adaption-auto .hotel-detail-view section.menu-suit-items .item .title-box:before {
   content: " ";
   display: block;
   flex: 1;
   order: 5;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .list-box .item .title-box .left-icon,
-.adaption-auto .hotel-detail-view section.info-items .list-box .item .title-box .left-icon {
+.adaption-auto .hotel-detail-view section.menu-suit-items .item .title-box .left-icon {
   display: inline-block;
   margin-right: 2px;
   order: 1;
-}
-.adaption-auto .hotel-detail-view section.menu-suit-items .list-box .item .title-box .title,
-.adaption-auto .hotel-detail-view section.info-items .list-box .item .title-box .title {
   font-size: 14px;
-  line-height: 35px;
+  line-height: 45px;
+}
+.adaption-auto .hotel-detail-view section.menu-suit-items .item .title-box .title {
+  color: #999999;
+  font-size: 14px;
+  line-height: 45px;
   order: 2;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .list-box .item .title-box .subtitle,
-.adaption-auto .hotel-detail-view section.info-items .list-box .item .title-box .subtitle {
-  color: #e2bf76;
+.adaption-auto .hotel-detail-view section.menu-suit-items .item .title-box .subtitle {
+  color: #999999;
   font-size: 12px;
   margin-right: 5px;
-  line-height: 35px;
+  line-height: 45px;
   order: 8;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .list-box .item .title-box .right-icon,
-.adaption-auto .hotel-detail-view section.info-items .list-box .item .title-box .right-icon {
+.adaption-auto .hotel-detail-view section.menu-suit-items .item .title-box .right-icon {
   float: right;
   order: 9;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .list-box .item:last-child .title-box,
-.adaption-auto .hotel-detail-view section.info-items .list-box .item:last-child .title-box {
-  border-bottom-style: none;
+.adaption-auto .hotel-detail-view section.info-items .item .title-box {
+  padding-right: 5px;
+  position: relative;
+  height: 45px;
+  border-bottom: 1px solid #d6d6d6;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .icon-discount:before,
-.adaption-auto .hotel-detail-view section.info-items .icon-discount:before {
-  content: "惠";
+.adaption-auto .hotel-detail-view section.info-items .item .title-box:before {
+  content: " ";
+  display: block;
+  flex: 1;
+  order: 5;
+}
+.adaption-auto .hotel-detail-view section.info-items .item .title-box .left-icon {
+  display: inline-block;
+  margin-right: 2px;
+  order: 1;
   font-size: 14px;
-  line-height: 35px;
-  background-color: #51a5f4;
-  color: #fff;
-  padding: 2px;
+  line-height: 45px;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .icon-gift:before,
-.adaption-auto .hotel-detail-view section.info-items .icon-gift:before {
-  content: "礼";
+.adaption-auto .hotel-detail-view section.info-items .item .title-box .title {
+  color: #000000;
   font-size: 14px;
-  line-height: 35px;
-  background-color: #f94267;
-  color: #fff;
-  padding: 2px;
+  line-height: 45px;
+  order: 2;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .icon-arrow,
-.adaption-auto .hotel-detail-view section.info-items .icon-arrow {
-  background-image: url("../images/icon-hotel-info.png");
-  width: calc(20px);
-  height: calc(20px);
-  background-size: calc(20px * 1);
-  display: block;
-  background-repeat: no-repeat;
-  background-position-y: calc((20px) * (0 - (1 - 1)));
+.adaption-auto .hotel-detail-view section.info-items .item .title-box .subtitle {
+  color: #999999;
+  font-size: 12px;
+  margin-right: 5px;
+  line-height: 45px;
+  order: 8;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .icon-address,
-.adaption-auto .hotel-detail-view section.info-items .icon-address {
-  background-image: url("../images/icon-hotel-info.png");
-  width: calc(20px);
-  height: calc(20px);
-  background-size: calc(20px * 1);
-  display: block;
-  background-repeat: no-repeat;
-  background-position-y: calc((20px) * (0 - (1 - 1)));
+.adaption-auto .hotel-detail-view section.info-items .item .title-box .right-icon {
+  float: right;
+  order: 9;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .icon-detail,
-.adaption-auto .hotel-detail-view section.info-items .icon-detail {
-  background-image: url("../images/icon-hotel-info.png");
-  width: calc(20px);
-  height: calc(20px);
-  background-size: calc(20px * 1);
-  display: block;
-  background-repeat: no-repeat;
-  background-position-y: calc((20px) * (0 - (1 - 1)));
+.adaption-auto .hotel-detail-view section.info-items .phone-item .title-box .title {
+  color: #999999;
 }
-.adaption-auto .hotel-detail-view section.menu-suit-items .icon-photo,
-.adaption-auto .hotel-detail-view section.info-items .icon-photo {
-  background-image: url("../images/icon-hotel-info.png");
-  width: calc(20px);
-  height: calc(20px);
-  background-size: calc(20px * 1);
+.adaption-auto .hotel-detail-view section.gift-items {
+  background-color: #f8f8f8;
+}
+.adaption-auto .hotel-detail-view section.gift-items .item .title-box {
+  padding-right: 5px;
+  position: relative;
+  height: 40px;
+  border-bottom: 1px solid #d6d6d6;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.adaption-auto .hotel-detail-view section.gift-items .item .title-box:before {
+  content: " ";
   display: block;
-  background-repeat: no-repeat;
-  background-position-y: calc((20px) * (0 - (1 - 1)));
+  flex: 1;
+  order: 5;
+}
+.adaption-auto .hotel-detail-view section.gift-items .item .title-box .left-icon {
+  display: inline-block;
+  margin-right: 2px;
+  order: 1;
+  font-size: 12px;
+  line-height: 40px;
+}
+.adaption-auto .hotel-detail-view section.gift-items .item .title-box .title {
+  color: #000000;
+  font-size: 12px;
+  line-height: 40px;
+  order: 2;
+}
+.adaption-auto .hotel-detail-view section.gift-items .item .title-box .subtitle {
+  color: #999999;
+  font-size: 12px;
+  margin-right: 5px;
+  line-height: 40px;
+  order: 8;
+}
+.adaption-auto .hotel-detail-view section.gift-items .item .title-box .right-icon {
+  float: right;
+  order: 9;
 }
 .adaption-auto .hotel-detail-view section.hall-items {
   padding-bottom: 10px;
@@ -3195,7 +3230,6 @@ body {
 }
 .adaption-auto .hotel-detail-view section.hall-items ul li {
   width: calc((100vw - (10px * (2 + 1)))/2);
-  height: calc((100vw - (10px * (2 + 1)))/2 * 0.6666 + 55px);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -3209,11 +3243,11 @@ body {
 }
 .adaption-auto .hotel-detail-view section.hall-items ul li .info-box {
   width: 100%;
-  height: 55px;
+  height: 30px;
 }
 .adaption-auto .hotel-detail-view section.hall-items ul li .photo-box {
   width: 100%;
-  height: calc(100% - 55px);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -3234,18 +3268,24 @@ body {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 .adaption-auto .hotel-detail-view section.hall-items .item {
+  padding-top: 30px;
   background-color: #fff;
+  position: relative;
 }
 .adaption-auto .hotel-detail-view section.hall-items .item .info-box {
   padding-left: 5px;
   padding-right: 5px;
 }
 .adaption-auto .hotel-detail-view section.hall-items .item .info-box .title-box {
-  height: 18px;
-  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  height: 30px;
 }
 .adaption-auto .hotel-detail-view section.hall-items .item .info-box .title-box .text {
   font-size: 14px;
+  color: #f94267;
+  line-height: 30px;
 }
 .adaption-auto .hotel-detail-view section.hall-items .item .info-box .table-box,
 .adaption-auto .hotel-detail-view section.hall-items .item .info-box .price-box {
@@ -3265,6 +3305,8 @@ body {
   line-height: 14px;
   font-size: 12px;
   display: block;
+  color: #999999;
+  font-weight: 300;
 }
 .adaption-auto .hotel-detail-view section.hall-items .list-box {
   background-color: #f0f0f0;

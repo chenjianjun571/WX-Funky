@@ -146,13 +146,15 @@ class ListContent extends BaseShowDetail {
             let onShowDetail=super.showDetail.bind(this, DetailType.Pringles, ShowType.image, null, dataUrl)
             return (
               <li key={k+''+v.id} className="item" onClick={onShowDetail}>
-                <MediaItem
-                  aspectRatio="2:3"
-                  imageUrl={v.coverUrlWeb}
-                  processType={EmImgProcessType.emGD_S_S}
-                  height={600}
-                  quality={95}
-                />
+                <div className="photo-box">
+                  <MediaItem
+                    aspectRatio="2:3"
+                    imageUrl={v.coverUrlWeb}
+                    processType={EmImgProcessType.emGD_S_S}
+                    height={600}
+                    quality={95}
+                  />
+                </div>
               </li>
             )
           })
@@ -168,13 +170,15 @@ class ListContent extends BaseShowDetail {
             let onShowDetail=super.showDetail.bind(this, DetailType.Sample, ShowType.image, null, dataUrl)
             return (
               <li key={k+''+v.id} className="item" onClick={onShowDetail}>
-                <MediaItem
-                  aspectRatio="2:3"
-                  imageUrl={v.coverUrlWx || v.coverUrlWeb}
-                  processType={EmImgProcessType.emGD_S_S}
-                  height={300}
-                  quality={95}
-                />
+                <div className="photo-box">
+                  <MediaItem
+                    aspectRatio="2:3"
+                    imageUrl={v.coverUrlWx || v.coverUrlWeb}
+                    processType={EmImgProcessType.emGD_S_S}
+                    height={300}
+                    quality={95}
+                  />
+                </div>
               </li>
             )
           })
@@ -215,12 +219,14 @@ class ListContent extends BaseShowDetail {
             let onShowDetail=super.showDetail.bind(this, DetailType.Case, ShowType.image, null, dataUrl)
             return (
               <li key={k+''+v.id} className="item" onClick={onShowDetail}>
-                <MediaItem
-                  aspectRatio="3:2"
-                  imageUrl={v.coverUrlWeb}
-                  processType={EmImgProcessType.emGD_S_S}
-                  width={300}
-                />
+                <div className="photo-box">
+                  <MediaItem
+                    aspectRatio="3:2"
+                    imageUrl={v.coverUrlWeb}
+                    processType={EmImgProcessType.emGD_S_S}
+                    width={300}
+                  />
+                </div>
               </li>
             )
           })
@@ -294,12 +300,14 @@ class ListContent extends BaseShowDetail {
             let onShowDetail=super.showDetail.bind(this, DetailType.FollowPhoto, ShowType.image, null, dataUrl)
             return (
               <li key={k} className="item" onClick={onShowDetail}>
-                <MediaItem
-                  aspectRatio="3:2"
-                  imageUrl={v.coverUrlWeb}
-                  processType={EmImgProcessType.emGD_S_S}
-                  width={300}
-                />
+                <div className="photo-box">
+                  <MediaItem
+                    aspectRatio="3:2"
+                    imageUrl={v.coverUrlWeb}
+                    processType={EmImgProcessType.emGD_S_S}
+                    width={300}
+                  />
+                </div>
               </li>
             )
           })

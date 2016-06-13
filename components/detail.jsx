@@ -483,6 +483,46 @@ class Detail extends React.Component {
             </ul>
           </div>
         )
+        //return (
+        //  <div className="list-photo-box">
+        //    <div id="gallery" className="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+        //      <div className="pswp__bg"></div>
+        //      <div className="pswp__scroll-wrap">
+        //        <div className="pswp__container">
+        //          <div className="pswp__item"></div>
+        //          <div className="pswp__item"></div>
+        //          <div className="pswp__item"></div>
+        //        </div>
+        //        <div className="pswp__ui pswp__ui--hidden">
+        //          <div className="pswp__top-bar">
+        //            <div className="pswp__counter"></div>
+        //            <button className="pswp__button pswp__button--close" title="Close (Esc)"></button>
+        //            <button className="pswp__button pswp__button--share" title="Share"></button>
+        //            <button className="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+        //            <button className="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+        //            <div className="pswp__preloader">
+        //              <div className="pswp__preloader__icn">
+        //                <div className="pswp__preloader__cut">
+        //                  <div className="pswp__preloader__donut"></div>
+        //                </div>
+        //              </div>
+        //            </div>
+        //          </div>
+        //          <div className="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+        //            <div className="pswp__share-tooltip">
+        //            </div>
+        //          </div>
+        //          <button className="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+        //          <button className="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+        //          <div className="pswp__caption">
+        //            <div className="pswp__caption__center">
+        //            </div>
+        //          </div>
+        //        </div>
+        //      </div>
+        //    </div>
+        //  </div>
+        //)
       }
       default:
       {
@@ -611,6 +651,41 @@ class Detail extends React.Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.renderFlg;
+  }
+
+  componentDidUpdate() {
+    //if (this.props.type == DetailType.Hall) {
+    //  var pswpElement = document.querySelectorAll('.pswp')[0];
+    //  // build items array
+    //  let detailImages = JSON.parse(this.props.data.pcDetailImages);
+    //  let items = _.map(detailImages, (v,k)=>{
+    //    var dimension = v && v.split(/_(\d{1,4})x(\d{1,4})\.\w+g$/i);
+    //    var src = v + '@90q|watermark=1&object=c2h1aXlpbi5wbmc&t=80&p=5&y=10&x=10';
+    //    var w = dimension!=undefined&&dimension.length>2 ?parseInt(dimension[1]):-1;
+    //    var h = dimension!=undefined&&dimension.length>2 ?parseInt(dimension[2]):-1;
+    //    return {
+    //      src:src,
+    //      w:w,
+    //      h:h
+    //    }
+    //  })
+    //  let options = {
+    //    index: 0,
+    //    history:false,
+    //    focus:false,
+    //    closeEl:false,
+    //    escKey:false,
+    //    closeOnVerticalDrag:false,
+    //    closeOnScroll:false,
+    //    pinchToClose:false
+    //  };
+    //  this.gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+    //  this.gallery.init();
+    //}
+  }
+
+  componentWillUnmount () {
+    //this.gallery.close();
   }
 }
 

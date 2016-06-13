@@ -17,6 +17,7 @@ const DetailType = {
   Hotel:12,
   Map:13,// 地图
   Hall:14,// 宴会厅
+  Activity:15,// 活动
 }
 
 const ShowType = {

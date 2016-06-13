@@ -436,6 +436,54 @@ class Detail extends React.Component {
           </div>
         )
       }
+      case DetailType.Activity: {
+        let list = JSON.parse(this.state.data[0].detailImages);
+        return (
+          <div className={"list-photo-box"}>
+            <ul className="item-list">
+              {
+                _.map(list,(v,k)=>{
+                  return (
+                    <li key={k} className="item">
+                      <MediaItem
+                        aspectRatio="1:-1"
+                        imageUrl={v.url}
+                        quality={90}
+                        processType={EmImgProcessType.emGD_S_S}
+                        water={true}
+                      />
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
+        )
+      }
+      case DetailType.Hall: {
+        let detailImages = JSON.parse(this.props.data.pcDetailImages);
+        return (
+          <div className={"list-photo-box photo-space"}>
+            <ul className="item-list">
+              {
+                _.map(detailImages,(v,k)=>{
+                  return (
+                    <li key={k} className="item">
+                      <MediaItem
+                        aspectRatio="1:-1"
+                        imageUrl={v}
+                        quality={90}
+                        processType={EmImgProcessType.emGD_S_S}
+                        water={true}
+                      />
+                    </li>
+                  )
+                })
+              }
+            </ul>
+          </div>
+        )
+      }
       default:
       {
         return null;

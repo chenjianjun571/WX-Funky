@@ -76,7 +76,7 @@ class SeasonList extends React.Component {
   getListContent () {
     let content={};
     if (this.state.data.length > 0) {
-      let style = {width: "calc(( (100vw - 10px * (3 + 1))/3 + 10px) * (" + this.state.data.length +" + 2) - 10px)"};
+      let style = {width: "calc(((100vw - 10px * (3 + 1))/3 + 10px) * ("+this.state.data.length+" + 2) - 10px)"};
       content.list = (
         <ul className="item-list" style={style}>
           {

@@ -8,7 +8,7 @@ if [ -f $file_path ]; then
     filename="${file%.*}"
 
     watchify $file_path -o "uglifyjs -cm > ./assets/script/modules/$filename.min.$extension" &
-    sleep 16
+    sleep 25
 
     PIDS=`ps -ef|grep watchify|grep -v grep|awk '{print $2}'`
     for pid in $PIDS

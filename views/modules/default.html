@@ -3,10 +3,6 @@
 
 <% if (main === 'hotel-details') {%>
     <script src="http://api.map.baidu.com/api?v=2.0&ak=AzitIIsmKbAnwlppPtW8sXls" type="text/javascript" charset="utf-8"></script>
-    <!--<link href="/third/photoswipe/photoswipe.css?v=4.1.1-1.0.4" type="text/css" rel="stylesheet">-->
-    <!--<link href="/third/photoswipe/default-skin/default-skin.css?v=4.1.1-1.0.4" rel="stylesheet">-->
-    <!--<script src="/third/photoswipe/photoswipe.js?v=4.1.1-1.0.4"></script>-->
-    <!--<script src="/third/photoswipe/photoswipe-ui-default.js?v=4.1.1-1.0.4"></script>-->
 <%}%>
 
 <% if (main === 'movie' || main === 'follow-video' || main == 'f4') {%>
@@ -15,4 +11,8 @@
     <script src="//api.video.taobao.com//video/getPlayerJS"></script>
 <%}%>
 
-<script src=<%= '/script/modules/'+main+'.min.js?t=3' %> charset="utf-8" ></script>
+<% if (mode === 'development') {%>
+    <script src=<%= '/script/modules/'+main+'.min.js' %> charset="utf-8" ></script>
+<% } else {%>
+    <script src=<%= 'http://img2.jsbn.com/mcq/assets/script/modules/'+main+'.min.js?t=1' %> charset="utf-8" ></script>
+<%}%>

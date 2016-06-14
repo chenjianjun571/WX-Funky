@@ -724,6 +724,7 @@ class BaseShowDetail extends React.Component {
 
   handlePopState(ev) {
     if(location.hash.indexOf("#detail") < 0) {
+      // 用户回退,浏览器取消了锚点
       // 关闭详情页面,这里是渲染成一个null标签
       ReactDOM.render(<Detail showFlg={false} />,document.getElementById('J_Detail'))
     }
@@ -732,7 +733,9 @@ class BaseShowDetail extends React.Component {
   showDetail(detailType, showType, data, dataUrl=null) {
     // 设置锚点,显示详情页面
     location.hash = "detail";
-    ReactDOM.render(<Detail showFlg={true} type={detailType} showType={showType} data={data} dataUrl={dataUrl} />,document.getElementById('J_Detail'))
+    ReactDOM.render(
+      <Detail showFlg={true} type={detailType} showType={showType} data={data} dataUrl={dataUrl} />,
+      document.getElementById('J_Detail'))
   }
 }
 

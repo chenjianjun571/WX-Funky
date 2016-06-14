@@ -1246,7 +1246,7 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .hssy-home-view .list-sample ul li {
-  width: calc((100vw - (10px * (2 + 3)))/2);
+  width: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1263,7 +1263,7 @@ body {
 }
 .adaption-auto .hssy-home-view .list-sample ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (10px * (2 + 3)))/2 * 1.5);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5);
   overflow: hidden;
   position: relative;
 }
@@ -1301,7 +1301,7 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .hssy-home-view .list-pringles ul li {
-  width: calc((100vw - (10px * (2 + 3)))/2);
+  width: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1318,7 +1318,7 @@ body {
 }
 .adaption-auto .hssy-home-view .list-pringles ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (10px * (2 + 3)))/2 * 1.5);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5);
   overflow: hidden;
   position: relative;
 }
@@ -1415,7 +1415,7 @@ body {
   margin-bottom: -5px;
 }
 .adaption-auto .hqdz-home-view .list-case ul li {
-  width: calc((100vw - (5px * (2 + 3)))/2);
+  width: calc((100vw - (5px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -1432,7 +1432,7 @@ body {
 }
 .adaption-auto .hqdz-home-view .list-case ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (5px * (2 + 3)))/2 * 0.6666);
+  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -1470,7 +1470,7 @@ body {
   margin-bottom: -20px;
 }
 .adaption-auto .hqdz-home-view .list-f4 ul li {
-  width: calc((100vw - (20px * (2 + 3)))/2);
+  width: calc((100vw - (20px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 20px;
 }
@@ -1488,7 +1488,7 @@ body {
 }
 .adaption-auto .hqdz-home-view .list-f4 ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (20px * (2 + 3)))/2 * 1.175);
+  height: calc((100vw - (20px * (2 + 1)))/2 * 1.175);
   overflow: hidden;
   position: relative;
 }
@@ -1579,7 +1579,7 @@ body {
 }
 .adaption-auto .hqdz-home-view .list-supplies ul li,
 .adaption-auto .hqdz-home-view .list-car ul li {
-  width: calc((100vw - (10px * (2 + 3)))/2);
+  width: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1600,7 +1600,7 @@ body {
 .adaption-auto .hqdz-home-view .list-supplies ul li .photo-box,
 .adaption-auto .hqdz-home-view .list-car ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (10px * (2 + 3)))/2 * 1.5);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5);
   overflow: hidden;
   position: relative;
 }
@@ -1770,7 +1770,7 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .hssy-suit-list-view .list-box ul li {
-  width: calc((100vw - (10px * (1 + 3)))/1);
+  width: calc((100vw - (10px * (1 + 1)))/1);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1788,7 +1788,7 @@ body {
 }
 .adaption-auto .hssy-suit-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (10px * (1 + 3)))/1 * 0.66666667);
+  height: calc((100vw - (10px * (1 + 1)))/1 * 0.66666667);
   overflow: hidden;
   position: relative;
 }
@@ -1848,7 +1848,7 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .sample-list-view .list-box ul li {
-  width: calc((100vw - (10px * (2 + 3)))/2);
+  width: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1865,7 +1865,7 @@ body {
 }
 .adaption-auto .sample-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (10px * (2 + 3)))/2 * 1.5);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5);
   overflow: hidden;
   position: relative;
 }
@@ -1932,7 +1932,7 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .pringles-list-view .list-season ul li {
-  width: calc((100vw - (10px * (3 + 3)))/3);
+  width: calc((100vw - (10px * (3 + 1)))/3);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1950,7 +1950,7 @@ body {
 }
 .adaption-auto .pringles-list-view .list-season ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (10px * (3 + 3)))/3 * 0.6666);
+  height: calc((100vw - (10px * (3 + 1)))/3 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -2033,7 +2033,7 @@ body {
 }
 .adaption-auto .pringles-list-view .list-pringles ul li,
 .adaption-auto .pringles-list-view .list-new-pringles ul li {
-  width: calc((100vw - (10px * (2 + 3)))/2);
+  width: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -2054,7 +2054,7 @@ body {
 .adaption-auto .pringles-list-view .list-pringles ul li .photo-box,
 .adaption-auto .pringles-list-view .list-new-pringles ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (10px * (2 + 3)))/2 * 1.5);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1.5);
   overflow: hidden;
   position: relative;
 }
@@ -2094,7 +2094,7 @@ body {
   margin-bottom: -5px;
 }
 .adaption-auto .micro-movie-list-view .list-box ul li {
-  width: calc((100vw - (5px * (2 + 3)))/2);
+  width: calc((100vw - (5px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2112,7 +2112,7 @@ body {
 }
 .adaption-auto .micro-movie-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (5px * (2 + 3)))/2 * 0.6666);
+  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -2156,7 +2156,7 @@ body {
   margin-bottom: -5px;
 }
 .adaption-auto .case-list-view .list-box ul li {
-  width: calc((100vw - (5px * (2 + 3)))/2);
+  width: calc((100vw - (5px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2173,7 +2173,7 @@ body {
 }
 .adaption-auto .case-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (5px * (2 + 3)))/2 * 0.6666);
+  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -2413,7 +2413,7 @@ body {
   margin-bottom: 0px;
 }
 .adaption-auto .case-detail-view .image-detail-box .detail-list-box ul li {
-  width: calc((100vw - (0px * (1 + 3)))/1);
+  width: calc((100vw - (0px * (1 + 1)))/1);
   overflow: hidden;
   margin-bottom: 0px;
 }
@@ -2467,7 +2467,7 @@ body {
   margin-bottom: -5px;
 }
 .adaption-auto .followPhoto-list-view .list-box ul li {
-  width: calc((100vw - (5px * (2 + 3)))/2);
+  width: calc((100vw - (5px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2484,7 +2484,7 @@ body {
 }
 .adaption-auto .followPhoto-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (5px * (2 + 3)))/2 * 0.6666);
+  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -2522,7 +2522,7 @@ body {
   margin-bottom: -5px;
 }
 .adaption-auto .followVideo-list-view .list-box ul li {
-  width: calc((100vw - (5px * (2 + 3)))/2);
+  width: calc((100vw - (5px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2539,7 +2539,7 @@ body {
 }
 .adaption-auto .followVideo-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (5px * (2 + 3)))/2 * 0.6666);
+  height: calc((100vw - (5px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -2695,7 +2695,7 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .dress-list-view .list-box ul li {
-  width: calc((100vw - (10px * (1 + 3)))/1);
+  width: calc((100vw - (10px * (1 + 1)))/1);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -2713,7 +2713,7 @@ body {
 }
 .adaption-auto .dress-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (10px * (1 + 3)))/1 * 0.6666);
+  height: calc((100vw - (10px * (1 + 1)))/1 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -2773,7 +2773,7 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .supply-list-view .list-box ul li {
-  width: calc((100vw - (10px * (2 + 3)))/2);
+  width: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -2791,7 +2791,7 @@ body {
 }
 .adaption-auto .supply-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (10px * (2 + 3)))/2 * 1);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 1);
   overflow: hidden;
   position: relative;
 }
@@ -2870,7 +2870,7 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .car-list-view .list-box ul li {
-  width: calc((100vw - (10px * (2 + 3)))/2);
+  width: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -2888,7 +2888,7 @@ body {
 }
 .adaption-auto .car-list-view .list-box ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (10px * (2 + 3)))/2 * 0.6666);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }
@@ -3476,7 +3476,7 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .hotel-detail-view section.hall-items ul li {
-  width: calc((100vw - (10px * (2 + 3)))/2);
+  width: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -3494,7 +3494,7 @@ body {
 }
 .adaption-auto .hotel-detail-view section.hall-items ul li .photo-box {
   width: 100%;
-  height: calc((100vw - (10px * (2 + 3)))/2 * 0.6666);
+  height: calc((100vw - (10px * (2 + 1)))/2 * 0.6666);
   overflow: hidden;
   position: relative;
 }

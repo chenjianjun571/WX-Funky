@@ -190,11 +190,11 @@ class HotelContent extends React.Component {
           external:{minPrice:0,maxPrice:2000}
         },
         {
-          name:"2000-3000元",
+          name:"2000至3000元",
           external:{minPrice:2000,maxPrice:3000}
         },
         {
-          name:"3000-4000元",
+          name:"3000至4000元",
           external:{minPrice:3000,maxPrice:4000}
         },
         {

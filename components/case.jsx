@@ -93,27 +93,27 @@ class CaseContent extends React.Component {
           external:{}
         },
         {
-          name:"5000-10,000",
+          name:"5000至10,000",
           external:{minPrice:5000,maxPrice:10000}
         },
         {
-          name:"10,000-15,000",
+          name:"10,000至15,000",
           external:{minPrice:10000,maxPrice:15000}
         },
         {
-          name:"15,000-20,000",
+          name:"15,000至20,000",
           external:{minPrice:15000,maxPrice:20000}
         },
         {
-          name:"20,000-30,000",
+          name:"20,000至30,000",
           external:{minPrice:20000,maxPrice:30000}
         },
         {
-          name:"30,000-50,000",
+          name:"30,000至50,000",
           external:{minPrice:30000,maxPrice:50000}
         },
         {
-          name:"50,000-100,000",
+          name:"50,000至100,000",
           external:{minPrice:50000,maxPrice:100000}
         },
         {

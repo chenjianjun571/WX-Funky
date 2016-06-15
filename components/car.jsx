@@ -157,11 +157,11 @@ class CarContent extends React.Component {
           external:{minPrice:0,maxPrice:999}
         },
         {
-          name:"1000-2000",
+          name:"1000至2000",
           external:{minPrice:1000,maxPrice:2000}
         },
         {
-          name:"2000-3000",
+          name:"2000至3000",
           external:{minPrice:2000,maxPrice:3000}
         },
         {

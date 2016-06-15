@@ -153,19 +153,19 @@ class HotelContent extends React.Component {
           external:{minTable:0, maxTable:10}
         },
         {
-          name:"10-20桌",
+          name:"10至20桌",
           external:{minPrice:10,maxPrice:20}
         },
         {
-          name:"20-30桌",
+          name:"20至30桌",
           external:{minPrice:20,maxPrice:30}
         },
         {
-          name:"30-40桌",
+          name:"30至40桌",
           external:{minPrice:30,maxPrice:40}
         },
         {
-          name:"40-50桌",
+          name:"40至50桌",
           external:{minPrice:40,maxPrice:50}
         },
         {

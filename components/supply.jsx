@@ -10,7 +10,7 @@ import { ListContent } from './common/list-content.jsx'
 class SupplyContent extends React.Component {
   constructor (props) {
     super(props);
-    this.conditions=new Array();
+    this.conditions=[];
     this.state = {
       renderFlg:true,
       filters:[],

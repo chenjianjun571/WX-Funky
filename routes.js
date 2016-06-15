@@ -34,7 +34,10 @@ const renderOption = (templateName, menuKey, parentKey, params={}, platformType=
     'params': JSON.stringify(p)
   }
 }
-
+siteRouter.post('/debuger', function *(next) {
+  console.log('post:'+this.request.body.msg)
+  this.body = 'ok'
+});
 /*********************************** 首页 *************************************/
 siteRouter.get('/', function* (next) {
   yield this.render('modules/default', renderOption('home', '/home', '/home'))

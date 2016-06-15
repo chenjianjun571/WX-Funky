@@ -7,6 +7,7 @@ import Logger from 'koa-logger'
 import StaticFile from 'koa-static'
 import thunkify from 'thunkify-wrap'
 import _ from 'lodash'
+//import bodyParser from 'koa-bodyparser' // 调试的时候打开,用于解析post的body数据
 
 import { siteRouter } from './routes'
 
@@ -32,6 +33,7 @@ ejsEngine(ReactServer, {
 process.env.NODE_ENV === 'development' && ReactServer.use(Logger()) // 只有在NODE_ENV为development才加载日志
 ReactServer.use(Favicon(__dirname + '/assets/images/favicon.png')) // favico
 ReactServer.use(StaticFile('./assets',{'maxage':3*60*1000})) // 其他静态资源：js images css
+//ReactServer.use(convert(bodyParser())); // 调试的时候打开,用于解析post的body数据
 
 let proxyFetcher = thunkify.genify(NetWorker.getData)
 ReactServer.use(convert(function*(next){

@@ -13,7 +13,7 @@ class Detail extends React.Component {
     // 渲染标志
     this.renderFlg=true;
     // 缓存
-    this.cache=new Map();
+    this.cache={};
     // 状态
     this.state = {
       // 数据请求状态
@@ -578,7 +578,7 @@ class Detail extends React.Component {
 
   render () {
     // 判断是否需要渲染
-    if (this.props.showFlg==false) {
+    if (!this.props.showFlg) {
       return null
     }
 
@@ -652,41 +652,6 @@ class Detail extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return this.renderFlg;
   }
-
-  componentDidUpdate() {
-    //if (this.props.type == DetailType.Hall) {
-    //  var pswpElement = document.querySelectorAll('.pswp')[0];
-    //  // build items array
-    //  let detailImages = JSON.parse(this.props.data.pcDetailImages);
-    //  let items = _.map(detailImages, (v,k)=>{
-    //    var dimension = v && v.split(/_(\d{1,4})x(\d{1,4})\.\w+g$/i);
-    //    var src = v + '@90q|watermark=1&object=c2h1aXlpbi5wbmc&t=80&p=5&y=10&x=10';
-    //    var w = dimension!=undefined&&dimension.length>2 ?parseInt(dimension[1]):-1;
-    //    var h = dimension!=undefined&&dimension.length>2 ?parseInt(dimension[2]):-1;
-    //    return {
-    //      src:src,
-    //      w:w,
-    //      h:h
-    //    }
-    //  })
-    //  let options = {
-    //    index: 0,
-    //    history:false,
-    //    focus:false,
-    //    closeEl:false,
-    //    escKey:false,
-    //    closeOnVerticalDrag:false,
-    //    closeOnScroll:false,
-    //    pinchToClose:false
-    //  };
-    //  this.gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
-    //  this.gallery.init();
-    //}
-  }
-
-  componentWillUnmount () {
-    //this.gallery.close();
-  }
 }
 
 Detail.defaultProps = {
@@ -712,7 +677,7 @@ class BaseShowDetail extends React.Component {
 
   componentDidMount() {
     // 初期化渲染详情页面
-    ReactDOM.render(<Detail showFlg={false} />,document.getElementById('J_Detail'))
+    ReactDOM.render(<Detail showFlg={false}></Detail>,document.getElementById('J_Detail'))
     // 添加回退事件监听
     window.addEventListener('popstate', this.onPopState);
   }
@@ -726,7 +691,7 @@ class BaseShowDetail extends React.Component {
     if(location.hash.indexOf("#detail") < 0) {
       // 用户回退,浏览器取消了锚点
       // 关闭详情页面,这里是渲染成一个null标签
-      ReactDOM.render(<Detail showFlg={false} />,document.getElementById('J_Detail'))
+      ReactDOM.render(<Detail showFlg={false}></Detail>,document.getElementById('J_Detail'))
     }
   }
 

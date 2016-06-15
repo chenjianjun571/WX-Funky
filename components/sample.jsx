@@ -5,9 +5,6 @@ import { MediaSlider } from './common/media-slider.jsx'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
 import { SampleConfig } from './config/sample-config'
 import { DetailType, ShowType } from '../src/utils/detail-type'
-import { GetHintContent, HintType } from './common/hint'
-import { ReqCode } from './common/code'
-import { BaseShowDetail } from './detail.jsx'
 import { ListContent } from './common/list-content.jsx'
 
 // 因为样片的搜索有特殊性,风格和场景的展示与类型挂钩,所以不能使用公共的过滤器组件
@@ -362,6 +359,7 @@ class SampleContent extends React.Component {
         </div>
         <FilterContent filterChangeHandle={this.changeHandle.bind(this)} />
         <ListContent params={this.state.params} type={DetailType.Sample} dataUrl={SampleConfig.SampleList.dataUrl} />
+
       </div>
     )
   }

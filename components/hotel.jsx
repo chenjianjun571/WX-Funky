@@ -10,7 +10,7 @@ import { ListContent } from './common/list-content.jsx'
 class HotelContent extends React.Component {
   constructor (props) {
     super(props);
-    this.conditions=new Array();
+    this.conditions=[];
     this.state = {
       renderFlg:false,
       filters:[],

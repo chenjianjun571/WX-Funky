@@ -23,7 +23,7 @@ class ListContent extends BaseShowDetail {
     // 渲染标志,控制组件是否渲染
     this.renderFlg=false;
     // 缓存对象
-    this.cache=new Map();
+    this.cache={};
     // 组件状态
     this.state = {
       // 数据请求状态

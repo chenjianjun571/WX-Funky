@@ -28,8 +28,11 @@ class ConditionFilter extends React.Component {
     // 第一次渲染标志
     this.isFirstRender=false;
     this.state = {
+      // 通过设置class来控制选项的选中和非选中状态
       selShowClass:'',
+      // 选中的条件名称,用于展示在筛选标题栏上
       selContent:[],
+      // 筛选条件,参考顶部说明注释
       filters:[]
     };
   }
@@ -83,7 +86,7 @@ class ConditionFilter extends React.Component {
                                 let kl = "item";
                                 if (v.selType && v.selType == 1) {
                                   // 多选
-                                  kl=(vv.isActive&&vv.isActive==true)?"item item-activate":"item"
+                                  kl=(vv.isActive&&vv.isActive===true)?"item item-activate":"item"
                                 } else {
                                   // 单选
                                   kl=(kk==v.kIndex)?"item item-activate":"item"
@@ -105,7 +108,7 @@ class ConditionFilter extends React.Component {
 
               <div className="button-box">
                 <div className="confirm-button" onClick={this.handleSubmit.bind(this)}>确定</div>
-                <div className="reset-button" onClick={this.handleReset.bind(this)}>重置</div>
+                <div className="reset-button" onClick={this.handleReset.bind(this)}>清除条件</div>
               </div>
 
             </div>

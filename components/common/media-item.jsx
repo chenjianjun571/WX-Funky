@@ -165,13 +165,10 @@ class ImageItem extends React.Component {
       let quality = this.props.quality || '70'
 
       // 获取文件后缀名,图片服务只针对jpg类型才有效
-      let fileExtend = ''
-      if (this.props.imageUrl) {
-        fileExtend = this.props.imageUrl.substring(this.props.imageUrl.lastIndexOf('.')).toLowerCase();
-      }
-
+      let fileExtend = this.props.imageUrl.substring(this.props.imageUrl.lastIndexOf('.')).toLowerCase();
       // 图片处理参数
       let imageOption = '';
+
       if (fileExtend == '.jpg' || fileExtend == '.jpeg') {
         switch (this.props.processType) {
           case EmImgProcessType.emGD_NONE:
@@ -269,16 +266,24 @@ class ImageItem extends React.Component {
 }
 
 class MediaItem extends React.Component {
+
   render () {
+
     let width;
     let height;
+
     if (this.props.videoUrl && this.props.videoUrl.length > 0) {
+
       width = this.props.width || '100%'
       height = this.props.height || '100%'
+
+      return (<VideoItem {...this.props} height={height} width={width} />)
     } else {
+
       let factors = this.props.aspectRatio.split(':')
       width = this.props.width;
       height = this.props.height;
+
       if (factors[0] === '-1' || factors[1] === '-1') {
         width = '100%';
         height = '100%';
@@ -292,16 +297,8 @@ class MediaItem extends React.Component {
           return null;
         }
       }
-    }
 
-    if (this.props.videoUrl && this.props.videoUrl.length > 0) {
-      return (
-        <VideoItem {...this.props} height={height} width={width} />
-      )
-    } else {
-      return (
-        <ImageItem {...this.props} height={height} width={width} />
-      )
+      return (<ImageItem {...this.props} height={height} width={width} />)
     }
   }
 }

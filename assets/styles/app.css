@@ -269,7 +269,7 @@ body {
 }
 .adaption-auto .first-menu {
   position: fixed;
-  z-index: 10070;
+  z-index: 10000;
   bottom: 0;
   width: 100%;
   height: 50px;
@@ -325,10 +325,12 @@ body {
 .adaption-auto .first-menu .item:nth-child(5) .icon {
   background-position: 0 -80px;
 }
-.adaption-auto .first-menu .item.item-activate .icon {
+.adaption-auto .first-menu .item.item-activate .icon,
+.adaption-auto .first-menu .item:active .icon {
   background-image: url("../images/icon-first-menu-activate.png");
 }
-.adaption-auto .first-menu .item.item-activate .title {
+.adaption-auto .first-menu .item.item-activate .title,
+.adaption-auto .first-menu .item:active .title {
   color: #f94267;
 }
 .adaption-auto .first-menu .item .dropdown-menu-box {
@@ -416,7 +418,8 @@ body {
   line-height: 35px;
   display: block;
 }
-.adaption-auto .secondly-menu .menu-box .item.item-activate .title {
+.adaption-auto .secondly-menu .menu-box .item.item-activate .title,
+.adaption-auto .secondly-menu .menu-box .item:active .title {
   color: #fbd213;
 }
 .adaption-auto .secondly-menu .menu-box .open-button {
@@ -522,12 +525,12 @@ body {
 .adaption-auto .fixed-popup-show-box {
   border-top: 1px solid #d6d6d6;
   background-color: #fff;
-  position: fixed !important;
-  top: 50%;
+  position: fixed;
+  top: calc(50% - 50px);
   left: 0;
   z-index: 10070;
-  width: 100% !important;
-  height: 50% !important;
+  width: 100%;
+  height: 50%;
   -webkit-animation-name: moveBegin;
   /*动画属性名，也就是我们前面keyframes定义的动画名*/
   -webkit-animation-duration: 0.2s;
@@ -573,7 +576,7 @@ body {
 .adaption-auto .fixed-popup-show-box .popup-content-box {
   width: 100%;
   height: calc(100% - 40px);
-  overflow: scroll;
+  overflow: auto;
   -webkit-overflow-scrolling: touch;
 }
 .adaption-auto .fixed-popup-show-box .popup-content-box .menu-suit-box {
@@ -931,6 +934,9 @@ body {
   font-size: 0.875rem;
   line-height: 1.125rem;
 }
+.adaption-auto .more-button .button-box .title:active {
+  color: #f94267;
+}
 .adaption-auto .top-logo-box {
   height: 42px;
   width: 100%;
@@ -1246,7 +1252,8 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .hssy-home-view .list-sample ul li {
-  width: calc((100vw - (10px * (2 + 1)))/2);
+  width: calc((100% - (10px * (2 - 1)))/2);
+  max-height: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1301,7 +1308,8 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .hssy-home-view .list-pringles ul li {
-  width: calc((100vw - (10px * (2 + 1)))/2);
+  width: calc((100% - (10px * (2 - 1)))/2);
+  max-height: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1384,9 +1392,6 @@ body {
   font-weight: bold;
   height: 0.875rem;
 }
-.adaption-auto .hssy-home-view .list-suit .suit-box .info-box .text-title:active {
-  color: #f94267;
-}
 .adaption-auto .hssy-home-view .list-suit .suit-box .info-box .text-content {
   display: block;
   margin-top: 3px;
@@ -1415,7 +1420,8 @@ body {
   margin-bottom: -5px;
 }
 .adaption-auto .hqdz-home-view .list-case ul li {
-  width: calc((100vw - (5px * (2 + 1)))/2);
+  width: calc((100% - (5px * (2 - 1)))/2);
+  max-height: calc((100vw - (5px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -1470,7 +1476,8 @@ body {
   margin-bottom: -20px;
 }
 .adaption-auto .hqdz-home-view .list-f4 ul li {
-  width: calc((100vw - (20px * (2 + 1)))/2);
+  width: calc((100% - (20px * (2 - 1)))/2);
+  max-height: calc((100vw - (20px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 20px;
 }
@@ -1579,7 +1586,8 @@ body {
 }
 .adaption-auto .hqdz-home-view .list-supplies ul li,
 .adaption-auto .hqdz-home-view .list-car ul li {
-  width: calc((100vw - (10px * (2 + 1)))/2);
+  width: calc((100% - (10px * (2 - 1)))/2);
+  max-height: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1770,7 +1778,8 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .hssy-suit-list-view .list-box ul li {
-  width: calc((100vw - (10px * (1 + 1)))/1);
+  width: calc((100% - (10px * (1 - 1)))/1);
+  max-height: calc((100vw - (10px * (1 + 1)))/1);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1848,7 +1857,8 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .sample-list-view .list-box ul li {
-  width: calc((100vw - (10px * (2 + 1)))/2);
+  width: calc((100% - (10px * (2 - 1)))/2);
+  max-height: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -1932,7 +1942,8 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .pringles-list-view .list-season ul li {
-  width: calc((100vw - (10px * (3 + 1)))/3);
+  width: calc((100% - (10px * (3 - 1)))/3);
+  max-height: calc((100vw - (10px * (3 + 1)))/3);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -2034,7 +2045,8 @@ body {
 }
 .adaption-auto .pringles-list-view .list-pringles ul li,
 .adaption-auto .pringles-list-view .list-new-pringles ul li {
-  width: calc((100vw - (10px * (2 + 1)))/2);
+  width: calc((100% - (10px * (2 - 1)))/2);
+  max-height: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -2095,7 +2107,8 @@ body {
   margin-bottom: -5px;
 }
 .adaption-auto .micro-movie-list-view .list-box ul li {
-  width: calc((100vw - (5px * (2 + 1)))/2);
+  width: calc((100% - (5px * (2 - 1)))/2);
+  max-height: calc((100vw - (5px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2157,7 +2170,8 @@ body {
   margin-bottom: -5px;
 }
 .adaption-auto .case-list-view .list-box ul li {
-  width: calc((100vw - (5px * (2 + 1)))/2);
+  width: calc((100% - (5px * (2 - 1)))/2);
+  max-height: calc((100vw - (5px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2414,7 +2428,8 @@ body {
   margin-bottom: 0px;
 }
 .adaption-auto .case-detail-view .image-detail-box .detail-list-box ul li {
-  width: calc((100vw - (0px * (1 + 1)))/1);
+  width: calc((100% - (0px * (1 - 1)))/1);
+  max-height: calc((100vw - (0px * (1 + 1)))/1);
   overflow: hidden;
   margin-bottom: 0px;
 }
@@ -2468,7 +2483,8 @@ body {
   margin-bottom: -5px;
 }
 .adaption-auto .followPhoto-list-view .list-box ul li {
-  width: calc((100vw - (5px * (2 + 1)))/2);
+  width: calc((100% - (5px * (2 - 1)))/2);
+  max-height: calc((100vw - (5px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2523,7 +2539,8 @@ body {
   margin-bottom: -5px;
 }
 .adaption-auto .followVideo-list-view .list-box ul li {
-  width: calc((100vw - (5px * (2 + 1)))/2);
+  width: calc((100% - (5px * (2 - 1)))/2);
+  max-height: calc((100vw - (5px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 5px;
 }
@@ -2696,7 +2713,8 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .dress-list-view .list-box ul li {
-  width: calc((100vw - (10px * (1 + 1)))/1);
+  width: calc((100% - (10px * (1 - 1)))/1);
+  max-height: calc((100vw - (10px * (1 + 1)))/1);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -2774,7 +2792,8 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .supply-list-view .list-box ul li {
-  width: calc((100vw - (10px * (2 + 1)))/2);
+  width: calc((100% - (10px * (2 - 1)))/2);
+  max-height: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -2871,7 +2890,8 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .car-list-view .list-box ul li {
-  width: calc((100vw - (10px * (2 + 1)))/2);
+  width: calc((100% - (10px * (2 - 1)))/2);
+  max-height: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }
@@ -3477,7 +3497,8 @@ body {
   margin-bottom: -10px;
 }
 .adaption-auto .hotel-detail-view section.hall-items ul li {
-  width: calc((100vw - (10px * (2 + 1)))/2);
+  width: calc((100% - (10px * (2 - 1)))/2);
+  max-height: calc((100vw - (10px * (2 + 1)))/2);
   overflow: hidden;
   margin-bottom: 10px;
 }

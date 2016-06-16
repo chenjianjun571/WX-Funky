@@ -61,6 +61,8 @@ class BestPringles extends BaseShowDetail {
 class SeasonList extends React.Component {
   constructor (props) {
     super(props);
+    // 屏幕宽度
+    this.innerWidth=320;
     // 渲染标志,控制组件是否渲染
     this.renderFlg=false;
     // 标识是否是第一次渲染
@@ -76,9 +78,12 @@ class SeasonList extends React.Component {
   getListContent () {
     let content={};
     if (this.state.data.length > 0) {
-      let style = {width: "calc(((100vw - 10px * (3 + 1))/3 + 10px) * ("+this.state.data.length+" + 2) - 10px)"};
+      let iUl = ((this.innerWidth-40)/3+10)*(this.state.data.length+2)-10;
+      let iLi = (this.innerWidth-40)/3;
+      let styleUl = {width: iUl};
+      let styleLi = {width: iLi};
       content.list = (
-        <ul className="item-list" style={style}>
+        <ul className="item-list" style={styleUl}>
           {
             _.map(this.state.data, (v,k)=>{
               let kClass = "item";
@@ -87,7 +92,7 @@ class SeasonList extends React.Component {
                 content.seasonActivateName = v.name;
               }
               return (
-                <li key={k} className={kClass} onClick={this.handleClick.bind(this,k,v.seasonId)}>
+                <li key={k} className={kClass} style={styleLi} onClick={this.handleClick.bind(this,k,v.seasonId)}>
                   <div className="photo-box">
                     <MediaItem
                       aspectRatio="3:2"
@@ -169,6 +174,8 @@ class SeasonList extends React.Component {
   }
 
   componentDidMount() {
+    // 获取屏幕宽度
+    this.innerWidth = window.innerWidth;
     let cfg = PringlesConfig.SeasonList
     let fetchUrl = cfg.buildUrl(null,cfg.dataUrl)
     fetch(fetchUrl)

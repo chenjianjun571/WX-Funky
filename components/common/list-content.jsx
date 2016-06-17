@@ -429,7 +429,7 @@ class ListContent extends BaseShowDetail {
                     _.map(v.workList && v.workList.slice(0,2), (v, k) => {
                       // 显示详情处理句柄
                       if (this.props.customData.workType=='video') {
-                        let onShowDetail=super.showDetail.bind(this, DetailType.F4, ShowType.video, v)
+                        let onShowDetail=super.showDetail.bind(this, DetailType.F4, ShowType.video, v, null)
                         return (
                           <div key={k} className="img-box" onClick={onShowDetail}>
                             <MediaItem
@@ -442,7 +442,7 @@ class ListContent extends BaseShowDetail {
                           </div>
                         )
                       } else {
-                        let onShowDetail=super.showDetail.bind(this, DetailType.F4, ShowType.image, v)
+                        let onShowDetail=super.showDetail.bind(this, DetailType.F4, ShowType.image, v, null)
                         return (
                           <div key={k} className="img-box" onClick={onShowDetail}>
                             <MediaItem

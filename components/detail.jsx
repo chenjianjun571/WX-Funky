@@ -483,46 +483,6 @@ class Detail extends React.Component {
             </ul>
           </div>
         )
-        //return (
-        //  <div className="list-photo-box">
-        //    <div id="gallery" className="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-        //      <div className="pswp__bg"></div>
-        //      <div className="pswp__scroll-wrap">
-        //        <div className="pswp__container">
-        //          <div className="pswp__item"></div>
-        //          <div className="pswp__item"></div>
-        //          <div className="pswp__item"></div>
-        //        </div>
-        //        <div className="pswp__ui pswp__ui--hidden">
-        //          <div className="pswp__top-bar">
-        //            <div className="pswp__counter"></div>
-        //            <button className="pswp__button pswp__button--close" title="Close (Esc)"></button>
-        //            <button className="pswp__button pswp__button--share" title="Share"></button>
-        //            <button className="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-        //            <button className="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-        //            <div className="pswp__preloader">
-        //              <div className="pswp__preloader__icn">
-        //                <div className="pswp__preloader__cut">
-        //                  <div className="pswp__preloader__donut"></div>
-        //                </div>
-        //              </div>
-        //            </div>
-        //          </div>
-        //          <div className="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-        //            <div className="pswp__share-tooltip">
-        //            </div>
-        //          </div>
-        //          <button className="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-        //          <button className="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-        //          <div className="pswp__caption">
-        //            <div className="pswp__caption__center">
-        //            </div>
-        //          </div>
-        //        </div>
-        //      </div>
-        //    </div>
-        //  </div>
-        //)
       }
       default:
       {
@@ -560,12 +520,10 @@ class Detail extends React.Component {
       case ReqCode.Ready: {
         // 数据准备ok状态
         content = (
-          <div className="fixed-full-box">
-            <div className="detail-scrollView">
-              {
-                this.getContent()
-              }
-            </div>
+          <div className="detail-scrollView">
+            {
+              this.getContent()
+            }
           </div>
         )
         break;

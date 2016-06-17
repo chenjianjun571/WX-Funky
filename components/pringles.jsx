@@ -28,13 +28,15 @@ class BestPringles extends BaseShowDetail {
               let onShowDetail=super.showDetail.bind(this, DetailType.Pringles, ShowType.image, null, dataUrl)
               return (
                 <li key={k} className="item" onClick={onShowDetail}>
-                  <MediaItem
-                    aspectRatio="2:3"
-                    imageUrl={v.coverUrlWeb}
-                    processType={EmImgProcessType.emGD_S_S}
-                    height={600}
-                    quality={95}
-                  />
+                  <div className="photo-box">
+                    <MediaItem
+                      aspectRatio="2:3"
+                      imageUrl={v.coverUrlWeb}
+                      processType={EmImgProcessType.emGD_S_S}
+                      height={600}
+                      quality={95}
+                    />
+                  </div>
                 </li>
               )
             })

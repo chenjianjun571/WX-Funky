@@ -9,7 +9,7 @@ do
     filename="${file%.*}"
 
     watchify $file_path -o "uglifyjs -cm > ./assets/script/modules/$filename.min.$extension" &
-    sleep 25
+    sleep 20
     PIDS=`ps -ef|grep watchify|grep -v grep|awk '{print $2}'`
     for pid in $PIDS
     do

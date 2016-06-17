@@ -26,14 +26,14 @@ class DiscountInfo extends BaseShowDetail {
         <ul className="list-box info-list">
           <li className="item" onClick={onShowGiftDetail}>
             <div className="title-box">
-              <i className="left-icon icon-text">[预订有礼]</i>
+              <i className="left-icon icon-text">预订有礼</i>
               <span className="title">下单立享万元大礼包</span>
               <i className="right-icon icon-arrow"></i>
             </div>
           </li>
           <li className="item" onClick={onShowDiscountDetail}>
             <div className="title-box">
-              <i className="left-icon icon-text">[组合优惠]</i>
+              <i className="left-icon icon-text">组合优惠</i>
               <span className="title">下单立享组合优惠</span>
               <i className="right-icon icon-arrow"></i>
             </div>

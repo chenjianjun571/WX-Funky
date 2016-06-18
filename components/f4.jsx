@@ -168,20 +168,16 @@ class F4Content extends React.Component {
           external:{minPrice:0,maxPrice:1500}
         },
         {
-          name:"1500-2000元",
+          name:"1500至2000元",
           external:{minPrice:1500,maxPrice:2000}
         },
         {
-          name:"2000-2500元",
+          name:"2000至2500元",
           external:{minPrice:2000,maxPrice:2500}
         },
         {
           name:"2500元以上",
           external:{minPrice:2500,maxPrice:99999}
-        },
-        {
-          name:"30,000-50,000",
-          external:{minPrice:30000,maxPrice:50000}
         }
       ]
     }

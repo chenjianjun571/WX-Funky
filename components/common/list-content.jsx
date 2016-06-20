@@ -471,6 +471,12 @@ class ListContent extends BaseShowDetail {
             //let dataUrl=BaseConfig.baseUrl+'dress/dress_list?brandId='+v.brandId+'&typeId='+dressType;
             //let onShowDetail=super.showDetail.bind(this, DetailType.Hotel, ShowType.image, null, dataUrl)
             //<li key={k+'v.id'} className="item " onClick={onShowDetail}>
+            let ad = v.address||'';
+            if (v.address.length > 6) {
+              ad = v.address.substring(0, v.address.length - 5);
+            }
+            ad+='****'
+
             let detailUrl = "/hotel/"+v.id;
             return (
               <a key={k+''+v.id} href={detailUrl} target="_blank" >
@@ -507,7 +513,7 @@ class ListContent extends BaseShowDetail {
                     </div>
                     <div className="addr-box" >
                       <strong className="text-hint">位置：</strong>
-                      <span className="text-content" >{v.address}</span>
+                      <span className="text-content" >{ad}</span>
                     </div>
                     <div className="price-box">
                       <span className="text">{'￥'+v.lowestConsumption+'-'+v.highestConsumption}</span>

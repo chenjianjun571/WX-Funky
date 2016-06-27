@@ -19,22 +19,13 @@ class DiscountInfo extends BaseShowDetail {
     let giftUrl=BaseConfig.baseUrl+'activity/detail/libao';
     let onShowGiftDetail=super.showDetail.bind(this, DetailType.Activity, ShowType.image, null, giftUrl)
 
-    let discountUrl=BaseConfig.baseUrl+'activity/detail/zuhe';
-    let onShowDiscountDetail=super.showDetail.bind(this, DetailType.Activity, ShowType.image, null, discountUrl)
     return (
       <section className="items gift-items">
         <ul className="list-box info-list">
           <li className="item" onClick={onShowGiftDetail}>
             <div className="title-box">
               <i className="left-icon icon-text">预订有礼</i>
-              <span className="title">下单立享万元大礼包</span>
-              <i className="right-icon icon-arrow"></i>
-            </div>
-          </li>
-          <li className="item" onClick={onShowDiscountDetail}>
-            <div className="title-box">
-              <i className="left-icon icon-text">组合优惠</i>
-              <span className="title">下单立享组合优惠</span>
+              <span className="title">下单立享万元品质大礼包</span>
               <i className="right-icon icon-arrow"></i>
             </div>
           </li>

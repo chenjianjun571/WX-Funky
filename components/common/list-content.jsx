@@ -121,7 +121,7 @@ class ListContent extends BaseShowDetail {
                 <div className="photo-box">
                   <MediaItem
                     aspectRatio="3:2"
-                    imageUrl={v.coverUrlWx || v.coverUrlWeb}
+                    imageUrl={v.coverUrlWeb}
                     processType={EmImgProcessType.emGD_S_S}
                     height={400}
                   />
@@ -173,7 +173,7 @@ class ListContent extends BaseShowDetail {
                 <div className="photo-box">
                   <MediaItem
                     aspectRatio="2:3"
-                    imageUrl={v.coverUrlWx || v.coverUrlWeb}
+                    imageUrl={v.coverUrlWeb}
                     processType={EmImgProcessType.emGD_S_S}
                     height={300}
                     quality={95}

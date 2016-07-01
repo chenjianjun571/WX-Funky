@@ -5,7 +5,7 @@
 
     <% if (mode === 'development') {%>
       <link rel="stylesheet" href="/styles/app.css" />
-      <script src="http://192.168.1.138:8081/target/target-script-min.js#anonymous" charset="utf-8"></script>
+      <!--<script src="http://192.168.1.138:8081/target/target-script-min.js#anonymous" charset="utf-8"></script>-->
     <% } else {%>
       <link rel="stylesheet" href="http://img2.jsbn.com/mcq/assets/styles/app.css?t=2" />
     <%}%>
@@ -22,6 +22,7 @@
         <div id='J_Nav_First'><%- navFirst %></div>
         <div id='J_Detail'></div>
         <div id='J_Main' class="scrollView"><%- body %></div>
+        <div id='J_PopupBox'></div>
       </div>
     </div>
     <% include modules/thirdpartservice.html %>

@@ -61,7 +61,7 @@ class HallInfo extends BaseShowDetail {
                   <div className="photo-box">
                     <MediaItem
                       aspectRatio="3:2"
-                      imageUrl={v.coverUrlWx || v.coverUrlWeb}
+                      imageUrl={v.coverUrlWeb}
                       processType={EmImgProcessType.emGD_S_S}
                       height={400}
                     />
@@ -93,38 +93,123 @@ class HallInfo extends BaseShowDetail {
   }
 }
 
+const HintPopupBoxType = {
+  INIT_NONE:-1,// 初期值
+  MAP:0,// 地图
+  INTRODUCTION:1,// 介绍
+  MENU:2,// 菜单
+}
+
+class HintPopupBox extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.state = {
+      // 介绍框类样式
+      boxClass:' hide',
+      // 介绍框标题
+      boxTitle:'',
+      // 介绍框类型
+      boxType:-1,
+    }
+  }
+
+  getContent () {
+    let content=null;
+
+    switch (this.state.boxType) {
+      case HintPopupBoxType.MENU: {
+        if (this.state.boxData.length > 0) {
+          content = (
+            <div className="menu-suit-box">
+              <ol className="menu-list">
+                {
+                  _.map(this.state.boxData, (v,k)=>{
+                    return (
+                      <li key={k}>{'.'+v.name}</li>
+                    )
+                  })
+                }
+              </ol>
+            </div>
+          )
+        } else {
+          content = (
+            <div className="menu-suit-box">
+              <span className="text-hint">*该酒店未提供菜肴，请以店谈为准</span>
+            </div>
+          )
+        }
+        break;
+      }
+      case HintPopupBoxType.MAP: {
+        content = (
+          <MapLocation latitude={this.state.boxData.latitude} longitude={this.state.boxData.longitude} />
+        )
+        break;
+      }
+      case HintPopupBoxType.INTRODUCTION: {
+        content = (
+          <ul className="item-list">
+            <li className="item">
+              <div className="info-box">
+                <span className="text-content">{this.state.boxData}</span>
+              </div>
+            </li>
+          </ul>
+        )
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+
+    return content;
+  }
+
+  render () {
+    return (
+      <div className={"fixed-popup-show-box"+this.state.boxClass}>
+        <div className="title-box">
+          <span className="title">{this.state.boxTitle}</span>
+        </div>
+        <div className="close-box" onClick={this.onHide.bind(this)}>
+          <span className="icon"></span>
+        </div>
+        <div className="popup-content-box">
+          {
+            this.getContent()
+          }
+        </div>
+      </div>
+    )
+  }
+
+  onHide(e) {
+    e.preventDefault();
+    this.setState({boxClass:' hide'});
+  }
+
+  setData(showFlg, boxTitle, boxType, boxData) {
+    if (!showFlg) {
+      this.setState({boxClass:' hide'});
+    } else {
+      this.setState({boxClass:'', boxTitle:boxTitle, boxType:boxType, boxData:boxData})
+    }
+  }
+}
+
 class MenuInfo extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       // 菜单明显
       setMealDetail: props.setMealDetail||'',
-      // 介绍框类
-      boxClass:' hide',
-      // 介绍框标题
-      boxTitle:'',
-      // 介绍框内容
-      menuList:[],
     };
   }
 
   render () {
-    let menuContent = null;
-    if (this.state.menuList.length > 0) {
-      menuContent = (
-        <ol className="menu-list">
-          {
-            _.map(this.state.menuList, (v,k)=>{
-              return (
-                <li key={k}>{'.'+v.name}</li>
-              )
-            })
-          }
-        </ol>
-      )
-    } else {
-      menuContent = (<span className="text-hint">*该酒店未提供菜肴，请以店谈为准</span>)
-    }
     // 菜单明显
     let setMealDetail = JSON.parse(this.state.setMealDetail)
     return (
@@ -148,34 +233,15 @@ class MenuInfo extends React.Component {
             }
           </ul>
         </section>
-
-        <div className={"fixed-popup-show-box"+this.state.boxClass}>
-          <div className="title-box">
-            <span className="title">菜单套系</span>
-          </div>
-          <div className="close-box" onClick={this.onHide.bind(this)}>
-            <span className="icon"></span>
-          </div>
-          <div className="popup-content-box">
-            <div className="menu-suit-box">
-              {
-                menuContent
-              }
-            </div>
-          </div>
-        </div>
       </div>
     )
   }
 
   onShowMenu(title, menuList, e) {
     e.preventDefault();
-    this.setState({boxClass:'', boxTitle:title, menuList:menuList});
-  }
-
-  onHide(e) {
-    e.preventDefault();
-    this.setState({boxClass:' hide'});
+    if (this.props.optPopupBox) {
+      this.props.optPopupBox(true, title, HintPopupBoxType.MENU, menuList);
+    }
   }
 }
 
@@ -200,39 +266,10 @@ class HotelInfo extends React.Component {
       introduction:props.introduction||'',
       // 电话
       tell:'400-015-9999',
-      // 介绍框类
-      boxClass:' hide',
-      // 介绍框标题
-      boxTitle:'',
-      // 介绍框内容
-      boxContent:'',
-      // 显示类型 0:内容 1:地图
-      type:0
     };
   }
 
   render () {
-
-    // 介绍框显示内容
-    let content = null;
-    if (this.state.boxClass.length == '') {
-      if (this.state.type == 0) {
-        content = (
-          <ul className="item-list">
-            <li className="item">
-              <div className="info-box">
-                <span className="text-content">{this.state.boxContent}</span>
-              </div>
-            </li>
-          </ul>
-        )
-      } else {
-        content = (
-          <MapLocation latitude={this.state.latitude} longitude={this.state.longitude} />
-        )
-      }
-    }
-
     return (
       <div>
         <section className="items info-items">
@@ -263,37 +300,22 @@ class HotelInfo extends React.Component {
             </li>
           </ul>
         </section>
-
-        <div className={"fixed-popup-show-box"+this.state.boxClass}>
-          <div className="title-box">
-            <span className="title">{this.state.boxTitle}</span>
-          </div>
-          <div className="close-box" onClick={this.onHide.bind(this)}>
-            <span className="icon"></span>
-          </div>
-          <div className="popup-content-box">
-            {
-              content
-            }
-          </div>
-        </div>
       </div>
     )
   }
 
   onShowDress(title, latitude, longitude, e) {
     e.preventDefault();
-    this.setState({boxClass:'', boxTitle:title, latitude:latitude, longitude:longitude, type:1});
+    if (this.props.optPopupBox) {
+      this.props.optPopupBox(true, title, HintPopupBoxType.MAP, {latitude:latitude, longitude:longitude});
+    }
   }
 
   onShowIntroduction(title, boxContent, e) {
     e.preventDefault();
-    this.setState({boxClass:'', boxTitle:title, boxContent:boxContent, type:0});
-  }
-
-  onHide(e) {
-    e.preventDefault();
-    this.setState({boxClass:' hide'});
+    if (this.props.optPopupBox) {
+      this.props.optPopupBox(true, title, HintPopupBoxType.INTRODUCTION, boxContent);
+    }
   }
 }
 
@@ -314,6 +336,7 @@ class HotelDetails extends React.Component {
       return null;
     }
     let detailImages = JSON.parse(this.state.data.pcDetailImages)
+    let optPopupBoxHandle = this.optPopupBox.bind(this);
     return (
       <div className="hotel-detail-view">
         <div className="top-logo-box">
@@ -341,10 +364,9 @@ class HotelDetails extends React.Component {
         </div>
 
         <DiscountInfo />
-        <HotelInfo {...this.state.data} />
+        <HotelInfo {...this.state.data} optPopupBox={optPopupBoxHandle} />
         <HallInfo {...this.state.data} />
-        <MenuInfo {...this.state.data} />
-
+        <MenuInfo {...this.state.data} optPopupBox={optPopupBoxHandle} />
       </div>
     )
   }
@@ -365,8 +387,32 @@ class HotelDetails extends React.Component {
     }
   }
 
+  /*
+   boxTitle:介绍框标题
+   boxType:介绍框类型
+  * */
+  optPopupBox(showFlg, boxTitle, boxType, boxData) {
+    this.hintPopupBox.setData(showFlg, boxTitle, boxType, boxData);
+  }
+
   componentDidUpdate() {
+    // 初期化渲染详情页面
+    ReactDOM.render(<HintPopupBox ref={(ref)=>{this.hintPopupBox=ref}} />,document.getElementById('J_PopupBox'))
   }
 }
 
-export { HotelDetails }
+class HotelTools extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+    };
+  }
+
+  render () {
+    return (
+      <div>jj</div>
+    )
+  }
+}
+
+export { HotelDetails, HotelTools }

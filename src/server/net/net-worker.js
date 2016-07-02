@@ -2,7 +2,7 @@
  * Created by chenjianjun on 16/5/20.
  */
 var http = require('http');
-var Config = require("./config.js");
+var Config = require("./../config.js");
 
 var memTool = null;
 

@@ -4,46 +4,15 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
-const Calendar = React.createClass({
+class Calendar extends React.Component {
 
-  getInitialState() {
-    return {
-      kClass:'',
-      external:{},
+  constructor (props) {
+    super(props);
+    this.state = {
       indexMonth:0,// 偏移月份
       shoMonthNum:1,// 显示的月份数
-      style: {
-        width:'37.5em',
-      }
     };
-  },
-
-  setChange(showFlg, top=0, left=0, external={}) {
-    if (showFlg) {
-      this.setState({
-        kClass:' datepicker-show',
-        external:external,
-        indexMonth:0,
-        style:{
-          width:'37.5em',
-          position:"absolute",
-          top:top,
-          left:left,
-          zIndex:"10000",
-          display:"block"
-        }
-      })
-    } else {
-      this.setState({
-        kClass:'',
-        external:{},
-        style:{
-          width:'37.5em',
-          display:'none'
-        }
-      })
-    }
-  },
+  }
 
   render() {
     // 开始时间,外部传入
@@ -135,70 +104,51 @@ const Calendar = React.createClass({
     }
 
     return (
-      <div id="xq-datepicker-box" className={"xq-datepicker-box "+this.state.kClass} style={this.state.style} onClick={this.click} >
+      <div className="datepicker-box" style={{width:'100%'}}>
         <div className="datepicker">
           {
             _.map(itemsContent,(v,k)=>{
-              if (k==0) {
-                return (
-                  <div key={k} className="datepicker-group datepicker-group-first ">
-                    <div className="datepicker-header">
-                      <div className="left-btn-box" onClick={this.onPrev}>
-                        <span className="icon-left-btn"></span>
-                      </div>
-                      {
-                        v.head
-                      }
+              return (
+                <div key={k} className="datepicker-group">
+                  <div className="datepicker-header">
+                    <div className="left-btn-box" onClick={this.onPrev.bind(this)}>
+                      <span className="icon-left-btn"></span>
                     </div>
                     {
-                      v.body
+                      v.head
                     }
-                  </div>
-                )
-              } else {
-                return (
-                  <div key={k} className="datepicker-group datepicker-group-last">
-                    <div className="datepicker-header">
-                      {
-                        v.head
-                      }
-                      <div className="right-btn-box" onClick={this.onNext}>
-                        <span className="icon-right-btn"></span>
-                      </div>
+                    <div className="right-btn-box" onClick={this.onNext.bind(this)}>
+                      <span class="icon-right-btn"></span>
                     </div>
-                    {
-                      v.body
-                    }
                   </div>
-                )
-              }
+                  {
+                    v.body
+                  }
+                </div>
+              )
             })
           }
         </div>
       </div>
     )
-  },
-
-  click(e) {
-    e.stopPropagation();
-  },
+  }
 
   onPrev(e) {
-    e.stopPropagation();
+    e.preventDefault();
     this.setState({indexMonth:this.state.indexMonth-1})
-  },
+  }
 
   onNext(e) {
-    e.stopPropagation();
+    e.preventDefault();
     this.setState({indexMonth:this.state.indexMonth+1})
-  },
+  }
 
   onDateChange(dateStr, e) {
-    e.stopPropagation();
+    e.preventDefault();
     if (this.props.onDateChange) {
-      this.props.onDateChange(dateStr, this.state.external);
+      this.props.onDateChange(dateStr);
     }
   }
-})
+}
 
 export { Calendar }

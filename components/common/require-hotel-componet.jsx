@@ -704,6 +704,23 @@ class RequireHotelComponent extends React.Component {
         break;
       }
       case EmShowType.HotelRequire: {
+        content = (
+          <div className="scrollView">
+            <div className="hotel-need-view">
+              <div className="top-logo-box">
+                <div className="logo-box">
+                  <i className="icon-home-logo"></i>
+                  <i className="icon-home-word"></i>
+                </div>
+              </div>
+              <div className="tjxq-form">
+                <div className="center-content-box">
+                  <div><p>{this.state.resultHint}</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
         break;
       }
       default:{

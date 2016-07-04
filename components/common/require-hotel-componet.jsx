@@ -311,7 +311,7 @@ class BookingTimeInfo extends React.Component {
         <div>
           <div className={"fixed-popup-show-box"+this.state.kClass}>
             <div className="title-box">
-              <span className="title">选择档期</span>
+              <span className="title">选择日期</span>
             </div>
             <div className="close-box" onClick={this.onHide.bind(this)}>
               <span className="icon"></span>
@@ -632,45 +632,35 @@ class RequireHotelComponent extends React.Component {
       }
       case EmShowType.HotelRequire: {
         return (
-          <div className="scrollView">
-            <div className="hotel-need-view">
-              <div className="top-logo-box">
-                <div className="logo-box">
-                  <i className="icon-home-logo"></i>
-                  <i className="icon-home-word"></i>
-                </div>
-              </div>
-              <div className="tjxq-form">
-                <div className="header-box" >
-                  <h2 className="title">金色百年婚宴预定需求提交</h2>
-                  <span className="desc-text">
-                    在金色百年婚宴预订服务平台，已接入包括重庆第一婚宴品牌芭菲嘉宴等上百家婚宴酒店，
-                    我们的统筹师对这些酒店的了解程度、对婚宴本身的专业知识和丰富的婚宴预定经验，
-                    能帮你轻松预定到如你所愿的酒店。简单填写以下表格，剩下的交给统筹师搞定，
-                    服务免费，还有万元品质大礼包可以拿哟，赶快行动吧！
-                  </span>
-                </div>
-                <ul className="data-item-list">
-                  <UserInfo ref={(ref)=>this.userInfo=ref} showType={this.state.showType} />
-                  <ContactInfo ref={(ref)=>this.contactInfo=ref} showType={this.state.showType} />
-                  <BookingTimeInfo ref={(ref)=>this.bookingTimeInfo=ref} showType={this.state.showType} />
-                  <PlaceInfo ref={(ref)=>this.placeInfo=ref} showType={this.state.showType} />
-                  <TableNumInfo ref={(ref)=>this.tableNumInfo=ref} showType={this.state.showType} />
-                  <RemarkInfo ref={(ref)=>this.remarkInfo=ref} showType={this.state.showType} />
-                </ul>
-                <div className="footer-box">
-                  {
-                    this.state.resultHint.length > 0
-                      ? <div ><p>{this.state.resultHint}</p></div>
-                      : null
-                  }
-                  {
-                    this.state.commitFlg
-                      ? <input type="submit" className="btn-submit" onClick={this.commit.bind(this)} value="提交"></input>
-                      : <input type="submit" className="btn-submit loading-state" onClick={this.commit.bind(this)} value="提交"></input>
-                  }
-                </div>
-              </div>
+          <div className="tjxq-form">
+            <div className="header-box" >
+              <h2 className="title">金色百年婚宴预定需求提交</h2>
+                <span className="desc-text">
+                  在金色百年婚宴预订服务平台，已接入包括重庆第一婚宴品牌芭菲嘉宴等上百家婚宴酒店，
+                  我们的统筹师对这些酒店的了解程度、对婚宴本身的专业知识和丰富的婚宴预定经验，
+                  能帮你轻松预定到如你所愿的酒店。简单填写以下表格，剩下的交给统筹师搞定，
+                  服务免费，还有万元品质大礼包可以拿哟，赶快行动吧！
+                </span>
+            </div>
+            <ul className="data-item-list">
+              <UserInfo ref={(ref)=>this.userInfo=ref} showType={this.state.showType} />
+              <ContactInfo ref={(ref)=>this.contactInfo=ref} showType={this.state.showType} />
+              <BookingTimeInfo ref={(ref)=>this.bookingTimeInfo=ref} showType={this.state.showType} />
+              <PlaceInfo ref={(ref)=>this.placeInfo=ref} showType={this.state.showType} />
+              <TableNumInfo ref={(ref)=>this.tableNumInfo=ref} showType={this.state.showType} />
+              <RemarkInfo ref={(ref)=>this.remarkInfo=ref} showType={this.state.showType} />
+            </ul>
+            <div className="footer-box">
+              {
+                this.state.resultHint.length > 0
+                  ? <div ><p>{this.state.resultHint}</p></div>
+                  : null
+              }
+              {
+                this.state.commitFlg
+                  ? <input type="submit" className="btn-submit" onClick={this.commit.bind(this)} value="提交"></input>
+                  : <input type="submit" className="btn-submit loading-state" onClick={this.commit.bind(this)} value="提交"></input>
+              }
             </div>
           </div>
         )
@@ -705,19 +695,9 @@ class RequireHotelComponent extends React.Component {
       }
       case EmShowType.HotelRequire: {
         content = (
-          <div className="scrollView">
-            <div className="hotel-need-view">
-              <div className="top-logo-box">
-                <div className="logo-box">
-                  <i className="icon-home-logo"></i>
-                  <i className="icon-home-word"></i>
-                </div>
-              </div>
-              <div className="tjxq-form">
-                <div className="center-content-box">
-                  <div><p>{this.state.resultHint}</p></div>
-                </div>
-              </div>
+          <div className="tjxq-form">
+            <div className="center-content-box">
+              <div><p>{this.state.resultHint}</p></div>
             </div>
           </div>
         )

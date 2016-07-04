@@ -12,7 +12,15 @@ class HotelRequire extends React.Component {
 
   render () {
     return (
-      <RequireHotelComponent showType={EmShowType.HotelRequire} showFlg={true} />
+      <div className="hotel-need-view">
+        <div className="top-logo-box">
+          <div className="logo-box">
+            <i className="icon-home-logo"></i>
+            <i className="icon-home-word"></i>
+          </div>
+        </div>
+        <RequireHotelComponent showType={EmShowType.HotelRequire} showFlg={true} />
+      </div>
     )
   }
 

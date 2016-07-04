@@ -14,4 +14,13 @@ const LoadingCode = {
   OK:3,// 加载ok
 }
 
-export { ReqCode, LoadingCode }
+const HintPopupBoxType = {
+  INIT_NONE:-1,// 初期值
+  MAP:0,// 地图
+  INTRODUCTION:1,// 介绍
+  MENU:2,// 菜单
+  CALENDAR:3,// 日历
+  REQUIRE:4,// 需求提交
+}
+
+export { ReqCode, LoadingCode, HintPopupBoxType }

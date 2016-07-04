@@ -305,10 +305,10 @@ body {
   transition: 0.3s;
 }
 .adaption-auto .data-input-view {
-  padding: 10px;
+  padding: 50px 10px 20px;
   background: #fff;
-  padding-top: 20px;
-  height: 100%;
+  position: relative;
+  min-height: 100%;
 }
 .adaption-auto .data-input-view .center-content-box {
   height: 100%;
@@ -332,8 +332,39 @@ body {
   -webkit-align-items: center;
   align-items: center;
 }
-.adaption-auto .data-input-view .name {
+.adaption-auto .data-input-view .top-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: #f94267;
   text-align: center;
+}
+.adaption-auto .data-input-view .top-box span {
+  font-size: 18px;
+  line-height: 40px;
+  color: #fff;
+}
+.adaption-auto .data-input-view .top-box .close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 30px;
+  height: 30px;
+  transition: ease-in-out 0.3s;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 24px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  color: #fff;
+}
+.adaption-auto .data-input-view .top-box .close:before {
+  content: "x";
+}
+.adaption-auto .data-input-view .name {
+  text-align: left;
   height: 30px;
   margin-bottom: 10px;
   overflow: hidden;
@@ -451,13 +482,14 @@ body {
   height: 40px;
   text-align: center;
 }
-.adaption-auto .data-input-view .name-box .radio-box span {
+.adaption-auto .data-input-view .name-box .radio-box label {
   font-size: 14px;
   margin-left: 5px;
   margin-right: 10px;
   line-height: 40px;
 }
 .adaption-auto .data-input-view .name-box .radio-box input {
+  font-size: 14px;
   line-height: 40px;
 }
 .adaption-auto .data-input-view .pin-box {
@@ -501,7 +533,7 @@ body {
   background: #ff5384;
   cursor: pointer;
 }
-.adaption-auto .data-input-view .pin-box .send-pin-btn:hover {
+.adaption-auto .data-input-view .pin-box .send-pin-btn:active {
   background-color: #ec0043;
 }
 .adaption-auto .data-input-view .desc-box {
@@ -530,37 +562,44 @@ body {
 .adaption-auto .data-input-view .error {
   color: #ff0000;
   height: 20px;
+  font-size: 10px;
   line-height: 20px;
   margin-bottom: 5px;
 }
-.adaption-auto .data-input-view .confirm-btn {
+.adaption-auto .data-input-view .confirm-btn,
+.adaption-auto .data-input-view .cancel-btn {
   margin-top: 20px;
   height: 44px;
   text-align: center;
   border-radius: 2px;
-  background: #ff5384;
   cursor: pointer;
   position: relative;
+  background: #ff5384;
 }
-.adaption-auto .data-input-view .confirm-btn:hover {
+.adaption-auto .data-input-view .confirm-btn:active,
+.adaption-auto .data-input-view .cancel-btn:active {
   background-color: #ec0043;
 }
-.adaption-auto .data-input-view .confirm-btn span {
+.adaption-auto .data-input-view .confirm-btn,
+.adaption-auto .data-input-view .cancel-btn,
+.adaption-auto .data-input-view .confirm-btn span,
+.adaption-auto .data-input-view .cancel-btn span {
   line-height: 44px;
   color: #fff;
   font-size: 18px;
 }
-.adaption-auto .data-input-view .confirm-btn .icon-box {
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  margin-top: -15px;
-  width: 30px;
-  height: 30px;
-  overflow: hidden;
+.adaption-auto .data-input-view .cancel-btn {
+  background: #4763ff;
 }
-.adaption-auto .data-input-view .confirm-btn .icon-box img {
-  width: 100%;
+.adaption-auto .data-input-view .cancel-btn:active {
+  background-color: #0022e0;
+}
+.adaption-auto .data-input-view .loading-state {
+  background-image: url("http://img2.jsbn.com/static/loading.gif");
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 30px;
+  background-position: 30px center;
 }
 .adaption-auto .data-input-view .invalid-btn {
   cursor: default !important;
@@ -4367,6 +4406,7 @@ body {
   margin-right: 20px;
   width: 55%;
 }
+.adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box .info-box label,
 .adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box .info-box span {
   margin-left: 5px;
   margin-right: 15px;

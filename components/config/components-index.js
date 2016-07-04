@@ -19,6 +19,7 @@ import { Supply } from '../supply.jsx'
 
 import { Hotel } from '../hotel.jsx'
 import { HotelDetails } from '../hotel-details.jsx'
+import { HotelRequire } from '../hotel-require.jsx'
 
 import { Activity} from '../activity.jsx'
 
@@ -42,6 +43,8 @@ const ComponentsIndex = {
 
   'hotel': <Hotel />,
   'hotel-details': <HotelDetails />,
+  'hotel-require': <HotelRequire />,
+
   'activity': <Activity />
 }
 const ComponentsSeo= {
@@ -123,6 +126,11 @@ const ComponentsSeo= {
   },
   'hotel-details': {
     'seoTitle':'酒店详情',
+    'seoKeywords':'',
+    'seoDescription':''
+  },
+  'hotel-require': {
+    'seoTitle':'需求提交',
     'seoKeywords':'',
     'seoDescription':''
   },

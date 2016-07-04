@@ -111,6 +111,10 @@ siteRouter.get('/hotel', function* (next) {
 siteRouter.get('/hotel/:id', function* (next) {
   yield this.render('modules/default', renderOption('hotel-details', '/hotel', '/hotel', this.params))
 })
+// 提交婚宴预订需求
+siteRouter.get('/hotel-require', function* (next) {
+  yield this.render('modules/default', renderOption('hotel-require', '/hotel-require', '/hotel'))
+})
 ///** 宴会厅详情 **/
 //siteRouter.get('/hall/:id', function* (next) {
 //  yield this.render('modules/default', renderOption('hall-details', '/hotel', '/hotel',this.params))
@@ -118,10 +122,6 @@ siteRouter.get('/hotel/:id', function* (next) {
 ///** 酒店位置地图 **/
 //siteRouter.get('/map/:longitude/:latitude', function* (next) {
 //  yield this.render('modules/default', renderOption('map-location', '/hotel', '/hotel',this.params))
-//})
-//// 提交婚宴预订需求
-//siteRouter.get('/hotel-require', function* (next) {
-//  yield this.render('modules/default', renderOption('hotel-require', '/hotel-require', '/hotel'))
 //})
 
 /** 活动详情页 **/

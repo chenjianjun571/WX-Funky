@@ -58,12 +58,12 @@ const MenuConfig = {
       link:'/hotel',
       target:false
     },
-    //{
-    //  name:'提交需求',
-    //  menu:'/hotel-require',
-    //  link:'/hotel-require',
-    //  target:false
-    //},
+    {
+      name:'婚宴预约',
+      menu:'/hotel-require',
+      link:'/hotel-require',
+      target:false
+    },
     {
       name:'大礼包',
       menu:'/libao',

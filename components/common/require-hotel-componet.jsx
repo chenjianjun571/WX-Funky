@@ -732,9 +732,13 @@ class RequireHotelComponent extends React.Component {
     // 短信验证码
     let smsValue = this.contactInfo.getValue().code;
     if(!(/^1[3|4|5|7|8]\d{9}$/.test(phoneValue))) {
-      this.contactInfo.setErr('请输入正确的手机号码');
+      this.setState({
+        resultHint:'请输入正确的手机号码'
+      })
     } else if (!(/\d{6}$/.test(smsValue))) {
-      this.contactInfo.setErr('请输入正确的验证码');
+      this.setState({
+        resultHint:'请输入正确的验证码'
+      })
     } else {
       let body={
         code:smsValue,

@@ -12,7 +12,6 @@ class BestCases extends React.Component {
     super(props);
 
     this.state = {
-      data:[]
     };
   }
 
@@ -28,7 +27,7 @@ class BestCases extends React.Component {
             <span className="title">最佳案例</span>
           </div>
         </a>
-        <ListContent params={{pageIndex:1,pageSize:6}}
+        <ListContent params={{pageIndex:0,pageSize:6}}
                      customData={{listClass:" list-case"}}
                      type={DetailType.Case}
                      showMore={false}
@@ -47,14 +46,6 @@ class BestCases extends React.Component {
   }
 
   componentDidMount() {
-    let url = SchemeConfig['BestCasesHot'].baseUrl+SchemeConfig['BestCasesHot'].dataUrl;
-    fetch(url)
-      .then(res => {return res.json()})
-      .then(j =>{
-        if(j.success && j.data.length > 0) {
-          this.setState({ data:j.data })
-        }
-      })
   }
 }
 

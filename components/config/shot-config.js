@@ -14,12 +14,12 @@ const ShotConfig  = {
 
   // 最佳样片热区
   BestSampleHot: _.merge({
-    'dataUrl': 'sample/weddingshot_index_best_sample?pageIndex=1&pageSize=4', // 数据请求地址
+    'dataUrl': 'sample/weddingshot_index_best_sample', // 数据请求地址
   },BaseConfig),
 
   // 最佳客片热区
   BestPringlesHot: _.merge({
-    'dataUrl': 'pringles/weddingshot_index_best_pringles?pageIndex=1&pageSize=6', // 数据请求地址
+    'dataUrl': 'pringles/weddingshot_index_best_pringles', // 数据请求地址
   },BaseConfig),
 
   // 最新活动

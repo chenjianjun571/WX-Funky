@@ -118,7 +118,7 @@ class Calendar extends React.Component {
                       v.head
                     }
                     <div className="right-btn-box" onClick={this.onNext.bind(this)}>
-                      <span class="icon-right-btn"></span>
+                      <span className="icon-right-btn"></span>
                     </div>
                   </div>
                   {

@@ -179,7 +179,7 @@ class ContactInfo extends React.Component {
                 {
                   this.state.showTimeFlg
                     ? <button type="button" className="send-pin-btn invalid-btn" >{this.state.timeNum+'秒后重新获取'}</button>
-                    : <button type="button" className="send-pin-btn invalid-btn" onClick={this.getSMS.bind(this)}>获取验证码</button>
+                    : <button type="button" className="send-pin-btn" onClick={this.getSMS.bind(this)}>获取验证码</button>
                 }
               </div>
             </div>
@@ -288,7 +288,7 @@ class BookingTimeInfo extends React.Component {
     return (
       <li  className="data-item">
         <div className="hint-box">
-          <label className="hint-text">请选择你的婚期</label>
+          <label className="hint-text">请选择您的宴会日期</label>
         </div>
         <div className="data-box">
           <div className="date-box">
@@ -297,7 +297,7 @@ class BookingTimeInfo extends React.Component {
                  onClick={this.clickChecked.bind(this, 0)} >
               <button type="button" className="btn ">
                 <span className="title">{this.state.bookingTime}</span>
-                <i className="icon-font">&#xe607;</i>
+                <i className="icon-font font-date-picker"></i>
               </button>
             </div>
             <div className={this.state.index===0?"btn-group":"btn-group checked"}
@@ -383,7 +383,7 @@ class PlaceInfo extends React.Component {
     return (
       <li  className="data-item">
         <div className="hint-box">
-          <label className="hint-text">您的婚礼会在哪个区办呢</label>
+          <label className="hint-text">您的宴会在哪个区办呢</label>
         </div>
         <div className="data-box">
           <ul className="option-group">
@@ -442,13 +442,14 @@ class TableNumInfo extends React.Component {
     this.state = {
       // 显示类型
       showType:props.showType,
-      index:5,
+      index:6,
       data:[
         {name:'10桌以下'},
         {name:'10至20桌'},
         {name:'20至30桌'},
         {name:'30至40桌'},
-        {name:'40桌以上'},
+        {name:'40至50桌'},
+        {name:'50桌以上'},
         {name:'未确定'}
       ]
     }
@@ -456,15 +457,15 @@ class TableNumInfo extends React.Component {
 
   init () {
     this.setState({
-      index:5,
+      index:6,
     });
   }
 
   render() {
     return (
-      <li  className="data-item">
+      <li className="data-item">
         <div className="hint-box">
-          <label className="hint-text">请选择你的桌数</label>
+          <label className="hint-text">您的桌数大概是</label>
         </div>
         <div className="data-box">
           <ul className="option-group">
@@ -490,8 +491,14 @@ class TableNumInfo extends React.Component {
   }
 
   getValue() {
-    return {
-      tableNum:this.state.data[this.state.index].name,
+    if (this.state.index == 6) {
+      return {
+        tableNum:'',
+      }
+    } else {
+      return {
+        tableNum:this.state.data[this.state.index].name,
+      }
     }
   }
 }
@@ -636,10 +643,9 @@ class RequireHotelComponent extends React.Component {
             <div className="header-box" >
               <h2 className="title">金色百年婚宴预定需求提交</h2>
                 <span className="desc-text">
-                  在金色百年婚宴预订服务平台，已接入包括重庆第一婚宴品牌芭菲嘉宴等上百家婚宴酒店，
-                  我们的统筹师对这些酒店的了解程度、对婚宴本身的专业知识和丰富的婚宴预定经验，
-                  能帮你轻松预定到如你所愿的酒店。简单填写以下表格，剩下的交给统筹师搞定，
-                  服务免费，还有万元品质大礼包可以拿哟，赶快行动吧！
+                  &emsp;&emsp;在金色百年婚宴预订服务平台，已接入包括重庆第一婚宴品牌芭菲嘉宴等上百家婚宴酒店，我们的婚礼顾问对这些酒店的了解程度、
+                  对婚宴本身的专业知识和丰富的婚宴预定经验，能帮你轻松预定到如你所愿的酒店。简单填写以下表格，剩下的交给我们的婚礼顾问帮您搞定，
+                  服务免费，还有万元优质大礼包可以拿哟，赶快行动吧！
                 </span>
             </div>
             <ul className="data-item-list">
@@ -653,13 +659,13 @@ class RequireHotelComponent extends React.Component {
             <div className="footer-box">
               {
                 this.state.resultHint.length > 0
-                  ? <div ><p>{this.state.resultHint}</p></div>
+                  ? <div className="error">{this.state.resultHint}</div>
                   : null
               }
               {
                 this.state.commitFlg
-                  ? <input type="submit" className="btn-submit" onClick={this.commit.bind(this)} value="提交"></input>
-                  : <input type="submit" className="btn-submit loading-state" onClick={this.commit.bind(this)} value="提交"></input>
+                  ? <div className="btn-submit" onClick={this.commit.bind(this)}>确  定</div>
+                  : <div className="btn-submit loading-state">确  定</div>
               }
             </div>
           </div>
@@ -686,7 +692,7 @@ class RequireHotelComponent extends React.Component {
                 <div className="close" onClick={this.close.bind(this)}></div>
               </div>
               <div className="center-content-box">
-                <div><p>{this.state.resultHint}</p></div>
+                <div><p>&emsp;&emsp;{this.state.resultHint}</p></div>
               </div>
             </div>
           </div>
@@ -697,7 +703,7 @@ class RequireHotelComponent extends React.Component {
         content = (
           <div className="tjxq-form">
             <div className="center-content-box">
-              <div><p>{this.state.resultHint}</p></div>
+              <div><p>&emsp;&emsp;{this.state.resultHint}</p></div>
             </div>
           </div>
         )

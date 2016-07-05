@@ -14,12 +14,32 @@
     top: 50%;
   }
 }
+@font-face {
+  font-family: 'iconfont';
+  src: url('../fonts/iconfont.eot');
+  src: url('../fonts/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/iconfont.woff') format('woff'), /* chrome、firefox */ url('../fonts/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('../fonts/iconfont.svg#iconfont') format('svg');
+  
+  /* IE9*/
+  /* iOS 4.1- */
+}
+.icon-font {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.font-date-picker:before {
+  content: '\e600';
+}
 * {
   outline: none;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
-  -webkit-user-select: none;
+  -webkit-user-select: auto;
+  -moz-user-select: text;
 }
 body,
 div,
@@ -309,28 +329,7 @@ body {
   background: #fff;
   position: relative;
   min-height: 100%;
-}
-.adaption-auto .data-input-view .center-content-box {
-  height: 100%;
-  display: -webkit-flex;
-  /*webkit*/
-  display: flex;
-  flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  -webkit-box-direction: normal;
-  -webkit-box-orient: vertical;
-  -moz-flex-direction: column;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -moz-justify-content: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -moz-align-items: center;
-  -webkit-align-items: center;
-  align-items: center;
+  padding-bottom: 40vh;
 }
 .adaption-auto .data-input-view .top-box {
   position: absolute;
@@ -959,17 +958,53 @@ body {
   position: relative;
   padding-right: 2.5rem;
   padding-left: 2.5rem;
-  height: 20%;
+  height: 18%;
 }
 .adaption-auto .datepicker-box .datepicker .datepicker-group .datepicker-header .left-btn-box {
   position: absolute;
-  left: 0.125rem;
-  top: 0.125rem;
+  left: 0;
+  top: 0;
+  width: 2.5rem;
+  height: 100%;
+}
+.adaption-auto .datepicker-box .datepicker .datepicker-group .datepicker-header .left-btn-box .icon-left-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  background-image: url(../images/date-left-array.png);
+  display: block;
+  overflow: hidden;
+  width: 20px;
+  height: 20px;
+  background-position: 0 -20px;
+}
+.adaption-auto .datepicker-box .datepicker .datepicker-group .datepicker-header .left-btn-box .icon-left-btn:active {
+  background-position: 0 0;
 }
 .adaption-auto .datepicker-box .datepicker .datepicker-group .datepicker-header .right-btn-box {
   position: absolute;
-  right: 0.125rem;
-  top: 0.125rem;
+  right: 0;
+  top: 0;
+  width: 2.5rem;
+  height: 100%;
+}
+.adaption-auto .datepicker-box .datepicker .datepicker-group .datepicker-header .right-btn-box .icon-right-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -10px;
+  margin-top: -10px;
+  background-image: url(../images/date-right-array.png);
+  display: block;
+  overflow: hidden;
+  width: 20px;
+  height: 20px;
+  background-position: 0 -20px;
+}
+.adaption-auto .datepicker-box .datepicker .datepicker-group .datepicker-header .right-btn-box .icon-right-btn:active {
+  background-position: 0 0;
 }
 .adaption-auto .datepicker-box .datepicker .datepicker-group .datepicker-header .date-title-box {
   height: 100%;
@@ -992,7 +1027,7 @@ body {
   background-color: #fff;
   text-align: center;
   width: 100%;
-  height: 80%;
+  height: 82%;
 }
 .adaption-auto .datepicker-box .datepicker .datepicker-group table.datepicker-calendar thead {
   background: #F7F7F7;
@@ -1397,6 +1432,28 @@ body {
 .adaption-auto .nav-placeholder .option-group-box .option-group .option.activate .title,
 .adaption-auto .nav-placeholder .option-group-box .option-group .option:active .title {
   color: #f94267;
+}
+.adaption-auto .center-content-box {
+  min-height: 90vh;
+  display: -webkit-flex;
+  /*webkit*/
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -moz-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-justify-content: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -moz-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
 }
 .adaption-auto .more-button {
   width: 100%;
@@ -4353,6 +4410,7 @@ body {
 }
 .adaption-auto .hotel-need-view .tjxq-form {
   padding: 10px;
+  padding-bottom: 40vh;
 }
 .adaption-auto .hotel-need-view .tjxq-form .header-box {
   margin-bottom: 20px;
@@ -4383,10 +4441,6 @@ body {
   color: #ff0000;
   line-height: 20px;
 }
-.adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box textarea {
-  width: 100%;
-  max-width: 100%;
-}
 .adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box input[type="text"],
 .adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box textarea {
   padding: 0 10px;
@@ -4402,6 +4456,14 @@ body {
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 83, 132, 0.6);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 83, 132, 0.6);
 }
+.adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box textarea {
+  padding: 10px;
+  width: 100%;
+  max-width: 100%;
+  font-size: 12px;
+  line-height: 14px;
+  min-height: 62px;
+}
 .adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box .info-box input[type="text"] {
   margin-right: 20px;
   width: 55%;
@@ -4409,7 +4471,8 @@ body {
 .adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box .info-box label,
 .adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box .info-box span {
   margin-left: 5px;
-  margin-right: 15px;
+  margin-right: 5px;
+  font-size: 14px;
 }
 .adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box .phone-box:before,
 .adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box .phone-box:after {
@@ -4437,7 +4500,7 @@ body {
   display: block;
   background-color: #FC5682;
   border: 1px solid #febacc;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 40%;
   float: right;
 }
@@ -4501,10 +4564,10 @@ body {
   padding-right: 10px;
 }
 .adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box .date-box .btn-group button .title {
-  font-size: 14px;
+  font-size: 12px;
   line-height: 40px;
 }
-.adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box .date-box .btn-group button:hover {
+.adaption-auto .hotel-need-view .tjxq-form .data-item-list .data-item .data-box .date-box .btn-group button:active {
   background-color: #ce072f;
   border-color: #ce072f;
   color: #fff;
@@ -4543,17 +4606,16 @@ body {
   margin-bottom: 10px;
 }
 .adaption-auto .hotel-need-view .tjxq-form .footer-box .btn-submit {
-  margin: 10px auto;
-  width: 90%;
+  margin-top: 20px;
+  width: 100%;
   height: 40px;
   line-height: 40px;
   color: #fff;
   display: block;
   background-color: #FC5682;
   border: 1px solid #febacc;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 16px;
-  margin: 20px;
 }
 .adaption-auto .hotel-need-view .tjxq-form .footer-box .btn-submit:active {
   background-color: #febacc;

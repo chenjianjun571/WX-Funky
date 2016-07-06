@@ -16,7 +16,9 @@ class HotelContent extends React.Component {
       filters:[],
       params:{
         pageSize:4,
-        pageIndex:0
+        pageIndex:0,
+        sort:'price',
+        order:'desc',
       }
     };
   }
@@ -39,6 +41,9 @@ class HotelContent extends React.Component {
   }
 
   filterChangeHandle(params) {
+    // 默认值
+    params.sort='price';
+    params.order='desc';
     if (JSON.stringify(params) != JSON.stringify(this.state.params)) {
       this.setState({params:params, renderFlg:false})
     }

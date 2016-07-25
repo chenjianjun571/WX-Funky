@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 import { CaseConfig } from './config/case-config'
 import { MediaItem, EmImgProcessType } from './common/media-item.jsx'
-import { ConditionFilter } from './common/condition-filter.jsx'
+import { SingleFilter } from './common/single-filter.jsx'
 import { DetailType, ShowType } from '../src/utils/detail-type'
 import { ListContent } from './common/list-content.jsx'
 
@@ -32,7 +32,7 @@ class CaseContent extends React.Component {
           <span className="title">案例欣赏</span>
         </div>
 
-        <ConditionFilter filters={this.state.filters} renderFlg={this.state.renderFlg} filterChangeHandle={this.filterChangeHandle.bind(this)} />
+        <SingleFilter filters={this.state.filters} renderFlg={this.state.renderFlg} filterChangeHandle={this.filterChangeHandle.bind(this)} />
         <ListContent params={this.state.params} type={DetailType.Case} dataUrl={CaseConfig.CaseList.dataUrl} />
       </div>
     )
@@ -64,8 +64,6 @@ class CaseContent extends React.Component {
     let p1 = {
       kClass:"content-box case-style",
       kName:"风格",
-      selType:0, // 单选
-      defaultIndex:0,// 默认选中第一个
       conditions:[]
     }
     p1.conditions=_.map(tmpData, (v,k)=>{
@@ -85,8 +83,6 @@ class CaseContent extends React.Component {
     let p2 = {
       kClass:"content-box price",
       kName:"价位",
-      selType:0, // 单选
-      defaultIndex:0,// 默认选中第一个
       conditions:[
         {
           name:"全部",

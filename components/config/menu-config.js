@@ -4,13 +4,13 @@ const FooterMenuConfig = {
     name:'首页',
     link:'/home',
   },
-  '/shot':{
-    name:'摄影',
-    link:'/shot',
-  },
   '/scheme':{
     name:'婚庆',
     link:'/scheme',
+  },
+  '/shot':{
+    name:'摄影',
+    link:'/shot',
   },
   '/hotel':{
     name:'婚宴',

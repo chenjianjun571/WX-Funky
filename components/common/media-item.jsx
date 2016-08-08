@@ -253,7 +253,7 @@ class ImageItem extends React.Component {
 
     if (this.props.linkUrl && this.props.linkUrl.length > 0) {
       return (
-        <a href={this.props.linkUrl}>
+        <a href={this.props.linkUrl} style={{fontSize:0}}>
           <img src={imageUrl}/>
         </a>
       )

@@ -283,23 +283,25 @@ class Detail extends React.Component {
                   <span className="text-hint">色系</span> <span className="text-content">{content.color}</span>
                 </div>
               </div>
-              <div className="price-box">
-                <div className="hint-box">
-                  <span className="hint-title">价格</span>
-                  <i className="hint-icon"></i>
-                </div>
-                <div className="total-price">
-                  <i className="icon-discount"></i>
-                  <span className="price-discount">{'￥'+parseFloat(content.totalCost).toFixed(2)}</span>
-                  <i className="icon-original"></i>
-                  <span className="price-original">{'￥'+parseFloat(content.originalPrice).toFixed(2)}</span>
-                </div>
-                <h2><span className="text-hint">场景布置费用</span> <span class="text-content">{'￥'+parseFloat(content.senceCost).toFixed(2)}</span></h2>
-                <h2>
-                  <span className="text-hint">{($.trim(f4String) === '')?'婚礼人费用：':'婚礼人(' + f4String +') 费用：'}</span>
-                  <span class="text-content">{'￥'+parseFloat(content.hdpcCost).toFixed(2)}</span>
-                </h2>
-              </div>
+              {
+                //<div className="price-box">
+                //  <div className="hint-box">
+                //    <span className="hint-title">价格</span>
+                //    <i className="hint-icon"></i>
+                //  </div>
+                //  <div className="total-price">
+                //    <i className="icon-discount"></i>
+                //    <span className="price-discount">{'￥'+parseFloat(content.totalCost).toFixed(2)}</span>
+                //    <i className="icon-original"></i>
+                //    <span className="price-original">{'￥'+parseFloat(content.originalPrice).toFixed(2)}</span>
+                //  </div>
+                //  <h2><span className="text-hint">场景布置费用</span> <span class="text-content">{'￥'+parseFloat(content.senceCost).toFixed(2)}</span></h2>
+                //  <h2>
+                //    <span className="text-hint">{($.trim(f4String) === '')?'婚礼人费用：':'婚礼人(' + f4String +') 费用：'}</span>
+                //    <span class="text-content">{'￥'+parseFloat(content.hdpcCost).toFixed(2)}</span>
+                //  </h2>
+                //</div>
+              }
             </div>
             <div className="image-detail-box">
               <div className="hint-box">

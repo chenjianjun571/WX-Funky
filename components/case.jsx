@@ -79,47 +79,47 @@ class CaseContent extends React.Component {
         }
       }
     })
-    // 组装价格条件
-    let p2 = {
-      kClass:"content-box price",
-      kName:"价位",
-      conditions:[
-        {
-          name:"全部",
-          external:{}
-        },
-        {
-          name:"5000至10,000",
-          external:{minPrice:5000,maxPrice:10000}
-        },
-        {
-          name:"10,000至15,000",
-          external:{minPrice:10000,maxPrice:15000}
-        },
-        {
-          name:"15,000至20,000",
-          external:{minPrice:15000,maxPrice:20000}
-        },
-        {
-          name:"20,000至30,000",
-          external:{minPrice:20000,maxPrice:30000}
-        },
-        {
-          name:"30,000至50,000",
-          external:{minPrice:30000,maxPrice:50000}
-        },
-        {
-          name:"50,000至100,000",
-          external:{minPrice:50000,maxPrice:100000}
-        },
-        {
-          name:"100,000以上",
-          external:{minPrice:100000,maxPrice:9999999}
-        }
-      ]
-    }
+    //// 组装价格条件
+    //let p2 = {
+    //  kClass:"content-box price",
+    //  kName:"价位",
+    //  conditions:[
+    //    {
+    //      name:"全部",
+    //      external:{}
+    //    },
+    //    {
+    //      name:"5000至10,000",
+    //      external:{minPrice:5000,maxPrice:10000}
+    //    },
+    //    {
+    //      name:"10,000至15,000",
+    //      external:{minPrice:10000,maxPrice:15000}
+    //    },
+    //    {
+    //      name:"15,000至20,000",
+    //      external:{minPrice:15000,maxPrice:20000}
+    //    },
+    //    {
+    //      name:"20,000至30,000",
+    //      external:{minPrice:20000,maxPrice:30000}
+    //    },
+    //    {
+    //      name:"30,000至50,000",
+    //      external:{minPrice:30000,maxPrice:50000}
+    //    },
+    //    {
+    //      name:"50,000至100,000",
+    //      external:{minPrice:50000,maxPrice:100000}
+    //    },
+    //    {
+    //      name:"100,000以上",
+    //      external:{minPrice:100000,maxPrice:9999999}
+    //    }
+    //  ]
+    //}
     f.push(p1);
-    f.push(p2);
+    //f.push(p2);
     this.setState({filters:f,renderFlg:true})
   }
 }

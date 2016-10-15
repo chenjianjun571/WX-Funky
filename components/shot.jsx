@@ -93,7 +93,7 @@ class BestPringles extends React.Component {
             <span className="title">最佳客片欣赏</span>
           </div>
         </a>
-        <ListContent params={{pageIndex:0,pageSize:4}}
+        <ListContent params={{pageIndex:0,pageSize:6}}
                      customData={{listClass:" list-pringles"}}
                      type={DetailType.Pringles}
                      showMore={false}

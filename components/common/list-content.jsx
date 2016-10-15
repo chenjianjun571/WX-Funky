@@ -148,12 +148,15 @@ class ListContent extends BaseShowDetail {
               <li key={k+''+v.id} className="item" onClick={onShowDetail}>
                 <div className="photo-box">
                   <MediaItem
-                    aspectRatio="2:3"
+                    aspectRatio="3:2"
                     imageUrl={v.coverUrlWeb}
                     processType={EmImgProcessType.emGD_S_S}
-                    height={600}
+                    height={400}
                     quality={95}
                   />
+                </div>
+                <div className="info-box">
+                  <span className="name">{v.name}</span>
                 </div>
               </li>
             )

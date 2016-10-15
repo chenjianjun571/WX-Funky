@@ -44,12 +44,12 @@ const MenuConfig = {
       link:'/suite',
       target:false
     },
-    {
-      name:'微电影',
-      menu:'/movie',
-      link:'/movie',
-      target:false
-    }
+    //{
+    //  name:'微电影',
+    //  menu:'/movie',
+    //  link:'/movie',
+    //  target:false
+    //}
   ],
   '/hotel':[
     {

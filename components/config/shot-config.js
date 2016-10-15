@@ -17,9 +17,9 @@ const ShotConfig  = {
     'dataUrl': 'sample/weddingshot_index_best_sample', // 数据请求地址
   },BaseConfig),
 
-  // 最佳客片热区
+  // 最新客片热区
   BestPringlesHot: _.merge({
-    'dataUrl': 'pringles/weddingshot_index_best_pringles', // 数据请求地址
+    'dataUrl': 'pringles/newest_pringles', // 数据请求地址
   },BaseConfig),
 
   // 最新活动

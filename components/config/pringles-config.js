@@ -19,6 +19,10 @@ const PringlesConfig  = {
     }
   ],
 
+  'PringlesList':_.merge({
+    dataUrl:'pringles/pringles_view_list'
+  },BaseConfig),
+
   BestPringles:_.merge({
     dataUrl:'pringles/weddingshot_index_best_pringles?pageIndex=1&pageSize=4',
   },BaseConfig),
@@ -27,9 +31,6 @@ const PringlesConfig  = {
     dataUrl:'pringlesSeason/all'
   },BaseConfig),
 
-  PringlesList:_.merge({
-    dataUrl:'pringles/pringles_season'
-  },BaseConfig),
 }
 
 export { PringlesConfig }

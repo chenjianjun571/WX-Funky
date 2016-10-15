@@ -30,10 +30,10 @@ class BestPringles extends BaseShowDetail {
                 <li key={k} className="item" onClick={onShowDetail}>
                   <div className="photo-box">
                     <MediaItem
-                      aspectRatio="2:3"
+                      aspectRatio="3:2"
                       imageUrl={v.coverUrlWeb}
                       processType={EmImgProcessType.emGD_S_S}
-                      height={600}
+                      height={400}
                       quality={95}
                     />
                   </div>
@@ -254,6 +254,12 @@ class PringlesContent extends React.Component {
 class Pringles extends React.Component {
   constructor (props) {
     super(props);
+    this.state = {
+      params:{
+        pageSize:6,
+        pageIndex:0,
+      }
+    };
   }
 
   render () {
@@ -270,8 +276,21 @@ class Pringles extends React.Component {
           imageUrl={PringlesConfig.Banner[0].imageUrl}
           processType={EmImgProcessType.emGD_S_S}
         />
-        <BestPringles />
-        <PringlesContent />
+        {
+          //<BestPringles />
+          //<PringlesContent />
+        }
+        <div className="title-box-style-1">
+          <div className="banner">
+            <i></i>
+            <span>幸福可以绽放的如此耀眼</span>
+          </div>
+          <span className="title">客片分季欣赏</span>
+        </div>
+        <ListContent params={this.state.params}
+                     customData={{listClass:" list-pringles"}}
+                     type={DetailType.Pringles}
+                     dataUrl={PringlesConfig.PringlesList.dataUrl} />
       </div>
     )
   }

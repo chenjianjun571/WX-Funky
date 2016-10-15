@@ -136,16 +136,18 @@ class Detail extends React.Component {
       }
       case DetailType.Pringles: {
         let list = [];
-        let kClass = ' photo-space';
-        if (this.state.data[0].wxDetailImages && this.state.data[0].wxDetailImages !== '') {
-          // 单片
-          list = JSON.parse(this.state.data[0].wxDetailImages);
-          kClass = ' photo-space';
-        } else {
-          // 设计版
-          list = JSON.parse(this.state.data[0].pcDetailImages);
-          kClass = '';
-        }
+        //let kClass = ' photo-space';
+        //if (this.state.data[0].wxDetailImages && this.state.data[0].wxDetailImages !== '') {
+        //  // 单片
+        //  list = JSON.parse(this.state.data[0].wxDetailImages);
+        //  kClass = ' photo-space';
+        //} else {
+        //  // 设计版
+        //  list = JSON.parse(this.state.data[0].pcDetailImages);
+        //  kClass = '';
+        //}
+        let kClass = '';
+        list = JSON.parse(this.state.data[0].pcDetailImages);
         return (
           <div className={"list-photo-box" + kClass}>
             <ul className="item-list">

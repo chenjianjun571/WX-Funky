@@ -229,7 +229,7 @@ class PringlesContent extends React.Component {
             <i></i>
             <span>幸福可以绽放的如此耀眼</span>
           </div>
-          <span className="title">客片分季欣赏</span>
+          <span className="title">最新客片欣赏</span>
         </div>
         <SeasonList changeHandle={this.changeHandle.bind(this)} />
         {

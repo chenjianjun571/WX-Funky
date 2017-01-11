@@ -12,10 +12,14 @@ const FooterMenuConfig = {
     name:'摄影',
     link:'/shot',
   },
-  '/hotel':{
-    name:'婚宴',
-    link:'/hotel',
-  }
+  //'/hotel':{
+  //  name:'婚宴',
+  //  link:'/hotel',
+  //},
+  '/dress':{
+    name:'婚纱',
+    link:'/dress',
+  },
 }
 
 const MenuConfig = {
@@ -43,6 +47,12 @@ const MenuConfig = {
       menu:'/suite',
       link:'/suite',
       target:false
+    },
+    {
+      name:'金色旅拍',
+      menu:'',
+      link:'http://trip.jsbn.com',
+      target:true
     },
     //{
     //  name:'微电影',
@@ -102,12 +112,12 @@ const MenuConfig = {
       link:'/f4',
       target:false
     },
-    {
-      name:'婚纱礼服',
-      menu:'/dress',
-      link:'/dress',
-      target:false
-    },
+    //{
+    //  name:'婚纱礼服',
+    //  menu:'/dress',
+    //  link:'/dress',
+    //  target:false
+    //},
     {
       name:'婚礼用品',
       menu:'/supply',
@@ -120,7 +130,8 @@ const MenuConfig = {
       link:'/car',
       target:false
     }
-  ]
+  ],
+  '/dress': []
 }
 
 export { MenuConfig, FooterMenuConfig }

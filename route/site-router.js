@@ -92,7 +92,7 @@ siteRouter.get('/f4', function* (next) {
 })
 // 礼服
 siteRouter.get('/dress', function* (next) {
-  yield this.render('modules/default', renderOption('dress', '/dress', '/scheme'))
+  yield this.render('modules/default', renderOption('dress', '/dress', '/dress'))
 })
 // 婚礼用品
 siteRouter.get('/supply', function* (next) {

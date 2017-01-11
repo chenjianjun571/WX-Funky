@@ -40,11 +40,11 @@ class Home extends React.Component {
               </a>
             </li>
             <li className="menu-item">
-              <a href="http://mtrip.jsbn.com" target="_blank">
+              <a href="/dress">
                 <div className="info-box">
-                  <span className="title">金色旅拍</span>
-                  <span className="desc">蜜月旅拍</span>
-                  <span className="desc">全球开启</span>
+                  <span className="title">婚纱礼服</span>
+                  <span className="desc">提供全球婚纱品牌</span>
+                  <span className="desc">免费试穿完美嫁衣</span>
                 </div>
                 <span className="menu-icon"></span>
               </a>

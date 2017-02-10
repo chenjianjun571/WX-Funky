@@ -22,19 +22,13 @@ class VideoItem extends React.Component {
     if (this.props.width && this.props.height && this.props.videoUrl) {
       if (this.props.videoUrl.includes('taobao.com')) {
         return (
-          <div id={this.state.genId} style={{'width':this.props.width,'height':this.props.height}}>
+          <div id={this.state.genId} style={ {width: this.props.width, height: this.props.height} }>
             <h1></h1>
           </div>
         )
       } else {
         return (
-          <video
-            width={this.props.width}
-            height={this.props.height}
-            poster={this.props.imageUrl}
-            id={this.state.genId}
-            src={this.props.videoUrl}
-            type="video/mp4" />
+          <div id={this.state.genId} style={ {width: this.props.width, height: this.props.height} } />
         )
       }
     } else {
@@ -58,37 +52,9 @@ class VideoItem extends React.Component {
     } else {
       if (this.props.videoUrl.endsWith('.mp4')) {
         //为了把初始化操作放到线程上去。
-        setTimeout(this.loadVideo(this.state.genId, this.props.autoplay),0)
+        setTimeout(this.loadVideo(this.state.genId, this.props), 0)
       } else {
         console.log('视频类型错误')
-      }
-    }
-  }
-
-  loadVideo(vid, autoPlay=false) {
-    if (autoPlay) {
-      // 自动播放
-      return ()=>{
-        MediaElement(vid, {success: (me)=> {
-          me.muted=true
-          me.loop = true
-          me.play()
-          me.addEventListener('ended',function(){
-            me.play()
-          })
-        }})
-      }
-    } else {
-      return ()=>{
-        $('#'+vid).mediaelementplayer({
-          pauseOtherPlayers: true,
-          // force iPad's native controls
-          iPadUseNativeControls: true,
-          // force iPhone's native controls
-          iPhoneUseNativeControls: true,
-          // force Android's native controls
-          AndroidUseNativeControls: true
-        })
       }
     }
   }
@@ -117,6 +83,36 @@ class VideoItem extends React.Component {
           allowScriptAccess:"always",
           allowFullScreen:"true" });
     }
+  }
+
+  loadVideo(videoId, props) {
+    let { imageUrl, videoUrl, aspectRatio, autoPlay, width, height } = props
+
+    let flashVars = {}
+    // 参考http://www.ckplayer.com/tool/help/29.htm
+    // 视频播放地址
+    flashVars.f = videoUrl
+    // 封面地址
+    flashVars.i = `${imageUrl}@75q`
+    // 播放结束的动作 调用js函数(function playerstop(){})并且退出全屏
+    flashVars.e = 6
+    // 是否支持拖动 视频是否支持播放未下载的内容 1:按关键帧进行拖动
+    flashVars.h = 1
+    // 视频宽高比例
+    if (aspectRatio) {
+      flashVars.wh = aspectRatio
+    }
+    // 是否自动播放
+    if (autoPlay) {
+      flashVars.p = 1
+    }
+    // 视频调用配置方式 0:调用ckplayer.js
+    flashVars.c = 0
+
+    let params = { bgcolor:'#FFF', allowFullScreen:true, allowScriptAccess:'always', wmode:'transparent' }
+    let h5Video = [`${videoUrl}->video/mp4`]
+
+    CKobject.embed('/script/ckplayer/ckplayer.swf', videoId, videoId, '100%', '100%', true, flashVars, h5Video, params);
   }
 }
 

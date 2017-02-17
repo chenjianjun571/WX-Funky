@@ -7,6 +7,203 @@ import { DetailType, ShowType } from '../src/utils/detail-type'
 import { GetHintContent, HintType } from './common/hint'
 import { ReqCode } from './common/code'
 
+class PriceInfo extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showFlg: false
+    }
+    this.optShowHandle = this.optShow.bind(this)
+  }
+
+  optShow() {
+    this.setState({showFlg:!this.state.showFlg})
+  }
+
+  render() {
+    const { data, fields=[] } = this.props
+    let liClassName = ''
+    let style = {}
+    if (this.state.showFlg) {
+      style.height = 31*(fields.length-2)
+      liClassName = 'unfold'
+    }
+    let len = fields.length
+    return (
+      <li className={liClassName}>
+        <div className="info-box" onClick={this.optShowHandle}>
+          <span className="title">{data[fields[0].key]}</span>
+          <div className="placeholder"></div>
+          <span className="value">{data[fields[len-1].key]}</span>
+          <span className="icon-arrow"></span>
+        </div>
+        <ul className="sub-list" style={style}>
+          {
+            _.map(fields, (v, k) => {
+              if (k === 0 || k === len-1) {
+                return null
+              }
+
+              return (
+                <div key={k} className="info-box">
+                  <span className="title">{v.name}</span>
+                  <div className="placeholder"></div>
+                  <span className="value">{data[v.key]}</span>
+                </div>
+              )
+            })
+          }
+        </ul>
+      </li>
+    )
+  }
+}
+
+class PriceItem extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    const { title, dataList=[], fields, sumTotal } = this.props
+
+    if (dataList.length <= 0) {
+      return null
+    }
+
+    return (
+      <div className="info-list">
+        <div className="title-box">
+          <i></i>
+          <span>{title}</span>
+        </div>
+        <ul>
+          {
+            _.map(dataList, (v,k) => {
+              return (
+                <PriceInfo key={k} data={v} fields={fields} />
+              )
+            })
+          }
+          <li className="sum-item">
+            <div className="info-box">
+              <span className="title">合计</span>
+              <div className="placeholder"></div>
+              <span className="value">{sumTotal}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    )
+  }
+}
+
+class CasePrice extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showFlg: false
+    }
+    this.optShowHandle = this.optShow.bind(this)
+    this.hideHandle = this.hide.bind(this)
+  }
+
+  optShow() {
+    this.setState({showFlg:!this.state.showFlg})
+  }
+
+  hide() {
+    this.setState({showFlg:false})
+  }
+
+  render() {
+    const { totalPrice=0,
+      executerPrice,
+      executerList='[]',
+      lightPrice,
+      lightList='[]',
+      flowerPrice,
+      flowerList='[]',
+      transportPrice,
+      transportList='[]',
+      arrangePrice,
+      arrangeList='[]', } = this.props
+    if (totalPrice <= 0) {
+      return null
+    }
+
+    let className = 'cost-detail'
+    if (this.state.showFlg) {
+      className = 'cost-detail unfold'
+    }
+    return (
+      <div className="case-cost">
+        <div className="title">布置费用</div>
+        <div className="button">
+          <button className="money">
+            <span className="unit">￥</span>
+            <span className="price">{totalPrice}元</span>
+          </button>
+          <button className="detail" onClick={this.optShowHandle}>费用明细</button>
+        </div>
+        <div className={className}>
+          <PriceItem title="执行费用"
+                     sumTotal={executerPrice}
+                     dataList={JSON.parse(executerList)}
+                     fields={[
+                     {name:'项目名称', key:'name'},
+                     {name:'数量', key:'number'},
+                     {name:'单位', key:'unit'},
+                     {name:'单价(元)', key:'univalent'},
+                     {name:'合计', key:'total'},]} />
+          <PriceItem title="外单灯光舞美费用"
+                     sumTotal={lightPrice}
+                     dataList={JSON.parse(lightList)}
+                     fields={[
+                     {name:'项目名称', key:'name'},
+                     {name:'规格',key: 'spec'},
+                     {name:'数量', key:'number'},
+                     {name:'单位', key:'unit'},
+                     {name:'单价(元)', key:'univalent'},
+                     {name:'合计', key:'total'},]} />
+          <PriceItem title="花车花艺费用"
+                     sumTotal={flowerPrice}
+                     dataList={JSON.parse(flowerList)}
+                     fields={[
+                     {name:'项目名称', key:'name'},
+                     {name:'规格',key: 'spec'},
+                     {name:'数量', key:'number'},
+                     {name:'单位', key:'unit'},
+                     {name:'单价(元)', key:'univalent'},
+                     {name:'合计', key:'total'},]} />
+          <PriceItem title="运输费用"
+                     sumTotal={transportPrice}
+                     dataList={JSON.parse(transportList)}
+                     fields={[
+                     {name:'项目名称', key:'name'},
+                     {name:'数量', key:'number'},
+                     {name:'单位', key:'unit'},
+                     {name:'单价(元)', key:'univalent'},
+                     {name:'合计', key:'total'},]} />
+          <PriceItem title="场景布置费用"
+                     sumTotal={arrangePrice}
+                     dataList={JSON.parse(arrangeList)}
+                     fields={[
+                     {name:'项目名称', key:'name'},
+                     {name:'区域',key: 'areaName'},
+                     {name:'数量', key:'number'},
+                     {name:'单位', key:'unit'},
+                     {name:'单价(元)', key:'univalent'},
+                     {name:'合计', key:'total'},]} />
+          <button className="hide-cost" onClick={this.hideHandle}>
+            <span>隐藏</span>
+          </button>
+        </div>
+      </div>
+    )
+  }
+}
+
 class Detail extends React.Component {
   constructor (props) {
     super(props);
@@ -224,24 +421,15 @@ class Detail extends React.Component {
         if (this.state.data.length == 0) {
           return null;
         }
-        let content = this.state.data[0];
 
-        let f4Map = {
-          '': '',
-          1: '主持人',
-          2: '化妆师',
-          3: '摄影师',
-          4: '摄像师',
-          5: '双机摄影',
-          6: '双机摄像',
-        }
+        let content = this.state.data[0];
         let f4String = ''
         let standardWeddingString = content.personDescription || '';
         _.each(standardWeddingString.split(','), function(v,k) {
           f4String += (' ' + v);
         })
 
-        let imgList = JSON.parse(content.pcDetailImages);
+        let imgList = JSON.parse(content.pcDetailImages||'');
 
         return (
           <div className="case-detail-view">
@@ -252,38 +440,57 @@ class Detail extends React.Component {
               </div>
             </div>
             <div className="text-info-box">
-              <div className="header-box">
-                <div className="cover-box">
-                  <MediaItem
-                    aspectRatio="3:2"
-                    imageUrl={content.coverUrlWeb}
-                    quality={95}
-                    processType={EmImgProcessType.emGD_S_S}
-                    height={300}
-                  />
-                </div>
-                <h1 className="text-title">{content.name}</h1>
-                <h3 className="text-content">{content.description}</h3>
+              <div className="cover-box">
+                <MediaItem
+                  aspectRatio="3:2"
+                  imageUrl={content.coverUrlWeb}
+                  quality={95}
+                  processType={EmImgProcessType.emGD_S_S}
+                  height={300}
+                />
               </div>
-              <div className="theme-box">
-                <div className="hint-box">
-                  <span className="hint-title">主题属性</span>
-                  <i className="hint-icon"></i>
-                </div>
-                <div className="theme-item theme-name">
-                  <span className="text-hint">主题</span> <span className="text-content">{content.theme}</span>
-                </div>
-                <div className="theme-item theme-style">
-                  <span className="text-hint">风格</span>
+              <div className="info-box">
+                <h1 className="text-title">{content.name}</h1>
+                <span className="text-content">{content.description}</span>
+                <ul className="label-box style">
+                  <li className="title">风格:</li>
                   {
-                    _.map(content.caseStyleName&&content.caseStyleName.split(',')||[],(v,k)=>{
-                      return <span key={k} className="text-content">{v + ' '}</span>
+                    _.map(content.caseStyleName && content.caseStyleName.split(',')||[],(v,k) => {
+                      if (v === '') {
+                        return null
+                      }
+                      return <li key={k}>{v}</li>
                     })
                   }
-                </div>
-                <div className="theme-item theme-color">
-                  <span className="text-hint">色系</span> <span className="text-content">{content.color}</span>
-                </div>
+                </ul>
+                <ul className="label-box color">
+                  <li className="title">色系:</li>
+                  {
+                    _.map(content.color && content.color.split(',')||[], (v,k) => {
+                      if (v === '') {
+                        return null
+                      }
+                      return <li key={k}>{v}</li>
+                    })
+                  }
+                </ul>
+                {
+                  content.caseType
+                    ?
+                    <ul className="label-box type">
+                      <li className="title">类型:</li>
+                      {
+                        content.caseType === 1
+                          ?
+                          <li>套系</li>
+                          :
+                          <li>定制</li>
+                      }
+                    </ul>
+                    :
+                    null
+                }
+                <CasePrice {...content} />
               </div>
               {
                 //<div className="price-box">
@@ -306,30 +513,24 @@ class Detail extends React.Component {
               }
             </div>
             <div className="image-detail-box">
-              <div className="hint-box">
-                <span className="hint-title">现场实景</span>
-                <i className="hint-icon"></i>
-              </div>
-              <div className="detail-list-box">
-                <ul className="item-list">
-                  {
-                    _.map(imgList, (v,k)=>{
-                      return (
-                        <li key={k} className="item">
-                          <MediaItem
-                            aspectRatio="1:-1"
-                            imageUrl={v}
-                            quality={90}
-                            processType={EmImgProcessType.emGD_S_S}
-                            water={true}
-                          />
-                        </li>
-                      )
-                    })
-                  }
-                </ul>
-
-              </div>
+              <div className="title">现场实景</div>
+              <ul className="item-list">
+                {
+                  _.map(imgList, (v,k)=>{
+                    return (
+                      <li key={k} className="item">
+                        <MediaItem
+                          aspectRatio="1:-1"
+                          imageUrl={v}
+                          quality={90}
+                          processType={EmImgProcessType.emGD_S_S}
+                          water={true}
+                        />
+                      </li>
+                    )
+                  })
+                }
+              </ul>
             </div>
           </div>
         )

@@ -45,11 +45,13 @@ class PriceInfo extends React.Component {
               }
 
               return (
-                <div key={k} className="info-box">
-                  <span className="title">{v.name}</span>
-                  <div className="placeholder"></div>
-                  <span className="value">{data[v.key]}</span>
-                </div>
+                <li key={k}>
+                  <div className="info-box">
+                    <span className="title">{v.name}</span>
+                    <div className="placeholder"></div>
+                    <span className="value">{data[v.key]}</span>
+                  </div>
+                </li>
               )
             })
           }
@@ -147,7 +149,7 @@ class CasePrice extends React.Component {
           <button className="detail" onClick={this.optShowHandle}>费用明细</button>
         </div>
         <div className={className}>
-          <PriceItem title="执行费用"
+          <PriceItem title="执行人员"
                      sumTotal={executerPrice}
                      dataList={JSON.parse(executerList)}
                      fields={[
@@ -156,7 +158,17 @@ class CasePrice extends React.Component {
                      {name:'单位', key:'unit'},
                      {name:'单价(元)', key:'univalent'},
                      {name:'合计', key:'total'},]} />
-          <PriceItem title="外单灯光舞美费用"
+          <PriceItem title="现场布置"
+                     sumTotal={arrangePrice}
+                     dataList={JSON.parse(arrangeList)}
+                     fields={[
+                     {name:'项目名称', key:'name'},
+                     {name:'区域',key: 'areaName'},
+                     {name:'数量', key:'number'},
+                     {name:'单位', key:'unit'},
+                     {name:'单价(元)', key:'univalent'},
+                     {name:'合计', key:'total'},]} />
+          <PriceItem title="灯光舞美"
                      sumTotal={lightPrice}
                      dataList={JSON.parse(lightList)}
                      fields={[
@@ -166,7 +178,7 @@ class CasePrice extends React.Component {
                      {name:'单位', key:'unit'},
                      {name:'单价(元)', key:'univalent'},
                      {name:'合计', key:'total'},]} />
-          <PriceItem title="花车花艺费用"
+          <PriceItem title="花车花艺"
                      sumTotal={flowerPrice}
                      dataList={JSON.parse(flowerList)}
                      fields={[
@@ -181,16 +193,6 @@ class CasePrice extends React.Component {
                      dataList={JSON.parse(transportList)}
                      fields={[
                      {name:'项目名称', key:'name'},
-                     {name:'数量', key:'number'},
-                     {name:'单位', key:'unit'},
-                     {name:'单价(元)', key:'univalent'},
-                     {name:'合计', key:'total'},]} />
-          <PriceItem title="场景布置费用"
-                     sumTotal={arrangePrice}
-                     dataList={JSON.parse(arrangeList)}
-                     fields={[
-                     {name:'项目名称', key:'name'},
-                     {name:'区域',key: 'areaName'},
                      {name:'数量', key:'number'},
                      {name:'单位', key:'unit'},
                      {name:'单价(元)', key:'univalent'},

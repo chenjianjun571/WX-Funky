@@ -11,7 +11,7 @@ class PriceInfo extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showFlg: false
+      showFlg: this.props.showFlg|false
     }
     this.optShowHandle = this.optShow.bind(this)
   }
@@ -82,8 +82,14 @@ class PriceItem extends React.Component {
         <ul>
           {
             _.map(dataList, (v,k) => {
+              if (k === 0) {
+                return (
+                  <PriceInfo key={k} showFlg={true} data={v} fields={fields} />
+                )
+              }
+
               return (
-                <PriceInfo key={k} data={v} fields={fields} />
+                <PriceInfo key={k} showFlg={false} data={v} fields={fields} />
               )
             })
           }
@@ -118,6 +124,24 @@ class CasePrice extends React.Component {
     this.setState({showFlg:false})
   }
 
+  getAreaPrice(arrangeList) {
+    let arrangeArea = {}
+
+    _.each(arrangeList, (v) => {
+      if (arrangeArea[v.areaName]) {
+        arrangeArea[v.areaName].listData.push(v)
+        arrangeArea[v.areaName].sumTotal += v.total
+      } else {
+        arrangeArea[v.areaName] = {
+          listData: [],
+          sumTotal: 0,
+        }
+      }
+    })
+
+    return arrangeArea
+  }
+
   render() {
     const { totalPrice=0,
       executerPrice,
@@ -133,6 +157,8 @@ class CasePrice extends React.Component {
     if (totalPrice <= 0) {
       return null
     }
+
+    let arrangePriceList = this.getAreaPrice(JSON.parse(arrangeList))
 
     let className = 'cost-detail'
     if (this.state.showFlg) {
@@ -158,16 +184,21 @@ class CasePrice extends React.Component {
                      {name:'单位', key:'unit'},
                      {name:'单价(元)', key:'univalent'},
                      {name:'合计', key:'total'},]} />
-          <PriceItem title="现场布置"
-                     sumTotal={arrangePrice}
-                     dataList={JSON.parse(arrangeList)}
-                     fields={[
-                     {name:'项目名称', key:'name'},
-                     {name:'区域',key: 'areaName'},
-                     {name:'数量', key:'number'},
-                     {name:'单位', key:'unit'},
-                     {name:'单价(元)', key:'univalent'},
-                     {name:'合计', key:'total'},]} />
+          {
+            _.map(arrangePriceList, (v, k) => {
+              return (
+                <PriceItem key={k} title={k}
+                           sumTotal={v.sumTotal}
+                           dataList={v.listData}
+                           fields={[
+                           {name:'项目名称', key:'name'},
+                           {name:'数量', key:'number'},
+                           {name:'单位', key:'unit'},
+                           {name:'单价(元)', key:'univalent'},
+                           {name:'合计', key:'total'},]} />
+              )
+            })
+          }
           <PriceItem title="灯光舞美"
                      sumTotal={lightPrice}
                      dataList={JSON.parse(lightList)}

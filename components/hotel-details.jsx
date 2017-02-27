@@ -269,7 +269,7 @@ class HotelInfo extends React.Component {
       // 酒店详情介绍
       introduction:props.introduction||'',
       // 电话
-      tell:'400-015-9999',
+      tell:'400-805-9289',
     };
   }
 
@@ -293,7 +293,7 @@ class HotelInfo extends React.Component {
               </div>
             </li>
             <li className="item phone-item">
-              <a href="tel:400-015-9999">
+              <a href="tel:400-805-9289">
                 <div className="title-box">
                   <i className="left-icon icon-phone"></i>
                   <span className="title">{this.state.tell}</span>
@@ -335,7 +335,7 @@ class HotelTools extends React.Component {
           <i className="icon icon-service"></i>
           <span>在线客服</span>
         </a>
-        <a className="phone-box" href="tel:400-015-9999">
+        <a className="phone-box" href="tel:400-805-9289">
           <i className="icon icon-phone"></i>
           <span>联系商家</span>
         </a>

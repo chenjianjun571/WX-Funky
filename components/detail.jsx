@@ -67,7 +67,8 @@ class PriceItem extends React.Component {
   }
 
   render() {
-    const { title, dataList=[], fields, sumTotal } = this.props
+    let { title, dataList=[], fields, sumTotal } = this.props
+    sumTotal = Number(sumTotal.toFixed(2))
 
     if (dataList.length <= 0) {
       return null

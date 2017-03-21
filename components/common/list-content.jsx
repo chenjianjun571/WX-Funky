@@ -216,6 +216,8 @@ class ListContent extends BaseShowDetail {
       }
       case DetailType.Case:
       {
+        // 首页的最佳案例才会带样式进来
+        let isShowInfo = (this.props.customData && this.props.customData.listClass) ? false : true
         content.listData = (
           _.map(this.state.data||[], (v,k)=>{
             let dataUrl=BaseConfig.baseUrl+'cases/detail/'+v.id;
@@ -230,6 +232,16 @@ class ListContent extends BaseShowDetail {
                     width={300}
                   />
                 </div>
+                {
+                  isShowInfo
+                    ?
+                    <div className="info-box">
+                      <span className="title">{v.name}</span>
+                      <span className="price">{v.totalPrice||'暂无'}</span>
+                    </div>
+                    :
+                    null
+                }
               </li>
             )
           })

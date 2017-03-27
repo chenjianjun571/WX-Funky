@@ -40,7 +40,7 @@ class F4Content extends React.Component {
           this.state.dataUrl.length >0
             ? <ListContent params={this.state.params}
                            type={DetailType.F4}
-                           isShuffle={true}
+                           isShuffle={false}
                            customData={{typeName:this.state.typeName, workType:this.state.workType}}
                            dataUrl={this.state.dataUrl} />
             : null
@@ -164,8 +164,12 @@ class F4Content extends React.Component {
           external:{}
         },
         {
-          name:"1500元以下",
-          external:{minPrice:0,maxPrice:1500}
+          name:"1000元以下",
+          external:{minPrice:0,maxPrice:1000}
+        },
+        {
+          name:"1000至1500元",
+          external:{minPrice:1000,maxPrice:1500}
         },
         {
           name:"1500至2000元",
@@ -176,8 +180,12 @@ class F4Content extends React.Component {
           external:{minPrice:2000,maxPrice:2500}
         },
         {
-          name:"2500元以上",
-          external:{minPrice:2500,maxPrice:99999}
+          name:"2500至3000元",
+          external:{minPrice:2500,maxPrice:3000}
+        },
+        {
+          name:"3000元以上",
+          external:{minPrice:3000,maxPrice:99999}
         }
       ]
     }
